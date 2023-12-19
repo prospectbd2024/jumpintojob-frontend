@@ -1,12 +1,14 @@
+"use client"
 import { useThrottle } from '@uidotdev/usehooks';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-    const storedUserData = localStorage.getItem('userData');
+    const isClient = typeof window !=='undefined'
+    const storedUserData =isClient? localStorage.getItem('userData') : null;
     const initialUserData = storedUserData ? JSON.parse(storedUserData) : null;
 
     const [userData, setUserData] = useState(initialUserData);
@@ -28,9 +30,7 @@ export const UserProvider = ({ children }) => {
 
     // For Resume
     const [currentStep, setCurrentStep] = useState(1);
-    const [resumeData, setResumeData] = useState({
-        educations: [],
-    });
+    const [resumeData, setResumeData] = useState({educations : [],experiences :[]});
     const handleSubmitResume = () => {
         useEffect(() => {
             localStorage.setItem('userResume', JSON.stringify(resumeData))
