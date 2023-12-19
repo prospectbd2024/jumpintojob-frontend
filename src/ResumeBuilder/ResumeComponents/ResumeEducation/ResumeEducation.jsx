@@ -16,31 +16,6 @@ const ResumeEducation = () => {
   const [isFormFilled, setFormFilled] = useState(false);
 
 
-<<<<<<< HEAD
-    return (
-        <div className='resume-education'>
-            <div className="resume-education-container container">
-                <div className="resume-form-header">
-                    <h3>Now complete your <span>education</span></h3>
-                </div>
-                <div className="resume-education-content resume-heading-content">
-                    <PreviewEducation props={{resumeData,setEditEducation,deleteEducation,deleteEducation,setDeleteEducation,setEducationFields,inputType,setInputType}}  />
-                    <EducationFields props={{setResumeData,resumeData,isFormFilled,formIndex,isFormFilled,setFormFilled,educationFields,setEducationFields,deleteEducation ,inputType,setInputType}}/>
-                    
-                    {
-
-                        addMore ||
-                        <div className="add-more-education">
-                            <button onClick={() => isFormFilled && handleAddMore()} style={{ cursor: isFormFilled ? 'pointer' : 'not-allowed', opacity: isFormFilled ? 1 : 0.5 }}><FaPlus /> ADD MORE EDUCATION</button>
-                        </div>
-                    }
-                </div>
-                <div>
-
-                  <PrevNextButton  props={{setCurrentStep}}/>
-                </div>
-            </div>
-=======
   return (
     <div className="resume-education">
       <div className="resume-education-container container">
@@ -48,7 +23,6 @@ const ResumeEducation = () => {
           <h3>
             Now complete your <span>education</span>
           </h3>
->>>>>>> origin/dev-1.0.2
         </div>
         <div className="resume-education-content resume-heading-content">
           {(state.type=='list-view' || state.type=='delete') && (
