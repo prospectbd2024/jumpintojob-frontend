@@ -2,53 +2,63 @@ import SaveDismissButtons from "@/ResumeBuilder/Layout/Button/SaveDismissButtons
 import React, { useCallback, useEffect, useState } from "react";
 
 function EperienceFiels({ props }) {
-  const [index, setIndex] = useState(0);
 
-  const [experienceFields, setExperienceFields] = useState({});
   const BaseFormat = {
+    id : 0,
     job_title: "",
     company: "",
     job_city: "",
     job_country: "",
     job_starting_year: "",
-    job_ending_year:
-      experienceFields.job_ending_year == "on" ? "off" : "",
-    job_description : "",
-  };
+    job_ending_year: "",
+    job_description: "",
+}
+
+
+  const [experienceFields, setExperienceFields] = useState({});
   const { setResumeData, resumeData, formIndex, state, setState } = props;
 
-  useEffect(() => {
-    if (resumeData.experiences[index]) {
-      setExperienceFields(resumeData.experiences[index]);
-    }
-  }, [resumeData]);
 
   const handleChange = useCallback((key, value) => {
     setExperienceFields((prev) => {
       prev[key] = value;
       return prev;
     });
-    updateResumeData(index, experienceFields);
+    updateResumeData( experienceFields);
   });
 
   useEffect(() => {
     if (state.type == "insert") {
+
+      // alert(state.index)
+
+      BaseFormat.id = state.index;
+      // console.log(state.index,BaseFormat)
       setExperienceFields(BaseFormat);
-      setIndex(formIndex);
-      updateResumeData(formIndex, BaseFormat);
+
+      updateResumeData(BaseFormat);
     }
     if (state.type == "update") {
-      setExperienceFields(resumeData.experiences[state.id]);
-      setIndex(state.id);
+      let experience_fields = resumeData.experiences.find((item) => item.id == state.id)
+        setExperienceFields(experience_fields);
+
     }
-  }, [formIndex]);
+  }, [state]);
 
-  const updateResumeData = useCallback((index, experienceFields) => {
+  const updateResumeData = useCallback((experienceFields) => {
     const resumeExperiences = resumeData.experiences;
+    console.log('old ',resumeExperiences)
+    
+    const index = resumeExperiences.findIndex(item => item.id ==experienceFields.id);
 
-    //check if the item is in the array
-    resumeExperiences[index] = experienceFields;
-    console.log(resumeExperiences);
+
+    if (index ==-1){
+      resumeExperiences.push(experienceFields);
+    }   
+    else{
+      resumeExperiences[index] = experienceFields;
+    }
+    // console.log(resumeExperiences);
     setResumeData((prev) => {
       return { ...prev, experiences: resumeExperiences };
     });
@@ -151,7 +161,7 @@ function EperienceFiels({ props }) {
           id="achivements"
           cols="30"
           rows="10"
-          value={resumeData.experiences[formIndex]?.job_description}
+          value={experienceFields?.job_description}
           placeholder="Write your job description"
           onChange={(e) => handleChange("job_description", e.target.value)}
         ></textarea>

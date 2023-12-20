@@ -8,12 +8,12 @@ import AddMoreButton from "@/ResumeBuilder/Layout/Button/AddMoreButton";
 const ResumeExperiences = () => {
   const { currentStep, setCurrentStep, resumeData, setResumeData } =
     useUserContext();
-  const [state, setState] = useState({ type: "list-view", id: -1 });
+  const [state, setState] = useState({ type: "list-view", id: 1 , index : 0 });
   const [experienceFields, setExperienceFields] = useState({});
   const [isFormFilled, setFormFilled] = useState(false);
 
   const handleAddMore = useCallback(()=>{
-    setState({type : 'insert' , id : state.id+1})
+    setState({...state,type : 'insert' , index : state.index+1})
   });
 
   return (
@@ -41,8 +41,6 @@ const ResumeExperiences = () => {
             props={{
                 setResumeData,
                 resumeData,
-                isFormFilled,
-                formIndex : state.id,
                 isFormFilled,
                 setFormFilled,
                 experienceFields,
