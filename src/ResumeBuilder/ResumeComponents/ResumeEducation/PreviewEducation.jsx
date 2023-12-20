@@ -24,13 +24,13 @@ const PreviewEducation = ({ props }) => {
       });
      
 
-    return <>
+    return <div >
     {/* {console.log(resumeData)} */}
    
    {resumeData && resumeData.educations.map((education,key)=>{
         const { institution_name, institution_location, degree, education_starting_year, education_graduation_year, field_study,id } = education;
         if (id==0){
-            return <></>  //if item is in the  demo data structure 
+            return <div key={id}></div>  //if item is in the  demo data structure 
         }
         return (
             <div className='preview-education' key={id}>
@@ -56,7 +56,7 @@ const PreviewEducation = ({ props }) => {
         );
     })}
     
-</> 
+</div> 
 };
 
 export default PreviewEducation;

@@ -27,14 +27,14 @@ const PreviewExperiences = ({props}) => {
 
 
     
-    return <>
+    return <div>
     {resumeData && resumeData.experiences.map((experience,key) =>{
 
         
         
         const {job_title, company, job_city, job_country, job_starting_year, job_ending_year,id} = experience;
     if (id==0){
-        return <></> // if item is demo education 
+        return <div key={id}></div> // if item is demo education 
     }
         return (
             <div className='preview-education' key={key}>
@@ -57,7 +57,7 @@ const PreviewExperiences = ({props}) => {
         </div>
     );
 }
-)}</>
+)}</div>
 };
 
 export default PreviewExperiences;
