@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useUserContext } from "../../../UserContext/UserContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
-import Model from "./Model";
+import Modal from "./Modal";
 
 const AddSkills = () => {
   const { resumeData, setResumeData } = useUserContext();
@@ -58,7 +58,7 @@ const AddSkills = () => {
           </li>
         ))}
       </ul>
-      <Model
+      <Modal
         props={{
           showModal,
           handleShowModal,
