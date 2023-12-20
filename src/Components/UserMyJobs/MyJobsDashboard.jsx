@@ -1,3 +1,4 @@
+"use client"
 import { useMediaQuery } from '@uidotdev/usehooks';
 import React from 'react';
 import { useEffect } from 'react';
@@ -9,7 +10,12 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaWhatsappSquare } from "react-ico
 const MyJobsDashboard = () => {
     const [userData, setUserData] = useState([]);
     const [dashboarJobs, setDashboardJobs] = useState([]);
-    const isMobileScreen = useMediaQuery("only screen and (max-width : 1368px)");
+    let isClient = false;
+    setTimeout(()=>{
+        isClient = true
+    },1000)
+
+    const isMobileScreen =isClient&& useMediaQuery("only screen and (max-width : 1368px)");
     useEffect(() => {
         fetch('/userprofile.json')
             .then(res => res.json())
@@ -124,7 +130,7 @@ const MyJobsDashboard = () => {
                             <h4>Social Contacts</h4>
                             <ul>
                                 <li className='facebook-social'><Link href={""}><FaFacebookF /> /kazisolah114</Link></li>
-                                <li className='linkedin-social'><Link> href={""}<FaLinkedinIn /> /kazisolah114</Link></li>
+                                <li className='linkedin-social'><Link href={""}> <FaLinkedinIn /> /kazisolah114</Link></li>
                                 <li className='github-social'><Link href={""}><FaGithub /> /kazisolah114</Link></li>
                                 <li className='whatsapp-social'><Link href={""}><FaWhatsappSquare /> /kazisolah114</Link></li>
                             </ul>
