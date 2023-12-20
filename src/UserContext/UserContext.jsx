@@ -43,6 +43,7 @@ export const UserProvider = ({ children }) => {
         country: "",
         summary: "",
         educations: [  {
+                id : 0,
                 nstitution_name: "",
                 institution_location:"",
                 degree: "",
@@ -54,6 +55,7 @@ export const UserProvider = ({ children }) => {
         ],
         experiences: [
             {
+                id : 0,
                 job_title: "",
                 company: "",
                 job_city: "",
