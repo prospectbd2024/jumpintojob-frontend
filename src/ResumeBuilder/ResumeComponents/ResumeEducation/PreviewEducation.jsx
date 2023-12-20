@@ -10,49 +10,47 @@ const PreviewEducation = ({ props }) => {
     if(state.type =='delete')
           {
             deleteEducation(state.id)
-            setState({ type : 'list-view', id : resumeData.educations.length-1})
+            setState({ ...state,type : 'list-view'})
 
           }   
     
    }, [state])
 
-
-
-    const deleteEducation = useCallback((index)=>{
-    const educations = resumeData.educations;
-    educations.splice(index, 1);
+    const deleteEducation = useCallback((id)=>{
+    const educations = resumeData.educations.filter((item) => item.id !=id );
     setResumeData({...resumeData,educations: educations})
     console.log(educations)
   
       });
      
 
-
-
-
-
     return <>
-    {console.log(resumeData)}
+    {/* {console.log(resumeData)} */}
    
    {resumeData && resumeData.educations.map((education,key)=>{
-        const { institution_name, institution_location, degree, education_starting_year, education_graduation_year, field_study } = education;
+        const { institution_name, institution_location, degree, education_starting_year, education_graduation_year, field_study,id } = education;
+        if (id==0){
+            return <></>  //if item is in the  demo data structure 
+        }
         return (
-            <div className='preview-education' key={key}>
+            <div className='preview-education' key={id}>
                 <div className='preview-number'>
-                    <h2>{key+1}</h2>
+                    <h2>{key}</h2>
                 </div>
                 <div className='preview-content'>
                     <h4>{degree} in {field_study}</h4>
                     <p>{institution_name}</p>
     
-                    <div>
+                    <div> 
                         <p>{institution_location}</p>
                         <p>{education_starting_year} - {education_graduation_year}</p>
                     </div>
                 </div>
                 <div className='preview-actions'>
-                    <button className='edit' onClick={() => setState({type : 'update', id : key })}><FaPencilAlt /></button>
-                    <button className='delete' onClick={() => setState({type :'delete', id :  key})}><FaTrashAlt /></button>
+                    <button className='edit' onClick={() => setState({...state, type : 'update', id : id })}><FaPencilAlt /></button>
+                    <button className='delete' onClick={() => setState({...state,type :'delete', id :  id
+                
+                })}><FaTrashAlt /></button>
                 </div>
             </div>
         );

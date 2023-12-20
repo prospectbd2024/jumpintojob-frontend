@@ -8,6 +8,7 @@ function EducationFields({ props }) {
 
   const [educationFields, setEducationFields] = useState({});
   const BaseFormat = {
+    id : 0,
     institution_name: "",
     education_achivements: "",
     education_graduation_year: educationFields.education_graduation_year == "on" ? "off" : "",
@@ -16,7 +17,6 @@ function EducationFields({ props }) {
     degree: "",
     institution_location: "",
     institution_name: "",
-    status: "edit",
   };
   const {
     setResumeData,
@@ -26,48 +26,65 @@ function EducationFields({ props }) {
     setState,
   } = props;
 
-  useEffect(() => {
-    if (resumeData.educations[index]) {
-      setEducationFields(resumeData.educations[index]);
-    }
-  }, [resumeData]);
 
   const handleChange = useCallback((key, value) => {
     setEducationFields((prev) => {
       prev[key] = value;
       return prev;
     });
-    updateResumeData(index, educationFields);
+    updateResumeData(educationFields);
   });
+
 
 
   useEffect(() => {
     if (state.type == "insert") {
+
+      BaseFormat.id = state.index;
+
       setEducationFields(BaseFormat);
-      setIndex(formIndex);
-      updateResumeData(formIndex, BaseFormat);
+
+      updateResumeData(BaseFormat);
     }
     if (state.type == "update") {
+      let education_fields = resumeData.educations.find((item) => item.id == state.id)
+        setEducationFields(education_fields);
+        // updateResumeData(educationFields)
 
-      setEducationFields(resumeData.educations[state.id]);
-      setIndex(state.id)
     }
-  }, [formIndex]);
+    if (state.type == "dissmiss") {
+      BaseFormat.id = state.id;
 
-  const updateResumeData = useCallback((index, educationFields) => {
+      setEducationFields(BaseFormat);
+
+      updateResumeData(BaseFormat);
+
+    }
+  }, [state]);
+
+
+
+  const updateResumeData = useCallback((educationFields) => {
     const resumeEducations = resumeData.educations;
+    // console.log('old ',resumeExperiences)
+    
+    const index = resumeEducations.findIndex(item => item.id ==educationFields.id);
 
-    //check if the item is in the array
-    resumeEducations[index] = educationFields;
-    console.log(resumeEducations)
+    console.log(index,resumeEducations)
+
+
+    if (index ==-1){
+      resumeEducations.push(educationFields);
+    }   
+    else{
+      resumeEducations[index] = educationFields;
+    }
+    console.log(resumeEducations);
     setResumeData((prev) => {
       return { ...prev, educations: resumeEducations };
     });
   });
 
-  const saveChanges = useCallback(() => {
-    setState({ type: "list-view", id: index });
-  });
 
   return (
     <form action="" className="heading-form">
@@ -169,10 +186,10 @@ function EducationFields({ props }) {
           onChange={(e) =>
             handleChange("education_achivements", e.target.value)
           }
-          value={resumeData.educations[index]?.education_achivements}
+          value={educationFields?.education_achivements}
         ></textarea>
       </div>
-      <SaveDismissButtons  props={{state,setState}}/>
+      <SaveDismissButtons  props={{state,setState, id : educationFields?.id}}/>
     </form>
   );
 }
