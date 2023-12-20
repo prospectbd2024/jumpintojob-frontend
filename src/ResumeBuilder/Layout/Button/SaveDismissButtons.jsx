@@ -2,11 +2,11 @@ import React, { useCallback } from 'react'
 
 function SaveDismissButtons({props}) {
 
-  const {state,setState} = props;
+  const {state,setState,id} = props;
   const saveChanges = useCallback(() => {
-    console.log(state)
+    // console.log(state)
 
-    setState({ type: "list-view", id: state.id });
+    setState({...state, type: "list-view"});
   });
 
   return (
@@ -18,7 +18,7 @@ function SaveDismissButtons({props}) {
       marginTop: "30px",
     }}
   >
-    <button>Dismiss</button>
+
     <div
       onClick={() => {
         saveChanges();
