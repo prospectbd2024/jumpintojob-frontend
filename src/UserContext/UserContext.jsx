@@ -66,9 +66,13 @@ export const UserProvider = ({ children }) => {
             },
 
         ],
-        skills: [],
-        languages: []
+        skills: [], //new  skills : [{name : '',id: '', rating : 0}]
+        languages: []  //new languages : [{name : '',id: '', rating : 0}]
     });
+
+
+    
+  
     const handleSubmitResume = () => {
         useEffect(() => {
             localStorage.setItem('userResume', JSON.stringify(resumeData))
