@@ -23,6 +23,20 @@ const categories = [
 const PORT = 8000;
 const app = express();
 app.use(express.json())
+const languages = [
+  { name: "Bengali", id: 1 ,rating : 0},
+  { name: "English", id: 2 ,rating : 0},
+  { name: "Hindi","i": 3 ,rating : 0},
+  { name: "Urdu", id: 4 ,rating : 0},
+  { name: "Chinese", id:5 ,rating : 0},
+  { name: "InVision", id: 6 ,rating : 0},
+  { name: "Object Oriented Programming", id: 7 ,rating : 0},
+  { name: "Restful APIs", id: 8 ,rating : 0},
+  { name: "NodeJS", id: 9 ,rating : 0},
+  { name: "NestJS", id: 10,rating : 0},
+  { name: "Django", id: 11 ,rating : 0},
+  { name: "Tailwind CSS", id: 12 ,rating : 0}
+];
 const skills = [
   { name: "AngularJS", id: 1 ,rating : 0},
   { name: "Git", id: 2 ,rating : 0},
@@ -79,6 +93,7 @@ app.post("/skills/search",(req,resp)=>{
   if (key==''){
     resp.send({})
   }
+  console.log(key)
 
   const filterd_data = skills.filter((item) => item.name.toLowerCase().replace(' ','').indexOf(key.toLowerCase().replace(' ','')) !=-1 );
   console.log(filterd_data)
@@ -87,6 +102,18 @@ app.post("/skills/search",(req,resp)=>{
 
 })
 
+app.post("/languages/search",(req,resp)=>{
+const key = req.body.key;
+if (key==''){
+  resp.send({})
+}
+
+const filterd_data = languages.filter((item) => item.name.toLowerCase().replace(' ','').indexOf(key.toLowerCase().replace(' ','')) !=-1 );
+console.log(filterd_data)
+resp.send( { data : filterd_data} )
+
+
+})
 
 app.get('/skills',(req,resp) =>{
     resp.send( { data : skills} )
