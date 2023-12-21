@@ -24,18 +24,18 @@ const PORT = 8000;
 const app = express();
 app.use(express.json())
 const skills = [
-  { name: "AngularJS", id: 1 },
-  { name: "Git", id: 2 },
-  { name: "Figma","i": 3 },
-  { name: "SAAS", id: 4 },
-  { name: "AJAX", id:5 },
-  { name: "InVision", id: 6 },
-  { name: "Object Oriented Programming", id: 7 },
-  { name: "Restful APIs", id: 8 },
-  { name: "NodeJS", id: 9 },
-  { name: "NestJS", id: 10},
-  { name: "Django", id: 11 },
-  { name: "Tailwind CSS", id: 12 }
+  { name: "AngularJS", id: 1 ,rating : 0},
+  { name: "Git", id: 2 ,rating : 0},
+  { name: "Figma","i": 3 ,rating : 0},
+  { name: "SAAS", id: 4 ,rating : 0},
+  { name: "AJAX", id:5 ,rating : 0},
+  { name: "InVision", id: 6 ,rating : 0},
+  { name: "Object Oriented Programming", id: 7 ,rating : 0},
+  { name: "Restful APIs", id: 8 ,rating : 0},
+  { name: "NodeJS", id: 9 ,rating : 0},
+  { name: "NestJS", id: 10,rating : 0},
+  { name: "Django", id: 11 ,rating : 0},
+  { name: "Tailwind CSS", id: 12 ,rating : 0}
 ];
 app.use(cors());
 
