@@ -1,14 +1,14 @@
 import React from 'react'
 
-function SkillListView({suggestedSkills, setSuggestedSkills,handleSkillSave,putCurrentSkill}) {
+function SkillListView({skills,onSkillClick}) {
 
   return (
     <ul>
-    {suggestedSkills &&
-      suggestedSkills.map((skill,index) => {
+    {skills &&
+      skills?.map((skill,index) => {
         return (
           <div key={index}>
-            <li onClick={() => putCurrentSkill(skill)}   style={{'cursor' : 'pointer'}} >{skill.name}  </li>
+            <li onClick={() => onSkillClick(skill)}   style={{'cursor' : 'pointer'}} >{skill.name}  </li>
           </div>
         );
       })}

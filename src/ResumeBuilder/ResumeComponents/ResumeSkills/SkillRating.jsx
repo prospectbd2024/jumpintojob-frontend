@@ -1,37 +1,33 @@
 'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 
-function SkillRating({setCurrentSkill,currentSkill,rating,setRating}) {
+function SkillRating({setCurrentSkill,currentSkill,rate_title}) {
 
 
     const increase_rating = useCallback(()=>{
-      // console.log(rating)
-      if(rating<5){
-        setRating(prev=>prev+0.5)
+
+      if(currentSkill.rating<5){
+        setCurrentSkill(prev => {return {...prev, rating : prev.rating+0.5}})
+        console.log(currentSkill)
+
       }
-    },[rating,currentSkill]);
+    },[currentSkill]);
     const decrease_rating = useCallback(()=>{
-      // alert(rating)
-      if(rating>0){
-        setRating(prev=>prev-0.5)
+      if(currentSkill.rating>0){
+        setCurrentSkill(prev => {return {...prev, rating : prev.rating-0.5}})
         
       }
-    },[rating,currentSkill]);
-
-  useEffect(()=>{
-    setCurrentSkill(prev => {return {...prev, rating : rating}})
-  },[rating])
-
+    },[currentSkill]);
   return (
     <div>          
-    <label htmlFor="rating">Rate your skill</label>
+    <label htmlFor="rating">{rate_title}</label>
     <div>
       <button onClick={increase_rating}>+</button>
       <button onClick={decrease_rating}>-</button>
     </div>
     <input
       type="text"
-      value={rating}
+      value={currentSkill.rating}
       readOnly
     />
     

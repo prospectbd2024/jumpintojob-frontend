@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+"use client";
+import React, { useCallback, useContext } from "react";
 import { HiPencil, HiPlus, HiX } from "react-icons/hi";
 import "./AddSkills.css";
 import { useState } from "react";
@@ -7,67 +8,55 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import Modal from "./Modal";
 
+import AddSkillButton from "./AddSkillButton";
+import ShowSkillList from "./SkillsList";
+import { SkillContext } from "@/UserContext/SkillContext";
+
 const AddSkills = () => {
-  const { resumeData, setResumeData } = useUserContext();
-  const [search, setSearch] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const handleShowModal = (e) => {
-    setShowModal(e);
-  };
-  const [skillList, setSkillList] = useState([]);
-  const [currentSkill, setCurrentSkill] = useState({
-    id: "",
-    type: "",
-    rating: 0,
+  const { handleRemoveSkill } = useContext(SkillContext);
+  const [searchKey, setSearchKey] = useState("");
+  const handleSaveCurrentSkill = useCallback((skill) => {
+    setCurrentSkill(demoSkill);
+    setSearchKey("");
+    console.log(skill);
+    handleShowModal(false);
+    if (skill.name && skill.rating >= 0) {
+      saveCurrentSkill(skill);
+    }
   });
-  const handleSkillList = useCallback((skill) => {
-      setSkillList([...skillList, skill]);
-      console.log([...skillList, skill])
-
-    // console.log(skillList,skill)
-
-  });
-
-
-
-  const handleRemoveSkill = useCallback((index) => {
-    const updatedSkillList = [...skillList];
-    updatedSkillList.splice(index, 1);
-    setSkillList(updatedSkillList);
-  });
-  useEffect(() => {
-    // This effect runs whenever skillList changes
-    setResumeData({ ...resumeData, skills: skillList });
-  }, [skillList]);
-
-  // console.log(resumeData)
+  const closeModal = useCallback(() => {
+    handleShowModal(false);
+    setCurrentSkill(demoSkill);
+    setSearchKey("");
+  }, []);
+  
+  const {
+    showModal,
+    setCurrentSkill,
+    currentSkill,
+    demoSkill,
+    handleShowModal,
+    saveCurrentSkill,
+  } = useContext(SkillContext);
   return (
     <div className="add-skills">
-      <div className="add-new-skill" onClick={() => handleShowModal(true)  }>
-        <h4>Add skill</h4>
-        <button>
-          <HiPlus />
-        </button>
-      </div>
-      <ul className="skills-list">
-        {resumeData?.skills?.map((skill, index) => (
-          <li className="skill" key={index}>
-            <p>name : {skill.name}, rating : {skill.rating}</p>
-            <button onClick={() => handleRemoveSkill(index)}>
-              <FaTrashAlt />
-            </button>
-          </li>
-        ))}
-      </ul>
+      <AddSkillButton />
+      <ShowSkillList onDeleteFunctin={handleRemoveSkill} type={"skills"} />
+
       <Modal
-        props={{
-          showModal,
-          handleShowModal,
-          setCurrentSkill,
-          currentSkill,
-          handleSkillList,
-          search, setSearch
-        }}
+        title={"Add Skills"}
+        desc={"Add your top skills to impress the employers"}
+        search_title={'Select Skill'}
+        rate_title = {'Rate  you  Skill'}
+        display_sug = {true}
+        closeModal={closeModal}
+        handleSaveCurrentSkill={handleSaveCurrentSkill}
+        setCurrentSkill={setCurrentSkill}
+        currentSkill={currentSkill}
+        showModal={showModal}
+        searchKey ={searchKey}
+        search_type={'skills'}
+        setSearchKey={setSearchKey}
       />
     </div>
   );
