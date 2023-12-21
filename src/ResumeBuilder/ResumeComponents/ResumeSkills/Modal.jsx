@@ -12,23 +12,33 @@ function Modal({ props }) {
     setCurrentSkill,
     currentSkill,
     handleSkillList,
+    search,
+    setSearch,
   } = props;
+  const skillObj = {id : '', name : '',rating : 0}
   const [ShowSearchSuggestion, setShowSearchSuggestion] = useState(false);
   const [findSkill, setFindSkill] = useState([]);
-  const [search, setSearch] = useState("");
+
+  const [rating,setRating] = useState(0);
   const [suggestedSkills, setSuggestedSkills] = useState([]);
 
   const handleSkillSave = useCallback((skill) => {
-    handleShowModal(false),
-    handleSkillList(skill);
+
+    setCurrentSkill(skillObj)
+    setSearch("")
+    setRating(0)
+    handleShowModal(false)
+    if (skill.name && skill.rating>=0){
+      handleSkillList(skill);
+    }
   });
 
   const putCurrentSkill = useCallback((skill) => {
     setShowSearchSuggestion(false);
     setSearch(skill.name);
-    setCurrentSkill(skill)
+    setCurrentSkill(skill);
   });
-
+  // fetch suggested skills
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills`)
       .then((res) => res.json())
@@ -37,7 +47,7 @@ function Modal({ props }) {
       });
     console.log(suggestedSkills);
   }, []);
-
+  //search skills
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills/search`, {
       method: "POST",
@@ -54,10 +64,14 @@ function Modal({ props }) {
     console.log("typing", findSkill);
   }, [search]);
 
-  const handleChange = useCallback((event) => {
-    setSearch(event.target.value);
-    // console.log("key word",JSON.stringify(search))
-  }, []);
+  const handleExit= useCallback(()=>{
+    handleShowModal(false)
+    setCurrentSkill(skillObj)
+    setSearch("")
+    setRating(0)
+    
+  },[]);
+
 
   return (
     <div
@@ -65,19 +79,19 @@ function Modal({ props }) {
     >
       <div className="modal-header">
         <p>Add Skills</p>
-        <button onClick={() => handleShowModal(false)}>
+        <button onClick={() => handleExit()}>
           <HiX />
         </button>
       </div>
       <div className="modal-content">
         <p>Add your top skills to impress the employers</p>
         <div>
-          <label htmlFor="skill">Skill* </label>
+          <label htmlFor="skill">Select Skill </label>
           <input
             type="text"
             value={search}
             onChange={(e) => {
-              handleChange(e);
+              setSearch(e.target.value);
               setShowSearchSuggestion(true);
             }}
             onFocus={() => setShowSearchSuggestion(true)}
@@ -98,8 +112,12 @@ function Modal({ props }) {
           )}
         </div>
         <div>
-            <SkillRating props={{setCurrentSkill,currentSkill}} />
-
+          <SkillRating
+            setCurrentSkill={setCurrentSkill}
+            currentSkill={setCurrentSkill}
+            rating ={rating}
+            setRating={setRating}
+          />
         </div>
         <div>
           <SuggestedSkills

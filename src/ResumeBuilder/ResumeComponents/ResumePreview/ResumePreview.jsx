@@ -49,8 +49,8 @@ const ResumePreview = ({ selectedTemplate }) => {
                     })
                     
                     }</>
-                    <>{resumeData.skills.map((skill)=>{
-                        return <div key={skill.id}>{skill.name}</div>
+                    <>{resumeData.skills.map((skill,index)=>{
+                        return <div key={index}>{skill.name} {skill.rating}</div>
                     })}</>
 
                 </div>}
