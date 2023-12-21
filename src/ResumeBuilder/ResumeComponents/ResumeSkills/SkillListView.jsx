@@ -8,7 +8,7 @@ function SkillListView({suggestedSkills, setSuggestedSkills,handleSkillSave,putC
       suggestedSkills.map((skill,index) => {
         return (
           <div key={index}>
-            <li onClick={() => putCurrentSkill(skill)}   style={{'cursor' : 'pointer'}} >{skill.name} </li>
+            <li onClick={() => putCurrentSkill(skill)}   style={{'cursor' : 'pointer'}} >{skill.name}  </li>
           </div>
         );
       })}

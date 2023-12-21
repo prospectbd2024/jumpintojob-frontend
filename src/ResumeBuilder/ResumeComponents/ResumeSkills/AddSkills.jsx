@@ -9,6 +9,7 @@ import Modal from "./Modal";
 
 const AddSkills = () => {
   const { resumeData, setResumeData } = useUserContext();
+  const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = (e) => {
     setShowModal(e);
@@ -42,7 +43,7 @@ const AddSkills = () => {
   // console.log(resumeData)
   return (
     <div className="add-skills">
-      <div className="add-new-skill" onClick={() => handleShowModal(true)}>
+      <div className="add-new-skill" onClick={() => handleShowModal(true)  }>
         <h4>Add skill</h4>
         <button>
           <HiPlus />
@@ -51,7 +52,7 @@ const AddSkills = () => {
       <ul className="skills-list">
         {resumeData?.skills?.map((skill, index) => (
           <li className="skill" key={index}>
-            <p>{skill.name}</p>
+            <p>name : {skill.name}, rating : {skill.rating}</p>
             <button onClick={() => handleRemoveSkill(index)}>
               <FaTrashAlt />
             </button>
@@ -65,6 +66,7 @@ const AddSkills = () => {
           setCurrentSkill,
           currentSkill,
           handleSkillList,
+          search, setSearch
         }}
       />
     </div>
