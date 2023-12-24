@@ -77,7 +77,7 @@ const AddLanguages = () => {
         showModal={showModal}
         searchKey ={searchKey}
         setSearchKey={setSearchKey}
-        search_type={'languages'}
+        search_url={'/languages/search'}
       />
     </div>
   );

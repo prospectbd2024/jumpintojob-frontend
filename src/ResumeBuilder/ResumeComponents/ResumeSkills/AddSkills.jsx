@@ -55,7 +55,7 @@ const AddSkills = () => {
         currentSkill={currentSkill}
         showModal={showModal}
         searchKey ={searchKey}
-        search_type={'skills'}
+        search_url={'/skills/search'}
         setSearchKey={setSearchKey}
       />
     </div>

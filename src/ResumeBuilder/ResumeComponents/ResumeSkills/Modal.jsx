@@ -11,6 +11,7 @@ function Modal({
   title,
   desc,
   display_sug,
+
   search_title,
   closeModal,
   handleSaveCurrentSkill,
@@ -19,8 +20,9 @@ function Modal({
   currentSkill,
   searchKey,
   setSearchKey,
-  search_type ,
-  rate_title
+  search_url ,
+  rate_title,
+  search_sug=true
 
 }) {
 
@@ -39,11 +41,12 @@ function Modal({
         <p>{desc}</p>
         <SearchSkills
           onSkillClick={setCurrentSkill}
-          type={search_type}
+          search_url={search_url}
           search_title={search_title}
           searchKey={searchKey}
           currentSkill={currentSkill}
           setSearchKey={setSearchKey} 
+          search_sug ={search_sug}
           
           />
 

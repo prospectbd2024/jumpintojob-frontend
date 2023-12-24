@@ -3,7 +3,7 @@ import { SkillContext } from "@/UserContext/SkillContext";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import SkillListView from "./SkillListView";
 
-function SearchSkills({onSkillClick,type ,search_title ,searchKey,setSearchKey,currentSkill}) {
+function SearchSkills({onSkillClick,search_url ,search_title ,searchKey,setSearchKey,currentSkill,search_sug}) {
   const [showSearchSuggestion, setShowSearchSuggestion] = useState(false);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
 
@@ -22,7 +22,7 @@ function SearchSkills({onSkillClick,type ,search_title ,searchKey,setSearchKey,c
   });
   //get skill when search for skill
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/${type}/search`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}${search_url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,6 +33,7 @@ function SearchSkills({onSkillClick,type ,search_title ,searchKey,setSearchKey,c
       .then((rsp) => rsp.json())
       .then((data) => {
         setSearchSuggestions(data.data);
+        console.log(data)
       });
       console.log('here is your ',searchSuggestions)
   }, [searchKey]);
@@ -54,8 +55,9 @@ function SearchSkills({onSkillClick,type ,search_title ,searchKey,setSearchKey,c
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
       />
-      {showSearchSuggestion && (
+      {showSearchSuggestion &&search_sug && (
         <div>
+
           <SkillListView
             skills={searchSuggestions}
               onSkillClick={onSkillClick}
