@@ -39,6 +39,7 @@ function Modal({
       </div>
       <div className="modal-content">
         <p>{desc}</p>
+
         <SearchSkills
           onSkillClick={setCurrentSkill}
           search_url={search_url}
@@ -50,12 +51,16 @@ function Modal({
           
           />
 
+
         <div>
+          {       currentSkill.name &&
+
           <SkillRating
             setCurrentSkill={setCurrentSkill}
             currentSkill={currentSkill}
             rate_title={rate_title}
           />
+          }
         </div>
         <div>
           {display_sug && <SuggestedSkills onSkillClick={setCurrentSkill} />}
