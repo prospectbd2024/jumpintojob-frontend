@@ -1,3 +1,4 @@
+'use client'
 import React, { useCallback, useEffect, useState } from "react";
 import { useUserContext } from "../../../UserContext/UserContext";
 import { FaPlus } from "react-icons/fa";
@@ -49,6 +50,7 @@ const ResumeExperiences = () => {
                 setState,
               }}
             />
+      
           }
           {(state.type=='list-view' || state.type=='delete') &&  (
             <AddMoreButton handleAddMore={handleAddMore}>
