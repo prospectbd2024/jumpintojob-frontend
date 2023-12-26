@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from "react";
 import { useUserContext } from "../../../UserContext/UserContext";
 import "../ResumeHeading/ResumeHeading.css";
