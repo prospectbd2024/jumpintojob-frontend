@@ -1,17 +1,22 @@
 "use client"
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 const PreviewExperiences = ({props}) => {
+
+
 
     const {resumeData ,setResumeData,state,setState} = props;
     useEffect(() => {
         if(state.type =='delete')
               {
                 deleteExperience(state.id)
+                // console.log(state)
                 setState({...state, type : 'list-view'})
+
     
-              }   
+              }
+
         
        }, [state])
     
@@ -26,7 +31,6 @@ const PreviewExperiences = ({props}) => {
 
 
 
-    
     return <div>
     {resumeData && resumeData.experiences.map((experience,key) =>{
 
