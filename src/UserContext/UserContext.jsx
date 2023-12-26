@@ -70,7 +70,12 @@ export const UserProvider = ({ children }) => {
         languages: []  //new languages : [{name : '',id: '', rating : 0}]
     });
 
-
+    useEffect(() => {
+    //    console.log(typeof userData)
+       setBearerToken(userData?.data?.access_token)
+    //    console.log(userData.data.access_token)
+    }, [userData])
+    
     
   
     const handleSubmitResume = () => {
