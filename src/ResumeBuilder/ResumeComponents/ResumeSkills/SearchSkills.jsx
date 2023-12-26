@@ -56,7 +56,19 @@ function SearchSkills({onSkillClick,search_url ,search_title ,searchKey,setSearc
         onBlur={handleSearchBlur}
       />
       {showSearchSuggestion &&search_sug && (
-        <div>
+        <div
+        style={{
+          position: 'absolute',
+          top: '182px',
+          left: '15px',
+          width: '267px',
+          backgroundColor: 'white',
+          listStyle: 'none',
+          borderBottomRightRadius: '10px',
+          borderBottomLeftRadius: '10px'
+
+
+        }}>
 
           <SkillListView
             skills={searchSuggestions}
