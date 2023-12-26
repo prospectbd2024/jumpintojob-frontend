@@ -8,7 +8,7 @@ function SkillListView({skills,onSkillClick}) {
       skills?.map((skill,index) => {
         return (
           <div key={index}>
-            <li onClick={() => onSkillClick(skill)}   style={{'cursor' : 'pointer'}} >{skill.name}  </li>
+            <li onClick={() =>{ onSkillClick(skill)}}   style={{'cursor' : 'pointer' ,'listStyle' : 'none'}} >{skill.name}  </li>
           </div>
         );
       })}
