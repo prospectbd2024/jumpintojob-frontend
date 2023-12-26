@@ -20,7 +20,7 @@ const categories = [
   { id: 15, category_name: "Telecommunications" },
   { id: 16, category_name: "Other" },
 ];
-const PORT = 8000;
+const PORT = 8100;
 const app = express();
 app.use(express.json())
 const languages = [
@@ -73,6 +73,14 @@ app.post("/auth/user/login", (req, resp) => {
 
   resp.send(user_info);
 });
+app.post('/auth/job-seeker/signup',(req,resp)=>{
+
+
+  resp.send({
+
+  })
+})
+
 
 app.get("/circular", (req, resp) => {
   resp.send({ data: jobs });
