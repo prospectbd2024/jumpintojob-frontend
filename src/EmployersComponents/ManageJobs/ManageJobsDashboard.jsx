@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { HiBookmark, HiBriefcase, HiEye, HiMail, HiMap, HiOutlineBriefcase, HiPhone, HiPhoneIncoming } from 'react-icons/hi';
