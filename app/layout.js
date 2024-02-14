@@ -34,6 +34,7 @@ function layout({children}) {
   return (
     <html lang="en">
       <body className='fou'>
+      test is auto deploy is working or not
       <UserProvider>
       <JobContext>
         {children}
