@@ -14,5 +14,5 @@ jobs:
           cd C:\Users\prospectbddev\Desktop\jumpintojob-frontend
           git pull origin
           docker compose down
-          docker compose up --build
+          docker compose up -d --build --remove-orphans
           ./bin/deploy_dev.sh
