@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 import  Link  from 'next/link';
 import { HiOutlineBookmark } from 'react-icons/hi';
