@@ -66,9 +66,18 @@ export const UserProvider = ({ children }) => {
             },
 
         ],
-        skills: [],
-        languages: []
+        skills: [], //new  skills : [{name : '',id: '', rating : 0}]
+        languages: []  //new languages : [{name : '',id: '', rating : 0}]
     });
+
+    useEffect(() => {
+    //    console.log(typeof userData)
+       setBearerToken(userData?.data?.access_token)
+    //    console.log(userData.data.access_token)
+    }, [userData])
+    
+    
+  
     const handleSubmitResume = () => {
         useEffect(() => {
             localStorage.setItem('userResume', JSON.stringify(resumeData))

@@ -9,6 +9,7 @@ import ResumePreview from '../ResumePreview/ResumePreview';
 import ResumeExperiences from '../ResumeExperiences/ResumeExperiences';
 import ResumeSkills from '../ResumeSkills/ResumeSkills';
 import ResumeFinalize from '../ResumeFinalize/ResumeFinalize';
+import SkillContextProvider from '@/UserContext/SkillContext';
 
 const ResumeContainer = () => {
     const { currentStep, setCurrentStep, resumeData, setResumeData } = useUserContext();
@@ -37,7 +38,7 @@ const ResumeContainer = () => {
                        {step==2 && <ResumeHeading templateType={templateType} />}
                        {step==3 && <ResumeEducation />}
                        {step==4 &&  <ResumeExperiences /> }
-                       {step==5 &&  <ResumeSkills /> }
+                       {step==5 &&   <SkillContextProvider><ResumeSkills /></SkillContextProvider>  }
                        {step==6 &&  <ResumeFinalize /> }
                     </div>
                     <div className="resume-preview">

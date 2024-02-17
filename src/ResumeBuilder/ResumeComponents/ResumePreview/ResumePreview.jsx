@@ -7,7 +7,7 @@ const ResumePreview = ({ selectedTemplate }) => {
         <div>
             <h3>{selectedTemplate.name + ' ' + selectedTemplate.type} preview</h3>
             {resumeData &&
-                <div>
+                <div >
                     <p>{resumeData.firstName}</p>
                     <p>{resumeData.lastName}</p>
                     <p>{resumeData.email}</p>
@@ -20,8 +20,8 @@ const ResumePreview = ({ selectedTemplate }) => {
                     <p>{resumeData.country}</p>
                     <p>{resumeData.summary}</p>
 
-                    <>{resumeData.educations.map((education)=>{
-                    return<div key ={education.institution_name}>
+                    <>{resumeData.educations.map((education,index)=>{
+                    return<div key ={index}>
                     <p>{education.institution_name}</p>
                     <p>{education.institution_location}</p>
                     <p>{education.degree}</p>
@@ -35,8 +35,8 @@ const ResumePreview = ({ selectedTemplate }) => {
                     }</>
                     {/* job_title, company, job_city, job_country, job_starting_year, job_ending_year */}
 
-                    <>{resumeData.experiences.map((job)=>{
-                    return<>
+                    <>{resumeData.experiences.map((job,index)=>{
+                    return<div key={index}>
                     <p>{job.job_title}</p>
                     <p>{job.company}</p>
                     <p>{job.job_city}</p>
@@ -45,10 +45,13 @@ const ResumePreview = ({ selectedTemplate }) => {
                     <p>{job.job_ending_year}</p>
                     <p>{job.job_description}</p>
 
-                        </>
+                        </div>
                     })
                     
                     }</>
+                    <>{resumeData.skills.map((skill,index)=>{
+                        return <div key={index}>{skill.name} {skill.rating}</div>
+                    })}</>
 
                 </div>}
         </div>

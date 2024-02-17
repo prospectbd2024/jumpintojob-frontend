@@ -9,14 +9,11 @@ export const useJobContext = ()=> useContext(jobContext);
 function JobContext({children}) {
     const [allJobs, setAllJobs] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/circular`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data.data);
                 setAllJobs(data.data);
-
-                console.log('job is not updating')
-
                 // If you want to use filteredJobs for filtering logic later on,
                 // you might want to keep it separate initially
                 // setFilteredJobs(data.data);

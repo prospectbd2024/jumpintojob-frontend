@@ -18,6 +18,7 @@ const Header = () => {
     const { userData, setUserData } = useContext(UserContext);
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
+
     
     const [isClient,setClient] = useState(false);
 
@@ -48,7 +49,7 @@ const Header = () => {
             return;
         }
         try {
-            const userLogoutResponse = await fetch('https://unitechholdingsltd.com/api/v1/logout', {
+            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -66,6 +67,8 @@ const Header = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            forEmployerNavigate.push('/signin')
+            
         } catch (error) {
             console.error("Logout failed:", error);
             alert(error);
