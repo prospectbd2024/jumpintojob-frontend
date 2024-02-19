@@ -13,6 +13,7 @@ services:
             - node_modules/
             - bin/
             - .github/
+            - .git/
         - action: rebuild
           path: package.json
     environment:
