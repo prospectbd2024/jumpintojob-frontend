@@ -72,8 +72,9 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
     //    console.log(typeof userData)
-       setBearerToken(userData?.data?.access_token)
-    //    console.log(userData.data.access_token)
+    if(userData){
+        setBearerToken(userData.data.access_token)
+    }
     }, [userData])
     
     
@@ -85,7 +86,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume }}>
+        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume,bearerToken }}>
             {children}
         </UserContext.Provider>
     );
