@@ -8,7 +8,23 @@ const VerifyEmail = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
 
-  const {userData,BearerToken} = useUserContext();
+  // console.log(bearerToken,userData);
+  const resandVerificatinCode =async ()=>{
+    console.log("resending")
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/resend_code`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${bearerToken}`,
+      },
+      body: JSON.stringify({ verify_by: userData.data.user.email }),
+    });
+    
+    const data = await response.json()
+    console.log(data)
+
+    
+  }
 
   const handleVerification = async () => {
     console.log(userData);
