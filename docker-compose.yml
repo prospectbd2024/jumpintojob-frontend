@@ -11,6 +11,8 @@ services:
           target: /app
           ignore:
             - node_modules/
+            - bin/
+            - .github/
         - action: rebuild
           path: package.json
     environment:
