@@ -59,7 +59,7 @@ const Register = () => {
       // Handle successful registration, e.g., show a success message
       console.log("Success Registration!", data);
       //   alert("Registration Successfull! Please Verify Your Email");
-      router.push("/signin" + "?" + createQueryString("msg", "User Created! Please Login"));
+      router.push("/signin" + "?" + createQueryString("msg", "Congratulation! Please Check your Email to verify!"));
     } else {
       // Handle registration error, e.g., display an error message
       console.log("Something is wrong!", data);
@@ -81,7 +81,7 @@ const Register = () => {
           <div className="account-info account-info-register">
             <label htmlFor="first_name">First Name</label>
             <div className="account-input  account-input-register">
-              <HiOutlineUserCircle></HiOutlineUserCircle>
+              <HiOutlineUserCircle/>
               <input
                 type="text"
                 placeholder="David"
@@ -97,7 +97,7 @@ const Register = () => {
             <div className="account-info account-info-register">
               <label htmlFor="last_name">Last Name</label>
               <div className="account-input account-input-register">
-                <HiOutlineUserCircle></HiOutlineUserCircle>
+                <HiOutlineUserCircle/>
                 <input
                   type="text"
                   placeholder="Warner"
@@ -114,7 +114,7 @@ const Register = () => {
             <div className="account-info account-info-register">
               <label htmlFor="user_name">User Type</label>
               <div className="account-input account-input-register">
-                <HiOutlineUserCircle></HiOutlineUserCircle>
+                <HiOutlineUserCircle/>
                 <input
                   type="text"
                   placeholder="davidwarner"
@@ -130,7 +130,7 @@ const Register = () => {
           <div className="account-info account-info-register">
             <label htmlFor="email">Email</label>
             <div className="account-input account-input-register">
-              <HiOutlineMail></HiOutlineMail>
+              <HiOutlineMail/>
               <input
                 type="text"
                 placeholder="warner22@info.com"
@@ -179,9 +179,9 @@ const Register = () => {
               )}
               <div onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? (
-                  <HiOutlineEye></HiOutlineEye>
+                  <HiOutlineEye/>
                 ) : (
-                  <HiOutlineEyeOff></HiOutlineEyeOff>
+                  <HiOutlineEyeOff/>
                 )}
               </div>
             </div>
@@ -213,9 +213,9 @@ const Register = () => {
                 )}
                 <div onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <HiOutlineEye></HiOutlineEye>
+                    <HiOutlineEye/>
                   ) : (
-                    <HiOutlineEyeOff></HiOutlineEyeOff>
+                    <HiOutlineEyeOff/>
                   )}
                 </div>
               </div>
@@ -249,7 +249,7 @@ const Register = () => {
         </form>
         <div className="social-login">
           <button>
-            <FcGoogle></FcGoogle> Login With Google
+            <FcGoogle/> Login With Google
           </button>
           <button>
             {" "}
