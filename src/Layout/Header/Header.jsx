@@ -18,6 +18,7 @@ const Header = () => {
     const { userData, setUserData } = useContext(UserContext);
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
+
     
     const [isClient,setClient] = useState(false);
 
@@ -41,14 +42,15 @@ const Header = () => {
     };
 
     const handleLogout = async () => {
-        localStorage.removeItem('userData');
+
+        console.log("logging out");
         const token = userData?.data?.access_token;
         if (!token) {
             console.error("User token not available.");
             return;
         }
         try {
-            const userLogoutResponse = await fetch('https://unitechholdingsltd.com/api/v1/logout', {
+            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -56,6 +58,7 @@ const Header = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            localStorage.removeItem('userData');
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
@@ -66,6 +69,8 @@ const Header = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            forEmployerNavigate.push('/signin')
+            
         } catch (error) {
             console.error("Logout failed:", error);
             alert(error);

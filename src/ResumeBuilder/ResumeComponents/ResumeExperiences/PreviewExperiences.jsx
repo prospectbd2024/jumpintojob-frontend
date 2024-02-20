@@ -1,17 +1,22 @@
 "use client"
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 const PreviewExperiences = ({props}) => {
+
+
 
     const {resumeData ,setResumeData,state,setState} = props;
     useEffect(() => {
         if(state.type =='delete')
               {
                 deleteExperience(state.id)
+                // console.log(state)
                 setState({...state, type : 'list-view'})
+
     
-              }   
+              }
+
         
        }, [state])
     
@@ -26,15 +31,14 @@ const PreviewExperiences = ({props}) => {
 
 
 
-    
-    return <>
+    return <div>
     {resumeData && resumeData.experiences.map((experience,key) =>{
 
         
         
         const {job_title, company, job_city, job_country, job_starting_year, job_ending_year,id} = experience;
     if (id==0){
-        return <></> // if item is demo education 
+        return <div key={id}></div> // if item is demo education 
     }
         return (
             <div className='preview-education' key={key}>
@@ -57,7 +61,7 @@ const PreviewExperiences = ({props}) => {
         </div>
     );
 }
-)}</>
+)}</div>
 };
 
 export default PreviewExperiences;

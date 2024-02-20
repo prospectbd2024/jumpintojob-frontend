@@ -3,29 +3,33 @@ import SaveDismissButtons from "@/ResumeBuilder/Layout/Button/SaveDismissButtons
 import React, { useState, useCallback, useEffect } from "react";
 
 function EducationFields({ props }) {
-  
-  const [index, setIndex] = useState(0);
-
-  const [educationFields, setEducationFields] = useState({});
-  const BaseFormat = {
-    id : 0,
+  const [educationFields, setEducationFields] = useState({
+    id: 0,
     institution_name: "",
     education_achivements: "",
-    education_graduation_year: educationFields.education_graduation_year == "on" ? "off" : "",
+    education_graduation_year: "",
+    education_starting_year: "",
+    field_study: "",
+    degree: "",
+    institution_location: "",
+    institution_name: "",
+  });
+
+
+  const BaseFormat = {
+    id: 0,
+    institution_name: "",
+    education_achivements: "",
+    education_graduation_year:
+    educationFields.education_graduation_year == "on" ? "off" : "",
     education_starting_year: "",
     field_study: "",
     degree: "",
     institution_location: "",
     institution_name: "",
   };
-  const {
-    setResumeData,
-    resumeData,
-    formIndex,
-    state,
-    setState,
-  } = props;
-
+  const [isWarning,setWarning] = useState(false)
+  const { setResumeData, resumeData, formIndex, state, setState } = props;
 
   const handleChange = useCallback((key, value) => {
     setEducationFields((prev) => {
@@ -35,11 +39,8 @@ function EducationFields({ props }) {
     updateResumeData(educationFields);
   });
 
-
-
   useEffect(() => {
     if (state.type == "insert") {
-
       BaseFormat.id = state.index;
 
       setEducationFields(BaseFormat);
@@ -47,10 +48,11 @@ function EducationFields({ props }) {
       updateResumeData(BaseFormat);
     }
     if (state.type == "update") {
-      let education_fields = resumeData.educations.find((item) => item.id == state.id)
-        setEducationFields(education_fields);
-        // updateResumeData(educationFields)
-
+      let education_fields = resumeData.educations.find(
+        (item) => item.id == state.id
+      );
+      setEducationFields(education_fields);
+      // updateResumeData(educationFields)
     }
     if (state.type == "dissmiss") {
       BaseFormat.id = state.id;
@@ -58,25 +60,22 @@ function EducationFields({ props }) {
       setEducationFields(BaseFormat);
 
       updateResumeData(BaseFormat);
-
     }
   }, [state]);
-
-
 
   const updateResumeData = useCallback((educationFields) => {
     const resumeEducations = resumeData.educations;
     // console.log('old ',resumeExperiences)
-    
-    const index = resumeEducations.findIndex(item => item.id ==educationFields.id);
 
-    console.log(index,resumeEducations)
+    const index = resumeEducations.findIndex(
+      (item) => item.id == educationFields.id
+    );
 
+    console.log(index, resumeEducations);
 
-    if (index ==-1){
+    if (index == -1) {
       resumeEducations.push(educationFields);
-    }   
-    else{
+    } else {
       resumeEducations[index] = educationFields;
     }
     console.log(resumeEducations);
@@ -84,7 +83,6 @@ function EducationFields({ props }) {
       return { ...prev, educations: resumeEducations };
     });
   });
-
 
   return (
     <form action="" className="heading-form">
@@ -96,8 +94,17 @@ function EducationFields({ props }) {
             placeholder="University of Dhaka"
             id="institutionname"
             onChange={(e) => handleChange("institution_name", e.target.value)}
-            value={educationFields.institution_name}
+            value={educationFields?.institution_name}
           />
+          <div
+            className={
+              isWarning && educationFields.institution_name == ""
+                ? "required"
+                : "hidden"
+            }
+          >
+            Institution name is required
+          </div>
         </div>
         <div className="resume-input-field">
           <label htmlFor="institutionloc">INSTITUTION LOCATION</label>
@@ -108,7 +115,7 @@ function EducationFields({ props }) {
             onChange={(e) =>
               handleChange("institution_location", e.target.value)
             }
-            value={educationFields.institution_location}
+            value={educationFields?.institution_location}
           />
         </div>
         <div className="resume-input-field">
@@ -118,8 +125,15 @@ function EducationFields({ props }) {
             placeholder="Bachelor of Science"
             id="degree"
             onChange={(e) => handleChange("degree", e.target.value)}
-            value={educationFields.degree}
+            value={educationFields?.degree}
           />
+          <div
+            className={
+              isWarning && educationFields.degree == "" ? "required" : "hidden"
+            }
+          >
+            Qualifications or degree is required
+          </div>
         </div>
         <div className="resume-input-field">
           <label htmlFor="field">FIELD OF STUDY</label>
@@ -128,8 +142,17 @@ function EducationFields({ props }) {
             placeholder="Computer Science"
             id="field"
             onChange={(e) => handleChange("field_study", e.target.value)}
-            value={educationFields.field_study}
+            value={educationFields?.field_study}
           />
+          <div
+            className={
+              isWarning && educationFields?.field_study == ""
+                ? "required"
+                : "hidden"
+            }
+          >
+            Field study is required
+          </div>
         </div>
         <div className="resume-input-field">
           <label htmlFor="starting">STARTING YEAR</label>
@@ -140,7 +163,7 @@ function EducationFields({ props }) {
             onChange={(e) =>
               handleChange("education_starting_year", e.target.value)
             }
-            value={educationFields.education_starting_year}
+            value={educationFields?.education_starting_year}
           />
         </div>
         <div className="resume-input-field">
@@ -152,7 +175,7 @@ function EducationFields({ props }) {
             onChange={(e) =>
               handleChange("education_graduation_year", e.target.value)
             }
-            value={educationFields.education_graduation_year}
+            value={educationFields?.education_graduation_year}
           />
           <div
             className="currently-here"
@@ -169,7 +192,7 @@ function EducationFields({ props }) {
               onChange={(e) =>
                 handleChange("education_graduation_year", e.target.value)
               }
-              value={educationFields.education_graduation_year}
+              value={educationFields?.education_graduation_year}
             />
             <label htmlFor="currently_here">I currently study here</label>
           </div>
@@ -189,7 +212,18 @@ function EducationFields({ props }) {
           value={educationFields?.education_achivements}
         ></textarea>
       </div>
-      <SaveDismissButtons  props={{state,setState, id : educationFields?.id}}/>
+      <SaveDismissButtons
+        props={{
+          state,
+          setState,
+          id: educationFields?.id,
+          requiredFields :[      
+            educationFields.institution_name,
+            educationFields.degree,
+            educationFields.field_study,],
+          setWarning
+        }}
+      />
     </form>
   );
 }
