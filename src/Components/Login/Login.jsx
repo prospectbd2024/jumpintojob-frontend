@@ -52,12 +52,13 @@ const Login = () => {
         body: JSON.stringify(userLoginData),
       }
     );
+    console.log( `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/login`)
     const loginUserData = await loginData.json();
     console.log(loginUserData);
     if (loginData.ok) {
       console.log("Login Successfull", loginUserData);
       setUserData(loginUserData);
-      console.log(loginUserData);
+      // console.log(loginUserData);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -65,8 +66,8 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-
-      if(loginUserData.data.message==', Please verify your email address to use all features!'){
+      // console.log(loginUserData.data.user)
+      if(loginUserData.data.user.is_verified==false){
         navigate.push('/verify-email')
       }
       else{

@@ -42,7 +42,8 @@ const Header = () => {
     };
 
     const handleLogout = async () => {
-        localStorage.removeItem('userData');
+
+        console.log("logging out");
         const token = userData?.data?.access_token;
         if (!token) {
             console.error("User token not available.");
@@ -57,6 +58,7 @@ const Header = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            localStorage.removeItem('userData');
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
