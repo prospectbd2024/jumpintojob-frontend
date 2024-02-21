@@ -29,7 +29,7 @@ const UserHome = () => {
 
     useEffect(() => {
 
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/circular`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL_LOCAL}/circular`)
             .then(res => res.json())
             .then(data => {
 
@@ -82,7 +82,7 @@ const UserHome = () => {
                                             <p>Size: {company.company_size}</p>
                                         </div>
                                         <div className='main-items'>
-                                            <p className='company_description'>{company.company_description.slice(0, 90)}...</p>
+                                            <p className='company_description'>{company.company_description?.slice(0, 90)}...</p>
                                         </div>
                                         <div className="company-item-content-footer">
                                             <Link href=""><button className='company-button company-details-button'>View Details</button></Link>

@@ -6,12 +6,13 @@ const FeaturedCompanies = () => {
 
     const [featuredCompanies, setFeaturedCompanies] = useState([]);
     useEffect(() => {
-        fetch('/companies.json')
+        fetch('companies.json')
             .then(res => res.json())
             .then(data => {
                 setFeaturedCompanies(data);
             })
     }, [])
+    console.log(featuredCompanies)
 
     return (
         <div className='featured-company-section'>

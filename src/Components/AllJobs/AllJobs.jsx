@@ -26,6 +26,7 @@ const AllJobs = ({children}) => {
     }
     const totalJobs = filteredJobs.length;
     const shouldShowButton = jobsToShow < totalJobs;
+    
     const handleFilteredJobs = (event) => {
         event.preventDefault();
         const jobTitle = event.target.jobTitle.value.toLowerCase();
@@ -80,9 +81,9 @@ const AllJobs = ({children}) => {
                                             <p className='posting-date'>22d</p>
                                         </div>
                                         {isMobileScreen ?
-                                            <Link onClick={() => handleClickedJob(job.id)} href={`/jobdetailsres/${job.id}`}>View Details</Link>
+                                            <Link scroll={false} onClick={() => handleClickedJob(job.id)} href={`/jobdetailsres/${job.id}`}>View Details</Link>
                                             :
-                                            <Link onClick={() => handleClickedJob(job.id)} href={`/findjobs/jobdetails/${job.id}`}>View Details</Link>
+                                            <Link scroll={false} onClick={() => handleClickedJob(job.id)} href={`/findjobs/jobdetails/${job.id}`}>View Details</Link>
                                         }
                                     </div>
                                 )
