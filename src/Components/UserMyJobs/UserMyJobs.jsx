@@ -1,9 +1,10 @@
+"use client";
 import React, { useState } from 'react';
 import './UserMyJobs.css'
 import  Link  from 'next/link';
 import { HiOutlineArchive, HiOutlineBookmark, HiOutlineBriefcase, HiOutlineHome, HiOutlinePhoneIncoming } from "react-icons/hi";
 
-const UserMyJobs = () => {
+const UserMyJobs = ({children}) => {
     const [sidebarItemClick, setSidebarItemClick] = useState('/myjobs/dashboard');
     const [activeSidebarItem, setActiveSideItem] = useState('Dashboard')
     return (
@@ -37,7 +38,7 @@ const UserMyJobs = () => {
                     </div>
                 </div>
                 <div className="dashboard-myjobs-details">
-                    <Outlet />
+                    <>{children}</>
                 </div>
             </div>
         </div>

@@ -19,7 +19,8 @@ const Header = () => {
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
-    const [isClient, setClient] = useState(false);
+    
+    const [isClient,setClient] = useState(false);
 
     useEffect(() => {
         setClient(true)
@@ -41,14 +42,15 @@ const Header = () => {
     };
 
     const handleLogout = async () => {
-        localStorage.removeItem('userData');
+
+        console.log("logging out");
         const token = userData?.data?.access_token;
         if (!token) {
             console.error("User token not available.");
             return;
         }
         try {
-            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
+            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -56,6 +58,7 @@ const Header = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            localStorage.removeItem('userData');
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
@@ -66,6 +69,8 @@ const Header = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            forEmployerNavigate.push('/signin')
+            
         } catch (error) {
             console.error("Logout failed:", error);
             alert(error);
@@ -98,7 +103,6 @@ const Header = () => {
             forEmployerNavigate.push('/foremployers');
         }
     };
-
 
 
     return (
@@ -220,6 +224,65 @@ const Header = () => {
                                         </ul>
                             }
                         </div>
+                    </div>
+
+                </div>
+                <div className={`header-menu ${!mobileMenuClicked ? 'hide-header-menu' : 'show-header-menu'}`}>
+                    <ul className="main-menu">
+                        <li><Link href="/" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/' ? 'active' : ''}>Home</Link></li>
+
+                        <li><Link href="/findjobs" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.indexOf('/findjobs')!=-1 ? 'active' : ''}>Jobs</Link></li>
+                        <li><Link href="/companies" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/companies' ? 'active' : ''}>Companies</Link></li>
+                        <li><Link href="/message" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/message' ? 'active' : ''}>Message</Link></li>
+                        <li><a onClick={handleSignoutAlert} style={{"cursor" : "pointer"}}>For Employers</a></li>
+                    </ul>
+                    <div className="account-menu">
+                        {
+                            userData?.data ?
+                                <div className="loggedin-user-container">
+                                    <div>
+                                        <div className='local-global'>
+                                            <label className="toggle-switch">
+                                                <input type="checkbox" onClick={toggleOption} />
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <TbBell/>
+                                        {/* <TbSend></TbSend> */}
+                                        <TbUserCircle onClick={toggleUserProfile} className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
+
+                                        {userProfileClicked ?
+                                            <div className="user-profile-icon">
+                                                <div className="user-profile-icon-header">
+                                                    <h4>Welcome Kazi !</h4>
+                                                    <p>kazisolah@gmail.com</p>
+                                                </div>
+                                                <div className="loggedin-user-options">
+                                                    <Link href="/userprofile/aboutme" onClick={toggleUserProfile}><FaUserTie></FaUserTie> Profile</Link>
+                                                    <Link href="/myjobs/dashboard" onClick={toggleUserProfile}><HiBriefcase></HiBriefcase> My Jobs</Link>
+                                                    <Link href="/resumebuilder" onClick={toggleUserProfile}><FaFileAlt></FaFileAlt> Resume Build</Link>
+                                                    <a onClick={toggleUserProfile}><HiCog/> Settings</a>
+                                                    <a onClick={toggleUserProfile}><HiQuestionMarkCircle/> Help Center</a>
+                                                </div>
+                                                <button className='signout-btn' onClick={handleLogout}>Sign Out <TbLogout/></button>
+                                            </div>
+                                            :
+                                            ''
+                                        }
+                                    </div>
+                                </div>
+                                :
+                                userLoggedout?.result ?
+                                    <ul>
+                                        <li><Link href="/register" className='register-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUserAdd />Register</Link></li>
+                                        <li><Link href="signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li> 
+                                    </ul>
+                                    :
+                                    <ul>
+                                        <li><Link href="/register" className='register-btn'><HiOutlineUserAdd />Register</Link></li>
+                                        <li><Link href="signin" className='login-btn'><HiOutlineUser />Sign In</Link></li>
+                                    </ul>
+                        }
                     </div>
                 </div>
             </div>

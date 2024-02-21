@@ -65,3 +65,11 @@
 .resume-heading-content .heading-form .resume-input-field input[type="checkbox"] {
     width: 15px;
 }
+
+.hidden{
+    display:  none;
+}
+.required{
+    color: red;
+    font-size: 13px;
+}
