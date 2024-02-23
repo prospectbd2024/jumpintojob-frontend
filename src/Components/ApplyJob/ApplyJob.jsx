@@ -2,14 +2,15 @@ import React from 'react';
 import './ApplyJob.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+// import { useLoaderData, useParams } from 'react-router-dom';
+import {useParams} from 'next/navigate';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { HiDocument, HiOutlineUpload } from "react-icons/hi";
 
 const ApplyJob = () => {
   const { id } = useParams();
-  const jobsData = useLoaderData();
+  const jobsData = [];
   const [applyJobData, setApplyJobData] = useState([]);
   const [coverLetterOption, setCoverLetterOption] = useState('text')
   useEffect(() => {

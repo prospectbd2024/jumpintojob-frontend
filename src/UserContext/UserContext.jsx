@@ -43,6 +43,7 @@ export const UserProvider = ({ children }) => {
         country: "",
         summary: "",
         educations: [  {
+                id : 0,
                 nstitution_name: "",
                 institution_location:"",
                 degree: "",
@@ -54,6 +55,7 @@ export const UserProvider = ({ children }) => {
         ],
         experiences: [
             {
+                id : 0,
                 job_title: "",
                 company: "",
                 job_city: "",
@@ -64,9 +66,19 @@ export const UserProvider = ({ children }) => {
             },
 
         ],
-        skills: [],
-        languages: []
+        skills: [], //new  skills : [{name : '',id: '', rating : 0}]
+        languages: []  //new languages : [{name : '',id: '', rating : 0}]
     });
+
+    useEffect(() => {
+    //    console.log(typeof userData)
+    if(userData){
+        setBearerToken(userData.data.access_token)
+    }
+    }, [userData])
+    
+    
+  
     const handleSubmitResume = () => {
         useEffect(() => {
             localStorage.setItem('userResume', JSON.stringify(resumeData))
@@ -74,7 +86,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume }}>
+        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume,bearerToken }}>
             {children}
         </UserContext.Provider>
     );

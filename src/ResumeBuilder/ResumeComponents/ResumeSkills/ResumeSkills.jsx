@@ -15,10 +15,6 @@ const ResumeSkills = () => {
                     <AddSkills />
                 </div>
 
-                {/* <div className="resume-prev-next-buttons">
-                    <button className='prev-button' onClick={() => setCurrentStep(currentStep - 1)}>Previous</button>
-                    <button className='next-button' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
-                </div> */}
                 <div>
                 <PrevNextButton  props={{setCurrentStep}}/>
                 </div>

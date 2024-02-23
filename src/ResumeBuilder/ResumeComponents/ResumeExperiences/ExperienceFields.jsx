@@ -2,58 +2,66 @@ import SaveDismissButtons from "@/ResumeBuilder/Layout/Button/SaveDismissButtons
 import React, { useCallback, useEffect, useState } from "react";
 
 function EperienceFiels({ props }) {
-  const [index, setIndex] = useState(0);
-
-  const [experienceFields, setExperienceFields] = useState({});
   const BaseFormat = {
+    id: 0,
     job_title: "",
     company: "",
     job_city: "",
     job_country: "",
     job_starting_year: "",
-    job_ending_year:
-      experienceFields.job_ending_year == "on" ? "off" : "",
-    job_description : "",
+    job_ending_year: "",
+    job_description: "",
   };
-  const { setResumeData, resumeData, formIndex, state, setState } = props;
 
-  useEffect(() => {
-    if (resumeData.experiences[index]) {
-      setExperienceFields(resumeData.experiences[index]);
-    }
-  }, [resumeData]);
+  const [isWarning, setWarning] = useState(false);
+  const [experienceFields, setExperienceFields] = useState(BaseFormat);
+  const { setResumeData, resumeData, state, setState } = props;
 
   const handleChange = useCallback((key, value) => {
     setExperienceFields((prev) => {
       prev[key] = value;
       return prev;
     });
-    updateResumeData(index, experienceFields);
+    updateResumeData(experienceFields);
   });
 
   useEffect(() => {
     if (state.type == "insert") {
+      // alert(state.index)
+
+      BaseFormat.id = state.index;
+      // console.log(state.index,BaseFormat)
       setExperienceFields(BaseFormat);
-      setIndex(formIndex);
-      updateResumeData(formIndex, BaseFormat);
+
+      updateResumeData(BaseFormat);
     }
     if (state.type == "update") {
-      setExperienceFields(resumeData.experiences[state.id]);
-      setIndex(state.id);
+      let experience_fields = resumeData.experiences.find(
+        (item) => item.id == state.id
+      );
+      setExperienceFields(experience_fields);
     }
-  }, [formIndex]);
+    console.log('state should not change')
+  }, [state]);
 
-  const updateResumeData = useCallback((index, experienceFields) => {
+  const updateResumeData = useCallback((experienceFields) => {
     const resumeExperiences = resumeData.experiences;
+    console.log("old ", resumeExperiences);
 
-    //check if the item is in the array
-    resumeExperiences[index] = experienceFields;
-    console.log(resumeExperiences);
+    const index = resumeExperiences.findIndex(
+      (item) => item.id == experienceFields.id
+    );
+
+    if (index == -1) {
+      resumeExperiences.push(experienceFields);
+    } else {
+      resumeExperiences[index] = experienceFields;
+    }
+    // console.log(resumeExperiences);
     setResumeData((prev) => {
       return { ...prev, experiences: resumeExperiences };
     });
   });
-
 
   return (
     <form action="" className="heading-form" style={{ marginTop: "50px" }}>
@@ -67,7 +75,8 @@ function EperienceFiels({ props }) {
             id="jobtitle"
             onChange={(e) => handleChange("job_title", e.target.value)}
           />{" "}
-          
+          <div className={isWarning && experienceFields.job_title=='' ? 'required': 'hidden'}>Job title is required</div>
+
         </div>
         <div className="resume-input-field">
           <label htmlFor="company">COMPANY</label>
@@ -78,7 +87,7 @@ function EperienceFiels({ props }) {
             id="company"
             onChange={(e) => handleChange("company", e.target.value)}
           />
-         
+        <div className={isWarning&&experienceFields.company=='' ? 'required': 'hidden'}>Company name is required</div>
         </div>
         <div className="resume-input-field">
           <label htmlFor="city">CITY</label>
@@ -89,7 +98,6 @@ function EperienceFiels({ props }) {
             id="city"
             onChange={(e) => handleChange("job_city", e.target.value)}
           />
-       
         </div>
         <div className="resume-input-field">
           <label htmlFor="job_country">COUNTRY</label>
@@ -115,9 +123,7 @@ function EperienceFiels({ props }) {
           <label htmlFor="end">END DATE</label>
           <input
             type="date"
-            value={
-              experienceFields?.job_ending_year
-            }
+            value={experienceFields?.job_ending_year}
             placeholder="Present"
             id="end"
             onChange={(e) => handleChange("job_ending_year", e.target.value)}
@@ -132,9 +138,7 @@ function EperienceFiels({ props }) {
           >
             <input
               type="checkbox"
-              value={
-                experienceFields?.job_ending_year
-              }
+              value={experienceFields?.job_ending_year}
               id="currently_here"
               onClick={(e) => handleChange("job_ending_year", e.target.value)}
             />
@@ -151,12 +155,22 @@ function EperienceFiels({ props }) {
           id="achivements"
           cols="30"
           rows="10"
-          value={resumeData.experiences[formIndex]?.job_description}
+          value={experienceFields?.job_description}
           placeholder="Write your job description"
           onChange={(e) => handleChange("job_description", e.target.value)}
         ></textarea>
       </div>
-       <SaveDismissButtons props={{state,setState}} />
+      <SaveDismissButtons
+        props={{
+          state,
+          setState,
+          requiredFields: [
+            experienceFields.job_title,
+            experienceFields.company,
+          ],
+          setWarning,
+        }}
+      />
     </form>
   );
 }
