@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import './UserMyJobs.css'
 import  Link  from 'next/link';
