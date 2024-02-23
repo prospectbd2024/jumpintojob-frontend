@@ -43,3 +43,8 @@
     height: 100%;
     line-height: 50px;
 }
+
+.no-jobs-available{}
+.no-jobs-available h4{
+    text-align: center;
+}

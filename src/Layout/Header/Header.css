@@ -139,7 +139,12 @@
     width: 60px;
     height: 28px;
   }
-  
+  .notification-profile-icon {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+  .notification-profile-icon svg{}
   .toggle-switch input[type="checkbox"] {
     opacity: 0;
     width: 0;

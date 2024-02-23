@@ -16,11 +16,13 @@ const Header = () => {
     const location = usePathname();
     const [activeMenu, setActiveMenu] = useState(location);
     const { userData, setUserData } = useContext(UserContext);
+
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
-    
+    console.log(userProfileClicked);
     const [isClient,setClient] = useState(false);
+
 
     useEffect(() => {
         setClient(true)
@@ -113,10 +115,6 @@ const Header = () => {
                 <div className="web-header container">
                     <div className="header-logo">
                         <img className='jump-job-logo' src="https://i.ibb.co/RNtVFY1/blue-full.jpg" alt="" />
-                        {/* <p>Explore Apply Conqure</p> */}
-
-
-
                         <div className='mobile-menu-icon'>
                             {userData ?
                                 <div className={`loggedin-user-container`}>
@@ -127,8 +125,7 @@ const Header = () => {
                                         </label>
                                     </div>
                                     <TbBell />
-                                    {/* <TbSend></TbSend> */}
-                                    <TbUserCircle onClick={toggleUserProfile} className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
+                                    <TbUserCircle className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
 
                                     <div className={`user-profile-icon ${!userProfileClicked ? 'hide-profile-menu' : 'show-profile-menu'}`}>
                                         <div className="user-profile-icon-header">
@@ -178,16 +175,16 @@ const Header = () => {
                                 userData?.data ?
                                     <div className="loggedin-user-container">
                                         <div>
-                                            <div className='togglenicon' style={{display: 'flex', gap: '25px'}}>
+                                            <div className='togglenicon' style={{ display: 'flex', gap: '25px' }}>
                                                 <div className='local-global'>
                                                     <label className="toggle-switch">
                                                         <input type="checkbox" onClick={toggleOption} />
                                                         <span className="slider round"></span>
                                                     </label>
                                                 </div>
-                                                <div>
-                                                <TbBell />
-                                                <TbUserCircle onClick={toggleUserProfile} className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
+                                                <div className='notification-profile-icon'>
+                                                    <TbBell />
+                                                    <TbUserCircle onClick={toggleUserProfile} className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
                                                 </div>
                                             </div>
 
