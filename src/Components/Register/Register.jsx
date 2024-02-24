@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useState } from "react";
+import {signIn} from 'next-auth/react'
 import "./Register.css";
 import {
   HiOutlineEye,
@@ -248,7 +249,7 @@ const Register = () => {
           </div>
         </form>
         <div className="social-login">
-          <button>
+          <button onClick={()=>{signIn('google')}}>
             <FcGoogle/> Login With Google
           </button>
           <button>
