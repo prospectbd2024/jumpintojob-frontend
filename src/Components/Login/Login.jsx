@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useUserContext } from "../../UserContext/UserContext";
 import Swal from "sweetalert2";
 import { useRouter,useSearchParams } from "next/navigation";
-
+import {signIn,useSession} from 'next-auth/react'
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -20,7 +20,7 @@ const Login = () => {
   const { setUserData } = useUserContext();
   const navigate = useRouter();
   const params = useSearchParams();
-
+  const { data: session, status } = useSession()
   const [message,setMessage] = useState(undefined)
 
 
@@ -29,7 +29,9 @@ const Login = () => {
     setMessage( params.get('msg'))
    
   }, [])
-  
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user.email}</p>
+  }
 
   const [warning, setWarning] = useState({ isWarning: false, messages: [] });
   const handleLogin = async (e) => {
@@ -181,13 +183,28 @@ const Login = () => {
           <div className="register-button">
             <input type="submit" value="Login" />
           </div>
-          <div className="register-to-login">
+
+        </form>
+        <div className="register-to-login mt-5">
             <p>
               Already have an account? <Link href="/register">Register</Link>{" "}
               here
             </p>
           </div>
-        </form>
+        <div className="social-login">
+          <button onClick={()=>{signIn('google')}}>
+            <FcGoogle/> Login With Google
+          </button>
+          <button onClick={()=>{signIn('facebook')}}>
+            {" "}
+            <img
+              src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg"
+              alt=""
+            />{" "}
+            Login With Facebook
+          </button>
+        </div>
+
       </div>
     </div>
   );

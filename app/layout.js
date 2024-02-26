@@ -30,7 +30,7 @@ import JobContext from '@/jobContext/JobContext'
 
 function layout({children}) {
 
-  // alert("main layout")
+
   return (
     <html lang="en">
       <body className='fou'>
