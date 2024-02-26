@@ -61,6 +61,7 @@ const Login = () => {
         if(data.data.result==true){
           setUserData(data)
           navigate.push('/')
+          Swal.close()
 
         }
 
@@ -79,6 +80,15 @@ const Login = () => {
 
     setMessage( params.get('msg'))
     if(session.status=='authenticated'){
+      Swal.fire({
+        position: 'center',
+        icon: 'warning', // Use 'warning' for a more appropriate processing icon
+        title: 'Processing...', // Add ellipsis "..." for better indication
+        showConfirmButton: false,
+        // timer: 20000,
+        allowEscapeKey: false, // Prevent accidental closing with Escape key
+        allowOutsideClick: false, // Prevent accidental closing by clicking outside
+      });
       handleSocialLogin(session.data)
     }
    
