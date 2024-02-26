@@ -122,7 +122,7 @@ const Header = () => {
                                     <TbBell />
                                     <TbUserCircle className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
 
-                                    <div className={`user-profile-icon ${!userProfileClicked ? 'hide-profile-menu' : 'show-profile-menu'}`}>
+                                    <div className={`user-profile-icon ${userProfileClicked ? 'show-profile-menu' : 'hide-profile-menu'}`}>
                                         <div className="user-profile-icon-header">
 
                                             <h4>Welcome {userData?.data?.user.first_name} !</h4>
