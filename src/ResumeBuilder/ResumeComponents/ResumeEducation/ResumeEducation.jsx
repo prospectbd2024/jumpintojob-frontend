@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from "react";
 import { useUserContext } from "../../../UserContext/UserContext";
 import "../ResumeHeading/ResumeHeading.css";
@@ -11,7 +12,7 @@ const ResumeEducation = () => {
   const { currentStep, setCurrentStep, resumeData, setResumeData } =
     useUserContext();
 
-  const [state, setState] = useState({ type :  "list-view" , id : -1});
+  const [state, setState] = useState({ type :  "list-view" , id : 0, index : 0});
   const [educationFields, setEducationFields] = useState({});
   const [isFormFilled, setFormFilled] = useState(false);
 
@@ -42,8 +43,6 @@ const ResumeEducation = () => {
                 setResumeData,
                 resumeData,
                 isFormFilled,
-                formIndex : state.id,
-                isFormFilled,
                 setFormFilled,
                 educationFields,
                 setEducationFields,
@@ -56,7 +55,7 @@ const ResumeEducation = () => {
           {(state.type=='list-view' || state.type=='delete') && (
             <div className="add-more-education">
               <button
-                onClick={() => setState({type : 'insert' , id : state.id+1 })}
+                onClick={() => setState({...state, type : 'insert' , index : state.index+1 })}
                 style={{
                   cursor: "pointer" ,
                   opacity:  1 ,

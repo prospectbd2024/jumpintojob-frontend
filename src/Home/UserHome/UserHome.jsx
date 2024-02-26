@@ -20,20 +20,22 @@ const UserHome = () => {
 
     const [featuredCompanies, setFeaturedCompanies] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
             .then(res => res.json())
             .then(data => {
                 setFeaturedCompanies(data.data);
+                console.log(data.data)
             })
     }, [])
 
     useEffect(() => {
 
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/circular`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
 
                 setAllJobs(data.data);
+                console.log(data)
                 const filteredFeaturedJobs = allJobs.filter(job => job.job_vacancy >= 2);
                 const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
                 setFeaturedJobs(sortedFeaturedJobs);
@@ -42,7 +44,7 @@ const UserHome = () => {
                 console.log("Error fetching jobs:", error)
             });
 
-    }, [featuredJobs])
+    }, [])
 
     useEffect(() => {
         fetch('/userprofile.json')

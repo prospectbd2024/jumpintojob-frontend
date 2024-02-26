@@ -22,7 +22,7 @@ const FeaturedJobs = () => {
     const isMobileScreen = isClient ? useMediaQuery("only screen and (max-width : 1368px)") : false;
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/circular`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);

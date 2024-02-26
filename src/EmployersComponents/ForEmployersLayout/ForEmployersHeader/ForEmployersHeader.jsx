@@ -5,7 +5,7 @@ import { FaAngleDown, FaUserAlt, FaUserCircle, FaUserPlus, FaUserTie } from "rea
 import { HiBookmark, HiBriefcase, HiChevronDown, HiCog, HiOutlineBookmark, HiOutlineUser, HiOutlineUserAdd, HiQuestionMarkCircle } from "react-icons/hi";
 import { TbBell, TbBriefcase, TbLogout, TbUserCircle } from 'react-icons/tb';
 import { UserContext } from '@/UserContext/UserContext';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 
@@ -15,6 +15,7 @@ const ForEmployersHeader = () => {
     const { userData, setUserData } = useContext(UserContext);
     const [userLoggedout, setUserLoggedout] = useState(false)
     const [userProfileClicked, setUserProfileClicked] = useState(false)
+    const router = useRouter();
     useEffect(() => {
       setClient(true)
     }, [])
@@ -41,6 +42,9 @@ const ForEmployersHeader = () => {
             alert("Logout Successfull!")
             setUserLoggedout(userLogoutData)
             setUserData(null)
+            router.push('/signin')
+
+            
         }
         catch (error) {
             console.error("Logout failed:", error);
