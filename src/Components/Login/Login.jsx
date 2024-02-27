@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useUserContext } from "../../UserContext/UserContext";
 import Swal from "sweetalert2";
 import { useRouter,useSearchParams } from "next/navigation";
-import {signIn,useSession} from 'next-auth/react'
+import {signIn} from 'next-auth/react'
 import axios from "axios";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,67 +30,10 @@ const Login = () => {
   
     return params.toString();
   };
-  const session = useSession();
-  const handleSocialLogin = async (sessionData)=>{
-    // try {
-      let profile = sessionData.user;
-      console.log(
-        {profile}
-      );
 
-      // Customize validation logic based on your requirements
-      if (!profile.name || !profile.email) {
-        throw new Error('Missing required profile information.');
-      }
-
-      // Add 'provider': 'google' only if necessary
-      // Consider alternative methods for storing sensitive information
-      const modifiedProfile = { ...profile,user_type : 'job_seeker'};
-
-      if (modifiedProfile) {
-        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/social-signin`, {
-          profile: modifiedProfile
-        }, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        // console.log(response.data); // Log response for debugging
-        console.log(data)
-        if(data.data.result==true){
-          setUserData(data)
-          navigate.push('/')
-          Swal.close()
-
-        }
-
-
-        return '/sign?'+createQueryString('error',data.data.message)
-
-        // Handle successful sign-in based on your application logic (e.g., redirect, display message)
-      }
-
-      return true; // Assuming successful sign-in by default
-    // } catch (error) {
-    //   console.error('Sign-in error:', error);
-    // }
-  }
   useEffect(() => {
 
     setMessage( params.get('msg'))
-    if(session.status=='authenticated'){
-      Swal.fire({
-        position: 'center',
-        icon: 'warning', // Use 'warning' for a more appropriate processing icon
-        title: 'Processing...', // Add ellipsis "..." for better indication
-        showConfirmButton: false,
-        // timer: 20000,
-        allowEscapeKey: false, // Prevent accidental closing with Escape key
-        allowOutsideClick: false, // Prevent accidental closing by clicking outside
-      });
-      handleSocialLogin(session.data)
-    }
    
   }, [])
 
@@ -253,7 +196,9 @@ const Login = () => {
             </p>
           </div>
         <div className="social-login">
-          <button onClick={()=>{signIn('google')}}>
+          <button onClick={()=>{signIn('google',{},{
+            userType:  'custom'
+          })}}>
             <FcGoogle/> Login With Google
           </button>
           <button onClick={()=>{signIn('facebook')}}>
