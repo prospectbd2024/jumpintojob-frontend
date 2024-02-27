@@ -196,12 +196,10 @@ const Login = () => {
             </p>
           </div>
         <div className="social-login">
-          <button onClick={()=>{signIn('google',{},{
-            userType:  'custom'
-          })}}>
+          <button onClick={()=>{signIn('google_job_seeker')}}>
             <FcGoogle/> Login With Google
           </button>
-          <button onClick={()=>{signIn('facebook')}}>
+          <button onClick={()=>{signIn('facebook_job_seeker')}}>
             {" "}
             <img
               src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg"

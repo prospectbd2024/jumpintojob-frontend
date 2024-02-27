@@ -5,24 +5,37 @@ import FacebookProvider from "next-auth/providers/facebook";
 import axios from 'axios';
 export const authOptions = {
  providers: [
-  GoogleProvider({
+  Google('google_job_seeker',{
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-   }),
-   FacebookProvider({
+    userType: 'job_seeker'
+  }),
+  Google('google_employer',{
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    userType: 'employer'
+  }),
+  // Facebook('facebook_job_seeker',{
+  //   clientId: process.env.FACEBOOK_CLIENT_ID,
+  //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  //   userType: 'job_seeker'
+  // }),
+  Facebook("facebook_job_seeker",{
     clientId: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    userType: 'job_seeker'
   }),
-
+  Facebook("facebook_employer",{
+    clientId: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    userType: 'employer'
+  }),
  ],
  session: {
   strategy: 'jwt',
  },
  callbacks: {
   async signIn({ user, account, profile,email, credentials}) {
-
-
-
     try {
 
 
@@ -46,7 +59,7 @@ export const authOptions = {
         });
 
         // console.log(response.data); // Log response for debugging
-        console.log(data)
+        // console.log(data)
         if(data.data.result==true){
           // setUserData(data)
           return '/?'+createQueryString('userData',JSON.stringify(data))
