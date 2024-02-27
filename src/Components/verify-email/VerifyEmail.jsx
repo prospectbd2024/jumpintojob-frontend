@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react';
+"use client"
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/UserContext/UserContext';
 
@@ -7,30 +7,53 @@ const VerifyEmail = () => {
   const router = useRouter();
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
+  const [resendDisabled, setResendDisabled] = useState(true);
+  const [resendTimer, setResendTimer] = useState(60); // Initial timer value in seconds
+  const { userData, bearerToken } = useUserContext();
 
-  const {userData,bearerToken} = useUserContext();
-  // console.log(bearerToken,userData);
-  const resandVerificatinCode =async ()=>{
+  useEffect(() => {
+    let timerInterval;
+
+    if (resendDisabled) {
+      timerInterval = setInterval(() => {
+        setResendTimer(prevTimer => {
+          if (prevTimer === 1) {
+            clearInterval(timerInterval);
+            setResendDisabled(false);
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timerInterval);
+  }, [resendDisabled]);
+
+  const resandVerificationCode = async () => {
     console.log("resending")
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/resend_code`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${bearerToken}`,
-      },
-      body: JSON.stringify({ verify_by: userData.data.user.email }),
-    });
-    
-    const data = await response.json()
-    console.log(data)
+    setResendDisabled(true); // Disable the resend button
+    setResendTimer(60); // Reset timer to initial value
 
-    
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/verification_code/resend_code`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${bearerToken}`,
+        },
+        body: JSON.stringify({ verify_by:'email' , email_or_phone: userData.data.user.email }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error during resending:', error);
+    }
   }
 
   const handleVerification = async () => {
     console.log(userData);
     try {
-      // Make a request to your backend API for email verification
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/confirm_code`, {
         method: 'POST',
         headers: {
@@ -39,25 +62,23 @@ const VerifyEmail = () => {
         },
         body: JSON.stringify({ verification_code: verificationCode }),
       });
+
       const data = await response.json();
       if (data.result) {
-        // If verification is successful, you can redirect the user or show a success message
         router.push('/verify-success');
       } else {
-        // If verification fails, display an error message
         setMessage(data.message || 'Verification failed');
       }
     } catch (error) {
       console.error('Error during verification:', error);
       setMessage('An error occurred during verification');
-      // router.push('/verify-success');
     }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' , marginBottom: '100px'}}>
-      <h1 style={{ color: '#333' , marginBlockEnd : '20px'}}>Verify Email</h1>
-      <p style={{ color: '#555' ,margin : '20px'}}>Enter the verification code sent to your email:</p>
+    <div style={{ textAlign: 'center', marginTop: '50px', marginBottom: '100px' }}>
+      <h1 style={{ color: '#333', marginBlockEnd: '20px' }}>Verify Email</h1>
+      <p style={{ color: '#555', margin: '20px' }}>Enter the verification code sent to your email:</p>
       <input
         type="text"
         value={verificationCode}
@@ -79,17 +100,18 @@ const VerifyEmail = () => {
         Verify
       </button>
       <button
-        onClick={resandVerificatinCode}
+        onClick={resandVerificationCode}
         style={{
-          backgroundColor: '#3199d8',
+          backgroundColor: resendDisabled ? '#ccc' : '#3199d8',
           color: 'white',
           padding: '8px 16px',
           border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer',
+          cursor: resendDisabled ? 'not-allowed' : 'pointer',
         }}
+        disabled={resendDisabled}
       >
-        Resend
+        Resend {resendTimer !== 0 && `(${resendTimer}s)`}
       </button>
       {message && (
         <p style={{ color: 'red', marginTop: '10px', fontStyle: 'italic' }}>{message}</p>
