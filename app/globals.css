@@ -22,7 +22,7 @@
 .section-header h2 {
   color: #061421;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
 
 }
 .section-header p {
@@ -35,7 +35,7 @@
   content: '';
   position: absolute;
   bottom: -15px;
-  left: 46%;
+  left: 45%;
   width: 10%;
   height: 5px;
   border-radius: 50px;

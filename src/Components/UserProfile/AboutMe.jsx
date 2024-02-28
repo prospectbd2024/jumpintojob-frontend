@@ -28,7 +28,7 @@ const AboutMe = () => {
         updateUserProfile.append('postal_code', postal_code);
         updateUserProfile.append('_method', 'PUT');
 
-        const userProfileResponse = await fetch('https://unitechholdingsltd.com/api/v1/profile/update', {
+        const userProfileResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/`, {
             method: 'POST',
             headers: {
 

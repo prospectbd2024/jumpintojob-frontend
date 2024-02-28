@@ -13,7 +13,7 @@ function JobContext({children}) {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
-                // console.log(data.data);
+                console.log(data.data);
                 setAllJobs(data.data);
                 // If you want to use filteredJobs for filtering logic later on,
                 // you might want to keep it separate initially
