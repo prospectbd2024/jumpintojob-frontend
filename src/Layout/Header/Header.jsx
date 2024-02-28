@@ -8,7 +8,7 @@ import { TbBell, TbLogout, TbSend, TbUserCircle } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { usePathname, useRouter } from 'next/navigation';
 import { UserContext } from '@/UserContext/UserContext';
-
+import { signOut } from 'next-auth/react';
 
 const Header = () => {
     const forEmployerNavigate = useRouter();
@@ -59,6 +59,9 @@ const Header = () => {
                 }
             });
             localStorage.removeItem('userData');
+            console.log("logging out");
+            await signOut();
+            console.log("logged out");
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
