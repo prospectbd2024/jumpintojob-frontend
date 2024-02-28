@@ -6,7 +6,7 @@ import { HiBookmark, HiBriefcase, HiChevronDown, HiCog, HiOutlineBookmark, HiOut
 import { TbBell, TbBriefcase, TbLogout, TbUserCircle } from 'react-icons/tb';
 import { UserContext } from '@/UserContext/UserContext';
 import { usePathname, useRouter } from 'next/navigation';
-
+import { signOut } from 'next-auth/react';
 
 
 const ForEmployersHeader = () => {
@@ -37,6 +37,9 @@ const ForEmployersHeader = () => {
                     'Authorization': `Bearer ${token}`
                 }
             })
+            console.log("logging out");
+            await signOut();
+            console.log("logged out");
             const userLogoutData = await userLogoutResponse.json();
             console.log(userLogoutData)
             alert("Logout Successfull!")
