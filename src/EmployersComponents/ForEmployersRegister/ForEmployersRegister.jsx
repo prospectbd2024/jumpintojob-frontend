@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail, HiOutlineUserCircle } from 'react-icons/hi';

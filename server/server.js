@@ -53,27 +53,25 @@ const skills = [
 ];
 app.use(cors());
 
-app.post("/auth/user/login", (req, resp) => {
-  console.log(req);
-  const user_info = {
-    data: {
-      result: true,
-      message: "Successfully logged in",
-      token_type: "Bearer",
-      expires_at: "2023-12-11 09:10:16",
-      access_token: "365|3j735o0FEfgbG01Pz8Yaq0BPRyrJ1xVQHJ0F5GoHce0c2713",
-      user_type: "job_seeker",
-      user: {
-        first_name: "kibria",
-        last_name: "ahmed",
-        email: "gkibria121@gmail.com",
-      },
-    },
-  };
+app.post('/auth/user/login',(req,resp)=>{
+    console.log(req)
+    const user_info = {
+        data: {
+            result: true,
+            message: "Successfully logged in",
+            token_type: "Bearer",
+            expires_at: "2023-12-11 09:10:16",
+            access_token: "365|3j735o0FEfgbG01Pz8Yaq0BPRyrJ1xVQHJ0F5GoHce0c2713",
+            user_type: "Job Seeker",
+            user: {
 
-  resp.send(user_info);
-});
-app.post('/auth/job-seeker/signup',(req,resp)=>{
+                first_name : "Kazi",
+                last_name : "Solayman",
+                email : 'kazisolayman123@gmail.com',
+                
+            }
+        }
+    }
 
 
   resp.send({

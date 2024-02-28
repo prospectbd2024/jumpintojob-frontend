@@ -32,8 +32,8 @@ const ForEmployersHeader = () => {
             const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
                 method: 'GET',
                 headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             })
