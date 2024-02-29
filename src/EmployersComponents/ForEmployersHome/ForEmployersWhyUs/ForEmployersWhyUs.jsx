@@ -40,11 +40,12 @@ const ForEmployersWhyUs = () => {
                         </div>
                     </div>
                     <div className="whyus-btn">
-                        {userData ?
-                        <Link href="/foremployers/postjobs"><button>Post a Job <HiArrowSmRight/></button></Link>
-                        :
+                        {userData &&
+                        <Link href="/foremployers/postjobs"><button>Post a Job <HiArrowSmRight/></button></Link>}
+
+                        {userData &&
                         <Link href="/foremployers/register"><button>Create Account <HiArrowSmRight/></button></Link>
-                        }
+                         }
                     </div>
                 </div>
             </div>

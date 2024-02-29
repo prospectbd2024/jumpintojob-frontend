@@ -44,7 +44,15 @@ const Header = () => {
     };
 
     const handleLogout = async () => {
-
+        forEmployerNavigate.push('/signin')
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'User logout successful!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setUserData(null);
         console.log("logging out");
         const token = userData?.data?.access_token;
         if (!token) {
@@ -67,14 +75,7 @@ const Header = () => {
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'User logout successful!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            forEmployerNavigate.push('/signin')
+            // forEmployerNavigate.push('/signin')
             
         } catch (error) {
             console.error("Logout failed:", error);

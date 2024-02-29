@@ -67,9 +67,8 @@ const Register = () => {
     const data = await response.json();
     if (response.ok) {
       // Handle successful registration, e.g., show a success message
-      console.log("Success Registration!", data);
       //   alert("Registration Successfull! Please Verify Your Email");
-      router.push("/signin" + "?" + createQueryString("msg", "Congratulation! Please Check your Email to verify!"));
+      router.push("/signin" + "?" + createQueryString("msg", "Registration Successfull ! Please Verify Your Email"));
     } else {
       // Handle registration error, e.g., display an error message
       console.log("Something is wrong!", data);
@@ -266,12 +265,7 @@ const Register = () => {
             <input type="submit" value="Sign Up" />
           </div>
 
-          <div className="register-to-login">
-            <p>
-              Already have an account? <Link href="/signin">Login</Link> Here
-            </p>
-            <span>OR</span>
-          </div>
+
         </form>
       </div>
     </div>

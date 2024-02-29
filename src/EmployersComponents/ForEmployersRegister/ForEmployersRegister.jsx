@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail, HiOutlineUserCircle } from 'react-icons/hi';
 import  Link  from 'next/link';
+import {useRouter} from 'next/navigation'
 import './ForEmployersRegister.css'
 
 const ForEmployersRegister = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const router = useRouter();
     // Register User:
     const [companyName, setCompanyName] = useState('');
     const [companyType, setCompanyType] = useState('');
@@ -15,14 +17,19 @@ const ForEmployersRegister = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userType, setUserType] = useState('Employer');
 
-
+    const createQueryString =(name, value) => {
+        const params = new URLSearchParams();
+        params.set(name, value);
+  
+        return params.toString();
+      };
     const handleRegistration = async (e) => {
         e.target.reset()
         e.preventDefault();
         const userData = { 'name': companyName, 'company_type': companyType, 'email': email, 'password': password, 'password_confirmation': confirmPassword, 'user_type': userType };
 
-        // console.log(userData)
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/employer/signup`, {
+        console.log(userData)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/employer/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +42,8 @@ const ForEmployersRegister = () => {
         if (response.ok) {
             // Handle successful registration, e.g., show a success message
             console.log('Success Registration!', data)
-            alert("Registration Successfull! Please Verify Your Email")
+            // alert("Registration Successfull! Please Verify Your Email")
+            router.push('/foremployers/signin?'+createQueryString('msg',"Registration Successfull ! Please Verify Your Email"))
         } else {
             // Handle registration error, e.g., display an error message
             console.log('Something is wrong!', data)
@@ -55,14 +63,14 @@ const ForEmployersRegister = () => {
                         <div className='account-info'>
                             <label htmlFor="company_name">Company Name</label>
                             <div className="account-input  account-input-register">
-                                <HiOutlineUserCircle></HiOutlineUserCircle>
+                                <HiOutlineUserCircle/>
                                 <input type="text" placeholder='Mircosoft Corp.' name="company_name" id="company_name" required value={companyName} onChange={e => setCompanyName(e.target.value)} />
                             </div>
                         </div>
                         {<div className='account-info account-info-register'>
                             <label htmlFor="company_type">Company Type</label>
                             <div className="account-input  account-input-register">
-                                <HiOutlineUserCircle></HiOutlineUserCircle>
+                                <HiOutlineUserCircle/>
                                 {/* <input type="text" placeholder='Warner' name="last_name" id="last_name" required value={lastName} onChange={e => setLastName(e.target.value)} /> */}
                                 <select name="company_type" id="company_type" required value={companyType} onChange={e => setCompanyType(e.target.value)}>
                                     <option value="">Select Type</option>
@@ -88,14 +96,14 @@ const ForEmployersRegister = () => {
                         {<div className='account-info'>
                             <label htmlFor="user_type">User Type</label>
                             <div className="account-input  account-input-register">
-                                <HiOutlineUserCircle></HiOutlineUserCircle>
+                                <HiOutlineUserCircle/>
                                 <input type="text" name="user_type" id="user_type" required value={userType} readOnly />
                             </div>
                         </div>}
                         <div className='account-info'>
                             <label htmlFor="email">Email</label>
                             <div className="account-input  account-input-register">
-                                <HiOutlineMail></HiOutlineMail>
+                                <HiOutlineMail/>
                                 <input type="email" placeholder='microsoft@info.com' name="email" id="email" required value={email} onChange={e => setEmail(e.target.value)} />
                             </div>
                         </div>
@@ -111,9 +119,9 @@ const ForEmployersRegister = () => {
                                 <div onClick={() => setShowPassword(!showPassword)}>
                                     {showPassword
                                         ?
-                                        <HiOutlineEye></HiOutlineEye>
+                                        <HiOutlineEye/>
                                         :
-                                        <HiOutlineEyeOff></HiOutlineEyeOff>
+                                        <HiOutlineEyeOff/>
                                     }
                                 </div>
                             </div>
@@ -130,9 +138,9 @@ const ForEmployersRegister = () => {
                                 <div onClick={() => setShowPassword(!showPassword)}>
                                     {showPassword
                                         ?
-                                        <HiOutlineEye></HiOutlineEye>
+                                        <HiOutlineEye/>
                                         :
-                                        <HiOutlineEyeOff></HiOutlineEyeOff>
+                                        <HiOutlineEyeOff/>
                                     }
                                 </div>
                             </div>
@@ -151,13 +159,13 @@ const ForEmployersRegister = () => {
 
                         <div className="register-to-login">
                             <p>Already have an account? <Link href="/signin">Login</Link> Here</p>
-                            <span>OR</span>
+                            {/* <span>OR</span> */}
                         </div>
                     </form>
-                    <div className="social-login">
-                        <button><FcGoogle></FcGoogle> Login With Google</button>
+                    {/* <div className="social-login" hidden>
+                        <button><FcGoogle/> Login With Google</button>
                         <button> <img src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg" alt="" /> Login With Facebook</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
