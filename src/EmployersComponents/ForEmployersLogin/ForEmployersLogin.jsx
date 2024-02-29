@@ -4,7 +4,7 @@ import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from 'react-icons/hi';
 import  Link  from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { useUserContext } from '../../UserContext/UserContext';
-import { useRouter } from 'next/navigation';
+import MessageBox from '@/Components/warnings/Message';
 
 
 const ForEmployersLogin = () => {
@@ -12,6 +12,7 @@ const ForEmployersLogin = () => {
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [rememberUser, setRememberUser] = useState(false);
+    const [message,setMessage] = useState(undefined)
     const { setUserData } = useUserContext();
     const router = useRouter();
     const handleLogin = async (e) => {
@@ -37,12 +38,15 @@ const ForEmployersLogin = () => {
             alert(loginUserData.message)
         }
     }
+        if(params.get('msg')){
+            setMessage( params.get('msg'))
     return (
         <div className='register-user'>
             <div className="register-user-header">
                 <h2>Login Account</h2>
                 <span>.</span>
             </div>
+            <MessageBox message={message}/>
             <div className="account-form">
                 <form action="" onSubmit={handleLogin}>
                     <div className='account-info'>
