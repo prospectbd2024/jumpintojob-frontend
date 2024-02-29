@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from 'react-icons/hi';
 import  Link  from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { useUserContext } from '../../UserContext/UserContext';
+import { useRouter ,useSearchParams,usePathname} from 'next/navigation';
 import MessageBox from '@/Components/warnings/Message';
 
 
@@ -13,13 +14,15 @@ const ForEmployersLogin = () => {
     const [userPassword, setUserPassword] = useState('');
     const [rememberUser, setRememberUser] = useState(false);
     const [message,setMessage] = useState(undefined)
+    const pathname = usePathname();
     const { setUserData } = useUserContext();
+    const params = useSearchParams();
     const router = useRouter();
     const handleLogin = async (e) => {
         e.preventDefault();
         const userLoginData = { 'email': userEmail, 'password': userPassword, 'remember_me': rememberUser };
         console.log(userLoginData)
-        const loginData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user/login`, {
+        const loginData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/login`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -31,15 +34,23 @@ const ForEmployersLogin = () => {
         if (loginData.ok) {
             console.log('Login Successfull', loginUserData);
             setUserData(loginUserData);
-            alert("Login Successfull!")
-            router.replace('/foremployers')
+            // alert("Login Successfull!")
+
+            router.push('/foremployers')
         } else {
             console.log('Something is wrong', loginUserData)
             alert(loginUserData.message)
         }
     }
+    useEffect(() => {
         if(params.get('msg')){
             setMessage( params.get('msg'))
+            console.log( router.push(pathname));
+        }
+
+       
+      }, [])
+    
     return (
         <div className='register-user'>
             <div className="register-user-header">
