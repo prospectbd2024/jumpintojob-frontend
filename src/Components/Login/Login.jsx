@@ -15,8 +15,10 @@ import Swal from "sweetalert2";
 import { useRouter,useSearchParams } from "next/navigation";
 import {signIn} from 'next-auth/react'
 import axios from "axios";
+import MessageBox from "../warnings/Message";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const pathname = usePathname()
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [rememberUser, setRememberUser] = useState(false);
@@ -32,8 +34,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-
-    setMessage( params.get('msg'))
+      if(params.get('msg')){
+        setMessage( params.get('msg'))
+        navigate.push(pathname)
+        
+      }
    
   }, [])
 
@@ -98,22 +103,7 @@ const Login = () => {
       </div>
 
       <div className="account-form">
-        {message&&
-          <div
-            style={{
-              color: "white",
-              backgroundColor: "#3498db",
-              height: "27px",
-              width: "459px",
-              paddingTop: "6px",
-              marginInline: "auto",
-              borderRadius: "4px",
-              marginBlockEnd : '20px'
-            }}
-          >
-            {message}
-          </div>
-        }
+      <MessageBox message={message}/>
         <form action="" onSubmit={handleLogin}>
           <div className="account-info">
             <label htmlFor="email">Email</label>
