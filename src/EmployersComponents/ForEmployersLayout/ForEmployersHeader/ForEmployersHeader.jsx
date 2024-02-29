@@ -29,7 +29,7 @@ const ForEmployersHeader = () => {
             return;
         }
         try {
-            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
+            const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
