@@ -12,7 +12,7 @@ const ForEmployersPostJob = () => {
     const [jobData, setJobData] = useState({});
     const [jobCategories, setJobCategories] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/job-categories`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/job-categories`)
         .then(res => res.json())
         .then(data => {
             setJobCategories(data.data);
