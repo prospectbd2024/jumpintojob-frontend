@@ -12,7 +12,7 @@ from "react-icons/hi";
 import Link from "next/link";
 import { useUserContext } from "../../UserContext/UserContext";
 import Swal from "sweetalert2";
-import { useRouter,useSearchParams } from "next/navigation";
+import { usePathname, useRouter,useSearchParams } from "next/navigation";
 import {signIn} from 'next-auth/react'
 import axios from "axios";
 import MessageBox from "../warnings/Message";
@@ -184,6 +184,12 @@ const Login = () => {
               Already have an account? <Link href="/register">Register</Link>{" "}
               here
             </p>
+          </div>
+          <div className="register-to-login">
+            <p>
+              Already have an account? <Link href="/signin">Login</Link> Here
+            </p>
+            <span>OR</span>
           </div>
         <div className="social-login">
           <button onClick={()=>{signIn('google_job_seeker')}}>
