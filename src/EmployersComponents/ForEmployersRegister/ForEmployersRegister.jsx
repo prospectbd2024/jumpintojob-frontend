@@ -159,13 +159,13 @@ const ForEmployersRegister = () => {
 
                         <div className="register-to-login">
                             <p>Already have an account? <Link href="/signin">Login</Link> Here</p>
-                            <span>OR</span>
+                            {/* <span>OR</span> */}
                         </div>
                     </form>
-                    <div className="social-login">
+                    {/* <div className="social-login" hidden>
                         <button><FcGoogle/> Login With Google</button>
                         <button> <img src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg" alt="" /> Login With Facebook</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
