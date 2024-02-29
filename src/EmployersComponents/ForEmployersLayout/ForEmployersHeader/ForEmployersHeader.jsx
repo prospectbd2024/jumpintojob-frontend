@@ -29,6 +29,8 @@ const ForEmployersHeader = () => {
             return;
         }
         try {
+            setUserData(null)
+
             const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
@@ -37,15 +39,11 @@ const ForEmployersHeader = () => {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            console.log("logging out");
             await signOut();
-            console.log("logged out");
+            router.push('/signin')            
             const userLogoutData = await userLogoutResponse.json();
-            console.log(userLogoutData)
-            alert("Logout Successfull!")
+            // alert("Logout Successfull!")
             setUserLoggedout(userLogoutData)
-            setUserData(null)
-            router.push('/signin')
 
             
         }
