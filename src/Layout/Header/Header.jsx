@@ -8,7 +8,7 @@ import { TbBell, TbLogout, TbSend, TbUserCircle } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { usePathname, useRouter } from 'next/navigation';
 import { UserContext } from '@/UserContext/UserContext';
-
+import { signOut } from 'next-auth/react';
 
 const Header = () => {
     const forEmployerNavigate = useRouter();
@@ -44,7 +44,15 @@ const Header = () => {
     };
 
     const handleLogout = async () => {
-
+        forEmployerNavigate.push('/signin')
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'User logout successful!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setUserData(null);
         console.log("logging out");
         const token = userData?.data?.access_token;
         if (!token) {
@@ -61,17 +69,13 @@ const Header = () => {
                 }
             });
             localStorage.removeItem('userData');
+            console.log("logging out");
+            await signOut();
+            console.log("logged out");
             const userLogoutData = await userLogoutResponse.json();
             setUserLoggedout(userLogoutData);
             setUserData(null);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'User logout successful!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            forEmployerNavigate.push('/signin')
+            // forEmployerNavigate.push('/signin')
             
         } catch (error) {
             console.error("Logout failed:", error);
@@ -224,7 +228,7 @@ const Header = () => {
                     </div>
 
                 </div>
-                <div className={`header-menu ${!mobileMenuClicked ? 'hide-header-menu' : 'show-header-menu'}`}>
+                <div className={`header-menu ${!mobileMenuClicked ? 'hide-header-menu' : 'show-header-menu'}`} hidden>
                     <ul className="main-menu">
                         <li><Link href="/" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/' ? 'active' : ''}>Home</Link></li>
 

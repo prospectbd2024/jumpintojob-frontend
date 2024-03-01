@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState ,useEffect} from "react";
 import "./Register.css";
 import {
   HiOutlineEye,
@@ -7,12 +7,13 @@ import {
   HiOutlineMail,
   HiOutlineUserCircle,
 } from "react-icons/hi";
-import { FcGoogle } from "react-icons/fc";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter ,useSearchParams} from "next/navigation";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const params = useSearchParams();
   // Register User:
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,8 +23,17 @@ const Register = () => {
   const [userType, setUserType] = useState("Job Seeker");
   const router = useRouter();
 
+  const [message,setMessage] = useState(undefined)
   const [warning, setWarning] = useState({ warning: false, message: "" });
+  useEffect(() => {
 
+    setMessage( params.get('msg'))
+    if(params.get('error')){
+      setWarning({warning: 'error', message : params.get('error')})
+
+    }
+   
+  }, [])
   const handleRegistration = async (e) => {
     e.target.reset();
     e.preventDefault();
@@ -57,9 +67,8 @@ const Register = () => {
     const data = await response.json();
     if (response.ok) {
       // Handle successful registration, e.g., show a success message
-      console.log("Success Registration!", data);
       //   alert("Registration Successfull! Please Verify Your Email");
-      router.push("/signin" + "?" + createQueryString("msg", "Congratulation! Please Check your Email to verify!"));
+      router.push("/signin" + "?" + createQueryString("msg", "Registration Successfull ! Please Verify Your Email"));
     } else {
       // Handle registration error, e.g., display an error message
       console.log("Something is wrong!", data);
@@ -77,6 +86,22 @@ const Register = () => {
         <span>.</span>
       </div>
       <div className="account-form account-form-register">
+      {warning.warning=='error'&&
+          <div
+            style={{
+              color: "white",
+              backgroundColor: "red",
+              height: "27px",
+              width: "459px",
+              paddingTop: "6px",
+              marginInline: "auto",
+              borderRadius: "4px",
+              marginBlockEnd : '20px'
+            }}
+          >
+            {warning.message}
+          </div>
+        }
         <form action="" onSubmit={handleRegistration}>
           <div className="account-info account-info-register">
             <label htmlFor="first_name">First Name</label>
@@ -240,26 +265,8 @@ const Register = () => {
             <input type="submit" value="Sign Up" />
           </div>
 
-          <div className="register-to-login">
-            <p>
-              Already have an account? <Link href="/signin">Login</Link> Here
-            </p>
-            <span>OR</span>
-          </div>
+
         </form>
-        <div className="social-login">
-          <button>
-            <FcGoogle/> Login With Google
-          </button>
-          <button>
-            {" "}
-            <img
-              src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg"
-              alt=""
-            />{" "}
-            Login With Facebook
-          </button>
-        </div>
       </div>
     </div>
   );

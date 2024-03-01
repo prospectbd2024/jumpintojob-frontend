@@ -25,7 +25,7 @@ const Home = () => {
     return (isClient&&
         <div>
             {userData ?
-                <UserHome></UserHome>
+                <UserHome/>
                 :
                 <div>
                     <Banner></Banner>

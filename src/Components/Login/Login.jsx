@@ -6,30 +6,41 @@ import {
   HiOutlineEyeOff,
   HiOutlineMail,
   HiOutlineUserCircle,
-} from "react-icons/hi";
+}
+
+from "react-icons/hi";
 import Link from "next/link";
 import { useUserContext } from "../../UserContext/UserContext";
 import Swal from "sweetalert2";
-import { useRouter,useSearchParams } from "next/navigation";
-
+import { usePathname, useRouter,useSearchParams } from "next/navigation";
+import {signIn} from 'next-auth/react'
+import axios from "axios";
+import MessageBox from "../warnings/Message";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const pathname = usePathname()
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [rememberUser, setRememberUser] = useState(false);
   const { setUserData } = useUserContext();
   const navigate = useRouter();
   const params = useSearchParams();
-
   const [message,setMessage] = useState(undefined)
-
+  const createQueryString =(name, value) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+  
+    return params.toString();
+  };
 
   useEffect(() => {
-
-    setMessage( params.get('msg'))
+      if(params.get('msg')){
+        setMessage( params.get('msg'))
+        navigate.push(pathname)
+        
+      }
    
   }, [])
-  
 
   const [warning, setWarning] = useState({ isWarning: false, messages: [] });
   const handleLogin = async (e) => {
@@ -92,22 +103,7 @@ const Login = () => {
       </div>
 
       <div className="account-form">
-        {message&&
-          <div
-            style={{
-              color: "white",
-              backgroundColor: "#3498db",
-              height: "27px",
-              width: "459px",
-              paddingTop: "6px",
-              marginInline: "auto",
-              borderRadius: "4px",
-              marginBlockEnd : '20px'
-            }}
-          >
-            {message}
-          </div>
-        }
+      <MessageBox message={message}/>
         <form action="" onSubmit={handleLogin}>
           <div className="account-info">
             <label htmlFor="email">Email</label>
@@ -181,13 +177,34 @@ const Login = () => {
           <div className="register-button">
             <input type="submit" value="Login" />
           </div>
-          <div className="register-to-login">
+
+        </form>
+        <div className="register-to-login mt-5">
             <p>
               Already have an account? <Link href="/register">Register</Link>{" "}
               here
             </p>
           </div>
-        </form>
+          <div className="register-to-login">
+            <p>
+              Already have an account? <Link href="/signin">Login</Link> Here
+            </p>
+            <span>OR</span>
+          </div>
+        <div className="social-login">
+          <button onClick={()=>{signIn('google_job_seeker')}}>
+            <FcGoogle/> Login With Google
+          </button>
+          <button onClick={()=>{signIn('facebook_job_seeker')}}>
+            {" "}
+            <img
+              src="https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-svg-vector.svg"
+              alt=""
+            />{" "}
+            Login With Facebook
+          </button>
+        </div>
+
       </div>
     </div>
   );

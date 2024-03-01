@@ -6,7 +6,7 @@ const FeaturedCompanies = () => {
 
     const [featuredCompanies, setFeaturedCompanies] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
             .then(res => res.json())
             .then(data => {
                 setFeaturedCompanies(data);
