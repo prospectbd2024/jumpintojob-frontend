@@ -179,15 +179,9 @@ const Login = () => {
           </div>
 
         </form>
-        <div className="register-to-login mt-5">
+          <div className="register-to-login m-2">
             <p>
-              Already have an account? <Link href="/register">Register</Link>{" "}
-              here
-            </p>
-          </div>
-          <div className="register-to-login">
-            <p>
-              Already have an account? <Link href="/signin">Login</Link> Here
+            Don't have any account? <Link href="/register">Register</Link>{" "}
             </p>
             <span>OR</span>
           </div>
