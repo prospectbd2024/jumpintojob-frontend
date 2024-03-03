@@ -20,7 +20,7 @@ const Header = () => {
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
-    console.log(userProfileClicked);
+    // console.log(userProfileClicked);
     const [isClient,setClient] = useState(false);
 
 
@@ -63,8 +63,8 @@ const Header = () => {
             const userLogoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`, {
                 method: 'GET',
                 headers: {
-                    'content-type': 'application/json',
-                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             });
