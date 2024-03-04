@@ -34,9 +34,12 @@ const ForEmployersLogin = () => {
         if (loginData.ok) {
             console.log('Login Successfull', loginUserData);
             setUserData(loginUserData);
-            // alert("Login Successfull!")
-
-            router.push('/foremployers')
+            if(loginUserData.data.user.is_verified==false){
+                router.push('/foremployers/verify-email')
+              }
+              else{
+                router.push("/foremployers");
+              }
         } else {
             console.log('Something is wrong', loginUserData)
             alert(loginUserData.message)
