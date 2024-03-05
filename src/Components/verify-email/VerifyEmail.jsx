@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/UserContext/UserContext';
 
-const VerifyEmail = () => {
+const VerifyEmail = ({redirect}) => {
   const router = useRouter();
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
@@ -65,7 +65,7 @@ const VerifyEmail = () => {
 
       const data = await response.json();
       if (data.result) {
-        router.push('/verify-success');
+        router.push(redirect);
       } else {
         setMessage(data.message || 'Verification failed');
       }
