@@ -12,6 +12,7 @@ jobs:
       - name: Debug
         run: |
           echo "Current directory: $(pwd)"
+          start update_repo.cmd
           ls C:\Users\prospectbddev\Desktop
       - name: Install dependencies (Optional)
         run: |
