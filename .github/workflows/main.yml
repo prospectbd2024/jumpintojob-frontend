@@ -9,13 +9,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Debug
-        run: |
-          echo "Current directory: $(pwd)"
-          ls C:\Users\prospectbddev\Desktop\jumpintojob-frontend
       - name: Install dependencies (Optional)
         run: |
-          cd C:\Users\prospectbddev\Desktop\jumpintojob-frontend
           git pull origin
           docker compose down
           docker compose up -d  --build --remove-orphans
