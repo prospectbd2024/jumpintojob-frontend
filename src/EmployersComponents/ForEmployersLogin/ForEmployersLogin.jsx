@@ -6,13 +6,14 @@ import { FcGoogle } from 'react-icons/fc';
 import { useUserContext } from '../../UserContext/UserContext';
 import { useRouter ,useSearchParams,usePathname} from 'next/navigation';
 import MessageBox from '@/Components/warnings/Message';
-
+import WarningBox from '@/Components/warnings/Warning';
 
 const ForEmployersLogin = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [rememberUser, setRememberUser] = useState(false);
+    const [warning, setWarning]= useState();
     const [message,setMessage] = useState(undefined)
     const pathname = usePathname();
     const { setUserData } = useUserContext();
@@ -34,12 +35,16 @@ const ForEmployersLogin = () => {
         if (loginData.ok) {
             console.log('Login Successfull', loginUserData);
             setUserData(loginUserData);
-            // alert("Login Successfull!")
-
-            router.push('/foremployers')
+            if(loginUserData.data.user.is_verified==false){
+                router.push('/foremployers/verify-email')
+              }
+              else{
+                router.push("/foremployers");
+              }
         } else {
             console.log('Something is wrong', loginUserData)
-            alert(loginUserData.message)
+            setWarning(loginUserData.message)
+            // alert()
         }
     }
     useEffect(() => {
@@ -57,6 +62,7 @@ const ForEmployersLogin = () => {
                 <h2>Login Account</h2>
                 <span>.</span>
             </div>
+
             <MessageBox message={message}/>
             <div className="account-form">
                 <form action="" onSubmit={handleLogin}>
@@ -85,6 +91,7 @@ const ForEmployersLogin = () => {
                                 }
                             </div>
                         </div>
+                                <WarningBox message={warning} />    
                     </div>
                     <div className="terms-conditions rememberme-n-forget">
                         <div>

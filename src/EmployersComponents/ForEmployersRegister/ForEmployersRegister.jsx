@@ -12,6 +12,7 @@ const ForEmployersRegister = () => {
     // Register User:
     const [companyName, setCompanyName] = useState('');
     const [companyType, setCompanyType] = useState('');
+    const [warning, setWarning]= useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -47,7 +48,7 @@ const ForEmployersRegister = () => {
         } else {
             // Handle registration error, e.g., display an error message
             console.log('Something is wrong!', data)
-            alert(data.message)
+            setWarning(data.message)
         }
     };
 
@@ -59,6 +60,9 @@ const ForEmployersRegister = () => {
                     <span>.</span>
                 </div>
                 <div className="account-form account-form-register">
+                    <div  style={{color: 'red', marginBottom: '50px'}}>
+                        {warning}
+                    </div>
                     <form action="" onSubmit={handleRegistration}>
                         <div className='account-info'>
                             <label htmlFor="company_name">Company Name</label>

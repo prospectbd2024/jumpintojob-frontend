@@ -3,7 +3,7 @@ import React from 'react'
 
 function page() {
   return (
-    <VerifyEmail redirect={"/verify-success"} />
+    <VerifyEmail  redirect={"/foremployers/verify-success"} />
   )
 }
 
