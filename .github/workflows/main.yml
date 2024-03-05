@@ -12,8 +12,7 @@ jobs:
       - name: Debug
         run: |
           echo "Current directory: $(pwd)"
-          cd ~/Desktop/
-          echo "Current directory: $(pwd)"
+          ls C:\Users\prospectbddev\Desktop\jumpintojob-frontend
       - name: Install dependencies (Optional)
         run: |
           cd jumpintojob-frontend
