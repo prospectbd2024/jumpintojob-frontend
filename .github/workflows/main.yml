@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
-          git config --global --add safe.directory C:/Users/prospectbddev/Desktop/jumpintojob-frontend
           cd C:\Users\prospectbddev\Desktop\jumpintojob-frontend
           git pull origin
           docker compose down
