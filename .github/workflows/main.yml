@@ -19,15 +19,5 @@ jobs:
         server: www.jumpintojob.com
         username: jumpinto
         password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
-        server-dir: /home/jumpinto/public_html/
-  # deploy:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: Install dependencies (Optional)
-  #       run: |
-  #         cd C:\Users\prospectbddev\Desktop\jumpintojob-frontend
-  #         git pull origin
-  #         docker compose down
-  #         docker compose up -d  --build --remove-orphans
-  #         ./bin/deploy_dev.sh
+        server-dir: /
 
