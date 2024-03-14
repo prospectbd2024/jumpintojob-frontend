@@ -19,5 +19,5 @@ jobs:
         server: www.jumpintojob.com
         username: jumpinto
         password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
-        server-dir: /
+        server-dir: /public_html/
 
