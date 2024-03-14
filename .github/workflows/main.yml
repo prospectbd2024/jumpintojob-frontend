@@ -1,4 +1,4 @@
-name: Windows Deployment
+name: Server Deployment
 
 on:
   push:
@@ -6,15 +6,28 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
     steps:
-      - name: Debug
-        run: |
-         echo "${pwd}"
-      - name: Install dependencies (Optional)
-        run: |
-          git pull origin
-          docker compose down
-          docker compose up -d  --build --remove-orphans
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: www.jumpintojob.com
+        username: jumpinto
+        password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
+        server-dir: /home/jumpinto/public_html
+  # deploy:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Install dependencies (Optional)
+  #       run: |
+  #         cd C:\Users\prospectbddev\Desktop\jumpintojob-frontend
+  #         git pull origin
+  #         docker compose down
+  #         docker compose up -d  --build --remove-orphans
+  #         ./bin/deploy_dev.sh
 
