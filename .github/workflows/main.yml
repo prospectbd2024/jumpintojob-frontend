@@ -19,7 +19,7 @@ jobs:
         server: www.jumpintojob.com
         username: jumpinto
         password: i;p93:fNnIMT14          # ${{ secrets.ftp_password }}
-        server-dir: /home/jumpinto/public_html
+        server-dir: /home/jumpinto/public_html/
   # deploy:
   #   runs-on: self-hosted
   #   steps:
