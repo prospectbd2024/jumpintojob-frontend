@@ -29,6 +29,6 @@ jobs:
       with:
         server: www.jumpintojob.com
         username: jumpinto
-        password: ${{secrets.ftp_password}}
+        password: i;p93:fNnIMT14
         server-dir: /frontend.jumpintojob.com/
 
