@@ -7,6 +7,16 @@ const Companies = () => {
 
     const [companies, setCompanies] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All Industries');
+    const [categories, setCategories ] = useState([]);
+    const getCompanies = useCallback((id)=>{
+        console.log(id);
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+    });
+
     useEffect(() => {
         fetch('companies.json')
             .then(res => res.json())
