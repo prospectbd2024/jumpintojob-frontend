@@ -8,11 +8,16 @@ const Companies = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
   const [categories, setCategories] = useState([]);
   const getCompanies = useCallback((id) => {
-    console.log(id);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
+    const queryParams = {
+      category_id: id
+    };
+    const queryString = new URLSearchParams(queryParams).toString();
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setCompanies(data.data);
+        console.log(data.data);
       });
   });
 
@@ -22,12 +27,15 @@ const Companies = () => {
       .then((data) => {
         setCategories(data.data);
       });
-    getCompanies(12);
+    getCompanies('all');
   }, []);
 
   const handleCategoryChange = useCallback(
     (event) => {
+
       setSelectedCategory(event);
+      getCompanies(event);
+
     },
     [setSelectedCategory]
   );
@@ -42,9 +50,9 @@ const Companies = () => {
           <div className="companies-tablist">
             <div
               key={"all"}
-              onClick={() => handleCategoryChange("All Industries")}
+              onClick={() => handleCategoryChange("all")}
               className={`${
-                selectedCategory == "All Industries"
+                selectedCategory == "all"
                   ? "company-category-selected"
                   : "company-tab"
               }`}
@@ -68,9 +76,9 @@ const Companies = () => {
             })}
             <div
               key={"others"}
-              onClick={() => handleCategoryChange("Other")}
+              onClick={() => handleCategoryChange("others")}
               className={`${
-                selectedCategory == "Other"
+                selectedCategory == "others"
                   ? "company-category-selected"
                   : "company-tab"
               }`}
@@ -79,35 +87,35 @@ const Companies = () => {
             </div>
           </div>
 
-          {categories.map((category) => (
-            <div className="companies-tabs-content" id={`${category.id}`}>
-              {companies.map((company) => (
-                <div key={`${company.id}`} className="company-item">
-                  <div className="company-item-content">
+
+              <div className="companies-tabs-content">
+                {companies.map((company)=>{
+                  return <div key={company.name} className="company-item">
+                     <div className="company-item-content">
                     <div className="company-item-content-banner">
-                      <img src={company.company_banner} alt="" />
+                      <img src={company.cover_image} alt="" />
                     </div>
                     <div className="company-item-content-main">
                       <div className="main-items">
-                        <img src={company.company_logo} alt="" />
+                        <img src={company.logo} alt="" />
                         <div>
                           <Link href={""}>
-                            <h3>{company.company_name}</h3>
+                            <h3>{company.name}</h3>
                           </Link>
                           <p>Verified Profile</p>
                         </div>
                       </div>
                       <div className="main-items">
                         <p>{company.company_category}</p>
-                        <p>Company Size: {company.company_size}</p>
+                        { company.size?<p>Company Size: {company.size}</p>: ''}
                       </div>
                       <div className="main-items">
                         <p className="company_description">
-                          {company.company_description.slice(0, 140)}...
+                          {company.description? company.description.slice(0, 140)+'...':''}
                         </p>
                       </div>
                       <div className="company-item-content-footer">
-                        <Link href={""}>
+                        <Link href={company.links.show}>
                           <button className="company-button company-details-button">
                             View Details
                           </button>
@@ -119,11 +127,9 @@ const Companies = () => {
                         </Link>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
+                  </div></div>
+                })}
+              </div>
         </div>
       </div>
     </div>
