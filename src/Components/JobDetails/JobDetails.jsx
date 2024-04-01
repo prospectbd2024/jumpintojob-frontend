@@ -12,7 +12,7 @@ const JobDetails = ({props}) => {
     const handleApplyJob = () => {
         if (userData) {
             // Use window.open() to open the URL in a new tab
-            window.open(`/applyjob/${showJobDetails.id}`, '_blank');
+            window.open(`/applyjob/${job.id}`, '_blank');
             
             
         } else {
