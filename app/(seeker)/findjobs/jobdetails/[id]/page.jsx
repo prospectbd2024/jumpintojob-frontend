@@ -21,7 +21,7 @@ function Page() {
 
   return (
     <div>
-      {selectedJob && <JobDetails props={{  job : selectedJob}} />}
+      {selectedJob.id && <JobDetails props={{  job : selectedJob}} />}
     </div>
       );
 }
