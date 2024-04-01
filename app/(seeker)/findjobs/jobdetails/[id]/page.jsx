@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import JobDetails from '@/Components/JobDetails/JobDetails';
 
 import { useParams } from 'next/navigation';
@@ -9,14 +9,21 @@ import { useJobContext } from '@/jobContext/JobContext';
 
 
 
+
 function Page() {
 
 
-    const {allJobs} = useJobContext();
-    // console.log(allJobs)
+    const {getJob,selectedJob} = useJobContext();
+    const {id}  = useParams();
+    useEffect(()=>{
+      getJob(id)
+    },[])
 
-
-  return (<JobDetails props={{  jobs : allJobs}} />);
+  return (
+    <div>
+      {selectedJob && <JobDetails props={{  job : selectedJob}} />}
+    </div>
+      );
 }
 
 export default Page;
