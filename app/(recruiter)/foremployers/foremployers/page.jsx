@@ -1,4 +1,4 @@
-import ForEmployersHome from '@/Components/EmployersComponents/ForEmployersHome/ForEmployersHome'
+import ForEmployersHome from '@/EmployersComponents/ForEmployersHome/ForEmployersHome'
 import React from 'react'
 
 function page() {

@@ -1,9 +1,10 @@
+"use client"
 import React from 'react';
 import './ApplyJob.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
 // import { useLoaderData, useParams } from 'react-router-dom';
-import {useParams} from 'next/navigate';
+import {useParams} from 'next/navigation';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { HiDocument, HiOutlineUpload } from "react-icons/hi";

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRightArrowLeft, FaRegBookmark, FaUpRightFromSquare } from "react-icons/fa6";
 import { HiBookmark, HiBookmarkAlt, HiOutlineBookmark, HiOutlineBriefcase } from 'react-icons/hi';
