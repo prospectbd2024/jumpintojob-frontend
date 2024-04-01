@@ -1,14 +1,30 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link';
 import { useUserContext } from '@/UserContext/UserContext';
+import CompanyDetails from '@/Components/Companies/CompanyDetails';
+import MoreJobButton from '@/Components/AllJobs/MoreJobButton';
+import JobListView from '@/Components/AllJobs/JobListView';
+import JobDetails from '@/Components/JobDetails/JobDetails';
 
 function Page() {
     const { slug } = useParams();
     const [company, setCompany] = useState({});
     const UserContext = useUserContext();
+    const [allJobs,setAllJobs] = useState([]);
+    const [clickedJob, setCLickedJob] = useState(0);
+    const [job,setJob] = useState({}); 
     let bearerToken = '';
+
+    const handleClickedJob = useCallback((id)=>{
+        setCLickedJob(id)
+        allJobs.map((job)=>{
+            if(job.id==id){
+                setJob(job)
+            }
+        })
+    },[allJobs]);
     useEffect(()=>{
         bearerToken = UserContext.userData.data.access_token;
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/show/${slug}`, {
@@ -21,33 +37,44 @@ function Page() {
         })
         .then((resp)=> resp.json())
         .then((data)=> {
-            setCompany(data.data)
+            let company = data.data;
+            setCompany(company)
+
         })
     },[])
+    useEffect(() => {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
+            .then(res => res.json())
+            .then(data => {
+                let jobs = data.data;
+                setAllJobs(jobs);
+                setJob(jobs.length>0?jobs[0]:{})
+                console.log(jobs.length>0?jobs[0]:{});
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
 
+            });
+    }, []);
     return (
-        <div key={company.name} className="company-item">
-            <div className="company-item-content">
-                <div className="company-item-cover company-cover">
-                    <img src={company.cover_image} alt="" className="company-cover-image" />
-                </div>
-                <div className="company-item-details">
-                    <div className="company-logo company-logo-container">
-                        <img src={company.logo} alt="" className="company-logo-image" />
-                        <div className="company-info company-info-container">
-                                <h3 className="company-title">{company.name}</h3>
-                            <p className="company-status">Verified Profile</p>
-                        </div>
+        <div>
+        <CompanyDetails company={company}/>
+        <div className='all-jobs' style={{'height' : '100%'}}>
+
+            <div className="all-jobs-main" >
+                <div className="all-jobs-content container">
+                    <div className="show-all-jobs  scroll-container">
+                    <JobListView props={{filteredJobs: allJobs, limit: 10, clickedJob: clickedJob, isMobileScreen: false , handleClickedJob : handleClickedJob}} />
+
                     </div>
-                    <div className="company-category">
-                        <p className="company-category-text">{company.category? company.category :''}</p>
-                        {company.size && <p className="company-size">Company Size: {company.size}</p>}
+                    <div>
+                    <JobDetails props={{job: job}} />
                     </div>
-                </div>
-                <div className="company-description company-description-container">
-                    <p className="company-description-text">{company.description ? company.description : ''}</p>
+
                 </div>
             </div>
+        </div>
+
         </div>
     )
 }
