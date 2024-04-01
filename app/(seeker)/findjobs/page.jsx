@@ -11,11 +11,11 @@ function Page() {
    const {selectedJob} = useJobContext();
 
   return (
-    <div>
+    <>
       {selectedJob.id?
       <JobDetails props={{job : selectedJob}} />:
       <DefaultJobDetails/>}
-    </div>
+    </>
   )
 }
 

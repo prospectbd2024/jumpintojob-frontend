@@ -20,9 +20,9 @@ function Page() {
     },[])
 
   return (
-    <div>
+    <>
       {selectedJob.id && <JobDetails props={{  job : selectedJob}} />}
-    </div>
+    </>
       );
 }
 
