@@ -3,11 +3,7 @@ import React, { useEffect } from 'react';
 import JobDetails from '@/Components/JobDetails/JobDetails';
 
 import { useParams } from 'next/navigation';
-import { useContext } from 'react';
 import { useJobContext } from '@/jobContext/JobContext';
-
-
-
 
 
 function Page() {

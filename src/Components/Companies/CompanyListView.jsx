@@ -35,7 +35,7 @@ function CompanyListView({props}) {
                 View Details
               </button>
             </Link>
-            <Link href={""}>
+            <Link href={`/companies/${company.links.show}#company-jobs`}>
               <button className="company-button company-jobs-button">
                 View Jobs
               </button>

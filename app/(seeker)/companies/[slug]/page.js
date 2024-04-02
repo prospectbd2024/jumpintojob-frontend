@@ -63,7 +63,7 @@ function Page() {
 
             <div className="all-jobs-main" >
                 <div className="all-jobs-content container">
-                    <div className="show-all-jobs  scroll-container">
+                    <div className="show-all-jobs  scroll-container" id="company-jobs">
                     <JobListView props={{filteredJobs: allJobs, limit: 10, clickedJob: clickedJob, isMobileScreen: false , handleClickedJob : handleClickedJob}} />
 
                     </div>

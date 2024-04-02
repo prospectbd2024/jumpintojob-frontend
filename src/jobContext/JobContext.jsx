@@ -28,6 +28,7 @@ function JobContext({children}) {
             });
     }, []);
 
+
     const getJob = useCallback((id)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/show/${id}`)
         .then(res => res.json())
