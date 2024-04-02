@@ -43,7 +43,7 @@ function Page() {
         })
     },[])
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/${slug}`)
             .then(res => res.json())
             .then(data => {
                 let jobs = data.data;
