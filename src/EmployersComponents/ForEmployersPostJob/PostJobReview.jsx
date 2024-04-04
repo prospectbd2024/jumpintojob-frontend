@@ -41,7 +41,7 @@ const PostJobReview = ({ setShowReview, jobData }) => {
                     console.log("Validation errors:", data.errors);
                 } else {
                     // Handle other errors
-                    console.log("Something is wrong:", data);
+                    console.log("Something is wrong:", data.message);
                 }
             }
         } catch (error) {

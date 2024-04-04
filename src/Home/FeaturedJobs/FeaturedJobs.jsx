@@ -26,6 +26,7 @@ const FeaturedJobs = () => {
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
+                console.log("Hello World");
                 const filteredFeaturedJobs = allJobs.filter(job => job.job_vacancy >= 5);
                 const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
                 setFeaturedJobs(sortedFeaturedJobs);

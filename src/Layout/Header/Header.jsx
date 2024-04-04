@@ -20,8 +20,22 @@ const Header = () => {
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
+    console.log(userProfileClicked);
+    const [isClient, setClient] = useState(false);
 
-    const [isClient,setClient] = useState(false);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (userProfileClicked && !event.target.closest('.user-profile-icon')) {
+                setUserProfileClicked(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [userProfileClicked]);
 
 
     useEffect(() => {
@@ -76,7 +90,7 @@ const Header = () => {
             setUserLoggedout(userLogoutData);
             setUserData(null);
             // forEmployerNavigate.push('/signin')
-            
+
         } catch (error) {
             console.error("Logout failed:", error);
             alert(error);
@@ -247,7 +261,7 @@ const Header = () => {
                                                 <span className="slider round"></span>
                                             </label>
                                         </div>
-                                        <TbBell/>
+                                        <TbBell />
                                         {/* <TbSend></TbSend> */}
                                         <TbUserCircle onClick={toggleUserProfile} className={userProfileClicked ? 'user-profile-active' : ''}></TbUserCircle>
 
@@ -261,10 +275,10 @@ const Header = () => {
                                                     <Link href="/userprofile/aboutme" onClick={toggleUserProfile}><FaUserTie></FaUserTie> Profile</Link>
                                                     <Link href="/myjobs/dashboard" onClick={toggleUserProfile}><HiBriefcase></HiBriefcase> My Jobs</Link>
                                                     <Link href="/resumebuilder" onClick={toggleUserProfile}><FaFileAlt></FaFileAlt> Resume Build</Link>
-                                                    <a onClick={toggleUserProfile}><HiCog/> Settings</a>
-                                                    <a onClick={toggleUserProfile}><HiQuestionMarkCircle/> Help Center</a>
+                                                    <a onClick={toggleUserProfile}><HiCog /> Settings</a>
+                                                    <a onClick={toggleUserProfile}><HiQuestionMarkCircle /> Help Center</a>
                                                 </div>
-                                                <button className='signout-btn' onClick={handleLogout}>Sign Out <TbLogout/></button>
+                                                <button className='signout-btn' onClick={handleLogout}>Sign Out <TbLogout /></button>
                                             </div>
                                             :
                                             ''
@@ -275,7 +289,7 @@ const Header = () => {
                                 userLoggedout?.result ?
                                     <ul>
                                         <li><Link href="/register" className='register-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUserAdd />Register</Link></li>
-                                        <li><Link href="signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li> 
+                                        <li><Link href="signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li>
                                     </ul>
                                     :
                                     <ul>

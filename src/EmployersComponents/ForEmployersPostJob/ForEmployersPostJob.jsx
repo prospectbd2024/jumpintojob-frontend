@@ -1,14 +1,17 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import './ForEmployersPostJob.css'
+import { useUserContext } from '@/UserContext/UserContext';
 import { HiOutlineUserCircle } from 'react-icons/hi';
-import  Link  from 'next/link';
 import RichEditor from './RichEditor';
+import Link from 'next/link';
 import PostJobReview from './PostJobReview';
 
 
 const ForEmployersPostJob = () => {
     const [showReview, setShowReview] = useState(false);
+    const {userData} = useUserContext();
+    console.log(userData.data.user.email);
     const [jobData, setJobData] = useState({});
     const [jobCategories, setJobCategories] = useState([]);
     useEffect(() => {
@@ -18,6 +21,11 @@ const ForEmployersPostJob = () => {
             setJobCategories(data.data);
         })
     },[])
+    const handlePosting = () => {
+        setShowReview(true);
+        setJobData({ ...jobData, 'email': userData.data.user.email });
+        
+    }
     return (
         <div className='post-job-main'>
             <div className="post-job-content container">
@@ -92,7 +100,6 @@ const ForEmployersPostJob = () => {
                                     <HiOutlineUserCircle/>
                                     <select name="category_id" id="category_id" onChange={(e) => setJobData({...jobData, 'category_id': 1, 'category_name': e.target.value})}>
                                         <option value="">Select</option>
-
                                         {
                                             jobCategories.map((category) => (
                                                 <option key={category.id} value={category.id}>
@@ -100,11 +107,6 @@ const ForEmployersPostJob = () => {
                                                 </option>
                                             ))
                                         }
-      
-                                        {/* <option value="1">IT & Technology</option>
-                                        <option value="2">Real Estate</option>
-                                        <option value="3">Medical</option>
-                                        <option value="4">Other</option> */}
                                     </select>
                                 </div>
                             </div>
@@ -126,7 +128,7 @@ const ForEmployersPostJob = () => {
                                 <label htmlFor="termscheck">I will agree company terms & conditions.</label>
                             </div>
                         </div>
-                        <button className='post-continue-btn' onClick={() => setShowReview(true)}>Continue</button>
+                        <button className='post-continue-btn' onClick={handlePosting}>Continue</button>
                     </form>
                 }
             </div>

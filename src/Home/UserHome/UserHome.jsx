@@ -11,6 +11,8 @@ const UserHome = () => {
     const { setClickedFeaturedJob } = useUserContext();
     const [allJobs, setAllJobs] = useState([]);
     const [featuredJobs, setFeaturedJobs] = useState([])
+    console.log(allJobs);
+    // console.log(featuredJobs);
     let isClient = false;
     setInterval(() => {
         isClient = true;
@@ -19,6 +21,7 @@ const UserHome = () => {
     const [userData, setUserData] = useState([]);
 
     const [featuredCompanies, setFeaturedCompanies] = useState([]);
+    console.log(featuredCompanies)
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
             .then(res => res.json())
@@ -33,12 +36,13 @@ const UserHome = () => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
-
+                console.log(data);
                 setAllJobs(data.data);
                 console.log(data)
-                const filteredFeaturedJobs = allJobs.filter(job => job.job_vacancy >= 2);
+                const filteredFeaturedJobs = allJobs.filter(job => parseInt(job.job_vacancy) >= 2);
+                console.log(filteredFeaturedJobs)
                 const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
-                setFeaturedJobs(sortedFeaturedJobs);
+                setFeaturedJobs(allJobs);
             })
             .catch((error) => {
                 console.log("Error fetching jobs:", error)
@@ -64,25 +68,25 @@ const UserHome = () => {
             <div className="user-home-content container">
                 <div className="user-home-companies res-second-div">
                     <h4>Featured Companies:</h4>
-                    {featuredCompanies.data > 0 ?
+                    {featuredCompanies.length > 0 ?
                         <div className='user-home-company'>
                             {
-                                featuredCompanies?.data?.slice(0, 3).map(company => <div key={company.id} className='company-item'>
+                                featuredCompanies.slice(0, 3).map((company, index) => <div key={index} className='company-item'>
                                     <div className="company-item-content">
                                         <div className="company-item-content-banner">
-                                            <img src={company.company_banner} alt="" />
+                                            <img src={company.conver_image} alt="" />
                                         </div>
                                         <div className="company-item-content-main">
                                             <div className='main-items'>
-                                                <img src={company.company_logo} alt="" />
+                                                <img src={company.logo} alt="" />
                                                 <div>
-                                                    <Link href=""><h3>{company.company_name}</h3></Link>
+                                                    <Link href=""><h3>{company.name}</h3></Link>
                                                     <p>Verified Profile</p>
                                                 </div>
                                             </div>
                                             <div className='main-items'>
-                                                <p>{company.company_category}</p>
-                                                <p>Size: {company.company_size}</p>
+                                                <p>{company.company_type}</p>
+                                                <p>Location: {company.location}</p>
                                             </div>
                                             <div className='main-items'>
                                                 <p className='company_description'>{company.company_description?.slice(0, 90)}...</p>
@@ -106,11 +110,11 @@ const UserHome = () => {
                 </div>
                 <div className="user-home-jobs res-first-div">
                     <h4>Featured Jobs:</h4>
-                    {featuredJobs.length > 0 ?
+                    {allJobs.length > 0 ?
                         <div>
                             <div className='featured-jobs-items all-jobs-container'>
                                 {
-                                    featuredJobs.slice(0, 10).map(job =>
+                                    allJobs.slice(0, 10).map(job =>
                                         <div className={`featured-job-item single-job`} key={job.id}>
                                             <div className="single-job-header">
                                                 <h2>{job.job_title}</h2>
