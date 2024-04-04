@@ -1,9 +1,21 @@
+"use client"
 import DefaultJobDetails from '@/Components/AllJobs/DefaultJobDetails'
-import React from 'react'
+import JobDetails from '@/Components/JobDetails/JobDetails'
+import {  useJobContext } from '@/jobContext/JobContext'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 function Page() {
+  const router = useRouter()
+
+   const {selectedJob} = useJobContext();
+
   return (
-    <DefaultJobDetails/>
+    <>
+      {selectedJob.id?
+      <JobDetails props={{job : selectedJob}} />:
+      <DefaultJobDetails/>}
+    </>
   )
 }
 

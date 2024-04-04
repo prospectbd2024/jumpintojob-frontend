@@ -15,25 +15,16 @@ import MoreJobButton from './MoreJobButton';
 
 const AllJobs = ({children}) => {
 
-
-
-
-
-    // const {allJobs, setAllJobs} =useState([])
-    const {allJobs, setAllJobs} =useJobContext()
+    const {allJobs,clickedJob,handleClickedJob} =useJobContext()
     const [filteredJobs, setFilteredJobs] = useState([]);
     const [jobsToShow, setJobsToShow] = useState(6)
-    const [clickedJob, setClickedJob] = useState();
+
     const jobsToShowIncrement = 6;
 
     useEffect(() => {
         setFilteredJobs(allJobs)
     }, [allJobs])
     
-
-    const handleClickedJob = (e) => {
-        setClickedJob(e)
-    }
     const totalJobs =filteredJobs.length;
     const shouldShowButton = jobsToShow < totalJobs;
     const handleFilteredJobs = useCallback( (event) => {
@@ -50,7 +41,6 @@ const AllJobs = ({children}) => {
         setFilteredJobs(filterJobs);
     })
 
-    // console.log(clickedFeaturedJob)
 
 
 
@@ -61,7 +51,7 @@ const AllJobs = ({children}) => {
             <div className="all-jobs-main" >
                 <div className="all-jobs-content container">
                     <div className="show-all-jobs  scroll-container">
-                        <JobListView props ={{filteredJobs : allJobs,handleClickedJob,jobsToShow,clickedJob}}/>
+                        <JobListView props ={{ filteredJobs : allJobs, limit : jobsToShow ,clickedJob : clickedJob,handleClickedJob }}/>
                         <MoreJobButton props={{shouldShowButton,jobsToShowIncrement,setJobsToShow}}/>
 
                     </div>
