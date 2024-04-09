@@ -10,7 +10,7 @@ function JobListView({props}) {
     {
         
         filteredJobs.slice(0, limit).map(job =>
-            <div className={`single-job ${clickedJob === job.id ? "clicked-job" : ""}`} key={job.id} href={""}  onClick={() => {handleClickedJob(job.id);}} >
+            <div className={`single-job ${clickedJob===job.id?'clicked-job': ''}`} key={job.id} href={""}  onClick={() => {handleClickedJob(job.id);}} >
                 <div className="single-job-header">
                     <h2>{job.job_title}</h2>
                     <HiOutlineBookmark/>
