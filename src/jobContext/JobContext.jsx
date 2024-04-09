@@ -48,7 +48,7 @@ function JobContext({children}) {
             }
 
         })
-    },[selectedJob])
+    },[selectedJob,allJobs])
 
     
     const handleClickedJob = (e) => {
@@ -59,7 +59,6 @@ function JobContext({children}) {
             router.push("/findjobs/jobdetails/"+e)
         }
         else{
-            
             const updatedUrl = pathname.replace(/\/\d+$/, `/${e}`);
             window.history.pushState({}, '', updatedUrl);
         }
