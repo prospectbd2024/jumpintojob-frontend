@@ -9,10 +9,12 @@ import { useJobContext } from '@/jobContext/JobContext';
 function Page() {
 
 
-    const {getJob,selectedJob} = useJobContext();
+    const {getJob,selectedJob,setClickedJob} = useJobContext();
     const {id}  = useParams();
     useEffect(()=>{
       getJob(id)
+      setClickedJob(id)
+
     },[])
 
   return (
