@@ -14,11 +14,13 @@ const AboutMe = () => {
     const [state, setState] = useState(''); 
     const [street, setStreet] = useState(''); 
     const [postal_code, setPostalCode] = useState('');  
+    
+    const [profile,setProfile] = useState([])
 
     const [updatedProfileData, setUpdatedProfileData] = useState([])
 
     const handleUpdateUserProfile = async (event) => {
-        // event.preventDefault();
+        event.preventDefault()
         const updateUserProfile =new FormData();
         // updateUserProfile.append('avatar', avatar)
         updateUserProfile.append('country', country);
@@ -27,8 +29,9 @@ const AboutMe = () => {
         updateUserProfile.append('street', street);
         updateUserProfile.append('postal_code', postal_code);
         updateUserProfile.append('_method', 'PUT');
-
-        const userProfileResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/`, {
+        
+        console.log(updateUserProfile);
+        const userProfileResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/update`, {
             method: 'POST',
             headers: {
 
@@ -42,7 +45,8 @@ const AboutMe = () => {
         const updatedData = await userProfileResponse.json();
         if (updatedData) {
             console.log("Data is updated", updatedData);
-            setUpdatedProfileData(updatedData)
+
+            setProfile(updatedData?.user)
            
         } else {
             console.log("Something is wrong with updating your data", updatedData)
@@ -51,7 +55,7 @@ const AboutMe = () => {
 
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -61,56 +65,69 @@ const AboutMe = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            setProfile(data.data)
+            console.log(profile);
         })
         
     }, [])
-    
+    useEffect(()=>{
+        setAvatar(profile?.avatar)
+        setCity(profile?.city)
+        setCountry(profile?.country)
+        setFirstName(profile?.first_name)
+        setLastName(profile?.last_name)
+        setPostalCode(profile?.postal_code)
+        setState(profile?.state)
+        setStreet(profile?.street)
+        console.log(profile);
+
+    },[profile])
 
     return (
         <div className='user-profile-about-me'>
             <h2>Contact Information</h2>
-            <form action="" onSubmit={handleUpdateUserProfile}>
+            <form action="" >
                 <div className="about-me-personal">
                     <div className='about-me-personal-header'>
-                        <FaUserCircle></FaUserCircle>
+                        <FaUserCircle/>
+                        
                         <div>
-                            <h4 suppressHydrationWarning={true}>{userData?.data?.user?.email}</h4>
-                            <p>{userData?.data?.user?.user_type}</p>
+                            <h4 suppressHydrationWarning={true}>{profile?.email}</h4>
+                            <p>{profile?.user_type}</p>
                         </div>
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="first_name">First Name</label>
-                        <input type="text" placeholder='Your First Name' id="first_name" name="firstName" value={userData?.data?.user?.first_name} readOnly />
+                        <input type="text" placeholder='Your First Name' id="first_name" name="firstName" value={first_name} readOnly />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="last_name">Last Name</label>
-                        <input type="text" placeholder='Your Last Name' id="last_name" name="lastName" value={userData?.data?.user?.last_name} readOnly />
+                        <input type="text" placeholder='Your Last Name' id="last_name" name="lastName" value={last_name} readOnly />
                     </div>
                 </div>
                 <div className="about-me-address">
                     <h3>Location</h3>
                     <div className='about-me-inputs'>
                         <label htmlFor="countryid">Country</label>
-                        <input type="text" placeholder='Your Country' id="countryid" name="country" defaultValue={updatedProfileData?.profile?.country} onChange={(e) => setCountry(e.target.value)} />
+                        <input type="text" placeholder='Your Country' id="countryid" name="country" value={country} onChange={(e) => setCountry(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="streetid">Stress Address</label>
-                        <input type="text" placeholder='Your Street Address' id="streetid" defaultValue={updatedProfileData?.profile?.street} name="street" onChange={(e) => setStreet(e.target.value)} />
+                        <input type="text" placeholder='Your Street Address' id="streetid" value={ street} name="street" onChange={(e) => setStreet(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="cityid">City</label>
-                        <input type="text" placeholder='Your City' id="cityid" name="city" defaultValue={updatedProfileData?.profile?.city} onChange={(e) => setCity(e.target.value)} />
+                        <input type="text" placeholder='Your City' id="cityid" name="city" value={ city} onChange={(e) => setCity(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="stateid">State</label>
-                        <input type="text" placeholder='Your State' id="stateid" name="state" defaultValue={updatedProfileData?.profile?.state} onChange={(e) => setState(e.target.value)} />
+                        <input type="text" placeholder='Your State' id="stateid" name="state" value={ state} onChange={(e) => setState(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="postal">Postal Code</label>
-                        <input type="text" placeholder='Your Postal Code' id="postal" defaultValue={updatedProfileData?.profile?.postal_code} name="postal_code" onChange={(e) => setPostalCode(e.target.value)} />
+                        <input type="text" placeholder='Your Postal Code' id="postal" value={ postal_code} name="postal_code" onChange={(e) => setPostalCode(e.target.value)} />
                     </div>
-                    <input type="submit" value="Save" className='save-user-info-btn' />
+                    <input type="button" value="save"   className='save-user-info-btn' onClick={handleUpdateUserProfile} />
                 </div>
             </form>
         </div>
