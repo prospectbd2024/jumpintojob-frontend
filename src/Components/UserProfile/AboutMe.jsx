@@ -4,7 +4,7 @@ import { useUserContext } from '../../UserContext/UserContext';
 import { FaUserCircle } from "react-icons/fa";
 
 const AboutMe = () => {
-    const { userData } = useUserContext();
+    const { userData,profile,setProfile } = useUserContext();
 
     const [avatar, setAvatar] = useState(null);
     const [first_name, setFirstName] = useState('')
@@ -15,9 +15,7 @@ const AboutMe = () => {
     const [street, setStreet] = useState(''); 
     const [postal_code, setPostalCode] = useState('');  
     
-    const [profile,setProfile] = useState([])
 
-    const [updatedProfileData, setUpdatedProfileData] = useState([])
 
     const handleUpdateUserProfile = async (event) => {
         event.preventDefault()
@@ -54,22 +52,7 @@ const AboutMe = () => {
     }
 
 
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Bearer ${userData?.data?.access_token}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            setProfile(data.data)
-            console.log(profile);
-        })
-        
-    }, [])
+
     useEffect(()=>{
         setAvatar(profile?.avatar)
         setCity(profile?.city)

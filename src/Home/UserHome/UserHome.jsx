@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { FcBriefcase, FcBusinessman, FcFinePrint, FcOnlineSupport } from "react-icons/fc";
 
 const UserHome = () => {
-    const { setClickedFeaturedJob } = useUserContext();
+    const { setClickedFeaturedJob,profile } = useUserContext();
     const [allJobs, setAllJobs] = useState([]);
     const [featuredJobs, setFeaturedJobs] = useState([])
     console.log(allJobs);
@@ -50,11 +50,11 @@ const UserHome = () => {
 
     }, [])
 
-    useEffect(() => {
-        fetch('/userprofile.json')
-            .then(res => res.json())
-            .then(data => setUserData(data))
-    }, [])
+    // useEffect(() => {
+    //     fetch('/userprofile.json')
+    //         .then(res => res.json())
+    //         .then(data => setUserData(data))
+    // }, [])
 
     const handleClickedFeaturedJob = (e) => {
         setClickedFeaturedJob(e);
@@ -145,20 +145,19 @@ const UserHome = () => {
                             <h4 className=''>No Jobs Available</h4>
                         </div>
                     }
-                </div>
+                </div>{console.log(profile)}
                 <div className="user-home-profile res-third-div">
                     <h4>User Profile:</h4>
                     <div className='user-home-profile-content'>
                         <div className='home-profile'>
                             <div className="home-user-profile">
-                                {
-                                    userData.map(data => <div key={data.user_name}>
 
+                                     <div>
                                         <div className="user-profile-main" >
                                             <img src="https://img.freepik.com/free-icon/man_318-677829.jpg" alt="" />
-                                            <h3>{data.user_name}</h3>
-                                            <p>{data.job_role}</p>
-                                            <p className='user-address'><HiMap /> {data.user_address}</p>
+                                            <h3> {`${profile?.first_name} ${profile?.last_name}`}</h3>
+                                            <p>Not added</p>
+                                            <p className='user-address'><HiMap />{`${profile?.street?profile?.street+",":""} ${profile?.state?profile?.state+",":""} ${profile?.city?profile?.city+",":""} ${profile?.country}`}</p>
                                         </div>
                                         <div className="user-profile-info">
 
@@ -193,8 +192,8 @@ const UserHome = () => {
 
                                         </div>
 
-                                    </div>)
-                                }
+                                    </div>
+
                             </div>
                         </div>
                         <div className='home-subscribe'>

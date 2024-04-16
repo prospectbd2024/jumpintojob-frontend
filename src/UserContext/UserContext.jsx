@@ -76,7 +76,23 @@ export const UserProvider = ({ children }) => {
         setBearerToken(userData.data.access_token)
     }
     }, [userData])
-    
+    const [profile,setProfile] = useState([])
+    useEffect(() => {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${userData?.data?.access_token}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            setProfile(data.data)
+            console.log(profile);
+        })
+        
+    }, [userData])
     
   
     const handleSubmitResume = () => {
@@ -86,7 +102,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume,bearerToken }}>
+        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume,bearerToken,profile,setProfile }}>
             {children}
         </UserContext.Provider>
     );
