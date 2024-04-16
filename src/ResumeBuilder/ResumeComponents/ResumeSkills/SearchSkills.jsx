@@ -33,7 +33,7 @@ function SearchSkills({onSkillClick,search_url ,search_title ,searchKey,setSearc
       .then((rsp) => rsp.json())
       .then((data) => {
         setSearchSuggestions(data.data);
-        console.log(data)
+        // console.log(data)
       });
       console.log('here is your ',searchSuggestions)
   }, [searchKey]);

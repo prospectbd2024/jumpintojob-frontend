@@ -20,7 +20,7 @@ function JobContext({children}) {
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
-                console.log(data.data);
+                // console.log(data.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

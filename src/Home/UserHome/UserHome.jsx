@@ -27,7 +27,7 @@ const UserHome = () => {
             .then(res => res.json())
             .then(data => {
                 setFeaturedCompanies(data.data);
-                console.log(data.data)
+                // console.log(data.data)
             })
     }, [])
 
@@ -36,9 +36,9 @@ const UserHome = () => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setAllJobs(data.data);
-                console.log(data)
+                // console.log(data)
                 const filteredFeaturedJobs = allJobs.filter(job => parseInt(job.job_vacancy) >= 2);
                 console.log(filteredFeaturedJobs)
                 const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
