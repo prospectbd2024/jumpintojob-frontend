@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './FeaturedCompanies.css'
 import Link from 'next/link';
+import { useCompanyContext } from '@/Contexts/CompanyContext';
 
 const FeaturedCompanies = () => {
 
-    const [featuredCompanies, setFeaturedCompanies] = useState([]);
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
-            .then(res => res.json())
-            .then(data => {
-                setFeaturedCompanies(data);
-            })
-    }, [])
-    console.log(featuredCompanies.data)
+    const {companies } = useCompanyContext();
 
     return (
         <div className='featured-company-section'>
@@ -20,20 +13,20 @@ const FeaturedCompanies = () => {
                 <div className="featured-companies-header section-header">
                     <h2>Featured companies on Jump Into Job</h2>
                 </div>
-                {featuredCompanies.data > 0 ?
+                {companies.length > 0 ?
                     <div>
                         <div className="featured-company-content-items">
                             {
-                                featuredCompanies?.data?.slice(0, 6).map(company => <div key={company.id} className='company-item'>
+                                companies?.slice(0, 6).map(company => <div key={company.name} className='company-item'>
                                     <div className="company-item-content">
                                         <div className="company-item-content-banner">
-                                            <img src={company.company_banner} alt="" />
+                                            <img src={company.cover_image} alt="" />
                                         </div>
                                         <div className="company-item-content-main">
                                             <div className='main-items'>
-                                                <img src={company.company_logo} alt="" />
+                                                <img src={company.logo} alt="" />
                                                 <div>
-                                                    <Link href={""} ><h3>{company.company_name}</h3></Link>
+                                                    <Link href={""} ><h3>{company.name}</h3></Link>
                                                     <p>Verified Profile</p>
                                                 </div>
                                             </div>

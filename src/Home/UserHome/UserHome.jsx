@@ -6,72 +6,36 @@ import { useMediaQuery } from '@uidotdev/usehooks';
 import { HiMap, HiOutlineBookmark } from 'react-icons/hi';
 import Link from 'next/link';
 import { FcBriefcase, FcBusinessman, FcFinePrint, FcOnlineSupport } from "react-icons/fc";
+import { useJobContext } from '@/jobContext/JobContext';
+import { useCompanyContext } from '@/Contexts/CompanyContext';
 
 const UserHome = () => {
     const { setClickedFeaturedJob,profile } = useUserContext();
-    const [allJobs, setAllJobs] = useState([]);
-    const [featuredJobs, setFeaturedJobs] = useState([])
-    console.log(allJobs);
-    // console.log(featuredJobs);
+    const {allJobs} = useJobContext();
+    const {companies} = useCompanyContext();
     let isClient = false;
     setInterval(() => {
         isClient = true;
     }, 1000);
     const isMobileScreen = isClient ? useMediaQuery("only screen and (max-width : 1368px)") : false;
-    const [userData, setUserData] = useState([]);
-
-    const [featuredCompanies, setFeaturedCompanies] = useState([]);
-    console.log(featuredCompanies)
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies`)
-            .then(res => res.json())
-            .then(data => {
-                setFeaturedCompanies(data.data);
-                // console.log(data.data)
-            })
-    }, [])
-
-    useEffect(() => {
-
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                setAllJobs(data.data);
-                // console.log(data)
-                const filteredFeaturedJobs = allJobs.filter(job => parseInt(job.job_vacancy) >= 2);
-                // console.log(filteredFeaturedJobs)
-                const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
-                setFeaturedJobs(allJobs);
-            })
-            .catch((error) => {
-                console.log("Error fetching jobs:", error)
-            });
-
-    }, [])
-
-    // useEffect(() => {
-    //     fetch('/userprofile.json')
-    //         .then(res => res.json())
-    //         .then(data => setUserData(data))
-    // }, [])
-
     const handleClickedFeaturedJob = (e) => {
         setClickedFeaturedJob(e);
     }
 
-
-
+    useEffect(()=>{
+        console.log(allJobs);
+        console.log(companies);
+    },[allJobs,companies])
     return (
 
         <div className='user-home'>
             <div className="user-home-content container">
                 <div className="user-home-companies res-second-div">
                     <h4>Featured Companies:</h4>
-                    {featuredCompanies.length > 0 ?
+                    {companies.length > 0 ?
                         <div className='user-home-company'>
                             {
-                                featuredCompanies.slice(0, 3).map((company, index) => <div key={index} className='company-item'>
+                                companies.slice(0, 3).map((company, index) => <div key={index} className='company-item'>
                                     <div className="company-item-content">
                                         <div className="company-item-content-banner">
                                             <img src={company.conver_image} alt="" />
@@ -145,7 +109,7 @@ const UserHome = () => {
                             <h4 className=''>No Jobs Available</h4>
                         </div>
                     }
-                </div>{console.log(profile)}
+                </div>
                 <div className="user-home-profile res-third-div">
                     <h4>User Profile:</h4>
                     <div className='user-home-profile-content'>
