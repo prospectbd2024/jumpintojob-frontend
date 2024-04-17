@@ -40,7 +40,7 @@ const UserHome = () => {
                 setAllJobs(data.data);
                 // console.log(data)
                 const filteredFeaturedJobs = allJobs.filter(job => parseInt(job.job_vacancy) >= 2);
-                console.log(filteredFeaturedJobs)
+                // console.log(filteredFeaturedJobs)
                 const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
                 setFeaturedJobs(allJobs);
             })
