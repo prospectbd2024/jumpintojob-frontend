@@ -22,10 +22,6 @@ const UserHome = () => {
         setClickedFeaturedJob(e);
     }
 
-    useEffect(()=>{
-        console.log(allJobs);
-        console.log(companies);
-    },[allJobs,companies])
     return (
 
         <div className='user-home'>

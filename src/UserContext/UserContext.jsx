@@ -78,19 +78,21 @@ export const UserProvider = ({ children }) => {
     }, [userData])
     const [profile,setProfile] = useState([])
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Bearer ${userData?.data?.access_token}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            setProfile(data.data)
-            console.log(profile);
-        })
+        if(userData){
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${userData?.data?.access_token}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                setProfile(data.data)
+                console.log(profile);
+            })
+        }
         
     }, [userData])
     
