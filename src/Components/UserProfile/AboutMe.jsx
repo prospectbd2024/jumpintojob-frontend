@@ -62,7 +62,7 @@ const AboutMe = () => {
         setPostalCode(profile?.postal_code)
         setState(profile?.state)
         setStreet(profile?.street)
-        console.log(profile);
+
 
     },[profile])
 
