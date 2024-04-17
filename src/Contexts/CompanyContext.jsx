@@ -14,7 +14,7 @@ function CompanyContext({children}) {
     const [cachedCategoryCompanies,addCachedCategoryCompanes] = useState([]);
 
     const handleCachedCompanies = useCallback((category_id)=>{
-      console.log(category_id);
+      // console.log(category_id);
       let flag = false;
       let companies = [];
       cachedCategoryCompanies.map((categoryCompanies)=>{
@@ -39,7 +39,7 @@ function CompanyContext({children}) {
         category_id: category_id
       };
       const queryString = new URLSearchParams(queryParams).toString();
-      console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
+      // console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`)
         .then((res) => res.json())
         .then((data) => {

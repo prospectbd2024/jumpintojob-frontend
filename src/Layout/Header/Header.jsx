@@ -20,7 +20,7 @@ const Header = () => {
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
-    console.log(userProfileClicked);
+    // console.log(userProfileClicked);
     const [isClient, setClient] = useState(false);
 
     useEffect(() => {
