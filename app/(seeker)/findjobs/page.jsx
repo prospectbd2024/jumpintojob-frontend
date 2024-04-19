@@ -1,7 +1,7 @@
 "use client"
 import DefaultJobDetails from '@/Components/AllJobs/DefaultJobDetails'
 import JobDetails from '@/Components/JobDetails/JobDetails'
-import {  useJobContext } from '@/jobContext/JobContext'
+import {  useJobContext } from '@/Contexts/JobContext'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 

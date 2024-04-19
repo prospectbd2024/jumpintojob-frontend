@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from "react";
-import { useUserContext } from "../../../UserContext/UserContext";
+import { useUserContext } from "../../../Contexts/UserContext";
 import "../ResumeHeading/ResumeHeading.css";
 import { FaPlus } from "react-icons/fa";
 import { useState } from "react";

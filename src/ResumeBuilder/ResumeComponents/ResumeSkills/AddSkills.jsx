@@ -3,14 +3,14 @@ import React, { useCallback, useContext } from "react";
 import { HiPencil, HiPlus, HiX } from "react-icons/hi";
 import "./AddSkills.css";
 import { useState } from "react";
-import { useUserContext } from "../../../UserContext/UserContext";
+import { useUserContext } from "../../../Contexts/UserContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import Modal from "./Modal";
 
 import AddSkillButton from "./AddSkillButton";
 import ShowSkillList from "./SkillsList";
-import { SkillContext } from "@/UserContext/SkillContext";
+import { SkillContext } from "@/Contexts/SkillContext";
 
 const AddSkills = () => {
   const { handleRemoveSkill } = useContext(SkillContext);

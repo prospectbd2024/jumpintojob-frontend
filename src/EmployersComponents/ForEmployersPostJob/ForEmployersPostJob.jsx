@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import './ForEmployersPostJob.css'
-import { useUserContext } from '@/UserContext/UserContext';
+import { useUserContext } from '@/Contexts/UserContext';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import RichEditor from './RichEditor';
 import Link from 'next/link';

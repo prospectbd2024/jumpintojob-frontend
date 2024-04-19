@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link';
-import { useUserContext } from '@/UserContext/UserContext';
+import { useUserContext } from '@/Contexts/UserContext';
 import CompanyDetails from '@/Components/Companies/CompanyDetails';
 import MoreJobButton from '@/Components/AllJobs/MoreJobButton';
 import JobListView from '@/Components/AllJobs/JobListView';

@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from 'react-icons/hi';
 import  Link  from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
-import { useUserContext } from '../../UserContext/UserContext';
+import { useUserContext } from '../../Contexts/UserContext';
 import { useRouter ,useSearchParams,usePathname} from 'next/navigation';
 import MessageBox from '@/Components/warnings/Message';
 import WarningBox from '@/Components/warnings/Warning';

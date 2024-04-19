@@ -5,8 +5,8 @@ import Link from 'next/link';
 import './FeaturedJobs.css'
 import { FaUpRightFromSquare } from 'react-icons/fa6';
 import { useMediaQuery } from '@uidotdev/usehooks';
-import { useUserContext } from '../../UserContext/UserContext';
-import { useJobContext } from '@/jobContext/JobContext';
+import { useUserContext } from '../../Contexts/UserContext';
+import { useJobContext } from '@/Contexts/JobContext';
 import { useCompanyContext } from '@/Contexts/CompanyContext';
 const FeaturedJobs = () => {
     const { setClickedFeaturedJob } = useUserContext();

@@ -24,8 +24,8 @@ import '@/ResumeBuilder/ResumeComponents/ResumeHeading/ResumeHeading.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSkills/AddSkills.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSteps/ResumeSteps.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeTemplates/ResumeTemplatesCSS.css'
-import { UserProvider } from "@/UserContext/UserContext"
-import JobContext from '@/jobContext/JobContext'
+import { UserProvider } from "@/Contexts/UserContext"
+import JobContext from '@/Contexts/JobContext'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "app/api/auth/[...nextauth]/route"
 import Provider from '@/UserContext/SessionProvider'

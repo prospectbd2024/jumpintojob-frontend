@@ -1,12 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import './UserHome.css'
-import { useUserContext } from '../../UserContext/UserContext';
+import { useUserContext } from '../../Contexts/UserContext';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { HiMap, HiOutlineBookmark } from 'react-icons/hi';
 import Link from 'next/link';
 import { FcBriefcase, FcBusinessman, FcFinePrint, FcOnlineSupport } from "react-icons/fc";
-import { useJobContext } from '@/jobContext/JobContext';
+import { useJobContext } from '@/Contexts/JobContext';
 import { useCompanyContext } from '@/Contexts/CompanyContext';
 
 const UserHome = () => {

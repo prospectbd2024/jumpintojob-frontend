@@ -7,7 +7,7 @@ import { HiBookmark, HiBriefcase, HiCog, HiMenu, HiOutlineUser, HiOutlineUserAdd
 import { TbBell, TbLogout, TbSend, TbUserCircle } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { usePathname, useRouter } from 'next/navigation';
-import { UserContext } from '@/UserContext/UserContext';
+import { UserContext } from '@/Contexts/UserContext';
 import { signOut } from 'next-auth/react';
 
 const Header = () => {

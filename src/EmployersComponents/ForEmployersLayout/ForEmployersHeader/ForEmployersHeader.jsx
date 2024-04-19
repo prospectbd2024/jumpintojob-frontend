@@ -4,7 +4,7 @@ import  Link  from 'next/link';
 import { FaAngleDown, FaUserAlt, FaUserCircle, FaUserPlus, FaUserTie } from "react-icons/fa";
 import { HiBookmark, HiBriefcase, HiChevronDown, HiCog, HiOutlineBookmark, HiOutlineUser, HiOutlineUserAdd, HiQuestionMarkCircle } from "react-icons/hi";
 import { TbBell, TbBriefcase, TbLogout, TbUserCircle } from 'react-icons/tb';
-import { UserContext } from '@/UserContext/UserContext';
+import { UserContext } from '@/Contexts/UserContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 

@@ -5,8 +5,8 @@ import { HiBookmark, HiBookmarkAlt, HiOutlineBookmark, HiOutlineBriefcase } from
 import Link from 'next/link';
 import { useRouter,useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
-import { useUserContext } from '../../UserContext/UserContext';
-import { useJobContext } from '@/jobContext/JobContext';
+import { useUserContext } from '../../Contexts/UserContext';
+import { useJobContext } from '@/Contexts/JobContext';
 
 
 const JobDetailsResponsive = () => {

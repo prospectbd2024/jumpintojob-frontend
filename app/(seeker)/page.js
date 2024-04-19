@@ -1,6 +1,6 @@
 "use client"
 import Home from "@/Home/Home/Home.jsx"
-import { useUserContext } from "@/UserContext/UserContext"; 
+import { useUserContext } from "@/Contexts/UserContext"; 
 import { useRouter ,useSearchParams} from "next/navigation";
 import { useEffect, useState } from "react";
 export default function HomeContainer() {

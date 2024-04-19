@@ -2,8 +2,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './AllJobs.css'
 
-import { useUserContext } from '../../UserContext/UserContext';
-import { useJobContext } from '@/jobContext/JobContext';
+import { useUserContext } from '../../Contexts/UserContext';
+import { useJobContext } from '@/Contexts/JobContext';
 import DefaultJobDetails from './DefaultJobDetails';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';

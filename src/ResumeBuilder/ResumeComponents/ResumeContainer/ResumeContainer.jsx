@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import ResumeSteps from '../ResumeSteps/ResumeSteps';
 import ResumeTemplates from '../ResumeTemplates/ResumeTemplates';
-import { useUserContext } from '../../../UserContext/UserContext';
+import { useUserContext } from '../../../Contexts/UserContext';
 import ResumeHeading from '../ResumeHeading/ResumeHeading';
 import ResumeEducation from '../ResumeEducation/ResumeEducation';
 import ResumePreview from '../ResumePreview/ResumePreview';
 import ResumeExperiences from '../ResumeExperiences/ResumeExperiences';
 import ResumeSkills from '../ResumeSkills/ResumeSkills';
 import ResumeFinalize from '../ResumeFinalize/ResumeFinalize';
-import SkillContextProvider from '@/UserContext/SkillContext';
+import SkillContextProvider from '@/Contexts/SkillContext';
 
 const ResumeContainer = () => {
     const { currentStep, setCurrentStep, resumeData, setResumeData } = useUserContext();

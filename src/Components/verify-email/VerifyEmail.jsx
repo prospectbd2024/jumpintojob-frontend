@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/UserContext/UserContext';
+import { useUserContext } from '@/Contexts/UserContext';
 
 const VerifyEmail = ({redirect}) => {
   const router = useRouter();

@@ -1,7 +1,7 @@
 
 import Header from "@/Layout/Header/Header"
 import Footer from "@/Layout/Footer/Footer"
-import { UserProvider } from "@/UserContext/UserContext"
+import { UserProvider } from "@/Contexts/UserContext"
 
 export const metadata = {
   title: 'Jump Into Job',

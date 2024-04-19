@@ -10,7 +10,7 @@ import {
 
 from "react-icons/hi";
 import Link from "next/link";
-import { useUserContext } from "../../UserContext/UserContext";
+import { useUserContext } from "../../Contexts/UserContext";
 import Swal from "sweetalert2";
 import { usePathname, useRouter,useSearchParams } from "next/navigation";
 import {signIn} from 'next-auth/react'
