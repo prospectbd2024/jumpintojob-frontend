@@ -1,5 +1,5 @@
 "use client";
-import { SkillContext } from "@/UserContext/SkillContext";
+import { SkillContext } from "@/Contexts/SkillContext";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import SkillListView from "./SkillListView";
 

@@ -7,7 +7,7 @@ import { HiBookmark, HiBriefcase, HiCog, HiMenu, HiOutlineUser, HiOutlineUserAdd
 import { TbBell, TbLogout, TbSend, TbUserCircle } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { usePathname, useRouter } from 'next/navigation';
-import { UserContext } from '@/UserContext/UserContext';
+import { UserContext } from '@/Contexts/UserContext';
 import { signOut } from 'next-auth/react';
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
     const [userLoggedout, setUserLoggedout] = useState(false);
     const [userProfileClicked, setUserProfileClicked] = useState(false);
 
-    console.log(userProfileClicked);
+    // console.log(userProfileClicked);
     const [isClient, setClient] = useState(false);
 
     useEffect(() => {

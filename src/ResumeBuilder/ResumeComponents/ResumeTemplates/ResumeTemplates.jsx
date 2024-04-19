@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import './ResumetemplatesCSS.css'
-import { useUserContext } from '../../../UserContext/UserContext';
+import { useUserContext } from '../../../Contexts/UserContext';
 import 'bear-react-carousel/dist/index.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";

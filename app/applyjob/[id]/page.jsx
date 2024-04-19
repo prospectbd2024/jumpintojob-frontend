@@ -1,6 +1,6 @@
 "use client"
 import ApplyJob from '@/Components/ApplyJob/ApplyJob'
-import { useUserContext } from '@/UserContext/UserContext'
+import { useUserContext } from '@/Contexts/UserContext'
 import React from 'react'
 
 function page() {

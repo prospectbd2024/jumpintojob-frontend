@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useUserContext } from '../../../UserContext/UserContext';
+import { useUserContext } from '../../../Contexts/UserContext';
 import AddLanguages from './AddLanguages';
 import './ResumeFinalize.css';
 import ResumeOthers from './ResumeOthers';

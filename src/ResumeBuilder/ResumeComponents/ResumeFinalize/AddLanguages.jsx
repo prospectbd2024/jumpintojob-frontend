@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { HiPencil, HiPlus, HiX } from "react-icons/hi";
 import { useState } from "react";
-import { useUserContext } from "../../../UserContext/UserContext";
+import { useUserContext } from "../../../Contexts/UserContext";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import ShowSkillList from "../ResumeSkills/SkillsList";

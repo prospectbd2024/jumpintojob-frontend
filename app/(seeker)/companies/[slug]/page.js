@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link';
-import { useUserContext } from '@/UserContext/UserContext';
+import { useUserContext } from '@/Contexts/UserContext';
 import CompanyDetails from '@/Components/Companies/CompanyDetails';
 import MoreJobButton from '@/Components/AllJobs/MoreJobButton';
 import JobListView from '@/Components/AllJobs/JobListView';
@@ -49,7 +49,7 @@ function Page() {
                 let jobs = data.data;
                 setAllJobs(jobs);
                 setJob(jobs.length>0?jobs[0]:{})
-                console.log(jobs.length>0?jobs[0]:{});
+                // console.log(jobs.length>0?jobs[0]:{});
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

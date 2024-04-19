@@ -2,7 +2,7 @@
 
 import React from "react";
 import JobDetailsResponsive from "@/Components/JobDetailsResponsive/JobDetailsResponsive";
-import { useUserContext } from "@/UserContext/UserContext";
+import { useUserContext } from "@/Contexts/UserContext";
 import { useParams } from "next/navigation";
 
 

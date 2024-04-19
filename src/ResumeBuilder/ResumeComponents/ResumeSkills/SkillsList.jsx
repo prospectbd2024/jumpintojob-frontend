@@ -1,5 +1,5 @@
-import { SkillContext } from '@/UserContext/SkillContext';
-import { UserContext } from '@/UserContext/UserContext'
+import { SkillContext } from '@/Contexts/SkillContext';
+import { UserContext } from '@/Contexts/UserContext'
 import React, { useContext } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './ResumeSteps.css'
-import { useUserContext } from '../../../UserContext/UserContext';
+import { useUserContext } from '../../../Contexts/UserContext';
 
 const ResumeSteps = () => {
     const {currentStep, setCurrentStep} = useUserContext();

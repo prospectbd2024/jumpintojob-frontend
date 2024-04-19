@@ -3,9 +3,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import CategoryList from "./CategoryList";
 import CompanyListView from "./CompanyListView";
 import { useCompanyContext } from "@/Contexts/CompanyContext";
+import { useCategoryContext } from "@/Contexts/CategoryContext";
 
 const Companies = () => {
-  const {getCompanies,companies,categories} = useCompanyContext()
+  const {getCompanies,companies} = useCompanyContext();
+  const {jobCategories} = useCategoryContext();
 
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
 
@@ -27,7 +29,7 @@ const Companies = () => {
       </div>
       <div className="companies-content container">
         <div className="companies-tabs">
-        <CategoryList props={{handleCategoryChange, selectedCategory, categories}} />
+        <CategoryList props={{handleCategoryChange, selectedCategory, categories: jobCategories}} />
         <CompanyListView props={{companies}} />
 
 

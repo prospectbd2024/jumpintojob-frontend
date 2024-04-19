@@ -3,7 +3,7 @@ import React,{ useContext } from 'react';
 import { HiArrowSmRight } from "react-icons/hi";
 import  Link  from 'next/link';
 
-import { UserContext } from '@/UserContext/UserContext';
+import { UserContext } from '@/Contexts/UserContext';
 
 
 const ForEmployersWhyUs = () => {

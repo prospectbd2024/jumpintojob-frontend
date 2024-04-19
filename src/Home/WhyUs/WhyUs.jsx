@@ -1,7 +1,7 @@
 import React from 'react';
 import './WhyUs.css'
 import  Link  from 'next/link';
-import { useUserContext } from '../../UserContext/UserContext';
+import { useUserContext } from '../../Contexts/UserContext';
 import { HiArrowSmRight } from "react-icons/hi";
 
 const WhyUs = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserContext } from '../../../UserContext/UserContext';
+import { useUserContext } from '../../../Contexts/UserContext';
 import './ResumeHeading.css'
 import ImageUpload from './ImageUpload';
 import PrevNextButton from '@/ResumeBuilder/Layout/Button/PrevNextButton';

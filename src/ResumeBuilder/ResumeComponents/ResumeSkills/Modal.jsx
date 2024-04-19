@@ -4,7 +4,7 @@ import { HiX } from "react-icons/hi";
 import SuggestedSkills from "./SuggestedSkills";
 import SkillListView from "./SkillListView";
 import SkillRating from "./SkillRating";
-import { SkillContext } from "@/UserContext/SkillContext";
+import { SkillContext } from "@/Contexts/SkillContext";
 import SearchSkills from "./SearchSkills";
 
 function Modal({

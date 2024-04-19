@@ -1,4 +1,4 @@
-import { SkillContext } from '@/UserContext/SkillContext';
+import { SkillContext } from '@/Contexts/SkillContext';
 import React, { useCallback, useContext } from 'react'
 import { HiPlus } from 'react-icons/hi'
 

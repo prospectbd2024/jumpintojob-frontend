@@ -1,29 +1,26 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import './ForEmployersPostJob.css'
-import { useUserContext } from '@/UserContext/UserContext';
+import { useUserContext } from '@/Contexts/UserContext';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import RichEditor from './RichEditor';
 import Link from 'next/link';
 import PostJobReview from './PostJobReview';
+import { useCategoryContext } from '@/Contexts/CategoryContext';
 
 
 const ForEmployersPostJob = () => {
     const [showReview, setShowReview] = useState(false);
     const {userData} = useUserContext();
-    console.log(userData.data.user.email);
     const [jobData, setJobData] = useState({});
-    const [jobCategories, setJobCategories] = useState([]);
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`)
-        .then(res => res.json())
-        .then(data => {
-            setJobCategories(data.data);
-        })
-    },[])
+
+    const { jobCategories} = useCategoryContext();
+
+
+
     const handlePosting = () => {
         setShowReview(true);
-        setJobData({ ...jobData, 'email': userData.data.user.email });
+        setJobData({ ...jobData, 'email': userData.data.user.email});
         
     }
     return (

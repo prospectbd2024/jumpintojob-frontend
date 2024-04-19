@@ -5,11 +5,12 @@ import Link from 'next/link';
 import './FeaturedJobs.css'
 import { FaUpRightFromSquare } from 'react-icons/fa6';
 import { useMediaQuery } from '@uidotdev/usehooks';
-import { useUserContext } from '../../UserContext/UserContext';
+import { useUserContext } from '../../Contexts/UserContext';
+import { useJobContext } from '@/Contexts/JobContext';
+import { useCompanyContext } from '@/Contexts/CompanyContext';
 const FeaturedJobs = () => {
     const { setClickedFeaturedJob } = useUserContext();
-    const [allJobs, setAllJobs] = useState([]);
-    const [featuredJobs, setFeaturedJobs] = useState([])
+    const {allJobs, setAllJobs} = useJobContext();
 
 
     let isClient = false;
@@ -17,25 +18,8 @@ const FeaturedJobs = () => {
         isClient = true
     }, 1000);
 
-
-
     const isMobileScreen = isClient ? useMediaQuery("only screen and (max-width : 1368px)") : false;
 
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
-            .then(res => res.json())
-            .then(data => {
-                setAllJobs(data.data);
-                console.log("Hello World");
-                const filteredFeaturedJobs = allJobs.filter(job => job.job_vacancy >= 5);
-                const sortedFeaturedJobs = filteredFeaturedJobs.sort((a, b) => b.job_vacancy - a.job_vacancy);
-                setFeaturedJobs(sortedFeaturedJobs);
-            })
-            .catch((error) => {
-                console.log("Error fetching data:", error);
-            });
-
-    }, [featuredJobs])
 
     const handleClickedFeaturedJob = (e) => {
         setClickedFeaturedJob(e);
@@ -48,11 +32,11 @@ const FeaturedJobs = () => {
                 <div className="featured-jobs-header section-header">
                     <h2>Featured jobs at Jump Into Job</h2>
                 </div>
-                {featuredJobs.length > 0 ?
+                {allJobs.length > 0 ?
                     <div>
                         <div className="featured-jobs-items all-jobs-container">
                             {
-                                featuredJobs.slice(0, 6).map(job =>
+                                allJobs.slice(0, 6).map(job =>
                                     <div className={`featured-job-item single-job`} key={job.id}>
                                         <div className="single-job-header">
                                             <h2>{job.job_title}</h2>

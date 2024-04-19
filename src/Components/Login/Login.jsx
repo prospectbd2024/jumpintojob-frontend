@@ -10,7 +10,7 @@ import {
 
 from "react-icons/hi";
 import Link from "next/link";
-import { useUserContext } from "../../UserContext/UserContext";
+import { useUserContext } from "../../Contexts/UserContext";
 import Swal from "sweetalert2";
 import { usePathname, useRouter,useSearchParams } from "next/navigation";
 import {signIn} from 'next-auth/react'
@@ -51,7 +51,7 @@ const Login = () => {
       password: userPassword,
       remember_me: rememberUser,
     };
-    console.log(userLoginData);
+    // console.log(userLoginData);
     const loginData = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/login`,
       {
