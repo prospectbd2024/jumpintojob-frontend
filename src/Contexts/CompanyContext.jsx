@@ -10,7 +10,6 @@ export const useCompanyContext = ()=> useContext(companyContext);
 function CompanyContext({children}) {
 
     const [companies, setCompanies] = useState([]);
-    const [categories, setCategories] = useState([]);
     const [cachedCategoryCompanies,addCachedCategoryCompanes] = useState([]);
 
     const handleCachedCompanies = useCallback((category_id)=>{
@@ -51,15 +50,10 @@ function CompanyContext({children}) {
     },[])
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`)
-          .then((res) => res.json())
-          .then((data) => {
-            setCategories(data.data);
-          });
         getCompanies('all');
       }, []);
   return (
-    <companyContext.Provider value={ {getCompanies,companies, setCompanies,categories, setCategories}}>
+    <companyContext.Provider value={ {getCompanies,companies, setCompanies}}>
         {children}
     </companyContext.Provider>
   )

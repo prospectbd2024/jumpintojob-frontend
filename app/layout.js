@@ -30,6 +30,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "app/api/auth/[...nextauth]/route"
 import Provider from '@/UserContext/SessionProvider'
 import CompanyContext from '@/Contexts/CompanyContext'
+import CategoryContext from '@/Contexts/CategoryContext'
 
 async function  layout({children}) {
 
@@ -40,9 +41,12 @@ async function  layout({children}) {
       <UserProvider>
       <JobContext>
       <CompanyContext>
+      <CategoryContext>
+        
       <Provider session={session}> 
             {children}
       </Provider>
+      </CategoryContext>
       </CompanyContext>
       </JobContext>
       </UserProvider>
