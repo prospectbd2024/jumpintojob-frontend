@@ -22,7 +22,7 @@ const ForEmployersLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         const userLoginData = { 'email': userEmail, 'password': userPassword, 'remember_me': rememberUser };
-        console.log(userLoginData)
+        // console.log(userLoginData)
         const loginData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/login`, {
             method: 'POST',
             headers: {

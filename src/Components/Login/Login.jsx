@@ -51,7 +51,7 @@ const Login = () => {
       password: userPassword,
       remember_me: rememberUser,
     };
-    console.log(userLoginData);
+    // console.log(userLoginData);
     const loginData = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/login`,
       {
