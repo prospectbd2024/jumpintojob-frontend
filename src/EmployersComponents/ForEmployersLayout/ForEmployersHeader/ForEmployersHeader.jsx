@@ -83,8 +83,8 @@ const ForEmployersHeader = () => {
                                                     <p>{userData?.data?.user.email}</p>
                                                 </div>
                                                 <div className="loggedin-user-options">
-                                                    <Link href="employerprofile" onClick={() => setUserProfileClicked(false)}><FaUserTie></FaUserTie>Company Profile</Link>
-                                                    <Link href="managejobs/dashboard" onClick={() => setUserProfileClicked(false)}><HiBriefcase></HiBriefcase>Manage Jobs</Link>
+                                                    <Link href="/foremployers/employerprofile" onClick={() => setUserProfileClicked(false)}><FaUserTie></FaUserTie>Employer Profile</Link>
+                                                    <Link href="/foremployers/managejobs/dashboard" onClick={() => setUserProfileClicked(false)}><HiBriefcase></HiBriefcase>Manage Jobs</Link>
                                                     <a onClick={() => setUserProfileClicked(false)} style={{"cursor" : "pointer"}} ><HiBriefcase></HiBriefcase>Subscriptions</a>
                                                     <a onClick={() => setUserProfileClicked(false)} style={{"cursor" : "pointer"}}><HiCog></HiCog> Settings</a>
                                                     <a onClick={() => setUserProfileClicked(false)} style={{"cursor" : "pointer"}}><HiQuestionMarkCircle></HiQuestionMarkCircle> Help Center</a>
