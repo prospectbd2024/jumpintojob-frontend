@@ -107,7 +107,7 @@ const MyJobsDashboard = () => {
                                         </div>
                                         <h3>{job.company_name}</h3>
                                         <p>{job.address}</p>
-                                        <p>{job.job_description.slice(0, 100)}...</p>
+                                        <p>{job.description.slice(0, 100)}...</p>
                                         <div className="single-job-bottom">
                                             <p className='single-job-salary'>{job.salary} <span>(Estimated)</span></p>
                                             <p className='posting-date'>22d</p>
