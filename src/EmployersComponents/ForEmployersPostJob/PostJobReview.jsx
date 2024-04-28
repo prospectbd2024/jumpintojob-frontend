@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { FaPencilAlt } from "react-icons/fa";
 import './ForEmployersPostJob.css'
@@ -50,6 +51,7 @@ const PostJobReview = ({ setShowReview, jobData }) => {
         }
     };
     
+    
     return (
         <div className='postjob-review'>
             <div className="header-banner">
@@ -62,69 +64,90 @@ const PostJobReview = ({ setShowReview, jobData }) => {
                         <h4>Job title</h4>
                         <div>
                             <p>{jobData.title}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
-                    <div className="review-item">
+                    {/* <div className="review-item">
                         <h4>Company</h4>
                         <div>
-                            <p>Unitech Holdings</p>
+                            <p>{jobData.company_name}</p>
                             <FaPencilAlt />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="review-item">
                         <h4>Job category</h4>
                         <div>
                             <p>{jobData.category_name}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Vacancy</h4>
                         <div>
                             <p>{jobData.vacancies}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Location type</h4>
                         <div>
                             <p>{jobData.location_type}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Address</h4>
                         <div>
                             <p>{jobData.location}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Job type</h4>
                         <div>
                             <p>{jobData.employment_type}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Estimatd salary</h4>
                         <div>
                             <p>{jobData.salary}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item">
                         <h4>Deadline</h4>
                         <div>
                             <p>{jobData.deadline}</p>
-                            <FaPencilAlt />
+                            {/* <FaPencilAlt /> */}
                         </div>
                     </div>
-                    <div className="review-item details">
-                        <h4>Details description</h4>
-                        <div className='details-description'>
-                            <p>{jobData.description}</p>
+                    <div className="review-item details" >
+                        <h4 style={{paddingTop: '10px'}}>Details description</h4>
+                        <div className='details-descriptions' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                            <div>{jobData.description}</div>
+                            {/* <FaPencilAlt /> */}
+                        </div>
+                    </div>
+                    <div className="review-item details" style={{marginBottom : '10px'}}>
+                        <h4 style={{paddingTop: '10px'}}>Details Responsibilites</h4>
+                        <div className='details-responsibilities' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                            <div>{jobData.responsibilities}</div>
+                            {/* <FaPencilAlt /> */}
+                        </div>
+                    </div>
+                    <div className="review-item details" style={{marginBottom : '10px'}}>
+                        <h4 style={{paddingTop: '10px'}}>Educational Requirements</h4>
+                        <div className='details-educational_requirements' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                            <div>{jobData.educational_requirements}</div>
+                            {/* <FaPencilAlt /> */}
+                        </div>
+                    </div>
+                    <div className="review-item details" style={{marginBottom : '10px'}}>
+                        <h4 style={{paddingTop: '10px'}}>Educational Requirements</h4>
+                        <div className='details-experience' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                            <div>{jobData.experience}</div>
                             {/* <FaPencilAlt /> */}
                         </div>
                     </div>
