@@ -52,7 +52,7 @@ const AboutMe = () => {
     }
 
     useEffect(()=>{
-        // setAvatar(profile?.avatar)
+
         setCity(profile?.city)
         setAvatar(profile?.avatar)
         setCountry(profile?.country)
