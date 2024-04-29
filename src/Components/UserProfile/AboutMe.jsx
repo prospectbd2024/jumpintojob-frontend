@@ -6,21 +6,21 @@ import UserImage from "@/assets/default-user.jpg"
 const AboutMe = () => {
     const { userData,profile,setProfile } = useUserContext();
     const [avatar, setAvatar] = useState(null);
-    const [first_name, setFirstName] = useState('')
-    const [last_name, setLastName] = useState('')
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState(''); 
-    const [state, setState] = useState(''); 
-    const [street, setStreet] = useState(''); 
-    const [postal_code, setPostalCode] = useState('');  
+    const [selectedAvatar,selectAvatar] =useState(null);
+    const [first_name, setFirstName] = useState(' ')
+    const [last_name, setLastName] = useState(' ')
+    const [country, setCountry] = useState(' ');
+    const [city, setCity] = useState(' '); 
+    const [state, setState] = useState(' '); 
+    const [street, setStreet] = useState(' '); 
+    const [postal_code, setPostalCode] = useState(' ');  
     const [message,setMessage] = useState({type: 'info', message : null})
-
 
 
     const handleUpdateUserProfile = async (event) => {
         event.preventDefault()
         const updateUserProfile =new FormData();
-        updateUserProfile.append('avatar', avatar)
+        updateUserProfile.append('avatar', selectedAvatar)
         updateUserProfile.append('country', country);
         updateUserProfile.append('city', city);
         updateUserProfile.append('state', state);
@@ -54,6 +54,7 @@ const AboutMe = () => {
     useEffect(()=>{
         // setAvatar(profile?.avatar)
         setCity(profile?.city)
+        setAvatar(profile?.avatar)
         setCountry(profile?.country)
         setFirstName(profile?.first_name)
         setLastName(profile?.last_name)
@@ -63,6 +64,12 @@ const AboutMe = () => {
 
 
     },[profile])
+
+    useEffect(()=>{
+        if (selectedAvatar){
+            setAvatar(URL.createObjectURL(selectedAvatar))
+        }
+    },[selectedAvatar])
     const messageStyle = {
         color: 'green',
         backgroundColor: 'lightgreen',
@@ -77,7 +84,7 @@ const AboutMe = () => {
 
 
   const handleFileChange = (event) => {
-    setAvatar(event.target.files[0]);
+    selectAvatar(event.target.files[0]);
   };
 
     return (
@@ -91,7 +98,7 @@ const AboutMe = () => {
                     <div className='about-me-personal-header'>
                     <div style={{ position: 'relative', display: 'inline-block' }}>
       <img
-        src={avatar ? URL.createObjectURL(avatar) : UserImage.src}
+        src={avatar ?  avatar : UserImage.src}
         alt="Avatar"
         style={{ width: '150px', height: '150px', borderRadius: '50%' }}
       />
@@ -129,34 +136,34 @@ const AboutMe = () => {
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="first_name">First Name</label>
-                        <input type="text" placeholder='Your First Name' id="first_name" name="firstName" value={first_name || ''} readOnly />
+                        <input type="text" placeholder='Your First Name' id="first_name" name="firstName" value={first_name || ' '} readOnly />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="last_name">Last Name</label>
-                        <input type="text" placeholder='Your Last Name' id="last_name" name="lastName" value={last_name || ''} readOnly />
+                        <input type="text" placeholder='Your Last Name' id="last_name" name="lastName" value={last_name || ' '} readOnly />
                     </div>
                 </div>
                 <div className="about-me-address">
                     <h3>Location</h3>
                     <div className='about-me-inputs'>
                         <label htmlFor="countryid">Country</label>
-                        <input type="text" placeholder='Your Country' id="countryid" name="country" value={country || ''} onChange={(e) => setCountry(e.target.value)} />
+                        <input type="text" placeholder='Your Country' id="countryid" name="country" value={country || ' '} onChange={(e) => setCountry(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="streetid">Stress Address</label>
-                        <input type="text" placeholder='Your Street Address' id="streetid" value={ street || ''} name="street" onChange={(e) => setStreet(e.target.value)} />
+                        <input type="text" placeholder='Your Street Address' id="streetid" value={ street || ' '} name="street" onChange={(e) => setStreet(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="cityid">City</label>
-                        <input type="text" placeholder='Your City' id="cityid" name="city" value={ city || ''} onChange={(e) => setCity(e.target.value)} />
+                        <input type="text" placeholder='Your City' id="cityid" name="city" value={ city || ' '} onChange={(e) => setCity(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="stateid">State</label>
-                        <input type="text" placeholder='Your State' id="stateid" name="state" value={ state || ''} onChange={(e) => setState(e.target.value)} />
+                        <input type="text" placeholder='Your State' id="stateid" name="state" value={ state || ' '} onChange={(e) => setState(e.target.value)} />
                     </div>
                     <div className='about-me-inputs'>
                         <label htmlFor="postal">Postal Code</label>
-                        <input type="text" placeholder='Your Postal Code' id="postal" value={ postal_code || ''} name="postal_code" onChange={(e) => setPostalCode(e.target.value)} />
+                        <input type="text" placeholder='Your Postal Code' id="postal" value={ postal_code || ' '} name="postal_code" onChange={(e) => setPostalCode(e.target.value)} />
                     </div>
                     <input type="button" value="save"   className='save-user-info-btn' onClick={handleUpdateUserProfile} />
                 </div>
