@@ -44,7 +44,7 @@ export const UserProvider = ({ children }) => {
         summary: "",
         educations: [  {
                 id : 0,
-                nstitution_name: "",
+                institution_name: "",
                 institution_location:"",
                 degree: "",
                 field_study: "",
