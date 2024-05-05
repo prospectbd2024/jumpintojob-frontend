@@ -214,6 +214,7 @@
     cursor: pointer;
     transition: .3s;
 }
+
 .qualifications-content .education-content .qualification-item button:hover{
     background-color: #3498db57;
     color: #1c5e8a;
@@ -614,4 +615,33 @@ border-radius: 3px;
     padding: 5px 10px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+.qualification-item-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 28px;
+    background-color: transparent;
+    line-height: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+.qualification-item-button:hover{
+    background-color: #3498db57;
+    color: #1c5e8a;
+}
+.hix{
+    height: 22px;
+    width: 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #343434;
+    padding: 3px;
+    transition: .1s;
+}
+.hix:hover{
+    background: #c823331e;
+    color: #C82333;
 }
