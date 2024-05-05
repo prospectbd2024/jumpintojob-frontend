@@ -1,0 +1,62 @@
+.modal-container {
+  background: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 3px 20px rgba(53, 53, 53, 0.15);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: auto;
+  z-index: 9999;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-body {
+  /* Add any specific styles for the modal body if needed */
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(128, 128, 128, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-top: 25px;
+  margin-top: 20px;
+}
+
+.modal-footer button {
+  background: transparent;
+  color: #c82333;
+  border: 1px solid #c82333;
+  width: 90px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-footer button:hover {
+  background-color: #c823338c;
+  color: #1c5e8a;
+}
