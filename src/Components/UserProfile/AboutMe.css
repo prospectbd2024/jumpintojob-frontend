@@ -1,69 +1,97 @@
+/* About Me CSS */
 .user-profile-about-me {
-    margin: 20px auto;
-    max-width: 600px;
-  }
-  
-  .about-me-personal {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .about-me-personal-header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .about-me-personal-header img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
-  
-  .about-me-inputs {
-    margin-bottom: 15px;
-  }
-  
-  .about-me-inputs label {
-    font-weight: bold;
-  }
-  
-  .save-user-info-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .save-user-info-btn:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Style for file upload */
-  .upload-btn-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .upload-btn-container input[type="file"] {
-    display: none;
-  }
-  
-  .upload-btn {
-    position: absolute;
-    bottom: 15px;
-    right: 40px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .upload-btn label {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-about-me h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.user-profile-about-me form {
+  display: grid;
+  gap: 20px;
+}
+
+.about-me-personal-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.about-me-personal-header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.about-me-personal-header .about-me-personal-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.about-me-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-me-inputs label {
+  color: #061421;
+}
+
+.about-me-inputs input {
+  height: 45px;
+  padding: 0 10px;
+  font-size: 17px;
+  border: 1px solid #80808057;
+  border-radius: 5px;
+}
+
+.about-me-address {
+  display: grid;
+  gap: 20px;
+}
+
+.about-me-address h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.save-user-info-btn {
+  background: #3498DB;
+  color: #fff;
+  width: 180px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.save-user-info-btn:hover {
+  background: #2980B9;
+}
+
+/* Added styles for first name and last name */
+.first-name,
+.last-name {
+
+  margin-bottom: 10px; /* Adjust gap */
+}
+
+.swal-title {
+  color: #3498db;
+}
+
+.swal-text {
+  color: #3498db;
+}
+.swal-confirm-button{
+  color: #3498db;
+}
