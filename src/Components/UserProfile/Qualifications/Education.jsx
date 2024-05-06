@@ -1,7 +1,6 @@
-"use client";
-import { HiAcademicCap, HiX } from "react-icons/hi";
-import { FaPencilAlt, FaAtlas } from "react-icons/fa";
 import React from "react";
+import { HiAcademicCap, HiX, HiMinus } from "react-icons/hi";
+import { FaPencilAlt } from "react-icons/fa";
 import EducationFields from "@/ResumeBuilder/ResumeComponents/ResumeEducation/EducationFields";
 import "./Education.css"; // Import CSS file
 
@@ -37,6 +36,9 @@ const Education = ({ props }) => {
           </div>
           {educations.map((education) => (
             <div className="education-container" key={education.institution_name}>
+              <div className="top-right-icons">
+                <HiMinus className="minus-icon" />
+              </div>
               <p className="institution-name">{education.institution_name}</p>
               <p>{education.institution_location}</p>
               <p><span className="label">Degree:</span> {education.degree}</p>
@@ -44,7 +46,7 @@ const Education = ({ props }) => {
               <p><span className="label">Start Year:</span> {education.education_starting_year}</p>
               <p><span className="label">Graduation Year:</span> {education.education_graduation_year}</p>
               <p><span className="label">Achievements:</span> {education.education_achievements}</p>
-              <div>
+              <div className="bottom-right-icons">
                 <FaPencilAlt
                   className="edit-icon"
                   onClick={() => {
