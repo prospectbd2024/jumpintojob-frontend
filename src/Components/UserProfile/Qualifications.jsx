@@ -47,11 +47,11 @@ const Qualifications = () => {
     
     useEffect(()=>{
         setSkills([
-            { "id": 1, "skill": "Javascript" },
-            { "id": 2, "skill": "ReactJS" },
-            { "id": 3, "skill": "NodeJS" },
-            { "id": 4, "skill": "ExpressJS" },
-            { "id": 5, "skill": "MongoDB" },
+            { "id": 1, "name": "Javascript" },
+            { "id": 2, "name": "ReactJS" },
+            { "id": 3, "name": "NodeJS" },
+            { "id": 4, "name": "ExpressJS" },
+            { "id": 5, "name": "MongoDB" },
         ]);
     },[])
 
@@ -74,8 +74,9 @@ const Qualifications = () => {
 
 
                 {/* Skills */}
-           
+                <SkillContextProvider >
                 <Skill props={{skills,setSkills}}/>
+                </SkillContextProvider>
       
           
 
@@ -83,6 +84,11 @@ const Qualifications = () => {
 
                 <Language props={{languages,setLanguages}}/>
 
+                {/* Experience*/}
+                <div>Experiences</div>
+
+                {/* Hobbies  */}
+                <div>Hobbies</div>
             </div>
         </div>
     );
