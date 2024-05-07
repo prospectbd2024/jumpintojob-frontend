@@ -39,6 +39,8 @@ const showModal =useCallback(( title )=>{
 
 
 const closeModal=useCallback (()=>{
+  setEducation({})
+  setEducationErrors({})
   manageModal(
     {
      display : 'none'
@@ -50,57 +52,43 @@ const closeModal=useCallback (()=>{
 const saveChanges =useCallback(()=>{
   validation()
   
-  console.log(education,educationErrors,validation());
+  
+  if (validation()){
+    setEducations((prev)=>{return [
+      ...prev,education
+    ]})
+    closeModal();
+  }
+  else{
+    console.log(educationErrors);
+  }
   
 },[education,educationErrors])
 
 const validation = useCallback(()=>{
-  if(!education?.institution_name){
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,institution_name : 1
-      }
-    })
-    return false
-  }
-  else{
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,institution_name : 0
-      }
-    })
-  }
-  if(!education?.degree){
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,degree : 1
-      }
-    })
-    return false
-  }else{
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,degree : 0
-      }
-    })
-    
-  }
-  if(!education?.field_study){
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,field_study : 1
-      }
-    })
-    return false
-  }
-  else{
-    setEducationErrors((prev)=>{
-      return {
-        ...prev,field_study : 0
-      }
-    })
-  }
-  return true
+
+  const required = ['institution_name','degree','field_study'];
+  let flag = true;
+
+  required.forEach(element => {
+    if(!education[element]){
+      setEducationErrors((prev)=>{
+        return {
+          ...prev,[element] : 1
+        }
+      })
+       flag= false;
+    }
+    else{
+      setEducationErrors((prev)=>{
+        return {
+          ...prev,[element] : 0
+        }
+      })
+    }
+  });
+
+  return flag;
 },[education,educationErrors])
 
 
@@ -122,7 +110,11 @@ const validation = useCallback(()=>{
               <p><span className="label">Degree:</span> {education.degree}</p>
               <p><span className="label">Field of Study:</span> {education.field_study}</p>
               <p><span className="label">Start Year:</span> {education.education_starting_year}</p>
+              {
+                education.education_graduation_year &&
+
               <p><span className="label">Graduation Year:</span> {education.education_graduation_year}</p>
+              }
               <p><span className="label">Achievements:</span> {education.education_achievements}</p>
               <div className="bottom-right-icons">
                 <FaPencilAlt

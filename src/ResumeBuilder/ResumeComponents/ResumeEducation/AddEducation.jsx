@@ -5,6 +5,8 @@ import './AddEducation.css';
 function AddEducation({ props }) {
 
     const { education, setEducation ,saveChanges,educationErrors} = props;
+    const [isCurrentlyStudying, setIsCurrentlyStudying] = useState(false);
+
     const handleChange = useCallback ((key, value) => {
         setEducation(prevState => ({
             ...prevState,
@@ -95,15 +97,18 @@ function AddEducation({ props }) {
                         id="end"
                         value={education?.education_graduation_year || ""}
                         onChange={(e) => handleChange("education_graduation_year", e.target.value)}
+                        disabled={isCurrentlyStudying} // Add disabled attribute based on isCurrentlyStudying state
                     />
                     <div className="add-education-currently-here">
                         <input
                             type="checkbox"
                             id="currently_here"
+                            onChange={(e) => setIsCurrentlyStudying(e.target.checked) &&  handleChange("education_graduation_year", 'present')} // Update isCurrentlyStudying state based on checkbox
                         />
                         <label htmlFor="currently_here">I currently study here</label>
                     </div>
                 </div>
+
             </div>
             <div className="add-education-textarea">
                 <label htmlFor="achivements">NOTABLE ACHIEVEMENTS</label>
@@ -114,7 +119,7 @@ function AddEducation({ props }) {
                     rows="10"
                     placeholder="Write your career summary"
                     value={education?.education_achivements || ""}
-                    onChange={(e) => handleChange("education_achivements", e.target.value)}
+                    onChange={(e) => handleChange("education_achievements", e.target.value)}
                 ></textarea>
             </div>
         </>
