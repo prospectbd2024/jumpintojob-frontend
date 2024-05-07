@@ -4,8 +4,8 @@ import { HiX } from "react-icons/hi";
 import "./ModalBox.css"; // Import CSS file
 import { useModalContext } from "@/Contexts/ModalContext";
 
-function ModalBox({children,props,onSave,onClose}) {
-  const {title,display} = props;
+function ModalBox({children,props }) {
+  const {title,display,onSave,onClose} = props;
 
 
   return (

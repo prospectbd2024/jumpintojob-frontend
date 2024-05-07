@@ -12,7 +12,7 @@ const Education = ({ props }) => {
 
   const { educations,setEducations } = props;
   const [education,setEducation] = useState({id : false});
-  const [modal,manageModal] = useState({display :  'none' ,title : 'Loading' , onSave:()=>{} ,onClose: ()=>{} });
+  const [modal,manageModal] = useState({display :  'none' ,title : 'Loading' , state : 'new' });
   const [educationErrors, setEducationErrors] = useState({});
 
   const removeEduction = useCallback(
@@ -28,10 +28,13 @@ const Education = ({ props }) => {
   )
 
 
-const showModal =useCallback(( title )=>{
+const showModal =useCallback(( title ,state,index)=>{
+  if(state=='update'){
+    setEducation(educations[index])
+  }
   manageModal(prev => 
     ({
-      title : title ,display : 'block'
+      title : title ,display : 'block',state : state , index : index
     })
   )
 },[education])
@@ -51,19 +54,34 @@ const closeModal=useCallback (()=>{
 
 const saveChanges =useCallback(()=>{
   validation()
-  
-  
   if (validation()){
-    setEducations((prev)=>{return [
-      ...prev,education
-    ]})
+    if(modal.state=='update'){
+      updateEducation(modal.index, education)
+    }
+    else{
+      setEducations((prev)=>{return [
+        ...prev,education
+      ]})
+    }
     closeModal();
   }
   else{
     console.log(educationErrors);
   }
-  
+
 },[education,educationErrors])
+
+const updateEducation= useCallback((index,education)=>{
+
+  let temp = educations.map((element,i)=>{
+    if(i==index){
+      return education;
+    }
+    return element
+  })
+  setEducations(temp)
+
+},[educations])
 
 const validation = useCallback(()=>{
 
@@ -120,13 +138,7 @@ const validation = useCallback(()=>{
                 <FaPencilAlt
                   className="edit-icon"
                   onClick={() => {
-                    manageModal({
-                      title: "Edit Education",
-                      display: "block",
-                      body: (
-                        <AddEducation props={{education,setEducation }} />
-                      ),
-                    });
+                    showModal('Edit Education','update',index)
                   }}
                 />
               </div>
@@ -137,11 +149,11 @@ const validation = useCallback(()=>{
         <div className='no-educations'>Please add education</div>
       )}
 
-      <div className="add-education" onClick={()=>showModal('Add Education')}>
+      <div className="add-education" onClick={()=>showModal('Add Education','add')}>
         <p className='add-education-text'>Add Education</p>
         <button className="add-button">+</button>
       </div>
-      <ModalBox props={modal} onSave={saveChanges}  onClose={closeModal}>
+      <ModalBox props={{...modal , onSave: saveChanges, onClose : closeModal }}  >
             <AddEducation props={{ education, setEducation,saveChanges,educationErrors }} />
       </ModalBox>
 
