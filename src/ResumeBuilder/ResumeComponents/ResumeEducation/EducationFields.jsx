@@ -85,6 +85,7 @@ function EducationFields({ props }) {
   });
 
   return (
+    <>
     <form action="" className="heading-form">
       <div className="heading-form-main">
         <div className="resume-input-field">
@@ -212,6 +213,7 @@ function EducationFields({ props }) {
           value={educationFields?.education_achivements}
         ></textarea>
       </div>
+    </form>
       <SaveDismissButtons
         props={{
           state,
@@ -224,7 +226,7 @@ function EducationFields({ props }) {
           setWarning
         }}
       />
-    </form>
+    </>
   );
 }
 

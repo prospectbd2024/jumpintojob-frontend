@@ -1,87 +1,87 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import Education from './Qualifications/Education';
 import Skill from './Qualifications/Skill';
 import Language from './Qualifications/Language';
 import ModalBox from './Qualifications/ModalBox';
 import SkillContextProvider, { SkillContext } from '@/Contexts/SkillContext';
+import ModalContext from '@/Contexts/ModalContext';
 
 
 const Qualifications = () => {
-    const [educationModalIsOpen, setEducationModalIsOpen] = useState(false);
-    const [skillsModalIsOpen, setSkillsModalIsOpen] = useState(false)
-    const [languageModalIsOpen, setLanguageModalIsOpen] = useState(false)
-    const [modalIsClosed, setModalIsClosed] = useState(false)
-    const [modal, manageModal] = useState({display : 'none', modal : null,title : 'education' })
-    const handleModalIsOpen = (event) => {
-        setEducationModalIsOpen(event);
-        setSkillsModalIsOpen(event);
-        setLanguageModalIsOpen(event);
-    }
-    const handleModalIsClosed = (event) => {
-        setModalIsClosed(event)
 
-    }
 
-    // Skills Select
-    const optionList = [
-        { value: "digital_marketing", label: "Digital Marketing" },
-        { value: "web_development", label: "Web Development" },
-        { value: "javascript", label: "Javascript" },
-        { value: "html", label: "HTML" },
-        { value: "css", label: "CSS" },
-        { value: "react", label: "ReactJS" },
-        { value: "node", label: "NodeJS" },
-        { value: "mongo", label: "MongoDB" },
-        { value: "python", label: "Python" },
-        { value: "graphic", label: "Graphic Design" },
-    ];
+
+    const [educations,setEducations] = useState([]);
+    const [skills, setSkills] = useState([]);
+    const [languages, setLanguages] = useState([]);
+
 
 
     // Education
-    const education = {
-        "degree": "Bachelor Degree",
-        "field": "Computer Science",
-    }
-    console.log(education)
+    useEffect(() => {
+       
+    setEducations([
+        {
+          institution_name: "University of XYZ",
+          institution_location: "City, Country",
+          degree: "Bachelor of Science",
+          field_study: "Computer Science",
+          education_starting_year: "2018",
+          education_graduation_year: "2022",
+          education_achievements: "Dean's List, Outstanding Student Award",
+        },
+        {
+          institution_name: "University of ABC",
+          institution_location: "City, Country",
+          degree: "Bachelor of Science",
+          field_study: "Computer Science",
+          education_starting_year: "2020",
+          education_graduation_year: "2024",
+          education_achievements: "Dean's List, Outstanding Student Award",
+        },
+      ])
 
-    // Skills
-    const skills = [
-        { "id": 1, "skill": "Javascript" },
-        { "id": 2, "skill": "ReactJS" },
-        { "id": 3, "skill": "NodeJS" },
-        { "id": 4, "skill": "ExpressJS" },
-        { "id": 5, "skill": "MongoDB" },
-    ]
+    }, [])
+    
+    useEffect(()=>{
+        setSkills([
+            { "id": 1, "skill": "Javascript" },
+            { "id": 2, "skill": "ReactJS" },
+            { "id": 3, "skill": "NodeJS" },
+            { "id": 4, "skill": "ExpressJS" },
+            { "id": 5, "skill": "MongoDB" },
+        ]);
+    },[])
 
-    //   Languages
-    const languages = [
+    useEffect(() => {
+      setLanguages( [
         { "id": 1, "name": "Bengali", "proficiency": "Native" },
         { "id": 2, "name": "English", "proficiency": "Fluent" },
         { "id": 3, "name": "Spanish", "proficiency": "Beginner" }
-    ]
+    ]);
+    }, [ ])
+    
 
     return (
         <div className='user-profile-qualifications user-profile-about-me'>
             <h2>Qualifications</h2>
             <div className="qualifications-content">
-                {/* Modal  */}
-                <ModalBox props={{title: 'education', body: '' ,modal, manageModal}} />
+
                 {/* Education */}
-                <Education props={{manageModal }}/>
+                <Education props={{educations,setEducations}}/>
 
 
                 {/* Skills */}
            
-                <Skill props={{skills,manageModal }}/>
+                <Skill props={{skills,setSkills}}/>
       
           
 
                 {/* Languages */}
 
-                <Language props={{languages,manageModal}}/>
-                
+                <Language props={{languages,setLanguages}}/>
 
             </div>
         </div>

@@ -1,31 +1,109 @@
-import React from "react";
+"use client"
+import React,{useCallback,useState,useEffect} from "react";
 import { HiAcademicCap, HiX, HiMinus } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
-import EducationFields from "@/ResumeBuilder/ResumeComponents/ResumeEducation/EducationFields";
+// import EducationFields from "@/ResumeBuilder/ResumeComponents/ResumeEducation/EducationFields";
+import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
 import "./Education.css"; // Import CSS file
+import { useModalContext } from "@/Contexts/ModalContext";
+import ModalBox from "./ModalBox";
 
 const Education = ({ props }) => {
-  const educations = [
-    {
-      institution_name: "University of XYZ",
-      institution_location: "City, Country",
-      degree: "Bachelor of Science",
-      field_study: "Computer Science",
-      education_starting_year: "2018",
-      education_graduation_year: "2022",
-      education_achievements: "Dean's List, Outstanding Student Award",
+
+  const { educations,setEducations } = props;
+  const [education,setEducation] = useState({id : false});
+  const [modal,manageModal] = useState({display :  'none' ,title : 'Loading' , onSave:()=>{} ,onClose: ()=>{} });
+  const [educationErrors, setEducationErrors] = useState({});
+
+  const removeEduction = useCallback(
+    (id) => {
+      setEducations(prev=>{
+       return prev.filter((education,index)=>{
+        return index!=id;
+       })
+      })
+
     },
+    [educations],
+  )
+
+
+const showModal =useCallback(( title )=>{
+  manageModal(prev => 
+    ({
+      title : title ,display : 'block'
+    })
+  )
+},[education])
+
+
+
+const closeModal=useCallback (()=>{
+  manageModal(
     {
-      institution_name: "University of ABC",
-      institution_location: "City, Country",
-      degree: "Bachelor of Science",
-      field_study: "Computer Science",
-      education_starting_year: "2020",
-      education_graduation_year: "2024",
-      education_achievements: "Dean's List, Outstanding Student Award",
-    },
-  ];
-  const { manageModal } = props;
+     display : 'none'
+    }
+  )
+},[education])
+
+
+const saveChanges =useCallback(()=>{
+  validation()
+  
+  console.log(education,educationErrors,validation());
+  
+},[education,educationErrors])
+
+const validation = useCallback(()=>{
+  if(!education?.institution_name){
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,institution_name : 1
+      }
+    })
+    return false
+  }
+  else{
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,institution_name : 0
+      }
+    })
+  }
+  if(!education?.degree){
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,degree : 1
+      }
+    })
+    return false
+  }else{
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,degree : 0
+      }
+    })
+    
+  }
+  if(!education?.field_study){
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,field_study : 1
+      }
+    })
+    return false
+  }
+  else{
+    setEducationErrors((prev)=>{
+      return {
+        ...prev,field_study : 0
+      }
+    })
+  }
+  return true
+},[education,educationErrors])
+
+
 
   return (
     <>
@@ -34,10 +112,10 @@ const Education = ({ props }) => {
           <div className="header">
             <HiAcademicCap /> Educations
           </div>
-          {educations.map((education) => (
+          {educations.map((education,index) => (
             <div className="education-container" key={education.institution_name}>
               <div className="top-right-icons">
-                <HiMinus className="minus-icon" />
+                <HiMinus className="minus-icon" onClick={()=>{removeEduction(index)}} />
               </div>
               <p className="institution-name">{education.institution_name}</p>
               <p>{education.institution_location}</p>
@@ -54,15 +132,7 @@ const Education = ({ props }) => {
                       title: "Edit Education",
                       display: "block",
                       body: (
-                        <EducationFields
-                          props={{
-                            setResumeData: () => {},
-                            resumeData: {},
-                            formIndex: 0,
-                            state: true,
-                            setState: () => {},
-                          }}
-                        />
+                        <AddEducation props={{education,setEducation }} />
                       ),
                     });
                   }}
@@ -72,29 +142,17 @@ const Education = ({ props }) => {
           ))}
         </>
       ) : (
-        <></>
+        <div className='no-educations'>Please add education</div>
       )}
 
-      <div className="add-education" onClick={() => {
-        manageModal({
-          title: "Add Education",
-          display: "block",
-          body: (
-            <EducationFields
-              props={{
-                setResumeData: () => {},
-                resumeData: {},
-                formIndex: 0,
-                state: true,
-                setState: () => {},
-              }}
-            />
-          ),
-        });
-      }}>
+      <div className="add-education" onClick={()=>showModal('Add Education')}>
         <p className='add-education-text'>Add Education</p>
         <button className="add-button">+</button>
       </div>
+      <ModalBox props={modal} onSave={saveChanges}  onClose={closeModal}>
+            <AddEducation props={{ education, setEducation,saveChanges,educationErrors }} />
+      </ModalBox>
+
     </>
   );
 };
