@@ -16,13 +16,19 @@ function SkillProperties({props}) {
   },[rating])
 
   useEffect(()=>{
+    setSkill(prev=>({...prev, learnedFrom : learnedFrom}))
+  },[learnedFrom])
+  useEffect(()=>{
     if(!selectedSkill.rating){
       setRating(0)
+    }
+    if(!selectedSkill.learnedFrom){
+      setLearnedFrom([])
     }
   },[selectedSkill])
   return (
     <div className="skill-properties-container">
-      <SkillRating  props={{rating,setRating}}  onChange={()=>{ }} /> {/* Render the SkillRating component */}
+      <SkillRating  props={{rating,setRating ,mode: 'rw'}}  onChange={()=>{ }} /> {/* Render the SkillRating component */}
        <HowSkillLearned props={{learnedFrom, setLearnedFrom}}/>
     </div>
   );

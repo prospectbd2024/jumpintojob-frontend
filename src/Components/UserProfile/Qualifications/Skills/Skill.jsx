@@ -6,6 +6,7 @@ import { HiMinus } from "react-icons/hi";
 import "./Skill.css"; // Import CSS file
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
+import Rating from "./Rating";
 
 function Skill({ props }) {
   const { skills, setSkills } = props;
@@ -62,10 +63,18 @@ function Skill({ props }) {
   },[skill,skills])
   const validation =useCallback((skill)=>{
     let flag = true;
-    console.log(skill);
+    if(!skill.name){
+      flag = false;
+      setSkillErrors(  prev => ({ ...prev,name : "Skill is not selected!" }));
+      return flag;
+    }
     if(!skill.rating){
       flag = false;
       setSkillErrors(  prev => ({ ...prev,rating : "Rating is missing!" }));
+    }
+    if(!skill.learnedFrom){
+      flag = false;
+      setSkillErrors(  prev => ({ ...prev,learnedFrom : "Please check from where you learned this skill!" }));
     }
     skills.map((element)=>{
       if(element.name==skill.name){
@@ -87,13 +96,25 @@ function Skill({ props }) {
         <div className="skills-container qualifications-container">
           {skills.map((skill, index) => (
             <div className="skill-item" key={index}>
+              <div>
               <div className="skill-name">{skill.name}</div>
+              </div>
+              <div className="skill-rating"> 
+              <Rating props={{rating: skill.rating, setRating : ()=>{} , mode : 'r'}} onChange={()=>{}} />
+              </div>
+              {/* <div>
+                {skill.learnedFrom.map((el,index)=>{
+                  return <div key={index} className="skill-name" >{el}</div>
+                })}
+              </div> */}
+              <div className='skill-actions'> 
               <HiMinus
                 className="remove-skill"
                 onClick={() => {
                   removeSkill(index);
                 }}
               />
+              </div>
             </div>
           ))}
         </div>

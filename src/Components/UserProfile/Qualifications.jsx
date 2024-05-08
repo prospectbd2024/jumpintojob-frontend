@@ -47,11 +47,11 @@ const Qualifications = () => {
     
     useEffect(()=>{
         setSkills([
-            { "id": 1, "name": "Javascript" },
-            { "id": 2, "name": "ReactJS" },
-            { "id": 3, "name": "NodeJS" },
-            { "id": 4, "name": "ExpressJS" },
-            { "id": 5, "name": "MongoDB" },
+            { "id": 1, "name": "Javascript","rating" : 4 , "learnedFrom" : ["self"] },
+            { "id": 2, "name": "ReactJS","rating" : 4.2 , "learnedFrom" : ["self"] },
+            { "id": 3, "name": "NodeJS" ,"rating" : 2.5 , "learnedFrom" : ["self"]},
+            { "id": 4, "name": "ExpressJS" ,"rating" : 2.5 , "learnedFrom" : ["self"]},
+            { "id": 5, "name": "MongoDB" ,"rating" : 3 , "learnedFrom" : ["self"]},
         ]);
     },[])
 

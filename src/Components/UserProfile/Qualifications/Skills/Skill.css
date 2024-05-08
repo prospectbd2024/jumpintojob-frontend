@@ -21,9 +21,8 @@
   
   .skill-item {
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns:  minmax(100px,1fr)  minmax(400px,1fr) minmax(50px,1fr);
     margin-bottom: 10px; /* Add margin bottom to each skill item */
   }
   
@@ -36,7 +35,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px; /* Add padding to separate border from skills */
-   
+    max-width: fit-content;
     font-weight: bold;
     font-size: 16px;
   }
@@ -50,7 +49,10 @@
     color: #FF5733;
     margin-left: 10px;
   }
-  
+  .skill-actions{
+    display: flex;
+    justify-content: flex-end;
+  }
   .add-skill {
     display: flex;
     align-items: center;

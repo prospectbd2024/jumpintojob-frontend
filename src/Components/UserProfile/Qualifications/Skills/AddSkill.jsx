@@ -19,7 +19,7 @@ function AddSkill({props}) {
         return <p key={key}>{skillErrors[key]}</p>
       })}</div>
       {
-selectedSkill.name &&
+      selectedSkill.name &&
       <SkillProperties    props={{setSkill,selectedSkill}}/>
       }
     </div>
