@@ -181,7 +181,7 @@ function AddExperience({ props }) {
                         
 
                     </div>
-                    <div>
+                    <div className='delete-btn-container'>
                     <button  className='delete-btn'>Delete</button>
 
                     </div>

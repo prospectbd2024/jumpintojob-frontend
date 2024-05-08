@@ -45,7 +45,12 @@
     display: grid;
     grid-template-columns: repeat(3,200px);
 }
-.add-experience-experties .delete-btn{
+.add-experience-experties .delete-btn-container{
+  display: 'flex';
+  justify-content: 'flex-end';
+  margin-right: '20px';
+}
+.add-experience-experties .delete-btn-container .delete-btn{
   background-color: #8f7685;
   color: white;
   border: none;
