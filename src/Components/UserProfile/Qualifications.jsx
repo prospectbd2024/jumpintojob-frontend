@@ -7,6 +7,8 @@ import Language from './Qualifications/Language/Language';
 import ModalBox from './Qualifications/ModalBox';
 import SkillContextProvider, { SkillContext } from '@/Contexts/SkillContext';
 import ModalContext from '@/Contexts/ModalContext';
+import Experience from './Qualifications/Experience/Experiences';
+import Experiences from './Qualifications/Experience/Experiences';
 
 
 const Qualifications = () => {
@@ -16,7 +18,7 @@ const Qualifications = () => {
     const [educations,setEducations] = useState([]);
     const [skills, setSkills] = useState([]);
     const [languages, setLanguages] = useState([]);
-
+    const [experiences, setExperiences] = useState([]);
 
 
     // Education
@@ -82,7 +84,7 @@ const Qualifications = () => {
                 <Language props={{languages,setLanguages}}/>
 
                 {/* Experience*/}
-                <div>Experiences</div>
+                <Experiences props={{experiences, setExperiences}} />
 
                 {/* Hobbies  */}
                 <div>Hobbies</div>
