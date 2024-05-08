@@ -1,9 +1,9 @@
 "use client"
 import React, { useState,useEffect } from 'react';
 
-import Education from './Qualifications/Education';
-import Skill from './Qualifications/Skill';
-import Language from './Qualifications/Language';
+import Education from './Qualifications/Education/Education';
+import Skill from './Qualifications/Skills/Skill';
+import Language from './Qualifications/Language/Language';
 import ModalBox from './Qualifications/ModalBox';
 import SkillContextProvider, { SkillContext } from '@/Contexts/SkillContext';
 import ModalContext from '@/Contexts/ModalContext';
@@ -74,11 +74,8 @@ const Qualifications = () => {
 
 
                 {/* Skills */}
-                <SkillContextProvider >
-                <Skill props={{skills,setSkills}}/>
-                </SkillContextProvider>
-      
-          
+
+                <Skill props={{skills,setSkills}}/>   
 
                 {/* Languages */}
 
