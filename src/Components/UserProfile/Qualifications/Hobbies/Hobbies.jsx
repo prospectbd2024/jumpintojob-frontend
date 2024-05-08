@@ -1,5 +1,6 @@
+// Hobbies.js
 import React, { useCallback, useState } from "react";
-import { HiHeart, HiMinus } from "react-icons/hi";
+import { HiMinus, HiHeart } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
 import AddHobby from "./AddHobby";
@@ -8,7 +9,11 @@ import "./Hobbies.css"; // Import CSS file
 const Hobbies = ({ props }) => {
   const { hobbies, setHobbies } = props;
   const [hobby, setHobby] = useState({ id: false });
-  const [modal, manageModal] = useState({ display: "none", title: "Loading", state: "new" });
+  const [modal, manageModal] = useState({
+    display: "none",
+    title: "Loading",
+    state: "new",
+  });
   const [hobbyErrors, setHobbyErrors] = useState({});
 
   const removeHobby = useCallback(
@@ -18,12 +23,20 @@ const Hobbies = ({ props }) => {
     [hobbies]
   );
 
-  const showModal = useCallback((title, state, index) => {
-    if (state === "update") {
-      setHobby(hobbies[index]);
-    }
-    manageModal({ title: title, display: "block", state: state, index: index });
-  }, [hobbies]);
+  const showModal = useCallback(
+    (title, state, index) => {
+      if (state === "update") {
+        setHobby(hobbies[index]);
+      }
+      manageModal({
+        title: title,
+        display: "block",
+        state: state,
+        index: index,
+      });
+    },
+    [hobbies]
+  );
 
   const closeModal = useCallback(() => {
     setHobby({});
@@ -44,10 +57,13 @@ const Hobbies = ({ props }) => {
     }
   }, [hobby, hobbyErrors]);
 
-  const updateHobby = useCallback((index, hobby) => {
-    const temp = hobbies.map((h, i) => (i === index ? hobby : h));
-    setHobbies(temp);
-  }, [hobbies]);
+  const updateHobby = useCallback(
+    (index, hobby) => {
+      const temp = hobbies.map((h, i) => (i === index ? hobby : h));
+      setHobbies(temp);
+    },
+    [hobbies]
+  );
 
   const validation = useCallback(() => {
     const required = ["name"];
@@ -66,36 +82,40 @@ const Hobbies = ({ props }) => {
   }, [hobby, hobbyErrors]);
 
   return (
-    <>
+    <div className="hobbies-content">
+      <div className="qualifications-header">
+        <HiHeart />
+        <h3>Hobbies</h3>
+      </div>
       {hobbies && hobbies.length > 0 ? (
-        <>
-          <div className="header">
-            <HiHeart /> Hobbies
-          </div>
-          {hobbies.map((h, index) => (
-            <div className="hobby-container" key={index}>
-              <div className="top-right-icons">
-                <HiMinus className="minus-icon" onClick={() => removeHobby(index)} />
+        <div className="hobbies-container">
+          {hobbies.map((hobby, index) => (
+            <div className="hobby-item" key={index}>
+              <div className="hobby-name">
+              <p >{hobby.name}</p>
               </div>
-              <p className="hobby-name">{h.name}</p>
-              <div className="bottom-right-icons">
-                <FaPencilAlt className="edit-icon" onClick={() => showModal("Edit Hobby", "update", index)} />
+              <div>
+                <HiMinus
+                className="remove-hobby"
+                style={{color : 'red'}}
+                onClick={() => removeHobby(index)}
+              />
               </div>
             </div>
           ))}
-        </>
+        </div>
       ) : (
         <div className="no-hobbies">Please add hobbies</div>
       )}
 
       <div className="add-hobby" onClick={() => showModal("Add Hobby", "add")}>
-        <p className="add-hobby-text">Add Hobby</p>
-        <button className="add-button">+</button>
+        <p>Add Hobby</p>
+        <button>+</button>
       </div>
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddHobby props={{ hobby, setHobby, saveChanges, hobbyErrors }} />
       </ModalBox>
-    </>
+    </div>
   );
 };
 
