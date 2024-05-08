@@ -59,9 +59,9 @@ const Qualifications = () => {
 
     useEffect(() => {
       setLanguages( [
-        { "id": 1, "name": "Bengali", "proficiency": "Native" },
-        { "id": 2, "name": "English", "proficiency": "Fluent" },
-        { "id": 3, "name": "Spanish", "proficiency": "Beginner" }
+        { "id": 1, "language": "Bengali", "proficiency": "Native" },
+        { "id": 2, "language": "English", "proficiency": "Fluent" },
+        { "id": 3, "language": "Spanish", "proficiency": "Beginner" }
     ]);
     }, [ ])
     
