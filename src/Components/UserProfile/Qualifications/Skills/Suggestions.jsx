@@ -4,7 +4,7 @@ import React, { useState,useEffect } from "react";
 // import "./Suggestions.css";
 
 function Suggestions({props}) {
-  const {selectSkill} = props;
+  const {setSkill} = props;
   const [suggestedSkills, setSuggestedSkills] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Suggestions({props}) {
               <li
                 key={index}
                 onClick={() => {
-                  selectSkill(skill)
+                  setSkill(skill)
                 }}
               >
                 {skill.name}
