@@ -1,9 +1,6 @@
-import { FaStarHalf } from "react-icons/fa"; 
-import { FaRegStarHalf } from "react-icons/fa"; 
-import HalfStar from "@/assets/star-half-icon.svg";
 // SkillRating.js
 import React, { useState,useEffect } from 'react';
-import './SkillRating.css'; // Import the CSS file for styling
+import './Rating.css'; // Import the CSS file for styling
 import CustomSVG from "./CustomSvg";
 
 function Rating({ props,onChange }) {
