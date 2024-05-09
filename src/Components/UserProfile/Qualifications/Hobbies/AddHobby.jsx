@@ -12,7 +12,7 @@ const AddHobby = ({ props }) => {
   return (
     <div className="add-hobby-container">
       <label htmlFor="name" className="add-hobby-label">
-        Hobby Name
+        Hobby
       </label>
       <input
         type="text"

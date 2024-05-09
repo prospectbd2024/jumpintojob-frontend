@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { HiBriefcase, HiMinus } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
@@ -8,27 +8,27 @@ import "./Experience.css"; // Import CSS file
 const Experience = ({ props }) => {
   const { experiences, setExperiences } = props;
   const [experience, setExperience] = useState({ id: false });
-  const [modal, manageModal] = useState({ display: "none", title: "Loading", state: "new" });
+  const [modal, setModal] = useState({ display: "none", title: "Loading", state: "new" });
   const [experienceErrors, setExperienceErrors] = useState({});
 
   const removeExperience = useCallback(
     (id) => {
       setExperiences((prev) => prev.filter((exp, index) => index !== id));
     },
-    [experiences]
+    [setExperiences]
   );
 
   const showModal = useCallback((title, state, index) => {
     if (state === "update") {
       setExperience(experiences[index]);
     }
-    manageModal({ title: title, display: "block", state: state, index: index });
+    setModal({ title: title, display: "block", state: state, index: index });
   }, [experiences]);
 
   const closeModal = useCallback(() => {
     setExperience({});
     setExperienceErrors({});
-    manageModal({ display: "none" });
+    setModal({ display: "none" });
   }, []);
 
   const saveChanges = useCallback(() => {
@@ -39,31 +39,33 @@ const Experience = ({ props }) => {
         setExperiences((prev) => [...prev, experience]);
       }
       closeModal();
+      console.log(experiences);
     } else {
       console.log(experienceErrors);
     }
-  }, [experience, experienceErrors]);
+  }, [experience, modal, experienceErrors, setExperiences, closeModal]);
 
   const updateExperience = useCallback((index, experience) => {
     const temp = experiences.map((exp, i) => (i === index ? experience : exp));
     setExperiences(temp);
-  }, [experiences]);
+  }, [experiences, setExperiences]);
 
   const validation = useCallback(() => {
-    const required = ["job_title", "company_name", "start_date"];
+    const required = ["job_title", "company_name", "start_date", "designation", "expertises"];
     let flag = true;
 
     required.forEach((element) => {
       if (!experience[element]) {
-        setExperienceErrors((prev) => ({ ...prev, [element]: 1 }));
+        setExperienceErrors((prev) => ({ ...prev, [element]: true }));
         flag = false;
       } else {
-        setExperienceErrors((prev) => ({ ...prev, [element]: 0 }));
+        setExperienceErrors((prev) => ({ ...prev, [element]: false }));
       }
     });
 
     return flag;
-  }, [experience, experienceErrors]);
+  }, [experience, setExperienceErrors]);
+
 
   return (
     <>
@@ -77,11 +79,25 @@ const Experience = ({ props }) => {
               <div className="top-right-icons">
                 <HiMinus className="minus-icon" onClick={() => removeExperience(index)} />
               </div>
-              <p className="job-title">{exp.job_title}</p>
-              <p>{exp.company_name}</p>
-              <p><span className="label">Start Date:</span> {exp.start_date}</p>
-              {exp.end_date && <p><span className="label">End Date:</span> {exp.end_date}</p>}
-              <p><span className="label">Description:</span> {exp.description}</p>
+              <div className="experience-details">
+                <p className="job-title">{exp.job_title}</p>
+                <p className="company-name">{exp.company_name}</p>
+                <p><span className="label">Designation:</span> {exp.designation}</p>
+                <p><span className="label">Start Date:</span> {exp.start_date}</p>
+                {exp.to_date && <p><span className="label">End Date:</span> {exp.to_date}</p>}
+                <p><span className="label">Company Business:</span> {exp.company_business}</p>
+                <p><span className="label">Department:</span> {exp.department}</p>
+                {exp.expertises && (
+                  <div className="expertise-section">
+                    <p className="label">Areas of Expertise:</p>
+                    <ul>
+                      {exp.expertises.map((expertise, idx) => (
+                        <li key={idx}>{expertise.name} - {expertise.months} months</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
               <div className="bottom-right-icons">
                 <FaPencilAlt className="edit-icon" onClick={() => showModal("Edit Experience", "update", index)} />
               </div>
@@ -97,7 +113,7 @@ const Experience = ({ props }) => {
         <button className="add-button">+</button>
       </div>
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
-        <AddExperience props={{ experience, setExperience, saveChanges, experienceErrors }} />
+        <AddExperience props={{ experience, setExperience, experienceErrors }} />
       </ModalBox>
     </>
   );

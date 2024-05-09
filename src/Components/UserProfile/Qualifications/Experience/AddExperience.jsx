@@ -1,6 +1,8 @@
+import { FaTrashAlt } from "react-icons/fa"; 
 // AddExperience.js
 import React, { useState, useCallback } from "react";
 import "./AddExperience.css";
+import AddAreaOfExpertise from "./AddAreaOfExpertise";
 
 function AddExperience({ props }) {
   const { experience, setExperience, experienceErrors } = props;
@@ -96,10 +98,10 @@ function AddExperience({ props }) {
           <input
             type="date"
             id="from_date"
-            value={experience?.from_date || ""}
-            onChange={(e) => handleChange("from_date", e.target.value)}
+            value={experience?.start_date || ""}
+            onChange={(e) => handleChange("start_date", e.target.value)}
           />
-          {experienceErrors?.from_date && (
+          {experienceErrors?.start_date && (
             <div className="add-experience-required">From date is required</div>
           )}
         </div>
@@ -142,66 +144,7 @@ function AddExperience({ props }) {
             </div>
           )}
         </div>
-        <div className="add-experience-input-field area-expertise-input-container">
-          
-            <label>
-              Area of Expertise
-              <abbr title="Required" className="required"></abbr>
-            </label>
-            <div>
-              <span className="hidden">
-                Add your area of expertise with duration (max 3)
-              </span>
-            </div>
-                  <div className="add-experience-experties" >
-                    <div className="">
-                      <input
-                        type="text"
-                        className=""
-                        placeholder=""
-                        value={experience?.area_of_expertise || ""}
-                        autoComplete="off"
-                        onChange={(e) =>
-                          handleChange("area_of_expertise", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="">
-                        <input
-                          type="text"
-                          className=""
-                          placeholder="Months"
-                          style={{width : '60px'}}
-                          maxLength="3"
-                          value={experience?.months || ""}
-                          onChange={(e) =>
-                            handleChange("months", e.target.value)
-                          }
-                        />
-                        
-
-                    </div>
-                    <div className='delete-btn-container'>
-                    <button  className='delete-btn'>Delete</button>
-
-                    </div>
-                  </div>
-
-              <div
-                id="addButton"
-                className=""
-                style={{ display: "block" }}
-              >
-                <button
-                className='add-experience-experties-add-btn'
-                  onClick={() => AddExpArea(-1)}
-                >
-                  <i className=" "></i>Add New
-                </button>
-              </div>
-            <input type="hidden" name="userType" id="userType" value="" />
-
-        </div>
+          <AddAreaOfExpertise props={{experience,setExperience,experienceErrors}} />
         <div className="add-experience-input-field experience-company-location">
           <label htmlFor="company_location">COMPANY LOCATION</label>
           <input
