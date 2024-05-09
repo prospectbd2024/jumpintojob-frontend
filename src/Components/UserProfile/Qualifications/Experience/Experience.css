@@ -86,6 +86,12 @@
 }
 
 /* Style ul and li */
+.experience-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+/* Style ul and li */
 .experience-details ul {
   margin-top: 5px;
   padding-left: 20px;
