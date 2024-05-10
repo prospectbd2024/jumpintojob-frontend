@@ -1,0 +1,67 @@
+.add-education-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+
+.add-education-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+  flex-basis: 48%;
+}
+
+.add-education-input-field label {
+  font-size: 12px;
+}
+
+.add-education-input-field input[type="text"],
+.add-education-input-field input[type="date"],
+.add-education-input-field textarea {
+  padding: 8px 5px;
+  outline: none;
+  border: 1px solid #ccc; /* Updated border color */
+  background: transparent;
+  color: #444; /* Updated text color */
+  font-family: Arial, sans-serif; /* Updated font family */
+  border-radius: 5px; /* Added border radius */
+}
+
+.add-education-required {
+  color: red;
+  font-size: 13px;
+}
+
+.add-education-currently-here {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.add-education-currently-here input[type="checkbox"] {
+  width: 15px;
+}
+
+.add-education-textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.add-education-textarea label {
+  font-size: 12px;
+}
+
+.add-education-textarea textarea {
+  height: 170px;
+  width: 97%;
+  resize: none;
+  padding: 8px 5px;
+  outline: none;
+  border: 1px solid #ccc; /* Updated border color */
+  background: transparent;
+  font-family: Arial, sans-serif; /* Updated font family */
+  border-radius: 5px; /* Added border radius */
+}

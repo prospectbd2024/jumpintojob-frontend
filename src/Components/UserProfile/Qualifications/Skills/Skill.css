@@ -1,0 +1,92 @@
+/* Skill.css */
+
+.skills-content {
+  margin-top: 20px;
+}
+
+.qualifications-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.qualifications-header h3 {
+  margin-left: 10px;
+}
+
+.education-items {
+  margin-top: 10px;
+}
+
+.skill-item {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(400px, 1fr) minmax(50px, 1fr);
+  margin-bottom: 10px; /* Add margin bottom to each skill item */
+}
+
+.skill-item:last-child {
+  margin-bottom: 0; /* Remove margin bottom from the last skill item */
+}
+
+.skill-name {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px; /* Add padding to separate border from skills */
+  max-width: fit-content;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.remove-skill {
+  /* border: 1px solid #ccc; */
+  /* border-radius: 8px; */
+  margin-top: -20px;
+  padding-right: 10px; /* Add padding to separate border from skills */
+  cursor: pointer;
+  color: #ff5733;
+  margin-left: 10px;
+}
+
+.skill-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-skill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3498db;
+}
+
+.add-skill p {
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.add-skill button {
+  font-weight: bold;
+  font-size: 24px;
+  color: #3498db;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 30px;
+}
+
+.add-skill button:hover {
+  background-color: #3498db57;
+  color: #1c5e8a;
+}
+
+.no-skills {
+  padding-block: 10px;
+  font-size: large;
+  font-weight: bold;
+}

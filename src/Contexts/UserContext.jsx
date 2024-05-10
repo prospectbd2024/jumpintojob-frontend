@@ -90,7 +90,7 @@ export const UserProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setProfile(data.data)
-                console.log(profile);
+                // console.log(profile);
             })
         }
         

@@ -1,14 +1,15 @@
 import React from 'react';
 import { FaFacebook, FaInstagramSquare, FaTwitterSquare, FaYoutubeSquare } from "react-icons/fa";
+import "./ForEmployersFooter.css";
 
 const ForEmployersFooter = () => {
     return (
         <div>
             <div className='footer-section'>
                 <div className="main-footer-items container">
-                    <div className="about-footer-item">
-                        <h2>JobHubGlobal</h2>
-                        <p>With JobHubGlobal you can browse for jobs, view local and national salary information, discover companies, and learn about the job market in a specific city.</p>
+                    <div className="footer-item">
+                        <h2>Jump Into Job</h2>
+                        <p>With Jump Into Job you can browse for jobs, view local and national salary information, discover companies, and learn about the job market in a specific city.</p>
                         <ul className='social-media-footer'>
                             <li><a href="#"><FaFacebook></FaFacebook></a></li>
                             <li><a href="#"><FaInstagramSquare></FaInstagramSquare></a></li>

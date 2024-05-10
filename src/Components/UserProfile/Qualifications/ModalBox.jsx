@@ -1,34 +1,30 @@
 "use client";
-import React from "react";
+import React,{useEffect} from "react";
 import { HiX } from "react-icons/hi";
 import "./ModalBox.css"; // Import CSS file
+import { useModalContext } from "@/Contexts/ModalContext";
 
-function ModalBox({ props }) {
-  const { modal, manageModal } = props;
+function ModalBox({children,props }) {
+  const {title,display,onSave,onClose} = props;
+
 
   return (
-    <div className="modal-container" style={{ display: modal.display }}>
+    <div className="modal-container" style={{ display: display }}>
       <div className="modal-header">
-        <h3>{modal.title}</h3>
+        <h3>{title}</h3>
         <HiX
           className="hix"
-          onClick={() => {
-            manageModal((prev) => {
-              return { ...prev, display: "none" };
-            });
-          }}
+          onClick={onClose}
+
         />
       </div>
-      <div className="modal-body">{modal.body}</div>
+      <div className="modal-body">{children}</div>
       <div className="modal-footer">
-        <input className="qualification-submit-btn" type="submit" value="Save" />
-        <button
-          onClick={() => {
-            manageModal((prev) => {
-              return { ...prev, display: "none" };
-            });
-          }}
-        >
+        <button className="qualification-submit-btn"  onClick={onSave} >
+          Save
+        </button>
+
+        <button className="qualification-close-btn"  onClick={onClose}>
           Close
         </button>
       </div>

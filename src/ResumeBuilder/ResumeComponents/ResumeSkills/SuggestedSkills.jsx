@@ -7,7 +7,7 @@ const SuggestedSkills = ({onSkillClick}) =>{
   const [suggestedSkills,setSuggestedSkills] =useState([]);
 
   useEffect(()=>{
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/skills`).then((res) => res.json()).then(
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/skills`).then((res) => res.json()).then(
       (data)=>{
         setSuggestedSkills(data.data)
       }

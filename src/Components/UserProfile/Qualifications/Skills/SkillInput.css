@@ -1,0 +1,51 @@
+/* SkillInput.css */
+
+.add-skill-input-container {
+    position: relative;
+  }
+  
+  .add-skill-label {
+    font-weight: bold;
+    font-size: 17px;
+  }
+  
+  .add-skill-input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none; 
+  }
+  
+  .suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width:  98%; /* Adjusted width */
+    min-height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .suggestions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .suggestions-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
