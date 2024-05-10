@@ -1,5 +1,6 @@
 // Skill.js
 "use client";
+import { FaTrashAlt } from "react-icons/fa"; 
 import React, { useCallback,useState,useEffect } from "react";
 import { RiMedalFill } from "react-icons/ri";
 import { HiMinus } from "react-icons/hi";
@@ -108,7 +109,8 @@ function Skill({ props }) {
                 })}
               </div> */}
               <div className='skill-actions'> 
-              <HiMinus
+        
+              <FaTrashAlt
                 className="remove-skill"
                 onClick={() => {
                   removeSkill(index);

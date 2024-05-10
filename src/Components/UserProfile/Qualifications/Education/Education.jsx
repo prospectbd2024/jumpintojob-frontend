@@ -1,4 +1,5 @@
 "use client"
+import { FaTrashAlt } from "react-icons/fa"; 
 import React,{useCallback,useState,useEffect} from "react";
 import { HiAcademicCap, HiX, HiMinus } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
@@ -121,7 +122,7 @@ const validation = useCallback(()=>{
           {educations.map((education,index) => (
             <div className="education-container" key={education.institution_name}>
               <div className="top-right-icons">
-                <HiMinus className="minus-icon" onClick={()=>{removeEduction(index)}} />
+                <FaTrashAlt className="minus-icon" onClick={()=>{removeEduction(index)}}/>
               </div>
               <p className="institution-name">{education.institution_name}</p>
               <p>{education.institution_location}</p>

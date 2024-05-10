@@ -1,3 +1,4 @@
+import { FaTrashAlt } from "react-icons/fa"; 
 import React, { useState, useCallback } from "react";
 import { HiBriefcase, HiMinus } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
@@ -71,13 +72,14 @@ const Experience = ({ props }) => {
     <>
       {experiences && experiences.length > 0 ? (
         <>
-          <div className="header">
+          <div className="header" style={{marginTop: '20px'}}>
             <HiBriefcase /> Experiences
           </div>
           {experiences.map((exp, index) => (
             <div className="experience-container" key={index}>
               <div className="top-right-icons">
-                <HiMinus className="minus-icon" onClick={() => removeExperience(index)} />
+                <FaTrashAlt className="minus-icon" onClick={() => removeExperience(index)} />
+
               </div>
               <div className="experience-details">
                 <p className="job-title">{exp.job_title}</p>

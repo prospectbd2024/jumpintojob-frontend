@@ -1,3 +1,4 @@
+import { FaTrashAlt } from "react-icons/fa"; 
 // Hobbies.js
 import React, { useCallback, useState } from "react";
 import { HiMinus, HiHeart } from "react-icons/hi";
@@ -95,7 +96,8 @@ const Hobbies = ({ props }) => {
               <p >{hobby.name}</p>
               </div>
               <div>
-                <HiMinus
+
+                <FaTrashAlt
                 className="remove-hobby"
                 style={{color : 'red'}}
                 onClick={() => removeHobby(index)}

@@ -1,3 +1,4 @@
+import { FaTrashAlt } from "react-icons/fa"; 
 // Language.js
 import React, { useState, useCallback, useEffect } from "react";
 import { RiMedalFill } from "react-icons/ri";
@@ -65,7 +66,9 @@ function Language({ props }) {
               
               {/* Display remove button */}
               <div className="language-actions"> 
-                <HiMinus
+         
+         
+                <FaTrashAlt
                   className="remove-language"
                   onClick={() => removeLanguage(index)}
                 />
