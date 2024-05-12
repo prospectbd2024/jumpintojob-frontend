@@ -1,0 +1,100 @@
+{
+	"personalInformation": {
+		"firstName": "John",
+		"lastName": "Doe",
+		"email": "john.doe@example.com",
+		"phone": "+1234567890",
+		"dateOfBirth": "d/m/y",
+		"gender": "Male",
+		"maritalStatus": "Single",
+		"presentAddress": {
+			"city": "New York",
+			"state": "NY",
+			"country": "USA"
+		},
+		"permanentAddress": {
+			"city": "New York",
+			"state": "NY",
+			"country": "USA"
+		},
+		"profile_picture": "",
+		"religion": "",
+		"nationality": "American",
+		"media_links": [
+			{"name": "linkedin", "url": "linkedin.com/in/johndoe"},
+			{ "name":"portfolio" ,"url": "johndoeportfolio.com"}
+		]
+	},
+    "title" : "",
+    "summary": "Experienced Senior Software Engineer with a demonstrated history of working in the computer software industry. Skilled in JavaScript, React.js, Node.js, and Software Architecture.",
+    "educations": [
+        {
+            "institution": "University of XYZ",
+            "location": "City, Country",
+            "degree": "Bachelor of Science",
+            "fieldOfStudy": "Computer Science",
+            "startDate": "2018",
+            "endDate": "2022",
+            "achievements": "Dean's List \n Outstanding Student Award"
+        },
+        {
+            "institution": "University of ABC",
+            "location": "City, Country",
+            "degree": "Bachelor of Science",
+            "fieldOfStudy": "Computer Science",
+            "startDate": "2020",
+            "endDate": "2024",
+            "achievements": "Dean's List \n Outstanding Student Award"
+        }
+    ],
+    "experiences": [
+        {
+            "title": "Senior Software Engineer",
+            "company": "Tech Innovators Inc.",
+            "industry": "Technology Solutions",
+            "location": "Silicon Valley, USA", 
+            "project_links": [{"title" : "","link" : ""}], 
+            "startDate": "2015-07-20",
+            "endDate": "2022-12-31",
+            "currentlyWorking": false,
+            "responsibilities": "Led the development of various web applications using React.js and Node.js. Collaborated with product managers and designers to define product features and timelines. Mentored junior developers and conducted code reviews.",
+            "achievements": "Implemented scalable architecture for high-traffic web applications",
+            "expertises": [
+                { "name": "Product Management", "months": 72 },
+                { "name": "Market Research", "months": 60 },
+                { "name": "Agile Methodology", "months": 48 },
+                { "name": "User Experience (UX) Design", "months": 48 }
+              ]
+        },
+        {
+            "title": "Product Manager",
+            "company": "GlobalTech Solutions",
+            "industry": "Technology Services",
+            "location": "New York City, USA",
+            "startDate": "2017-03-15",
+            "endDate": "2023-06-30",
+            "currentlyWorking": false,
+            "responsibilities": "Led product development lifecycle from concept to launch. Conducted market research, defined product requirements, and collaborated with engineering and design teams to deliver high-quality software products.",
+            "achievements": "Launched two successful products within budget and ahead of schedule",
+            "expertises": [
+                { "name": "Product Management", "months": 72 },
+                { "name": "Market Research", "months": 60 },
+                { "name": "Agile Methodology", "months": 48 },
+                { "name": "User Experience (UX) Design", "months": 48 }
+              ]
+        }
+    ],
+    "skills": [
+        { "name": "Javascript", "rating": 4, "learnedFrom": ["self","training"] },
+        { "name": "ReactJS", "rating": 4.2, "learnedFrom": ["self"] },
+        { "name": "NodeJS", "rating": 2.5, "learnedFrom": ["self"] },
+        { "name": "ExpressJS", "rating": 2.5, "learnedFrom": ["self"] },
+        { "name": "MongoDB", "rating": 3, "learnedFrom": ["self"] }
+    ],
+    "languages": [
+        { "language": "Bengali", "proficiency": "Native" },
+        { "language": "English", "proficiency": "Fluent" },
+        { "language": "Spanish", "proficiency": "Beginner" }
+    ],
+    "hobbies": [{ "name": "traveling" },{ "name": "Singing" }]
+}
