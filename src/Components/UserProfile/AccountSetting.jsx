@@ -1,78 +1,64 @@
 "use client"
 import React, { useState } from 'react';
-import './UserProfile.css';
 
 const AccountSetting = () => {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-    const data = Array.from({ length: 10 }, (_, index) => `Data ${index + 1}`); // Example data array
-  const itemsPerPage = 2;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const renderItems = () => {
-    return currentItems.map((item, index) => (
-      <li key={index}>{item}</li>
-    ));
-  };
-
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
-      pageNumbers.push(
-        <li
-          key={i}
-          className={i === currentPage ? 'active' : ''}
-          onClick={() => handlePageChange(i)}
-        >
-          {i}
-        </li>
-      );
+  // Function to handle changing password
+  const handleChangePassword = () => {
+    // Add validation logic here
+    if (newPassword !== confirmPassword) {
+      alert("New password and confirm password don't match.");
+      return;
     }
-    return pageNumbers;
+    
+    // Add logic here to handle changing password
+    console.log('Changing password...');
+    console.log('Old Password:', oldPassword);
+    console.log('New Password:', newPassword);
+    console.log('Confirm Password:', confirmPassword);
   };
 
-    return (
-        <div>
-      <ul>
-        {renderItems()}
-      </ul>
-      <div style={styles.paginationContainer}>
-        <ul style={styles.pagination}>
-          {renderPageNumbers()}
-        </ul>
+  return (
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Account Settings</h2>
+      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
+        <label htmlFor="oldPassword" style={{ width: '150px', marginRight: '1rem', fontSize: '1rem' }}>Old Password:</label>
+        <input
+          type="password"
+          id="oldPassword"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+        />
+      </div>
+      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
+        <label htmlFor="newPassword" style={{ width: '150px', marginRight: '1rem', fontSize: '1rem' }}>New Password:</label>
+        <input
+          type="password"
+          id="newPassword"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+        />
+      </div>
+      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
+        <label htmlFor="confirmPassword" style={{ width: '150px', marginRight: '1rem', fontSize: '1rem' }}>Confirm Password:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+        />
+      </div>
+      <div>
+        <button onClick={handleChangePassword} style={{ background: '#3498DB', color: '#fff', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Change Password</button>
       </div>
     </div>
-    );
+  );
 };
-
-// Basic styles (customize as needed)
-const styles = {
-    paginationContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '20px',
-    },
-    pagination: {
-      listStyle: 'none',
-      display: 'flex',
-      padding: '0',
-      margin: '0',
-      cursor: 'pointer',
-    },
-    active: {
-      background: '#007bff',
-      color: '#fff',
-      padding: '8px 12px',
-      borderRadius: '4px',
-      margin: '0 4px',
-    },
-  };
 
 export default AccountSetting;
