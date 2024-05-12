@@ -33,7 +33,7 @@ const ResumeContainer = () => {
             return  <ResumeTemplates handleSelectedTemplate={handleSelectedTemplate} selectedTemplateId={selectedTemplateId} />
         }
 
-        return <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '30px' }}>
+        return <div style={{  }}>
                     <div className="resume-form">
                        {step==2 && <ResumeHeading templateType={templateType} />}
                        {step==3 && <ResumeEducation />}
@@ -41,9 +41,9 @@ const ResumeContainer = () => {
                        {step==5 &&   <SkillContextProvider><ResumeSkills /></SkillContextProvider>  }
                        {step==6 &&  <ResumeFinalize /> }
                     </div>
-                    <div className="resume-preview">
+                    {/* <div className="resume-preview">
                         <ResumePreview selectedTemplate={selectedTemplate} />
-                    </div>
+                    </div> */}
                 </div>
     }
     return (
