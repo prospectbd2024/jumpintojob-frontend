@@ -1,41 +1,53 @@
 import React from 'react';
 import './ResumeSteps.css'
-import { useUserContext } from '../../../Contexts/UserContext';
+import { useResumeContext } from '@/Contexts/ResumeContext';
 
 const ResumeSteps = () => {
-    const {currentStep, setCurrentStep} = useUserContext();
+    const { currentStep, setCurrentStep } = useResumeContext();
     return (
         <div className='resume-steps'>
             <div className="resume-steps-container container">
                 <div className="steps">
-                    <div className="step">
-                        <h5 className={`${currentStep >= 1  ? 'current-step' : ''}`}>1</h5>
-                        <p>TEMPLATE</p>
-                        <span style={currentStep > 1 ? {background: '#3498DB'} : {}}></span>
+                    <div className={`step ${currentStep >= 1 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>1</h5>
+                            <p>TEMPLATE</p>
+                        </div>
+                        <span></span>
                     </div>
-                    <div className="step">
-                        <h5 className={`${currentStep >= 2 ? 'current-step' : ''}`}>2</h5>
-                        <p>HEADER</p>
-                        <span style={currentStep > 2 ? {background: '#3498DB'} : {}}></span>
+                    <div className={`step ${currentStep >= 2 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>2</h5>
+                            <p>HEADER</p>
+                        </div>
+                        <span ></span>
                     </div>
-                    <div className="step">
-                        <h5 className={`${currentStep >= 3? 'current-step' : ''}`}>3</h5>
-                        <p>EDUCATION</p>
-                        <span style={currentStep > 3 ? {background: '#3498DB'} : {}}></span>
+                    <div className={`step ${currentStep >= 3 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>3</h5>
+                            <p>EDUCATION</p>
+                        </div>
+                        <span ></span>
                     </div>
-                    <div className="step">
-                        <h5 className={`${currentStep >= 4? 'current-step' : ''}`}>4</h5>
-                        <p>EXPERIENCE</p>
-                        <span style={currentStep > 4 ? {background: '#3498DB'} : {}}></span>
+                    <div className={`step ${currentStep >= 4 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>4</h5>
+                            <p>EXPERIENCE</p>
+                        </div>
+                        <span></span>
                     </div>
-                    <div className="step">
-                        <h5 className={`${currentStep >= 5  ? 'current-step' : ''}`}>5</h5>
-                        <p>SKILLS</p>
-                        <span style={currentStep > 5 ? {background: '#3498DB'} : {}}></span>
+                    <div className={`step ${currentStep >= 5 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>5</h5>
+                            <p>SKILLS</p>
+                        </div>
+                        <span ></span>
                     </div>
-                    <div className="step">
-                        <h5 className={`${currentStep >= 6 ? 'current-step' : ''}`}>6</h5>
-                        <p>FINALIZE</p>
+                    <div className={`step ${currentStep >= 6 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>6</h5>
+                            <p>FINALIZE</p>
+                        </div>
                     </div>
                 </div>
             </div>
