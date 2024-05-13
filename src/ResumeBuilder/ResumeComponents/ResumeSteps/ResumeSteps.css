@@ -39,7 +39,7 @@
 }
 .resume-steps .step h5{
     font-size: 14px;
-    border: 1px solid #3498DB;
+    border: 1px solid var(--primary-color);
     width: 25px;
     height: 25px;
     background-color: white;

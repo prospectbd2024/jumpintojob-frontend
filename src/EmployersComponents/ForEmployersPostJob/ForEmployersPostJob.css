@@ -167,7 +167,7 @@
 }
 .jobpost-review-actions .preview-post .preview-btn {
     color: var(--primary-color);
-    border: 1px solid #3498DB;
+    border: 1px solid var(--primary-color);
     display: flex;
     align-items: center;
     gap: 8px;

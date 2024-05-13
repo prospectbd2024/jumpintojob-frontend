@@ -29,10 +29,10 @@
     transition: .1 ease-in-out;
 }
 .resume-templates .templates .template img:hover{
-    border: 3px solid #3498DB;
+    border: 3px solid var(--primary-color);
 }
 .resume-templates .templates .template img .selected-template{
-    border: 3px solid #3498DB;
+    border: 3px solid var(--primary-color);
 }
 .resume-templates .templates .template p{
     color: #616161;

@@ -148,7 +148,7 @@
     width: 140px;
     height: 40px;
     background: transparent;
-    border: 1px solid #3498DB;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     font-weight: bold;
     font-size: 15px;
