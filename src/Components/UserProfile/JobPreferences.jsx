@@ -35,6 +35,8 @@ const JobPreferences = () => {
     return (
         <div style={{ marginBottom: '30px' }}>
             <h2 style={{ fontSize: '20px', marginBottom: '10px' }}>Job Preferences</h2>
+            <div style={{marginTop: '60px'}}>
+
             <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
                 <label htmlFor="jobType" style={{ width: '150px', marginRight: '10px', fontWeight: 'bold' }}>Type of Job Preferred:</label>
                 <select
@@ -98,6 +100,7 @@ const JobPreferences = () => {
             </div>
             <button onClick={handleSavePreferences} style={{ background: '#3498DB', color: '#fff', width: '120px', height: '40px', borderRadius: '5px', border: 'none', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Save</button>
         </div>
+            </div>
     );
 };
 
