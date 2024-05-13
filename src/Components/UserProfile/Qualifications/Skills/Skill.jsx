@@ -1,13 +1,13 @@
 // Skill.js
 "use client";
 import { FaTrashAlt } from "react-icons/fa"; 
-import React, { useCallback,useState,useEffect } from "react";
+import React, { useCallback,useState } from "react";
 import { RiMedalFill } from "react-icons/ri";
-import { HiMinus } from "react-icons/hi";
 import "./Skill.css"; // Import CSS file
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
 import Rating from "./Rating";
+import AddButton from "@/Components/AddButton/AddButton";
 
 function Skill({ props }) {
   const { skills, setSkills } = props;
@@ -122,11 +122,8 @@ function Skill({ props }) {
         </div>
       )}
       {skills.length == 0 && <div className="no-skills">Please Add Skills</div>}
-      <div className="add-skill" onClick={() => {
-        showModal("Add Skill")
-      }}>
-        <p>Add Skill</p>
-        <button>+</button>
+      <div>
+        <AddButton onClick={()=>showModal('Add Skill','add')}/>
       </div>
       <ModalBox props={{ ...modal,onSave: saveSkill , onClose: closeModal }}>
         <AddSkill props={{selectedSkill: skill ,setSkill ,skillErrors}} />

@@ -1,12 +1,11 @@
 import { FaTrashAlt } from "react-icons/fa"; 
 // Language.js
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { RiMedalFill } from "react-icons/ri";
-import { HiMinus } from "react-icons/hi";
 import "./Language.css";
 import ModalBox from "../ModalBox";
 import AddLanguage from "./AddLanguage";
-import LanguageProperties from "./LanguageProperties";
+import AddButton from "@/Components/AddButton/AddButton";
 
 function Language({ props }) {
   // State for managing languages
@@ -82,9 +81,8 @@ function Language({ props }) {
       {languages.length === 0 && <div className="no-languages">Please Add Languages</div>}
       
       {/* Add language button */}
-      <div className="add-language" onClick={() => showModal("Add Language")}>
-        <p>Add Language</p>
-        <button>+</button>
+      <div>
+        <AddButton onClick={()=>showModal('Add Language','add')}/>
       </div>
       
       {/* Modal for adding/editing language */}

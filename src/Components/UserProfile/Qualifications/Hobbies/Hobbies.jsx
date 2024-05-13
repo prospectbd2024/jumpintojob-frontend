@@ -1,11 +1,11 @@
 import { FaTrashAlt } from "react-icons/fa"; 
 // Hobbies.js
 import React, { useCallback, useState } from "react";
-import { HiMinus, HiHeart } from "react-icons/hi";
-import { FaPencilAlt } from "react-icons/fa";
+import {  HiHeart } from "react-icons/hi";
 import ModalBox from "../ModalBox";
 import AddHobby from "./AddHobby";
 import "./Hobbies.css"; // Import CSS file
+import AddButton from "@/Components/AddButton/AddButton";
 
 const Hobbies = ({ props }) => {
   const { hobbies, setHobbies } = props;
@@ -110,9 +110,8 @@ const Hobbies = ({ props }) => {
         <div className="no-hobbies">Please add hobbies</div>
       )}
 
-      <div className="add-hobby" onClick={() => showModal("Add Hobby", "add")}>
-        <p>Add Hobby</p>
-        <button>+</button>
+      <div>
+        <AddButton onClick={()=>showModal('Add Hobby','add')}/>
       </div>
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddHobby props={{ hobby, setHobby, saveChanges, hobbyErrors }} />

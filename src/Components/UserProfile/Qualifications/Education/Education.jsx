@@ -1,13 +1,12 @@
 "use client"
 import { FaTrashAlt } from "react-icons/fa"; 
-import React,{useCallback,useState,useEffect} from "react";
-import { HiAcademicCap, HiX, HiMinus } from "react-icons/hi";
+import React,{useCallback,useState} from "react";
+import { HiAcademicCap } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
-// import EducationFields from "@/ResumeBuilder/ResumeComponents/ResumeEducation/EducationFields";
 import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
 import "./Education.css"; // Import CSS file
-import { useModalContext } from "@/Contexts/ModalContext";
 import ModalBox from "../ModalBox";
+import AddButton from "@/Components/AddButton/AddButton";
 
 const Education = ({ props }) => {
 
@@ -149,11 +148,13 @@ const validation = useCallback(()=>{
       ) : (
         <div className='no-educations'>Please add education</div>
       )}
-
-      <div className="add-education" onClick={()=>showModal('Add Education','add')}>
+      <div>
+        <AddButton onClick={()=>showModal('Add Education','add')}/>
+      </div>
+      {/* <div className="add-education" onClick={}>
         <p className='add-education-text'>Add Education</p>
         <button className="add-button">+</button>
-      </div>
+      </div> */}
       <ModalBox props={{...modal , onSave: saveChanges, onClose : closeModal }}  >
             <AddEducation props={{ education, setEducation,saveChanges,educationErrors }} />
       </ModalBox>
