@@ -26,10 +26,15 @@
 }
 .user-home-content .user-home-companies .user-home-company .company-item .main-items div a h3{
     font-size: 16px;
+    padding-top: 20px;
 }
 .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer a .company-button{
     width: 120px;
 }
+.company-item-content-main .main-items{
+    margin-top: 10px;
+}
+
 @media (min-width: 900px) {
     .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer{
         display: flex;
