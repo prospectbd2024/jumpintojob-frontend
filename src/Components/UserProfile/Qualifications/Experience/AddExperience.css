@@ -20,7 +20,7 @@
   .add-experience-input-field textarea {
     padding: 8px 5px;
     outline: none;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondery-color);
     background: transparent;
     color: #444;
     font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   /* Add your desired styling */
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--secondery-color);
   border-radius: 4px;
   font-size: 16px;
   width: 60px; /* Adjust the width as needed */

@@ -54,5 +54,5 @@
 
 .resume-steps .step p{
     font-size: 14px;
-    color: #616161;
+    color: var(--darker-secondary-color);
 }

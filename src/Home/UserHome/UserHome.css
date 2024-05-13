@@ -10,7 +10,7 @@
 }
 .user-home-content h4 {
     margin-bottom: 15px;
-    color: #616161;
+    color: var(--darker-secondary-color);
     font-size: 18px;
     font-weight: 400;
 }
@@ -45,7 +45,7 @@
 }
 
 .company_description{
-    color: #616161;
+    color: var(--darker-secondary-color);
 }
 .user-home-content .user-home-jobs{}
 .featured-jobs-more {
@@ -101,11 +101,11 @@
     font-size: 15px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main p {
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-top: 5px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main .user-address {
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-top: 5px;
     font-size: 14px;
 }
@@ -127,7 +127,7 @@
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div {}
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div p {
     font-size: 15px;
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-bottom: 4px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div h6{

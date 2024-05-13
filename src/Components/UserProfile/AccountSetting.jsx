@@ -31,7 +31,7 @@ const AccountSetting = () => {
           id="oldPassword"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
@@ -41,7 +41,7 @@ const AccountSetting = () => {
           id="newPassword"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
@@ -51,7 +51,7 @@ const AccountSetting = () => {
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div>

@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from 'react';
 import { useUserContext } from '../../../Contexts/UserContext';
-import AddSkills from './AddSkills';
 import PrevNextButton from '@/ResumeBuilder/Layout/Button/PrevNextButton';
 import Skill from '@/Components/UserProfile/Qualifications/Skills/Skill';
 

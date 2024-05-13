@@ -21,7 +21,7 @@
 .add-education-input-field textarea {
   padding: 8px 5px;
   outline: none;
-  border: 1px solid #ccc; /* Updated border color */
+  border: 1px solid var(--secondery-color); /* Updated border color */
   background: transparent;
   color: #444; /* Updated text color */
   font-family: Arial, sans-serif; /* Updated font family */
@@ -60,7 +60,7 @@
   resize: none;
   padding: 8px 5px;
   outline: none;
-  border: 1px solid #ccc; /* Updated border color */
+  border: 1px solid var(--secondery-color); /* Updated border color */
   background: transparent;
   font-family: Arial, sans-serif; /* Updated font family */
   border-radius: 5px; /* Added border radius */

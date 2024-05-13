@@ -102,7 +102,7 @@ const VerifyEmail = ({redirect}) => {
       <button
         onClick={resandVerificationCode}
         style={{
-          backgroundColor: resendDisabled ? '#ccc' : '#3199d8',
+          backgroundColor: resendDisabled ? 'var(--secondery-color)' : '#3199d8',
           color: 'white',
           padding: '8px 16px',
           border: 'none',

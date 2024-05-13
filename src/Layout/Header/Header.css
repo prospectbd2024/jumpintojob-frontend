@@ -99,10 +99,10 @@
     
 }
 .web-header .header-menu ul li a:hover{
-    color:var(--primary-color);
+    color:var(--primary-link-color);
 }
 .web-header .header-menu ul li a.active{
-    color: var(--primary-color);
+    color: var(--primary-link-color);
 }
 .web-header .header-menu .main-menu li:nth-child(2) a, .web-header .header-menu ul li:nth-child(5) a {
     /* display: flex;

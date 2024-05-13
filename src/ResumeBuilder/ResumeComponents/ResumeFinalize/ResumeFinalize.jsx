@@ -1,17 +1,12 @@
 import React, { useCallback } from 'react';
-import { useUserContext } from '../../../Contexts/UserContext';
-import AddLanguages from './AddLanguages';
 import './ResumeFinalize.css';
 import ResumeOthers from './ResumeOthers';
+import { useResumeContext } from '@/Contexts/ResumeContext';
+import Language from '@/Components/UserProfile/Qualifications/Language/Language';
 
 const ResumeFinalize = () => {
-    const { currentStep, setCurrentStep,resumeData } = useUserContext();
+    const {  languages,setLanguages } = useResumeContext();
 
-
-    const sendResume = useCallback(()=>{
-
-        console.log(resumeData)
-    });
     return (
         <div className='resume-finalize'>
             {/* <div className="resume-finalize-container container"> */}
@@ -20,7 +15,7 @@ const ResumeFinalize = () => {
             </div>
             <div className="resume-finalize-content">
                 <div>
-                    <AddLanguages />
+                <Language props={{languages,setLanguages}}/>
                 </div>
                 <div>
             

@@ -125,28 +125,28 @@ const PostJobReview = ({ setShowReview, jobData }) => {
                     </div>
                     <div className="review-item details" >
                         <h4 style={{paddingTop: '10px'}}>Details description</h4>
-                        <div className='details-descriptions' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                        <div className='details-descriptions' style={{ whiteSpace: 'pre-wrap', color : 'var(--darker-secondary-color)' }}>
                             <div>{jobData.description}</div>
                             {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item details" style={{marginBottom : '10px'}}>
                         <h4 style={{paddingTop: '10px'}}>Details Responsibilites</h4>
-                        <div className='details-responsibilities' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                        <div className='details-responsibilities' style={{ whiteSpace: 'pre-wrap', color : 'var(--darker-secondary-color)' }}>
                             <div>{jobData.responsibilities}</div>
                             {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item details" style={{marginBottom : '10px'}}>
                         <h4 style={{paddingTop: '10px'}}>Educational Requirements</h4>
-                        <div className='details-educational_requirements' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                        <div className='details-educational_requirements' style={{ whiteSpace: 'pre-wrap', color : 'var(--darker-secondary-color)' }}>
                             <div>{jobData.educational_requirements}</div>
                             {/* <FaPencilAlt /> */}
                         </div>
                     </div>
                     <div className="review-item details" style={{marginBottom : '10px'}}>
                         <h4 style={{paddingTop: '10px'}}>Educational Requirements</h4>
-                        <div className='details-experience' style={{ whiteSpace: 'pre-wrap', color : '#616161' }}>
+                        <div className='details-experience' style={{ whiteSpace: 'pre-wrap', color : 'var(--darker-secondary-color)' }}>
                             <div>{jobData.experience}</div>
                             {/* <FaPencilAlt /> */}
                         </div>

@@ -11,7 +11,7 @@ function ResumeContext({children}) {
     const [currentStep, setCurrentStep] = useState(1);
     const [educations,setEducations] = useState([]);
     const [experiences, setExperiences] = useState([]);
-
+    const [languages, setLanguages] = useState([]);
     useEffect(()=>{
       setExperiences([
         {
@@ -103,8 +103,15 @@ function ResumeContext({children}) {
         ])
   
       }, [])
+      useEffect(() => {
+        setLanguages( [
+          { "id": 1, "language": "Bengali", "proficiency": "Native" },
+          { "id": 2, "language": "English", "proficiency": "Fluent" },
+          { "id": 3, "language": "Spanish", "proficiency": "Beginner" }
+      ]);
+      }, [ ])
   return (
-    <resumeContext.Provider  value={{currentStep, setCurrentStep,educations,setEducations,experiences, setExperiences}} >
+    <resumeContext.Provider  value={{currentStep, setCurrentStep,educations,setEducations,experiences, setExperiences,languages, setLanguages}} >
         {children}
     </resumeContext.Provider>
   )

@@ -21,7 +21,7 @@
 }
 .companies-content .companies-tabs .companies-tablist li {
     list-style: none;
-    color: #616161;
+    color: var(--darker-secondary-color);
     border-left: 5px solid transparent;
     padding: 13px 10px;
     font-size: 16px;
@@ -80,7 +80,7 @@
     
 }
 .company-item .company-item-content .company-item-content-main .main-items p{
-    color: #616161;
+    color: var(--darker-secondary-color);
 }
 .company-item .company-item-content .company-item-content-main div .company_description{
     color: #060606;
@@ -147,7 +147,7 @@
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
     list-style: none;
-    color: #616161;
+    color: var(--darker-secondary-color);
     border-left: 5px solid transparent;
     padding: 13px 10px;
     font-size: 16px;
@@ -156,7 +156,7 @@
     transition: .3s;
 }
 .company-item {
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondery-color);
     padding: 20px;
     margin: 20px;
     border-radius: 10px;

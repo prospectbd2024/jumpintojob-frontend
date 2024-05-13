@@ -10,7 +10,7 @@
     width: calc(100% - 10px);
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #cccccc;
+    border: 1px solid var(--secondery-color);
     border-radius: 4px;
     box-sizing: border-box;
     outline: none;
@@ -38,7 +38,7 @@
     width: calc(100% - 10px);
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #cccccc;
+    border: 1px solid var(--secondery-color);
     border-radius: 4px;
     box-sizing: border-box;
     outline: none;

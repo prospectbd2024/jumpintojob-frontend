@@ -22,7 +22,7 @@
     height: 45px;
     font-weight: bold;
     border-radius: 5px;
-    background: var(--primary-color);
+    background: var(--primary-link-color);
     color: #fff;
     border: none;
     font-size: 15px;
