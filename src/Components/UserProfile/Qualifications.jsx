@@ -4,10 +4,6 @@ import React, { useState,useEffect } from 'react';
 import Education from './Qualifications/Education/Education';
 import Skill from './Qualifications/Skills/Skill';
 import Language from './Qualifications/Language/Language';
-import ModalBox from './Qualifications/ModalBox';
-import SkillContextProvider, { SkillContext } from '@/Contexts/SkillContext';
-import ModalContext from '@/Contexts/ModalContext';
-import Experience from './Qualifications/Experience/Experiences';
 import Experiences from './Qualifications/Experience/Experiences';
 import Hobbies from './Qualifications/Hobbies/Hobbies';
 
