@@ -6,61 +6,16 @@ import PreviewExperiences from "./PreviewExperiences";
 import ExperienceFildes from "./ExperienceFields";
 import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 import AddMoreButton from "@/ResumeBuilder/Layout/Button/AddMoreButton";
+import Experiences from "@/Components/UserProfile/Qualifications/Experience/Experiences";
+import { useResumeContext } from "@/Contexts/ResumeContext";
 const ResumeExperiences = () => {
-  const { currentStep, setCurrentStep, resumeData, setResumeData } =
-    useUserContext();
-  const [state, setState] = useState({ type: "list-view", id: 1 , index : 0 });
-  const [experienceFields, setExperienceFields] = useState({});
-  const [isFormFilled, setFormFilled] = useState(false);
+  const {experiences, setExperiences} =    useResumeContext();
 
-  const handleAddMore = useCallback(()=>{
-    setState({...state,type : 'insert' , index : state.index+1})
-  });
 
   return (
     <div className="resume-experiences">
       <div className="resume-experiences-container container">
-        <div className="resume-form-header">
-          <h3>
-            Now complete your <span>experiences</span>
-          </h3>
-        </div>
-        <div className="resume-education-content resume-heading-content">
-          {(state.type=='list-view' || state.type=='delete') &&
-            <PreviewExperiences
-            props ={{
-            resumeData,
-            setExperienceFields,
-            experienceFields,
-            state,
-            setState,
-            setResumeData}}
-            />
-            }
-             {(state.type == "update" || state.type == "insert") &&
-            <ExperienceFildes
-            props={{
-                setResumeData,
-                resumeData,
-                isFormFilled,
-                setFormFilled,
-                experienceFields,
-                setExperienceFields,
-                state,
-                setState,
-              }}
-            />
-      
-          }
-          {(state.type=='list-view' || state.type=='delete') &&  (
-            <AddMoreButton handleAddMore={handleAddMore}>
-                ADD EXPERIENCE
-            </AddMoreButton>
-          )}
-        </div>
-        <div>
-          <PrevNextButton props={{ setCurrentStep }} />
-        </div>
+      <Experiences props={{experiences, setExperiences}} />
       </div>
     </div>
   );

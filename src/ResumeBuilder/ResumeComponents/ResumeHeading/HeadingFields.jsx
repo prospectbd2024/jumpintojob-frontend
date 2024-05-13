@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {FaTrashAlt}  from 'react-icons/fa'
-function HeadingFields({ props }) {
-  const { templateType } = props;
-
+function HeadingFields({  }) {
   // Initial resume data state
   const initialResumeData = {
     title: "",
@@ -73,11 +71,12 @@ function HeadingFields({ props }) {
     setMediaLinks([...mediaLinks, { name: "", url: "" }]);
   };
   return (
-    <div className={`resume-heading-content ${templateType == 'cv' ? 'resume-heading-content-yesimg' : 'resume-heading-content-noimg'}`}>
-      {templateType == 'cv' &&
-        <div className="image-upload">
-          {/* Image Upload Component */}
-        </div>
+    <div className={`resume-heading-content  'resume-heading-content-yesimg' : 'resume-heading-content-noimg'`}>
+      {
+      // templateType == 'cv' &&
+      //   <div className="image-upload">
+      //     {/* Image Upload Component */}
+      //   </div>
       }
       <div action="" className="heading-form">
         <div className="heading-form-main">

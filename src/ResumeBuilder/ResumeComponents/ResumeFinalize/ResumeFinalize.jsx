@@ -27,10 +27,6 @@ const ResumeFinalize = () => {
              <ResumeOthers />
                 </div>
             </div>
-            <div className="resume-prev-next-buttons">
-                <button className='prev-button' onClick={() => setCurrentStep(currentStep - 1)}>Previous</button>
-                <button className='next-button' onClick={()=> {sendResume()}}>Save & Preview</button>
-            </div>
 
         </div>
     );

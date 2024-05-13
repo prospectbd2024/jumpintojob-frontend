@@ -7,69 +7,17 @@ import { useState } from "react";
 import PreviewEducation from "./PreviewEducation";
 import EducationFields from "./EducationFields";
 import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
+import Education from "@/Components/UserProfile/Qualifications/Education/Education";
+import { useResumeContext } from "@/Contexts/ResumeContext";
 
 const ResumeEducation = () => {
-  const { currentStep, setCurrentStep, resumeData, setResumeData } =
-    useUserContext();
-
-  const [state, setState] = useState({ type :  "list-view" , id : 0, index : 0});
-  const [educationFields, setEducationFields] = useState({});
-  const [isFormFilled, setFormFilled] = useState(false);
-
+  const {  educations,setEducations} = useResumeContext();
 
   return (
     <div className="resume-education">
-      <div className="resume-education-container container">
-        <div className="resume-form-header">
-          <h3>
-            Now complete your <span>education</span>
-          </h3>
-        </div>
-        <div className="resume-education-content resume-heading-content">
-          {(state.type=='list-view' || state.type=='delete') && (
-            <PreviewEducation
-              props={{
-                resumeData,
-                setEducationFields,
-                state,
-                setState,
-                setResumeData
-              }}
-            />
-          )}
-          {(state.type == "update" || state.type == "insert") && (
-            <EducationFields
-              props={{
-                setResumeData,
-                resumeData,
-                isFormFilled,
-                setFormFilled,
-                educationFields,
-                setEducationFields,
-                state,
-                setState,
-              }}
-            />
-          )}
 
-          {(state.type=='list-view' || state.type=='delete') && (
-            <div className="add-more-education">
-              <button
-                onClick={() => setState({...state, type : 'insert' , index : state.index+1 })}
-                style={{
-                  cursor: "pointer" ,
-                  opacity:  1 ,
-                }}
-              >
-                <FaPlus /> ADD EDUCATION
-              </button>
-            </div>
-          )}
-        </div>
-        <div>
-          <PrevNextButton props={{ setCurrentStep }} />
-        </div>
-      </div>
+      <Education props={{educations,setEducations}}/>
+
     </div>
   );
 };

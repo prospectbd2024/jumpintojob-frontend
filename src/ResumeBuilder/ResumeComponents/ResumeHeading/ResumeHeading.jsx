@@ -1,8 +1,6 @@
 import React from 'react';
 import { useUserContext } from '../../../Contexts/UserContext';
 import './ResumeHeading.css'
-import ImageUpload from './ImageUpload';
-import PrevNextButton from '@/ResumeBuilder/Layout/Button/PrevNextButton';
 import HeadingFields from './HeadingFields';
 
 const ResumeHeading = ({ templateType }) => {
@@ -15,9 +13,6 @@ const ResumeHeading = ({ templateType }) => {
                     <h3>Let's start with <span>header</span></h3>
                 </div>
                 <HeadingFields props={{resumeData, setResumeData,templateType}} />
-                <div>
-                    <PrevNextButton props={{setCurrentStep}} />
-                </div>
             </div>
         </div>
     );
