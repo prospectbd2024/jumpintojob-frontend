@@ -39,7 +39,7 @@
   width: 10%;
   height: 5px;
   border-radius: 50px;
-  background-color: #3498dbb8;
+  background-color: var(--primary-color);
 }
 
 
@@ -89,7 +89,3 @@
   text-decoration: none;
 }
 
-/* styles.css */
-:root {
-  --primary-color: #007BFF;
-}

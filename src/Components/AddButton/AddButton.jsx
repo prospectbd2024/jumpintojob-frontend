@@ -20,7 +20,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '10px 20px',
-    backgroundColor: '#3498DB',
+    backgroundColor: 'var(--primary-color)',
     color: 'white',
     borderRadius: '5px',
     cursor: 'pointer',

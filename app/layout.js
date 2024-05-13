@@ -22,6 +22,7 @@ import '@/ResumeBuilder/ResumeComponents/ResumeFinalize/ResumeFinalize.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSkills/AddSkills.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSteps/ResumeSteps.css'
 import { UserProvider } from "@/Contexts/UserContext"
+import './variables.css'
 import JobContext from '@/Contexts/JobContext'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "app/api/auth/[...nextauth]/route"
