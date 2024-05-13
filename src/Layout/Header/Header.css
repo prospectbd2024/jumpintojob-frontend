@@ -99,10 +99,10 @@
     
 }
 .web-header .header-menu ul li a:hover{
-    color:#3498DB;
+    color:var(--primary-color);
 }
 .web-header .header-menu ul li a.active{
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .web-header .header-menu .main-menu li:nth-child(2) a, .web-header .header-menu ul li:nth-child(5) a {
     /* display: flex;
@@ -282,7 +282,7 @@
     color: #8b0000d1!important;
 }
 .register-btn {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff!important;
     display: block;
     width: 120px;

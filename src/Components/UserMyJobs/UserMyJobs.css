@@ -91,7 +91,7 @@
     font-size: 13px;
 }
 .dashboard-stats-and-profile .dashboard-user-profile .user-profile-main .user-address svg {
-    color: #3498db;
+    color: var(--primary-color);
     margin-right: 5px;
 }
 .dashboard-stats-and-profile .dashboard-user-profile .user-profile-contact {
@@ -153,7 +153,7 @@
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .dashboard-jobs .dashboard-jobs-content {
     width: 100%;

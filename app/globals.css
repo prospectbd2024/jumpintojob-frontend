@@ -89,3 +89,7 @@
   text-decoration: none;
 }
 
+/* styles.css */
+:root {
+  --primary-color: #007BFF;
+}

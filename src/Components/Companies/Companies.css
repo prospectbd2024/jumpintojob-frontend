@@ -30,7 +30,9 @@
     transition: .3s;
 }
 .companies-content .companies-tabs .companies-tablist li:hover {
-    border-left: 5px solid #3498db70; color: #3498DB; box-shadow: 5px 12px 12px #e9e9e961;
+    border-left: 5px solid #3498db70; 
+    color: var(--primary-color); 
+    box-shadow: 5px 12px 12px #e9e9e961;
 }
 .default-category{
     border-left: 5px solid #3498dbdb!important; color: #3498DB!important; box-shadow: 5px 12px 12px #e9e9e961;
@@ -96,7 +98,7 @@
     font-weight: bold;
 }
 .company-item .company-item-content .company-item-content-footer .company-details-button {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     
 }

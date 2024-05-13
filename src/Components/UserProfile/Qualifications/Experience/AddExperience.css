@@ -63,7 +63,7 @@
   background: transparent;
   color: #ffff;
   border: none;
-  background-color: #3498db;
+  background-color: var(--primary-color);
   /* width: 71px; */
   height: 35px;
   font-size: 12px;

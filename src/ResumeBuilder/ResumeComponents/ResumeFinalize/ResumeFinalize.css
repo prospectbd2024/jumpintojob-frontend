@@ -3,7 +3,7 @@
     width: 110px;
     font-weight: bold;
     height: 35px;
-    background: #3498DB;
+    background: var(--primary-color);
     border: none;
     color: #fff;
     cursor: pointer;

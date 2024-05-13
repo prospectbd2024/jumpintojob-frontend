@@ -63,7 +63,7 @@
     cursor: pointer;
     border: none;
     margin-top: 60px;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     cursor: pointer;
     font-size: 15px;
@@ -166,7 +166,7 @@
     gap: 15px;
 }
 .jobpost-review-actions .preview-post .preview-btn {
-    color: #3498DB;
+    color: var(--primary-color);
     border: 1px solid #3498DB;
     display: flex;
     align-items: center;
@@ -177,7 +177,7 @@
     font-size: 16px;
 }
 .jobpost-review-actions .preview-post .post-btn {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     transition: .2s;
 }

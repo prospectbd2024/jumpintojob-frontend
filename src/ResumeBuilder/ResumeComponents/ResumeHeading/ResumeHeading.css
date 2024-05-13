@@ -68,7 +68,7 @@
     font-size: 16px;
     background: none;
     border: none;
-    color: #3498DB;
+    color: var(--primary-color);
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -109,7 +109,7 @@
  }
  .media-links button{
     max-width: fit-content;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     border:none;
     padding: 10px 20px 10px 20px;

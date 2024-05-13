@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 .add-skills .add-new-skill h4 {
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .add-skills .add-new-skill button {
     width: 42px;
@@ -23,7 +23,7 @@
     transition: .1s;
 }
 .add-skills .add-new-skill button svg{
-    color: #3498DB;
+    color: var(--primary-color);
     font-size: 25px;
 }
 .add-skills .add-new-skill button:hover{
@@ -165,7 +165,7 @@
     height: 40px;
     border: none;
     font-weight: bold;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #ffff;
     font-size: 15px;
     border-radius: 50px;

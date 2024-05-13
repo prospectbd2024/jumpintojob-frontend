@@ -248,7 +248,7 @@
     }
 
     .mobile-menu-icon .mobile-login-btn button {
-        background: #3498db;
+        background: var(--primary-color);
         border: none;
         display: flex;
         align-items: center;

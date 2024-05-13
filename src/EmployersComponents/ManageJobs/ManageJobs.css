@@ -35,7 +35,7 @@
 .most-applied-jobs .post-new-job-btn button {
     width: 170px;
     font-weight: bold;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     border: none;
     height: 45px;
@@ -80,7 +80,7 @@
     color: #323232;
 }
 .active-jobs-content .active-jobs-table-body .index {
-    background: #3498DB;
+    background: var(--primary-color);
     border: none;
     border-radius: 100%;
     width: 25px;
@@ -110,7 +110,7 @@
     text-align: center;
 }
 .managejobs-actions-btn {
-    background: #3498DB;
+    background: var(--primary-color);
     border: none;
     color: #fff;
     padding: 0 10px;
@@ -202,7 +202,7 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    background: #3498DB;
+    background: var(--primary-color);
     cursor: pointer;
 }
 .applicants-table-body .application-status select{
@@ -226,7 +226,7 @@
     font-size: 15px;
 }
 .applicants-table-body .application-status.active{
-    background: #3498DB;
+    background: var(--primary-color);
 }
 .applicants-table-body .application-status.shortlisted{
     background: #F08200;

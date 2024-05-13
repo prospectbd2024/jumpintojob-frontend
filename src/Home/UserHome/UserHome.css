@@ -60,13 +60,13 @@
     border-radius: 4px;
     border: 1px solid #3498DB;
     background: transparent;
-    color: #3498DB;
+    color: var(--primary-color);
     font-size: 15px;
     cursor: pointer;
     transition: .3s;
 }
 .featured-jobs-more a button:hover{
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
 }
 .user-home-content .user-home-jobs div {

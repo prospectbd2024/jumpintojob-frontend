@@ -15,14 +15,14 @@
 .resume-header-content .resume-header-title h2{}
 .resume-header-content .resume-header-title span {
     font-size: 14px;
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .resume-header-content .resume-header-button button {
     width: 130px;
     height: 45px;
     font-weight: bold;
     border-radius: 5px;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     border: none;
     font-size: 15px;

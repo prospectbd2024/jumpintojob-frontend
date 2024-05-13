@@ -118,7 +118,7 @@
     background-color: transparent;
 }
 .account-input svg{
-    color: #3498DB;
+    color: var(--primary-color);
 }
 
 .account-form form .account-info input {
@@ -154,7 +154,7 @@
     color: 15px;
 }
 .terms-conditions p a {
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .terms-conditions div {
     display: flex;
@@ -174,7 +174,7 @@
     width: 100%;
 }
 .register-button input[type=submit] {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     cursor: pointer;
     width: 100%;

@@ -52,5 +52,5 @@
     background: #ac381d;
 }
 .preview-education .preview-actions .edit{
-    background: #3498DB;
+    background: var(--primary-color);
 }

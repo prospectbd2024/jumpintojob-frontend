@@ -38,7 +38,7 @@
 }
 
 .banner-titles h1 span {
-    color: #3498db;
+    color: var(--primary-color);
 }
 
 .banner-titles p {
@@ -90,7 +90,7 @@
 }
 
 .banner-data .banner-data-content .banner-data-info p {
-    color: #3498db;
+    color: var(--primary-color);
     font-weight: bold;
     font-size: 22px;
 }
@@ -125,7 +125,7 @@
     right: 10px
 }
 .home-banner-buttons .find-job-btn {
-    background-color: #3498db;
+    background-color: var(--primary-color);
     padding: 10px 20px;
     transition: .3s;
 }

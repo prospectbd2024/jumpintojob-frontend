@@ -4,7 +4,7 @@
     color: #616161;
 }
 .resume-form-header h3 span{
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .resume-templates .templates {
     display: flex;
@@ -60,7 +60,7 @@
     border-radius: 3px;
 }
 .resume-prev-next-buttons .next-button {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     border-radius: 3px;
 }

@@ -1,5 +1,5 @@
 .resume-steps .step-title-container h5{
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
 }
 .resume-steps .steps{
@@ -26,16 +26,16 @@
 }
 .resume-steps .active-step .step-title-container h5{
     color: white;
-    background: #3498DB;
+    background: var(--primary-color);
 }
 .resume-steps .active-step span{
-    background: #3498DB;
+    background: var(--primary-color);
 }
 .resume-steps .resume-steps-container  .steps .step .filled{
-    background-color: #3498DB;
+    background-color: var(--primary-color);
 }
 .resume-steps .resume-steps-container  .steps .step .empty{
-    background-color: #3498DB;
+    background-color: var(--primary-color);
 }
 .resume-steps .step h5{
     font-size: 14px;
@@ -47,7 +47,7 @@
     text-align: center;
     border-radius: 100px;
     display: inline-block;
-    color:#3498DB;
+    color:var(--primary-color);
     margin-bottom: 8px;
 }
 
