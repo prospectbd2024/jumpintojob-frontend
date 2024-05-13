@@ -32,22 +32,18 @@ const AboutMe = () => {
 
   const handleUpdateUserProfile = async (event) => {
     event.preventDefault();
+    
     const updateUserProfile = new FormData();
     updateUserProfile.append("avatar", selectedAvatar);
-    updateUserProfile.append("current_city", currentAddress.city);
-    updateUserProfile.append("current_state", currentAddress.state);
-    updateUserProfile.append("current_country", currentAddress.country);
-    updateUserProfile.append("current_postal_code", currentAddress.postal_code);
-    updateUserProfile.append("permanent_city", permanentAddress.city);
-    updateUserProfile.append("permanent_state", permanentAddress.state);
-    updateUserProfile.append("permanent_country", permanentAddress.country);
-    updateUserProfile.append("permanent_postal_code", permanentAddress.postal_code);
+    updateUserProfile.append("current_address", currentAddress);
+    updateUserProfile.append("permanent_address", permanentAddress);
     updateUserProfile.append("gender", gender);
     updateUserProfile.append("marital_status", maritalStatus);
     updateUserProfile.append("date_of_birth", dateOfBirth);
     updateUserProfile.append("nationality", nationality);
     updateUserProfile.append("religion", religion);
-    updateUserProfile.append("_method", "PUT");
+    updateUserProfile.append("media_links", mediaLinks);
+    updateUserProfile.append("_method", "PUT");    
 
     const userProfileResponse = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/update`,
@@ -149,6 +145,8 @@ const AboutMe = () => {
   const handleAddMediaLink = () => {
     setMediaLinks([...mediaLinks, { name: "", url: "" }]);
   };
+
+
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
