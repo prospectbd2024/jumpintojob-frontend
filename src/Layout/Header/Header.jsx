@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { usePathname, useRouter } from 'next/navigation';
 import { UserContext } from '@/Contexts/UserContext';
 import { signOut } from 'next-auth/react';
+import Logo from '@/assets/Logo'
 
 const Header = () => {
     const forEmployerNavigate = useRouter();
@@ -132,7 +133,9 @@ const Header = () => {
             <div className='main-header' >
                 <div className="web-header container">
                     <div className="header-logo">
-                        <img className='jump-job-logo' src="https://i.ibb.co/RNtVFY1/blue-full.jpg" alt="" />
+                        {/* <img className='jump-job-logo' src={Logo.src} alt="" />
+                         */}
+                         <Logo className='jump-job-logo'  fill='var(--primary-color)' />
                         <div className='mobile-menu-icon'>
                             {userData ?
                                 <div className={`loggedin-user-container`}>
