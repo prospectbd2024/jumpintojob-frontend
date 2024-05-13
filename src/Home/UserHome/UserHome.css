@@ -30,7 +30,18 @@
 .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer a .company-button{
     width: 120px;
 }
+@media (min-width: 900px) {
+    .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+}
 
+.company_description{
+    color: #616161;
+}
 .user-home-content .user-home-jobs{}
 .featured-jobs-more {
     text-align: center;

@@ -49,7 +49,7 @@ const UserHome = () => {
                                                 <p>Location: {company.location}</p>
                                             </div>
                                             <div className='main-items'>
-                                                <p className='company_description'>{company.company_description?.slice(0, 90)}...</p>
+                                                <p className='company_description'>{company.description?.slice(0, 90)}...</p>
                                             </div>
                                             <div className="company-item-content-footer">
                                                 <Link href=""><button className='company-button company-details-button'>View Details</button></Link>
