@@ -98,7 +98,7 @@ const JobPreferences = () => {
                     style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '200px' }}
                 />
             </div>
-            <button onClick={handleSavePreferences} style={{ background: '#3498DB', color: '#fff', width: '120px', height: '40px', borderRadius: '5px', border: 'none', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Save</button>
+            <button onClick={handleSavePreferences} style={{ background: 'var(--primary-color)', color: '#fff', width: '120px', height: '40px', borderRadius: '5px', border: 'none', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Save</button>
         </div>
             </div>
     );

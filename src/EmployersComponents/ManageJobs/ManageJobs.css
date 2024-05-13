@@ -4,7 +4,7 @@
     gap: 10px;
     width: 180px;
     justify-content: center;
-    background: linear-gradient(to right, #3498DB, #31c983);
+    background: linear-gradient(to right, var(--primary-color), #31c983);
     padding: 10px;
     border-radius: 10px 0;
 }

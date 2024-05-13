@@ -307,7 +307,7 @@ const AboutMe = () => {
             </div>
           ))}
           {mediaLinks.length==0&& <div style={{fontSize : '18px', fontWeight: 'bold', margin : '0px 0px 20px 0px'}}>Please add Media links</div>}
-          <button type="button" onClick={handleAddMediaLink} style={{background: '#3498DB', color: '#fff', width: '70px', height: '30px', borderRadius: '5px', border: 'none', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s', marginBottom: '20px'}}>Add </button>
+          <button type="button" onClick={handleAddMediaLink} style={{background: 'var(--primary-color)', color: '#fff', width: '70px', height: '30px', borderRadius: '5px', border: 'none', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s', marginBottom: '20px'}}>Add </button>
         </div>
         <div style={{gridColumn : 'span 2',display : 'grid' , gridTemplateColumns : '1fr 1fr'}}>
           <div style={{marginBottom: '10px'}}>
@@ -408,7 +408,7 @@ const AboutMe = () => {
           </div>
         </div>
         <div style={{ gridColumn: "span 2", textAlign: "right" }}>
-          <button type="submit" style={{ background: "#3498DB", color: "#fff", width: "120px", height: "40px", borderRadius: "5px", border: "none", fontSize: "16px", fontWeight: "bold", cursor: "pointer", transition: ".3s" }}>Save</button>
+          <button type="submit" style={{ background: "var(--primary-color)", color: "#fff", width: "120px", height: "40px", borderRadius: "5px", border: "none", fontSize: "16px", fontWeight: "bold", cursor: "pointer", transition: ".3s" }}>Save</button>
         </div>
       </form>
     </div>

@@ -55,7 +55,7 @@ const AccountSetting = () => {
         />
       </div>
       <div>
-        <button onClick={handleChangePassword} style={{ background: '#3498DB', color: '#fff', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Change Password</button>
+        <button onClick={handleChangePassword} style={{ background: 'var(--primary-color)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Change Password</button>
       </div>
     </div>
   );
