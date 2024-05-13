@@ -8,7 +8,7 @@ const ResumeHeader = () => {
             <div className="resume-header-container container">
                 <div className="resume-header-content">
                     <div className="resume-header-title">
-                        <h2>JobsHub</h2>
+                        <img src="https://i.ibb.co/RNtVFY1/blue-full.jpg" alt="Jump Into Job" width="130px"/>
                         <span>Resume Builder</span>
                     </div>
                     <div className="resume-header-button">
