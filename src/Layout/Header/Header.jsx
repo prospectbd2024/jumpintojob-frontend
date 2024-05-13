@@ -185,7 +185,7 @@ const Header = () => {
                             <li><Link href="/" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/' ? 'active' : ''}>Home</Link></li>
                             <li><Link href="/findjobs" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={ location.search('/findjobs')!=-1  ? 'active' : ''}>Jobs</Link></li>
                             <li><Link href="/companies" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/companies') !=-1  ? 'active' : ''}>Companies</Link></li>
-                            <li><Link href="/message" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/message')!=-1 ? 'active' : ''}>Message</Link></li>
+                            {/* <li><Link href="/message" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/message')!=-1 ? 'active' : ''}>Message</Link></li> */}
                             <li><a onClick={handleSignoutAlert} style={{ "cursor": "pointer" }}>For Employers</a></li>
                         </ul>
                         <div className="account-menu">
@@ -247,7 +247,7 @@ const Header = () => {
                         <li><Link href="/" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location === '/' ? 'active' : ''}>Home</Link></li>
                         <li><Link href="/findjobs" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={ location.search('/findjobs')!=-1  ? 'active' : ''}>Jobs</Link></li>
                         <li><Link href="/companies" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/companies') !=-1  ? 'active' : ''}>Companies</Link></li>
-                        <li><Link href="/message" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/message')!=-1 ? 'active' : ''}>Message</Link></li>
+                        {/* <li><Link href="/message" onClick={() => (handleActiveMenu(activeMenu), setMobileMenuClicked(false))} className={location.search('/message')!=-1 ? 'active' : ''}>Message</Link></li> */}
                         <li><a onClick={handleSignoutAlert} style={{"cursor" : "pointer"}}>For Employers</a></li>
                     </ul>
                     <div className="account-menu">
