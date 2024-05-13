@@ -31,7 +31,7 @@
 .resume-templates .templates .template img:hover{
     border: 3px solid #3498DB;
 }
-.resume-templates .templates .template img.selected-template{
+.resume-templates .templates .template img .selected-template{
     border: 3px solid #3498DB;
 }
 .resume-templates .templates .template p{
@@ -57,10 +57,12 @@
     border: 1px solid #111;
     background: transparent;
     color: #111;
+    border-radius: 3px;
 }
 .resume-prev-next-buttons .next-button {
     background: #3498DB;
     color: #fff;
+    border-radius: 3px;
 }
 .slick-prev:before, .slick-next:before {
     font-size: 27px!important;
