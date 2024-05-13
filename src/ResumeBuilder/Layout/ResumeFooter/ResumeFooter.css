@@ -1,4 +1,7 @@
 .resume-footer{
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%; /* Ensures the footer spans the entire width of its container */
     padding: 20px 0;
     border-top: 1px solid gray;
 }
