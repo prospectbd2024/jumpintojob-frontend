@@ -21,7 +21,6 @@ import '@/ResumeBuilder/ResumeComponents/ResumeEducation/PreviewEducation.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeFinalize/ResumeFinalize.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSkills/AddSkills.css'
 import '@/ResumeBuilder/ResumeComponents/ResumeSteps/ResumeSteps.css'
-import '@/ResumeBuilder/ResumeComponents/ResumeTemplates/ResumeTemplatesCSS.css'
 import { UserProvider } from "@/Contexts/UserContext"
 import JobContext from '@/Contexts/JobContext'
 import { getServerSession } from "next-auth/next"
