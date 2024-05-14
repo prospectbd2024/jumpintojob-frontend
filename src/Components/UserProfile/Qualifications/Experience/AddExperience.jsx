@@ -18,7 +18,7 @@ function AddExperience({ props }) {
   );
 
   return (
-    <>
+    <div className='add-experience-container-main'>
       <div className="add-experience-container">
         <div className="add-experience-input-field">
           <label htmlFor="jobtitle">JOB TITLE</label>
@@ -161,7 +161,7 @@ function AddExperience({ props }) {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

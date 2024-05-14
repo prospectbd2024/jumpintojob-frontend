@@ -51,11 +51,6 @@ function AddAreaOfExpertise({ props }) {
         <abbr title="Required" className="required"></abbr>
       </label>
       <div>
-        <span className="hidden">
-          Add your area of expertise with duration (max 3)
-        </span>
-      </div>
-      <div>
         {experience?.expertises?.map((element, index) => (
           <div className="add-experience-experties" key={index}>
             <div className="">
