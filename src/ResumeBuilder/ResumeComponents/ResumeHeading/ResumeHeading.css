@@ -24,42 +24,86 @@
     gap: 7px;
     margin-bottom: 20px;
     flex-basis: 48%;
+    position: relative;
   }
   
   .resume-heading-content .heading-form .resume-input-field label,.media-links label {
-    font-size: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
   }
   
   .resume-heading-content .heading-form .resume-input-field input , .media-links input{
-    padding: 8px 5px;
+    padding: 12px 9px;
     outline: none;
+    font-size: 1rem;
+    font-weight: 400;
     border-radius: 5px;
     border: 1px solid #a3a3a3;
     background: transparent;
     color: #2c2c2c;
   }
-  
-  .resume-heading-content .heading-form .heading-textarea {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-  
-  .resume-heading-content .heading-form .heading-textarea label {
-    font-size: 12px;
-  }
-  
   .resume-heading-content .heading-form .heading-textarea textarea {
     height: 170px;
     width: 97%;
     resize: none;
     border-radius: 5px;
-    padding: 8px 5px;
+    padding: 12px 9px;
     outline: none;
+    font-size: 1rem;
+    font-weight: 400;
     border: 1px solid #a3a3a3;
     background: transparent;
   }
   
+  .resume-heading-content .heading-form .resume-input-field hr , .media-links hr{
+    height: 5px;
+    width: calc(100% - 2px);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: absolute;
+    background-color: var(--primary-color);
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 0.45s;
+  }
+  .resume-heading-content .heading-form .resume-input-field input:hover , .media-links input:hover {
+
+    border-color: var(--primary-color);
+  }
+  .resume-heading-content .heading-form .resume-input-field  .focused {
+    border-color:  var(--primary-color);
+    opacity : 1 ;
+  }
+  
+
+
+  .resume-heading-content .heading-form .heading-textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+  }
+  .resume-heading-content .heading-form .heading-textarea  .focused {
+    border-color:  var(--primary-color);
+    opacity : 1 ;
+  }
+  .resume-heading-content .heading-form .heading-textarea hr{
+    height: 5px;
+    width:  calc(97% + 10px);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: absolute;
+    background-color: var(--primary-color);
+    bottom: 0;
+    opacity: 0;
+  }
+  .resume-heading-content .heading-form .heading-textarea label {
+    font-size: 12px;
+  }
+  
+ 
   .add-more-education {
     margin-top: 40px;
   }
