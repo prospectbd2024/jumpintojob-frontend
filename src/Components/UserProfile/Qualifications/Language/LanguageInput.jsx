@@ -8,24 +8,34 @@ function LanguageInput({ props }) {
   const [isTyping, setTyping] = useState(false);
   const [searchKey, setSearchKey] = useState("");
   const [suggestedLanguages, setSuggestedLanguages] = useState([]);
+  const [allLanguages, setAllLanguages] = useState([]);
+
+  useEffect(()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/languages`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setAllLanguages(data.data)
+      setSuggestedLanguages(data.data.slice(0,5));
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+  },[])
 
   useEffect(() => {
-    searchKey &&
-      !isTyping &&
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/languages/search/${searchKey}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setSuggestedLanguages(data.data);
-          console.log(data.data);
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-        });
+    let temp = allLanguages.filter((element)=>{
+
+      if(searchKey!=="" && search(element.language,searchKey)!=-1 ){
+        return true;
+      }
+      return false
+    })
+    setSuggestedLanguages(temp.slice(0,5))
   }, [isTyping, searchKey]);
 
   const handleSearchFocus = useCallback(() => {
@@ -61,7 +71,10 @@ function LanguageInput({ props }) {
   useEffect(()=>{
    console.log(suggestedLanguages);  
   },[suggestedLanguages])
+  const search= (element, key)=>{
+    return element?.toLowerCase()?.indexOf(key?.toLowerCase());
 
+  }
   return (
     <div className="language-input-container">
       <label htmlFor="language" className="language-label">
