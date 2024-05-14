@@ -1,23 +1,33 @@
 .add-experience-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
-    gap: 20px;
-    
-  }
-  .add-experience-container-main{
-    max-width: 1000px; /* Set the width of the container */
-    width: 700px; /* Set the width of the container */
-    height: 500px; /* Set the height of the container */
-    overflow: auto; /* Enable scrollbars when content overflows */
-  }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 600px;
+}
+
+.add-experience-container-main {
+  max-width: 1000px;
+  width: 700px;
+  height: 500px;
+  overflow: auto;
+  /* Customize scrollbar */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-arrow-color: transparent;
+  scrollbar-color: var(--secondary-color) transparent; /* For Firefox */
+
+}
+
+
   
   .add-experience-input-field {
     display: flex;
     flex-direction: column;
     gap: 7px;
     margin-bottom: 20px;
+    position: relative;
     
   }
+  
   
   .add-experience-input-field label {
     font-size: 12px;
@@ -28,13 +38,38 @@
   .add-experience-input-field textarea {
     padding: 8px 5px;
     outline: none;
-    border: 1px solid var(--secondery-color);
+    border: 1px solid var(--secondery-color); /* Updated border color */
     background: transparent;
-    color: #444;
-    font-family: Arial, sans-serif;
-    border-radius: 5px;
+    color: #444; /* Updated text color */
+    font-family: Arial, sans-serif; /* Updated font family */
+    border-radius: 5px; /* Added border radius */
   }
-  
+  .add-experience-input-field input[type="text"]:hover,
+  .add-experience-input-field input[type="date"]:hover,
+  .add-experience-input-field textarea:hover {
+  border-color: var(--primary-color);
+
+}
+.add-experience-input-field hr, .responsibilities-textarea-container hr {
+  height: 1px;
+  width: calc(100% - 2px);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  background-color: var(--primary-color);
+  bottom: 0px;
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.45s;
+}
+.responsibilities-textarea-container hr{
+  width: calc(100% - 11px);
+}
+.add-experience-input-field  .focused{
+  border-color:   var(--primary-color) !important; 
+  opacity : 1 !important;
+}
+
   .add-experience-required {
     color: red;
     font-size: 13px;

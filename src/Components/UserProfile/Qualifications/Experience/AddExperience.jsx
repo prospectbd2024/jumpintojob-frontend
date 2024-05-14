@@ -1,11 +1,13 @@
+"use client"
 import { FaTrashAlt } from "react-icons/fa"; 
 // AddExperience.js
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import "./AddExperience.css";
 import AddAreaOfExpertise from "./AddAreaOfExpertise";
 
 function AddExperience({ props }) {
   const { experience, setExperience, experienceErrors } = props;
+  const [isWorking,setWorking] = useState(0)
 
   const handleChange = useCallback(
     (key, value) => {
@@ -16,6 +18,24 @@ function AddExperience({ props }) {
     },
     [setExperience]
   );
+  const handleFocus=(event)=>{
+    let element = event.target;
+    element.classList.add('focused')
+    let parentNode = element.parentNode;
+    let hr = parentNode.querySelector('hr');
+    hr.classList.add('focused')
+    
+  }
+  const handleBlur=( event)=>{
+    let element = event.target;
+    element.classList.remove('focused')
+    let parentNode = element.parentNode;
+    let hr = parentNode.querySelector('hr');
+    hr.classList.remove('focused')
+  }
+  useEffect(()=>{
+    setWorking(experience?.currently_working ?? false)
+  },[experience])
 
   return (
     <div className='add-experience-container-main'>
@@ -27,8 +47,9 @@ function AddExperience({ props }) {
             placeholder="Software Engineer"
             id="job_title"
             value={experience?.job_title || ""}
-            onChange={(e) => handleChange("job_title", e.target.value)}
+            onChange={(e) => handleChange("job_title", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.job_title && (
             <div className="add-experience-required">Job title is required</div>
           )}
@@ -40,8 +61,9 @@ function AddExperience({ props }) {
             placeholder="ABC Company"
             id="company_name"
             value={experience?.company_name || ""}
-            onChange={(e) => handleChange("company_name", e.target.value)}
+            onChange={(e) => handleChange("company_name", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.company_name && (
             <div className="add-experience-required">
               Company name is required
@@ -55,8 +77,9 @@ function AddExperience({ props }) {
             placeholder="Software Development"
             id="company_business"
             value={experience?.company_business || ""}
-            onChange={(e) => handleChange("company_business", e.target.value)}
+            onChange={(e) => handleChange("company_business", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.company_business && (
             <div className="add-experience-required">
               Company business is required
@@ -70,8 +93,9 @@ function AddExperience({ props }) {
             placeholder="Software Engineer"
             id="designation"
             value={experience?.designation || ""}
-            onChange={(e) => handleChange("designation", e.target.value)}
+            onChange={(e) => handleChange("designation", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.designation && (
             <div className="add-experience-required">
               Designation is required
@@ -85,8 +109,9 @@ function AddExperience({ props }) {
             placeholder="Engineering"
             id="department"
             value={experience?.department || ""}
-            onChange={(e) => handleChange("department", e.target.value)}
+            onChange={(e) => handleChange("department", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.department && (
             <div className="add-experience-required">
               Department is required
@@ -99,8 +124,9 @@ function AddExperience({ props }) {
             type="date"
             id="from_date"
             value={experience?.start_date || ""}
-            onChange={(e) => handleChange("start_date", e.target.value)}
+            onChange={(e) => handleChange("start_date", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.start_date && (
             <div className="add-experience-required">From date is required</div>
           )}
@@ -111,8 +137,10 @@ function AddExperience({ props }) {
             type="date"
             id="to_date"
             value={experience?.to_date || ""}
-            onChange={(e) => handleChange("to_date", e.target.value)}
+            onChange={(e) => handleChange("to_date", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
+            disabled={isWorking}
           />
+          <hr/>
           {experienceErrors?.to_date && (
             <div className="add-experience-required">To date is required</div>
           )}
@@ -136,8 +164,9 @@ function AddExperience({ props }) {
             id="responsibilities"
             rows="5"
             value={experience?.responsibilities || ""}
-            onChange={(e) => handleChange("responsibilities", e.target.value)}
+            onChange={(e) => handleChange("responsibilities", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           ></textarea>
+          <hr/>
           {experienceErrors?.responsibilities && (
             <div className="add-experience-required">
               Responsibilities are required
@@ -152,8 +181,9 @@ function AddExperience({ props }) {
             placeholder="City, Country"
             id="company_location"
             value={experience?.company_location || ""}
-            onChange={(e) => handleChange("company_location", e.target.value)}
+            onChange={(e) => handleChange("company_location", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
           />
+          <hr/>
           {experienceErrors?.company_location && (
             <div className="add-experience-required">
               Company location is required
