@@ -9,25 +9,42 @@ function SkillInput({ props }) {
   const [isTyping, setTyping] = useState(false);
   const [searchKey, setSearchKey] = useState("");
   const [suggestedSkills, setSuggestedSkills] = useState([]);
+  const [allSkills, setAllSkills] = useState([]);
+useEffect(()=>{
+
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/skills`)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return res.json();
+  })
+  .then(data => {
+    setAllSkills(data.data);
+    setSuggestedSkills(data.data.slice(0, 5))
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
+},[])
 
   useEffect(() => {
+    let temp = allSkills.filter((element)=>{
 
-    searchKey && !isTyping  &&
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/skills/search/${searchKey}`)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return res.json();
-        })
-        .then(data => {
-          setSuggestedSkills(data.data);
-        })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-        });
-  }, [isTyping,searchKey]);
+      if(searchKey!=="" && search(element.name,searchKey)!=-1 ){
+        return true;
+      }
+      return false
+    })
+    setSuggestedSkills(temp.slice(0,5))
+     
+  }, [searchKey]);
 
+  const search= (element, key)=>{
+    return element?.toLowerCase()?.indexOf(key?.toLowerCase());
+
+  }
 
   const handleSearchFocus = useCallback(() => {
     setShowSearchSuggestion(true);
