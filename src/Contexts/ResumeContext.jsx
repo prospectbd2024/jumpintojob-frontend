@@ -31,7 +31,8 @@ function ResumeContext({children}) {
             { "name": "React.js", "months": 60 },
             { "name": "Node.js", "months": 48 },
             { "name": "Software Architecture", "months": 48 }
-          ]
+          ],
+          "visible_on_cv": true
         },
         {
           "id": 2,
@@ -50,7 +51,8 @@ function ResumeContext({children}) {
             { "name": "Market Research", "months": 60 },
             { "name": "Agile Methodology", "months": 48 },
             { "name": "User Experience (UX) Design", "months": 36 }
-          ]
+          ],
+          "visible_on_cv": true
         },
         {
           "id": 3,
@@ -69,7 +71,8 @@ function ResumeContext({children}) {
             { "name": "Python", "months": 72 },
             { "name": "Data Visualization", "months": 48 },
             { "name": "Statistical Analysis", "months": 60 }
-          ]
+          ],
+          "visible_on_cv": true
         }
         
       ]
@@ -90,6 +93,7 @@ function ResumeContext({children}) {
             education_starting_year: "2018",
             education_graduation_year: "2022",
             education_achievements: "Dean's List, Outstanding Student Award",
+            "visible_on_cv": true
           },
           {
             institution_name: "University of ABC",
@@ -99,6 +103,7 @@ function ResumeContext({children}) {
             education_starting_year: "2020",
             education_graduation_year: "2024",
             education_achievements: "Dean's List, Outstanding Student Award",
+            "visible_on_cv": true
           },
         ])
   

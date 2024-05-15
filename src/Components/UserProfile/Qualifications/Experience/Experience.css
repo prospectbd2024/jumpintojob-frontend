@@ -33,11 +33,11 @@
 }
 
 .minus-icon {
-  cursor: pointer;
+  /* cursor: pointer;
   position: absolute;
   color: red;
   top: 10px;
-  right: 10px;
+  right: 10px; */
 }
 
 .add-experience {
