@@ -263,7 +263,7 @@ const AboutMe = () => {
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
-        <div style={{marginBottom: '10px'}}>
+        <div style={{marginBottom: '10px',}}>
           <label htmlFor="religion" style={{display : 'block' , marginBottom : '10px'}}>Religion</label>
           <input
             type="text"
@@ -274,10 +274,17 @@ const AboutMe = () => {
             style={{height: '45px',width : '80%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
-        <div style={{gridColumn : 'span 2'}}>
-          <h3 style={{marginBottom: '20px', fontSize: '20px'}}>Media Links</h3>
+        <div style={{gridColumn : 'span 2',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '7px',
+         marginBottom: '20px',
+         flexBasis: '48%',
+         position: 'relative'}}>
+          <h3 style={{fontSize: '1rem',fontWeight: '700',marginBottom: '10px'}}>Media Links</h3>
           {mediaLinks.map((link, index) => (
-            <div className="media-link" key={index}>
+            <div className="media-link" key={index} style={{display: 'grid',
+            gridTemplateColumns: 'repeat(3,1fr)'}}>
               <div style={{marginBottom: '10px'}}>
                 <label htmlFor="" style={{display : 'block' , paddingBottom : '5px'}}>Name</label>
                 <input
@@ -285,7 +292,14 @@ const AboutMe = () => {
                   value={link.name}
                   onChange={(e) => handleMediaLinkChange(index, "name", e.target.value)}
                   placeholder ='Linkdin'
-                  style={{height: '45px', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px', outline: 'none'}}
+                  style={{padding: '12px 9px',
+                  outline: 'none',
+                  fontSize: '1rem',
+                  fontWeight: '400',
+                  borderRadius: '5px',
+                  border: '1px solid #a3a3a3',
+                  background: 'transparent',
+                  color: '#2c2c2c'}}
                 />
               </div>
               <div style={{marginBottom: '10px'}}>
@@ -295,7 +309,14 @@ const AboutMe = () => {
                   value={link.url}
                   placeholder="linkedin.com/in/me"
                   onChange={(e) => handleMediaLinkChange(index, "url", e.target.value)}
-                  style={{height: '45px', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' , outline: 'none'}}
+                  style={{padding: '12px 9px',
+                  outline: 'none',
+                  fontSize: '1rem',
+                  fontWeight: '400',
+                  borderRadius: '5px',
+                  border: '1px solid #a3a3a3',
+                  background: 'transparent',
+                  color: '#2c2c2c'}}
                 />
               </div>
               <div style={{display : 'flex' , flexDirection : 'row' , justifyContent : 'center', alignItems : 'center'}}>

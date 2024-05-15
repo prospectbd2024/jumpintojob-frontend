@@ -3,6 +3,7 @@ import {FaTrashAlt}  from 'react-icons/fa'
 function HeadingFields({  }) {
 
   const [isFocused,setFocus] = useState("")
+  const [selectedImage, setSelectedImage] = useState(null);
   // Initial resume data state
   const initialResumeData = {
     title: "",
@@ -87,16 +88,24 @@ function HeadingFields({  }) {
     let hr = parentNode.querySelector('hr');
     hr.classList.remove('focused')
   }
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.files[0]);
+  };
+
   return (
     <div className={`resume-heading-content  'resume-heading-content-yesimg' : 'resume-heading-content-noimg'`}>
       {
       // templateType == 'cv' &&
-      //   <div className="image-upload">
-      //     {/* Image Upload Component */}
-      //   </div>
+
       }
       <div   className="heading-form">
+          <div className="resume-profile-image">
+               <label htmlFor="">PROFILE IMAGE</label>
+              <input type="file" onChange={handleImageChange} />
+          </div>
         <div className="heading-form-main">
+       
+         
           <div className='resume-input-field'>
             <label htmlFor="title">TITLE</label>
             <input type="text" placeholder='DevOps engineer' id="title" value={resumeData.title} onChange={(e) => handleChange('title', e.target.value)}  onFocus={handleFocus} onBlur={handleBlur} />

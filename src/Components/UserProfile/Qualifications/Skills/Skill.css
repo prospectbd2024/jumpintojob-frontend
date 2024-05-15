@@ -20,7 +20,7 @@
 
 .skill-item {
   display: grid;
-  grid-template-columns: minmax(100px, 1fr) minmax(400px, 1fr) minmax(50px, 1fr);
+  grid-template-columns: minmax(100px, 1fr) minmax(400px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr);
   margin-bottom: 10px; /* Add margin bottom to each skill item */
 }
 
@@ -50,8 +50,31 @@
 .skill-actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+}
+.skill-learned-from {
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 50px 70px 100px 100px;
 }
 
+@media (max-width: 1550px) {
+  .skill-learned-from {
+    grid-template-columns: 50px 50px  50px;
+  }
+}
+@media (max-width: 1260px) {
+  .skill-learned-from {
+    grid-template-columns: 50px;
+  }
+}
+
+.skill-learned-from div{
+  white-space: nowrap;
+  margin-right: 10px;
+
+}
 .add-skill {
   display: flex;
   align-items: center;
