@@ -20,7 +20,7 @@
 
 }
 .hobby-name{
-  border: 1px solid var(--secondery-color);
+  border: 1px solid var(--secondary-color);
   border-radius: 8px;
   padding: 10px;
   max-width: -moz-fit-content;
