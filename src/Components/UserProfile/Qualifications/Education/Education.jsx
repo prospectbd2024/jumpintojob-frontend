@@ -6,7 +6,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
 import "./Education.css"; // Import CSS file
 import ModalBox from "../ModalBox";
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 const Education = ({ props }) => {
 

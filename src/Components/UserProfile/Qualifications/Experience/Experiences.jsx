@@ -5,7 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
 import AddExperience from "./AddExperience";
 import "./Experience.css"; // Import CSS file
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 const Experiences = ({ props }) => {
   const { experiences, setExperiences } = props;

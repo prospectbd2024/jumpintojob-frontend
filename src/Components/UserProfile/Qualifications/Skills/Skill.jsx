@@ -7,7 +7,7 @@ import "./Skill.css"; // Import CSS file
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
 import Rating from "./Rating";
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 function Skill({ props }) {
   const { skills, setSkills } = props;
