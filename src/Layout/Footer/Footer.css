@@ -95,7 +95,7 @@
 }
 
 .bottom-footer-text p a:hover {
-  color: var(--secondary-color);
+  color: var(--secondery-color);
 }
 
 /* Media query for adjusting column count */
