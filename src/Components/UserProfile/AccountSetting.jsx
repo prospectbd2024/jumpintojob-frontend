@@ -31,7 +31,7 @@ const AccountSetting = () => {
           id="oldPassword"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
@@ -41,7 +41,7 @@ const AccountSetting = () => {
           id="newPassword"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
@@ -51,11 +51,11 @@ const AccountSetting = () => {
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #ccc', width: '300px' }}
+          style={{ fontSize: '1rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid var(--secondery-color)', width: '300px' }}
         />
       </div>
       <div>
-        <button onClick={handleChangePassword} style={{ background: '#3498DB', color: '#fff', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Change Password</button>
+        <button onClick={handleChangePassword} style={{ background: 'var(--primary-color)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Change Password</button>
       </div>
     </div>
   );

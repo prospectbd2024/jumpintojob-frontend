@@ -1,14 +1,15 @@
+"use client"
 import React, { useState } from 'react';
-// import './ResumetemplatesCSS.css'
-import { useUserContext } from '../../../Contexts/UserContext';
+import './ResumeTemplates.css'
 import 'bear-react-carousel/dist/index.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useResumeContext } from '@/Contexts/ResumeContext';
 
 
 const ResumeTemplates = ({ handleSelectedTemplate, selectedTemplateId}) => {
-    const { currentStep, setCurrentStep } = useUserContext();
+    const { currentStep, setCurrentStep } = useResumeContext();
     const resumeTemplates = [
         { id: 1, name: 'classic', image: 'https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcmVzdW1lcy90ZWFjaGVyLXJlc3VtZS5wbmc~..png', type: 'resume' },
         { id: 2, name: 'modern', image: 'https://i.ibb.co/P1crN2n/resumetemplate2.png', type: 'resume' },

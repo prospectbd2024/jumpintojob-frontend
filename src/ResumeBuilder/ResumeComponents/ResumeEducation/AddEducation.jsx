@@ -14,7 +14,21 @@ function AddEducation({ props }) {
         })); 
         saveChanges 
     },[]);
-
+    const handleFocus=(event)=>{
+        let element = event.target;
+        element.classList.add('focused')
+        let parentNode = element.parentNode;
+        let hr = parentNode.querySelector('hr');
+        hr.classList.add('focused')
+        
+      }
+      const handleBlur=( event)=>{
+        let element = event.target;
+        element.classList.remove('focused')
+        let parentNode = element.parentNode;
+        let hr = parentNode.querySelector('hr');
+        hr.classList.remove('focused')
+      }
 
     return (
         <>
@@ -26,8 +40,9 @@ function AddEducation({ props }) {
                         placeholder="University of Dhaka"
                         id="institution_name"
                         value={education?.institution_name || ""}
-                        onChange={(e) => handleChange("institution_name", e.target.value)}
+                        onChange={(e) => handleChange("institution_name", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                     />
+                    <hr />
                    { educationErrors?.institution_name ?
                     <div className="add-education-required" >
                         Institution name is required
@@ -42,8 +57,9 @@ function AddEducation({ props }) {
                         placeholder="Dhaka, Bangladesh"
                         id="institution_location"
                         value={education?.institution_location || ""}
-                        onChange={(e) => handleChange("institution_location", e.target.value)}
+                        onChange={(e) => handleChange("institution_location", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                     />
+                     <hr />
                 </div>
                 <div className="add-education-input-field">
                     <label htmlFor="degree">QUALIFICATIONS OR DEGREE</label>
@@ -52,8 +68,9 @@ function AddEducation({ props }) {
                         placeholder="Bachelor of Science"
                         id="degree"
                         value={education?.degree || ""}
-                        onChange={(e) => handleChange("degree", e.target.value)}
+                        onChange={(e) => handleChange("degree", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                     />
+                     <hr />
                     {
                         educationErrors?.degree ?
                         <div className="add-education-required">
@@ -69,8 +86,9 @@ function AddEducation({ props }) {
                         placeholder="Computer Science"
                         id="field"
                         value={education?.field_study || ""}
-                        onChange={(e) => handleChange("field_study", e.target.value)}
+                        onChange={(e) => handleChange("field_study", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                     />
+                     <hr />
                     {
                         educationErrors?.field_study ? 
                         <div className="add-education-required">
@@ -79,26 +97,28 @@ function AddEducation({ props }) {
                     }
     
                 </div>
-                <div className="add-education-input-field">
+                <div className="add-education-input-field date-container">
                     <label htmlFor="starting">STARTING YEAR</label>
                     <input
                         type="date"
                         placeholder="2018-01-01"
                         id="starting"
                         value={education?.education_starting_year || ""}
-                        onChange={(e) => handleChange("education_starting_year", e.target.value)}
+                        onChange={(e) => handleChange("education_starting_year", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                     />
+                     <hr />
                 </div>
-                <div className="add-education-input-field">
+                <div className="add-education-input-field  date-container">
                     <label htmlFor="end">YEAR OF GRADUATION</label>
                     <input
                         type="date"
                         placeholder="2022-01-01"
                         id="end"
                         value={education?.education_graduation_year || ""}
-                        onChange={(e) => handleChange("education_graduation_year", e.target.value)}
+                        onChange={(e) => handleChange("education_graduation_year", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                         disabled={isCurrentlyStudying} // Add disabled attribute based on isCurrentlyStudying state
                     />
+                     <hr />
                     <div className="add-education-currently-here">
                         <input
                             type="checkbox"
@@ -118,9 +138,10 @@ function AddEducation({ props }) {
                     cols="30"
                     rows="10"
                     placeholder="Write your career summary"
-                    value={education?.education_achivements || ""}
-                    onChange={(e) => handleChange("education_achievements", e.target.value)}
+                    value={education?.education_achievements || ""}
+                    onChange={(e) => handleChange("education_achievements", e.target.value)} onFocus={handleFocus} onBlur={handleBlur}
                 ></textarea>
+                 <hr />
             </div>
         </>
     );

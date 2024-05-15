@@ -28,7 +28,7 @@
 }
 .preview-education .preview-content div p{
     font-size: 13px;
-    color: #616161;
+    color: var(--darker-secondary-color);
 }
 .preview-education .preview-actions {
     width: auto;
@@ -52,5 +52,5 @@
     background: #ac381d;
 }
 .preview-education .preview-actions .edit{
-    background: #3498DB;
+    background: var(--primary-color);
 }

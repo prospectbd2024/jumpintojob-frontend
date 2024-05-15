@@ -1,12 +1,13 @@
 import { FaTrashAlt } from "react-icons/fa"; 
 import React, { useState, useCallback } from "react";
-import { HiBriefcase, HiMinus } from "react-icons/hi";
+import { HiBriefcase } from "react-icons/hi";
 import { FaPencilAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
 import AddExperience from "./AddExperience";
 import "./Experience.css"; // Import CSS file
+import AddButton from "@/Components/AddButton/AddButton";
 
-const Experience = ({ props }) => {
+const Experiences = ({ props }) => {
   const { experiences, setExperiences } = props;
   const [experience, setExperience] = useState({ id: false });
   const [modal, setModal] = useState({ display: "none", title: "Loading", state: "new" });
@@ -110,9 +111,8 @@ const Experience = ({ props }) => {
         <div className="no-experiences">Please add experiences</div>
       )}
 
-      <div className="add-experience" onClick={() => showModal("Add Experience", "add")}>
-        <p className="add-experience-text">Add Experience</p>
-        <button className="add-button">+</button>
+      <div>
+        <AddButton onClick={()=>showModal('Add Experience','add')}/>
       </div>
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddExperience props={{ experience, setExperience, experienceErrors }} />
@@ -121,4 +121,4 @@ const Experience = ({ props }) => {
   );
 };
 
-export default Experience;
+export default Experiences;

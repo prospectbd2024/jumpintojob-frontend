@@ -62,7 +62,7 @@
 }
 
 .save-user-info-btn {
-  background: #3498DB;
+  background: var(--primary-color);
   color: #fff;
   width: 180px;
   height: 45px;
@@ -86,12 +86,12 @@
 }
 
 .swal-title {
-  color: #3498db;
+  color: var(--primary-color);
 }
 
 .swal-text {
-  color: #3498db;
+  color: var(--primary-color);
 }
 .swal-confirm-button{
-  color: #3498db;
+  color: var(--primary-color);
 }

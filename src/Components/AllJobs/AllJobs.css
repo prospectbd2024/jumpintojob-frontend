@@ -24,7 +24,7 @@
     position: relative;
 }
 .all-jobs-search-section .search-content form div svg {
-    color: #3498DB;
+    color: var(--primary-color);
 
 }
 .all-jobs-search-section .search-content form div::after {
@@ -46,7 +46,7 @@
 .all-jobs-search-section .search-content form input[type=submit] {
     height: 40px;
     border: none;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     width: 110px;
     font-size: 15px;

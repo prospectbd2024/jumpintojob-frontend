@@ -63,7 +63,7 @@
     cursor: pointer;
     border: none;
     margin-top: 60px;
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     cursor: pointer;
     font-size: 15px;
@@ -119,7 +119,7 @@
     background: rgba(238, 238, 238, 0.548);
 }
 .review-content .main .review-item div p{
-    color: #616161;
+    color: var(--darker-secondary-color);
     text-align: justify;
 }
 .review-content .main .review-item div svg{
@@ -166,8 +166,8 @@
     gap: 15px;
 }
 .jobpost-review-actions .preview-post .preview-btn {
-    color: #3498DB;
-    border: 1px solid #3498DB;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -177,7 +177,7 @@
     font-size: 16px;
 }
 .jobpost-review-actions .preview-post .post-btn {
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
     transition: .2s;
 }

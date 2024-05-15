@@ -25,5 +25,5 @@
     transition: .3s;
 }
 .job-category-item:hover h3{
-    color: #3498DB;
+    color: var(--primary-color);
 }

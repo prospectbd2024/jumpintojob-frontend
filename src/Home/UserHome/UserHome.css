@@ -10,7 +10,7 @@
 }
 .user-home-content h4 {
     margin-bottom: 15px;
-    color: #616161;
+    color: var(--darker-secondary-color);
     font-size: 18px;
     font-weight: 400;
 }
@@ -26,11 +26,27 @@
 }
 .user-home-content .user-home-companies .user-home-company .company-item .main-items div a h3{
     font-size: 16px;
+    padding-top: 20px;
 }
 .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer a .company-button{
     width: 120px;
 }
+.company-item-content-main .main-items{
+    margin-top: 10px;
+}
 
+@media (min-width: 900px) {
+    .user-home-content .user-home-companies .user-home-company .company-item .company-item-content-footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+}
+
+.company_description{
+    color: var(--darker-secondary-color);
+}
 .user-home-content .user-home-jobs{}
 .featured-jobs-more {
     text-align: center;
@@ -42,15 +58,15 @@
     width: 180px;
     height: 45px;
     border-radius: 4px;
-    border: 1px solid #3498DB;
+    border: 1px solid var(--primary-color);
     background: transparent;
-    color: #3498DB;
+    color: var(--primary-color);
     font-size: 15px;
     cursor: pointer;
     transition: .3s;
 }
 .featured-jobs-more a button:hover{
-    background: #3498DB;
+    background: var(--primary-color);
     color: #fff;
 }
 .user-home-content .user-home-jobs div {
@@ -85,11 +101,11 @@
     font-size: 15px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main p {
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-top: 5px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main .user-address {
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-top: 5px;
     font-size: 14px;
 }
@@ -111,7 +127,7 @@
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div {}
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div p {
     font-size: 15px;
-    color: #616161;
+    color: var(--darker-secondary-color);
     margin-bottom: 4px;
 }
 .user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div h6{

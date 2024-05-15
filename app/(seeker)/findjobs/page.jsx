@@ -8,13 +8,13 @@ import React, { useState } from 'react'
 function Page() {
   const router = useRouter()
 
-   const {selectedJob} = useJobContext();
+   const {selectedJob,allJobs} = useJobContext();
 
   return (
     <>
       {selectedJob.id?
       <JobDetails props={{job : selectedJob}} />:
-      <DefaultJobDetails/>}
+      <JobDetails props={{job : allJobs[0] }} />}
     </>
   )
 }

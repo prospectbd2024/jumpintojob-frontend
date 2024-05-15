@@ -5,6 +5,9 @@
   background-color: #fff;
   color: #222;
   padding: 50px 0;
+  position: relative;
+  bottom: 0;
+
 }
 
 /* Container for main footer items */
@@ -92,7 +95,7 @@
 }
 
 .bottom-footer-text p a:hover {
-  color: #ccc;
+  color: var(--secondery-color);
 }
 
 /* Media query for adjusting column count */

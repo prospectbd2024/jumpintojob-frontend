@@ -91,7 +91,7 @@
     font-size: 13px;
 }
 .dashboard-stats-and-profile .dashboard-user-profile .user-profile-main .user-address svg {
-    color: #3498db;
+    color: var(--primary-color);
     margin-right: 5px;
 }
 .dashboard-stats-and-profile .dashboard-user-profile .user-profile-contact {
@@ -148,12 +148,12 @@
     width: 140px;
     height: 40px;
     background: transparent;
-    border: 1px solid #3498DB;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
-    color: #3498DB;
+    color: var(--primary-color);
 }
 .dashboard-jobs .dashboard-jobs-content {
     width: 100%;
@@ -197,7 +197,7 @@
 }
 .dashboard-social-resume .dashboard-social ul li a {
     text-decoration: none;
-    color: #616161;
+    color: var(--darker-secondary-color);
     font-size: 16px;
     display: flex;
     align-items: center;

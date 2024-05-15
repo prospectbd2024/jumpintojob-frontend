@@ -51,7 +51,7 @@
 }
 
 .user-profile-sidebar-menu ul li:hover {
-    background-color: #3498db;
+    background-color: var(--primary-color);
 }
 
 .user-profile-sidebar-menu ul li:hover svg {
@@ -78,7 +78,7 @@
 }
 
 .active-sidebar-item {
-    background-color: #3498db;
+    background-color: var(--primary-color);
 }
 
 .user-profile-sidebar-menu ul li.active-sidebar-item svg {

@@ -4,7 +4,7 @@
     
 }
 .employers-job-banner-content {
-    background: linear-gradient(to bottom right, #3498db, #a3ffc8);
+    background: linear-gradient(to bottom right, var(--primary-color), #a3ffc8);
     width: 60%;
     text-align: center;
     padding: 70px 0;

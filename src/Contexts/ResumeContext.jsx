@@ -1,68 +1,17 @@
 "use client"
-import React, { useState,useEffect } from 'react';
-
-import Education from './Qualifications/Education/Education';
-import Skill from './Qualifications/Skills/Skill';
-import Language from './Qualifications/Language/Language';
-import Experiences from './Qualifications/Experience/Experiences';
-import Hobbies from './Qualifications/Hobbies/Hobbies';
+import React,{useContext,createContext, useState,useEffect, useCallback, cache} from 'react'
 
 
-const Qualifications = () => {
+export const resumeContext = createContext();
+export const useResumeContext = ()=> useContext(resumeContext);
 
 
 
+function ResumeContext({children}) {
+    const [currentStep, setCurrentStep] = useState(1);
     const [educations,setEducations] = useState([]);
-    const [skills, setSkills] = useState([]);
-    const [languages, setLanguages] = useState([]);
     const [experiences, setExperiences] = useState([]);
-    const [hobbies, setHobbies] = useState([])
-
-
-    // Education
-    useEffect(() => {
-       
-    setEducations([
-        {
-          institution_name: "University of XYZ",
-          institution_location: "City, Country",
-          degree: "Bachelor of Science",
-          field_study: "Computer Science",
-          education_starting_year: "2018",
-          education_graduation_year: "2022",
-          education_achievements: "Dean's List, Outstanding Student Award",
-        },
-        {
-          institution_name: "University of ABC",
-          institution_location: "City, Country",
-          degree: "Bachelor of Science",
-          field_study: "Computer Science",
-          education_starting_year: "2020",
-          education_graduation_year: "2024",
-          education_achievements: "Dean's List, Outstanding Student Award",
-        },
-      ])
-
-    }, [])
-    
-    useEffect(()=>{
-        setSkills([
-            { "id": 1, "name": "Javascript","rating" : 4 , "learnedFrom" : ["self"] },
-            { "id": 2, "name": "ReactJS","rating" : 4.2 , "learnedFrom" : ["self"] },
-            { "id": 3, "name": "NodeJS" ,"rating" : 2.5 , "learnedFrom" : ["self"]},
-            { "id": 4, "name": "ExpressJS" ,"rating" : 2.5 , "learnedFrom" : ["self"]},
-            { "id": 5, "name": "MongoDB" ,"rating" : 3 , "learnedFrom" : ["self"]},
-        ]);
-    },[])
-
-    useEffect(() => {
-      setLanguages( [
-        { "id": 1, "language": "Bengali", "proficiency": "Native" },
-        { "id": 2, "language": "English", "proficiency": "Fluent" },
-        { "id": 3, "language": "Spanish", "proficiency": "Beginner" }
-    ]);
-    }, [ ])
-
+    const [languages, setLanguages] = useState([]);
     useEffect(()=>{
       setExperiences([
         {
@@ -126,37 +75,46 @@ const Qualifications = () => {
       ]
       )
     },[])
-
     useEffect(()=>{
-      setHobbies([{ name : "traveling"},{name : "Singing"}])
-    },[])
-    
+        console.log(currentStep);
+    },[currentStep])
+    // Education
+    useEffect(() => {
+       
+      setEducations([
+          {
+            institution_name: "University of XYZ",
+            institution_location: "City, Country",
+            degree: "Bachelor of Science",
+            field_study: "Computer Science",
+            education_starting_year: "2018",
+            education_graduation_year: "2022",
+            education_achievements: "Dean's List, Outstanding Student Award",
+          },
+          {
+            institution_name: "University of ABC",
+            institution_location: "City, Country",
+            degree: "Bachelor of Science",
+            field_study: "Computer Science",
+            education_starting_year: "2020",
+            education_graduation_year: "2024",
+            education_achievements: "Dean's List, Outstanding Student Award",
+          },
+        ])
+  
+      }, [])
+      useEffect(() => {
+        setLanguages( [
+          { "id": 1, "language": "Bengali", "proficiency": "Native" },
+          { "id": 2, "language": "English", "proficiency": "Fluent" },
+          { "id": 3, "language": "Spanish", "proficiency": "Beginner" }
+      ]);
+      }, [ ])
+  return (
+    <resumeContext.Provider  value={{currentStep, setCurrentStep,educations,setEducations,experiences, setExperiences,languages, setLanguages}} >
+        {children}
+    </resumeContext.Provider>
+  )
+}
 
-    return (
-        <div className='user-profile-qualifications user-profile-about-me'>
-            <h2>Qualifications</h2>
-            <div className="qualifications-content">
-
-                {/* Education */}
-                <Education props={{educations,setEducations}}/>
-
-
-                {/* Skills */}
-
-                <Skill props={{skills,setSkills}}/>   
-
-                {/* Languages */}
-
-                <Language props={{languages,setLanguages}}/>
-
-                {/* Experience*/}
-                <Experiences props={{experiences, setExperiences}} />
-
-                {/* Hobbies  */}
-                 <Hobbies props={{hobbies, setHobbies}} />
-            </div>
-        </div>
-    );
-};
-
-export default Qualifications;
+export default ResumeContext

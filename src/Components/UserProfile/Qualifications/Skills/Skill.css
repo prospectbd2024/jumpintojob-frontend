@@ -29,7 +29,7 @@
 }
 
 .skill-name {
-  border: 1px solid #ccc;
+  border: 1px solid var(--secondery-color);
   border-radius: 8px;
   padding: 10px; /* Add padding to separate border from skills */
   max-width: fit-content;
@@ -60,7 +60,7 @@
   margin-top: 10px;
   padding: 10px;
   border-radius: 5px;
-  background-color: #3498db;
+  background-color: var(--primary-color);
 }
 
 .add-skill p {
@@ -72,7 +72,7 @@
 .add-skill button {
   font-weight: bold;
   font-size: 24px;
-  color: #3498db;
+  color: var(--primary-color);
   background-color: transparent;
   border: none;
   cursor: pointer;

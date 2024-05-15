@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 20px;
+  max-width: 600px;
 }
 
 .add-education-input-field {
@@ -10,6 +11,12 @@
   gap: 7px;
   margin-bottom: 20px;
   flex-basis: 48%;
+  position: relative;
+}
+
+.add-education-input-field input {
+  border: 1px solid #a3a3a3;
+
 }
 
 .add-education-input-field label {
@@ -21,11 +28,44 @@
 .add-education-input-field textarea {
   padding: 8px 5px;
   outline: none;
-  border: 1px solid #ccc; /* Updated border color */
+  border: 1px solid var(--secondery-color); /* Updated border color */
   background: transparent;
   color: #444; /* Updated text color */
   font-family: Arial, sans-serif; /* Updated font family */
   border-radius: 5px; /* Added border radius */
+}
+
+.add-education-input-field input[type="text"]:hover,
+.add-education-input-field input[type="date"]:hover,
+.add-education-textarea textarea:hover {
+  border-color: var(--primary-color);
+
+}
+.add-education-input-field hr,.add-education-textarea hr {
+  height: 1px;
+  width: calc(100% - 2px);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  background-color: var(--primary-color);
+  bottom: 0px;
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.45s;
+}
+.date-container hr {
+  bottom: 31px;
+  width: calc(100% - 3px);
+  
+}
+.add-education-textarea hr{
+  width: calc(93% - 3px) ;
+  bottom: 106px;
+  
+}
+.add-education-input-field  .focused,.add-education-textarea  .focused {
+  border-color:   var(--primary-color) !important; 
+  opacity : 1 ;
 }
 
 .add-education-required {
@@ -60,7 +100,7 @@
   resize: none;
   padding: 8px 5px;
   outline: none;
-  border: 1px solid #ccc; /* Updated border color */
+  border: 1px solid var(--secondery-color); /* Updated border color */
   background: transparent;
   font-family: Arial, sans-serif; /* Updated font family */
   border-radius: 5px; /* Added border radius */

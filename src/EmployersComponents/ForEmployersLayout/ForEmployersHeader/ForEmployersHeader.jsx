@@ -7,6 +7,7 @@ import { TbBell, TbBriefcase, TbLogout, TbUserCircle } from 'react-icons/tb';
 import { UserContext } from '@/Contexts/UserContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import Logo from '@/assets/Logo';
 
 
 const ForEmployersHeader = () => {
@@ -58,7 +59,9 @@ const ForEmployersHeader = () => {
         <div className='main-header'>
             <div className="web-header container">
                 <div className="header-logo employer-header-logo">
-                    <img className='jump-job-logo' src="https://i.ibb.co/RNtVFY1/blue-full.jpg" alt="" />
+                    {/* <img className='jump-job-logo' src="https://i.ibb.co/RNtVFY1/blue-full.jpg" alt="" />
+                     */}
+                     <Logo className='jump-job-logo'  fill='var(--primary-color)' />
                     <p>For Employers</p>
                 </div>
                 <div className="header-menu">
