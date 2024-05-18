@@ -13,8 +13,8 @@ import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 import { useResumeContext } from "@/Contexts/ResumeContext";
 
 const ResumeContainer = () => {
-  const { currentStep, setCurrentStep } = useResumeContext();
-  const [templateType, setTemplateType] = useState(null);
+  const { currentStep, setCurrentStep,templateType, setTemplateType } = useResumeContext();
+
   const [selectedTemplateId, setSelectedTemplateId] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState([]);
 

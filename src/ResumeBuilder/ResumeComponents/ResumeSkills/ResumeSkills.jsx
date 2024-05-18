@@ -11,12 +11,6 @@ const ResumeSkills = () => {
         <div className='resume-skills'>
             <div className="resume-skills-container container">
             <Skill props={{skills,setSkills}}/>   
-                {/* <div className="resume-form-header">
-                    <h3>Add your top <span>skills</span></h3>
-                </div>
-                <div className="resume-skills-container">
-                    <AddSkills />
-                </div> */}
             </div>
         </div>
     );

@@ -13,6 +13,7 @@ function ResumeContext({children}) {
     const [experiences, setExperiences] = useState([]);
     const [languages, setLanguages] = useState([]);
     const [skills, setSkills] = useState([]);
+    const [templateType, setTemplateType] = useState(null);
     useEffect(()=>{
       setExperiences([
         {
