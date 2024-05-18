@@ -137,18 +137,19 @@ const AboutMe = () => {
 
             <div
               style={{
-                position: "absolute",
-                bottom: "15px",
-                right: "40px",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                padding: "4px 8px",
-                borderRadius: "4px",
-                cursor: "pointer",
+                position: 'absolute',
+                width: '110px',
+                textAlign: 'center',
+                right: '12px',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                color: 'white',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer'
               }}
             >
               <label htmlFor="avatar-upload">
-                <span style={{textDecoration: "underline"}}>Upload</span>
+                <span style={{textDecoration: "none"}}>Upload</span>
               </label>
               <input
                 id="avatar-upload"
