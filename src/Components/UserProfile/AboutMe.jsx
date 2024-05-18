@@ -9,41 +9,41 @@ const AboutMe = () => {
   const { userData, profile, setProfile } = useUserContext();
   const [avatar, setAvatar] = useState(null);
   const [selectedAvatar, selectAvatar] = useState(null);
-  const [first_name, setFirstName] = useState(" ");
-  const [last_name, setLastName] = useState(" ");
-  const [gender, setGender] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [religion, setReligion] = useState("");
-  const [currentAddress, setCurrentAddress] = useState({
-    city: "",
-    state: "",
-    country: "",
-    postal_code: ""
+
+  const [profileData,setProfileData] = useState({
+    title: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    currentAddress: {
+      city: "",
+      state: "",
+      country: "",
+      postal_code : ""
+    },
+    permanentAddress: {
+      city: "",
+      state: "",
+      country: "",
+      postal_code : ""
+    },
+    dateOfBirth: "", // New field for date of birth
+    gender: "", // New field for gender
+    nationality: "", // New field for nationality
+    religion: "", // New field for religion
+    maritalStatus: "", // New field for marital status
+    summary: "",
+    mediaLinks : [{name : "Linkedin", url: "www.linkedin.com"}],
   });
-  const [permanentAddress, setPermanentAddress] = useState({
-    city: "",
-    state: "",
-    country: "",
-    postal_code: ""
-  });
-  const [mediaLinks, setMediaLinks] = useState([]);
+
 
   const handleUpdateUserProfile = async (event) => {
     event.preventDefault();
     
-    const updateUserProfile = new FormData();
-    updateUserProfile.append("avatar", selectedAvatar);
-    updateUserProfile.append("current_address", currentAddress);
-    updateUserProfile.append("permanent_address", permanentAddress);
-    updateUserProfile.append("gender", gender);
-    updateUserProfile.append("marital_status", maritalStatus);
-    updateUserProfile.append("date_of_birth", dateOfBirth);
-    updateUserProfile.append("nationality", nationality);
-    updateUserProfile.append("religion", religion);
-    updateUserProfile.append("media_links", mediaLinks);
-    updateUserProfile.append("_method", "PUT");    
+    const updateUserProfile = {...profileData,
+                              "avata" : selectedAvatar,
+                              "_method" : "PUT"}  
 
     const userProfileResponse = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/update`,
@@ -78,28 +78,6 @@ const AboutMe = () => {
     }
   };
 
-  useEffect(() => {
-    setAvatar(profile?.avatar);
-    setFirstName(profile?.first_name);
-    setLastName(profile?.last_name);
-    setCurrentAddress({
-      city: profile?.current_address?.city || "",
-      state: profile?.current_address?.state || "",
-      country: profile?.current_address?.country || "",
-      postal_code: profile?.current_address?.postal_code || ""
-    });
-    setPermanentAddress({
-      city: profile?.permanent_address?.city || "",
-      state: profile?.permanent_address?.state || "",
-      country: profile?.permanent_address?.country || "",
-      postal_code: profile?.permanent_address?.postal_code || ""
-    });
-    setGender(profile?.gender || "");
-    setMaritalStatus(profile?.marital_status || "");
-    setDateOfBirth(profile?.date_of_birth || "");
-    setNationality(profile?.nationality || "");
-    setReligion(profile?.religion || "");
-  }, [profile]);
 
   useEffect(() => {
     if (selectedAvatar) {
@@ -111,41 +89,38 @@ const AboutMe = () => {
     selectAvatar(event.target.files[0]);
   };
 
-  const handleChange = (field, value, addressType) => {
-    switch (addressType) {
-      case "current":
-        setCurrentAddress((prevAddress) => ({
-          ...prevAddress,
-          [field]: value
-        }));
-        break;
-      case "permanent":
-        setPermanentAddress((prevAddress) => ({
-          ...prevAddress,
-          [field]: value
-        }));
-        break;
-      default:
-        break;
-    }
+  const handleChange = (field, value) => {
+    setProfileData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
   };
 
   const handleMediaLinkChange = (index, field, value) => {
-    const updatedMediaLinks = [...mediaLinks];
+    const updatedMediaLinks = [...profileData.mediaLinks];
     updatedMediaLinks[index][field] = value;
-    setMediaLinks(updatedMediaLinks);
+    setProfileData({...profileData, mediaLinks: updatedMediaLinks})
   };
 
   const handleDeleteMediaLink = (index) => {
-    const updatedMediaLinks = [...mediaLinks];
+    const updatedMediaLinks = [...profileData.mediaLinks];
     updatedMediaLinks.splice(index, 1);
-    setMediaLinks(updatedMediaLinks);
+    setProfileData({...profileData, mediaLinks: updatedMediaLinks})
   };
 
   const handleAddMediaLink = () => {
-    setMediaLinks([...mediaLinks, { name: "", url: "" }]);
+    setProfileData({...profileData, mediaLinks: [...profileData.mediaLinks, { name: "", url: "" }]})
   };
-
+  const handleAddressChange = (addressType, field, value) => {
+    console.log(value);
+    setProfileData((prevData) => ({
+      ...prevData,
+      [addressType]: {
+        ...prevData[addressType],
+        [field]: value
+      }
+    }));
+  };
 
 
   return (
@@ -196,8 +171,8 @@ const AboutMe = () => {
             placeholder="Your First Name"
             id="first_name"
             name="firstName"
-            value={first_name || " "}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={profileData.first_name || " "}
+            onChange={(e) => handleChange('first_name', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
@@ -208,8 +183,8 @@ const AboutMe = () => {
             placeholder="Your Last Name"
             id="last_name"
             name="lastName"
-            value={last_name || " "}
-            onChange={(e) => setLastName(e.target.value)}
+            value={profileData.last_name || " "}
+            onChange={(e) => handleChange('last_name', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
@@ -217,8 +192,8 @@ const AboutMe = () => {
           <label htmlFor="gender" style={{display : 'block' , marginBottom : '10px'}}>Gender</label>
           <select
             id="gender"
-            value={gender || ""}
-            onChange={(e) => setGender(e.target.value)}
+            value={profileData.gender || ""}
+            onChange={(e) => handleChange('gender', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           >
             <option value="">Select Gender</option>
@@ -231,8 +206,8 @@ const AboutMe = () => {
           <label htmlFor="maritalStatus" style={{display : 'block' , marginBottom : '10px'}}>Marital Status</label>
           <select
             id="maritalStatus"
-            value={maritalStatus || ""}
-            onChange={(e) => setMaritalStatus(e.target.value)}
+            value={profileData.maritalStatus || ""}
+            onChange={(e) => handleChange('maritalStatus', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           >
             <option value="" style={{display : 'block' , marginBottom : '10px'}}>Select Marital Status</option>
@@ -247,8 +222,8 @@ const AboutMe = () => {
           <input
             type="date"
             id="dateOfBirth"
-            value={dateOfBirth || ""}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            value={profileData.dateOfBirth || ""}
+            onChange={(e) => handleChange('dateOfBirth', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
@@ -258,8 +233,8 @@ const AboutMe = () => {
             type="text"
             placeholder="Nationality"
             id="nationality"
-            value={nationality || ""}
-            onChange={(e) => setNationality(e.target.value)}
+            value={profileData.nationality || ""}
+            onChange={(e) => handleChange('nationality', e.target.value)}
             style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
@@ -269,8 +244,8 @@ const AboutMe = () => {
             type="text"
             placeholder="Religion"
             id="religion"
-            value={religion || ""}
-            onChange={(e) => setReligion(e.target.value)}
+            value={profileData.religion || ""}
+            onChange={(e) => handleChange('religion', e.target.value)}
             style={{height: '45px',width : '80%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
           />
         </div>
@@ -282,7 +257,7 @@ const AboutMe = () => {
          flexBasis: '48%',
          position: 'relative'}}>
           <h3 style={{fontSize: '1rem',fontWeight: '700',marginBottom: '10px'}}>Media Links</h3>
-          {mediaLinks.map((link, index) => (
+          {profileData?.mediaLinks.map((link, index) => (
             <div className="media-link" key={index} style={{display: 'grid',
             gridTemplateColumns: 'repeat(3,1fr)'}}>
               <div style={{marginBottom: '10px'}}>
@@ -327,7 +302,7 @@ const AboutMe = () => {
               </div>
             </div>
           ))}
-          {mediaLinks.length==0&& <div style={{fontSize : '18px', fontWeight: 'bold', margin : '0px 0px 20px 0px'}}>Please add Media links</div>}
+          {profileData?.mediaLinks.length==0&& <div style={{fontSize : '18px', fontWeight: 'bold', margin : '0px 0px 20px 0px'}}>Please add Media links</div>}
           <button type="button" onClick={handleAddMediaLink} style={{background: 'var(--primary-color)', color: '#fff', width: '70px', height: '30px', borderRadius: '5px', border: 'none', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s', marginBottom: '20px'}}>Add </button>
         </div>
         <div style={{gridColumn : 'span 2',display : 'grid' , gridTemplateColumns : '1fr 1fr'}}>
@@ -337,8 +312,8 @@ const AboutMe = () => {
               <label htmlFor="city" style={{display : 'block' , marginBottom : '10px'}}>City</label>
               <input
                 type="text"
-                value={currentAddress.city}
-                onChange={(e) => handleChange("city", e.target.value, "current")}
+                value={profileData.currentAddress?.city} 
+                onChange={(e) => handleAddressChange('currentAddress', 'city', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -346,8 +321,8 @@ const AboutMe = () => {
               <label htmlFor="state" style={{display : 'block' , marginBottom : '10px'}}>State</label>
               <input
                 type="text"
-                value={currentAddress.state}
-                onChange={(e) => handleChange("state", e.target.value, "current")}
+                value={profileData.currentAddress?.state}
+                onChange={(e) => handleAddressChange('currentAddress', 'state', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -355,8 +330,8 @@ const AboutMe = () => {
               <label htmlFor="country" style={{display : 'block' , marginBottom : '10px'}}>Country</label>
               <input
                 type="text"
-                value={currentAddress.country}
-                onChange={(e) => handleChange("country", e.target.value, "current")}
+                value={profileData.currentAddress?.country} 
+                onChange={(e) => handleAddressChange('currentAddress', 'country', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -364,8 +339,8 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{display : 'block' , marginBottom : '10px'}}>Postal Code</label>
               <input
                 type="number"
-                value={currentAddress.postal_code}
-                onChange={(e) => handleChange("postal_code", e.target.value, "current")}
+                value={profileData.currentAddress?.postal_code} 
+                onChange={(e) => handleAddressChange('currentAddress', 'postal_code', e.target.value)} 
                 style={{
                   height: '45px',
                   width: '90%',
@@ -386,8 +361,8 @@ const AboutMe = () => {
               <label htmlFor="city" style={{display : 'block' , marginBottom : '10px'}}>City</label>
               <input
                 type="text"
-                value={permanentAddress.city}
-                onChange={(e) => handleChange("city", e.target.value, "permanent")}
+                value={profileData.permanentAddress.city}
+                onChange={(e) => handleAddressChange('permanentAddress', 'city', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -395,8 +370,8 @@ const AboutMe = () => {
               <label htmlFor="state" style={{display : 'block' , marginBottom : '10px'}}>State</label>
               <input
                 type="text"
-                value={permanentAddress.state}
-                onChange={(e) => handleChange("state", e.target.value, "permanent")}
+                value={profileData.permanentAddress.state}
+                onChange={(e) => handleAddressChange('permanentAddress', 'state', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -404,8 +379,8 @@ const AboutMe = () => {
               <label htmlFor="country" style={{display : 'block' , marginBottom : '10px'}}>Country</label>
               <input
                 type="text"
-                value={permanentAddress.country}
-                onChange={(e) => handleChange("country", e.target.value, "permanent")}
+                value={profileData.permanentAddress.country}
+                onChange={(e) => handleAddressChange('permanentAddress', 'country', e.target.value)} 
                 style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
               />
             </div>
@@ -413,8 +388,8 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{display : 'block' , marginBottom : '10px'}}>Postal Code</label>
               <input
                 type="number"
-                value={permanentAddress.postal_code}
-                onChange={(e) => handleChange("postal_code", e.target.value, "permanent")}
+                value={profileData.permanentAddress.postal_code}
+                onChange={(e) => handleAddressChange('permanentAddress', 'postal_code', e.target.value)} 
                 style={{
                   height: '45px',
                   width: '90%',
