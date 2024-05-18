@@ -14,6 +14,7 @@ function ResumeContext({ children }) {
   const [languages, setLanguages] = useState([]);
   const [skills, setSkills] = useState([]);
   const [templateType, setTemplateType] = useState(null);
+  const [hobbies, setHobbies] = useState([])
   const [profileData,setProfileData] = useState({
     title: "",
     firstName: "",
@@ -152,6 +153,10 @@ function ResumeContext({ children }) {
   }, [])
     
 
+  useEffect(()=>{
+    setHobbies([{ name : "traveling"},{name : "Singing"}])
+  },[])
+  
   return (
     <resumeContext.Provider value={{ currentStep, 
     setCurrentStep, educations, 
@@ -159,7 +164,8 @@ function ResumeContext({ children }) {
     setExperiences, languages, 
     setLanguages, skills, setSkills,
      templateType, setTemplateType,
-     profileData,setProfileData  }} >
+     profileData,setProfileData,
+     hobbies, setHobbies  }} >
       {children}
     </resumeContext.Provider>
   )
