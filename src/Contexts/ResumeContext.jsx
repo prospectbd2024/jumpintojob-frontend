@@ -8,12 +8,16 @@ export const useResumeContext = () => useContext(resumeContext);
 
 
 function ResumeContext({ children }) {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(7);
   const [educations, setEducations] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [resumeTemplates, setResumeTemplates] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [template , setTemplate] = useState({});
+  const [template , setTemplate] = useState({ 
+    id: 1, name: 'classic', image: 'https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcmVzdW1lcy90ZWFjaGVyLXJlc3VtZS5wbmc~..png', 
+    type: 'resume' ,
+    template : '<p>{resumeData}</p>' , template_type : 'jsx' });
   const [hobbies, setHobbies] = useState([])
   const [resumeData, setResumeData] = useState({});
   //template settings
@@ -121,9 +125,6 @@ function ResumeContext({ children }) {
     ]
     )
   }, [])
-  useEffect(() => {
-    console.log(currentStep);
-  }, [currentStep])
   // Education
   useEffect(() => {
 
@@ -169,19 +170,22 @@ function ResumeContext({ children }) {
   }, [])
     
 
-// resume templates
-const resumeTemplates = [
-  { id: 1, name: 'classic', image: 'https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcmVzdW1lcy90ZWFjaGVyLXJlc3VtZS5wbmc~..png', type: 'resume' ,
-   template : '<p>{resumeData)}</p>' , template_type : 'jsx' },
-  { id: 2, name: 'modern', image: 'https://i.ibb.co/P1crN2n/resumetemplate2.png', type: 'resume',
-  template : '<p>hello world</p>' , template_type : 'jsx'  },
-  { id: 3, name: 'creative', image: 'https://gosumo-cvtemplate.com/wp-content/uploads/2019/06/Word-CV-Template-Dublin.png', type: 'cv' ,
-  template : '<p>hello world</p>' , template_type : 'jsx' },
-  { id: 4, name: 'fancy', image: 'https://techguruplus.com/wp-content/uploads/2022/12/Resume-CV-Templates-Word-doc-023.jpg', type: 'cv' ,
-  template : '<p>hello world</p>' , template_type : 'jsx' },
-  { id: 5, name: 'stylish', image: 'https://blog.hubspot.com/hs-fs/hubfs/resume-templates-word_2.webp?width=650&height=841&name=resume-templates-word_2.webp', type: 'resume',
-  template : '<p>hello world</p>' , template_type : 'jsx'  }
-]
+  useEffect(() => {
+    const fetchResumeTemplates = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setResumeTemplates(data.data);
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+      }
+    };
+
+    fetchResumeTemplates();
+  }, []); // Empty dependency array means this effect runs once after the initial render
 
   useEffect(()=>{
     setHobbies([{ name : "traveling"},{name : "Singing"}])
@@ -219,9 +223,7 @@ useEffect(()=>{
 useEffect(()=>{
   setResumeData(prev=>({...prev,others : more}))
 },[more])
-useEffect(()=>{
-  console.log(resumeData);
-},[resumeData])
+
   return (
     <resumeContext.Provider value={{ currentStep, 
     setCurrentStep, educations, 
