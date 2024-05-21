@@ -13,16 +13,10 @@ import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 import { useResumeContext } from "@/Contexts/ResumeContext";
 
 const ResumeContainer = () => {
-  const { currentStep, setCurrentStep,templateType, setTemplateType } = useResumeContext();
+  const { currentStep, setCurrentStep  } = useResumeContext();
 
-  const [selectedTemplateId, setSelectedTemplateId] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState([]);
 
-  const handleSelectedTemplate = (template) => {
-    setSelectedTemplateId(template.id);
-    setTemplateType(template.type);
-    setSelectedTemplate(template);
-  };
+
 
   return (
     <div style={{ padding: "50px 0" }} className="container">
@@ -32,10 +26,7 @@ const ResumeContainer = () => {
         style={{ padding: "30px", margin: "50px 0" }}
       >
         {currentStep == 1 && (
-          <ResumeTemplates
-            handleSelectedTemplate={handleSelectedTemplate}
-            selectedTemplateId={selectedTemplateId}
-          />
+          <ResumeTemplates    />
         )}
         <div className="resume-form"  hidden={currentStep==1}>
           {currentStep == 2 && <ResumeHeading />}
@@ -43,6 +34,7 @@ const ResumeContainer = () => {
           {currentStep == 4 && <ResumeExperiences />}
           {currentStep == 5 &&  <ResumeSkills /> }
           {currentStep==6  && <ResumeFinalize />}
+          {currentStep==7  && <ResumePreview />}
 
           <PrevNextButton props={{setCurrentStep,currentStep}} />
      
