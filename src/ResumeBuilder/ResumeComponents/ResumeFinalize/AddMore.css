@@ -1,4 +1,12 @@
-/* General styles */
+/* General styles for all form containers */
+.add-project-container,
+.add-certificate-container,
+.add-publication-container,
+.default-container {
+    width: 400px;
+}
+
+/* General label styles */
 .add-project-container label,
 .add-certificate-container label,
 .add-publication-container label,
@@ -6,138 +14,80 @@
     font-size: 1rem;
     font-weight: 600;
 }
-.add-project-container input {
 
-    outline: none;
-}
-.add-project-container,
-.project-date,
-.project-end-date,
-.project-working-present,
-.add-certificate-container ,
-.add-publication-container,
-.default-container{
-    width: 400px;
-}
-/* Project styles */
-.add-project-container .project-date,
-.add-certificate-container .certificate-date,
-.add-publication-container .publication-date {
-    display: flex;
-    flex-direction: row;
-    gap: 10px; /* Added gap between date inputs */
-}
-
-.add-project-container .project-title,
-.add-certificate-container .certificate-title,
-.add-publication-container .publication-title,
-.add-publication-container .publication-journal,
-.default-container .default-title,
-.default-container .default-description {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px; /* Added margin for better spacing */
-}
-
-.add-project-container .project-date div,
-.add-certificate-container .certificate-date,
-.add-publication-container .publication-date {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px; /* Added margin for better spacing */
-}
-
-.project-working-present,
-.certificate-working-present,
-.publication-working-present {
-    display: flex !important;
-    gap: 0px 10px;
-    flex-direction: row !important;
-}
-
-.add-project-container .project-description,
-.add-certificate-container .certificate-description,
-.add-publication-container .publication-abstract {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px; /* Added margin for better spacing */
-}
-
-.add-project-container .project-description label,
-.add-certificate-container .certificate-description label,
-.add-publication-container .publication-abstract label,
-.default-container .default-description label {
-    display: block;
-}
-
-/* Input field styles */
-.add-project-container input[type='text'],
+/* General input styles */
+.add-project-container input,
+.add-certificate-container input,
+.add-publication-container input,
+.default-container input,
 .add-project-container textarea,
-.add-certificate-container input[type='text'],
 .add-certificate-container textarea,
-.add-publication-container input[type='text'],
 .add-publication-container textarea,
-.default-container input[type='text'],
 .default-container textarea {
     border-radius: 5px;
-    padding-top: 10px; /* Increased padding for better aesthetics */
-    padding-bottom: 10px; /* Increased padding for better aesthetics */
-    padding-left: 12px; /* Increased padding for better aesthetics */
-    padding-right: 12px; /* Increased padding for better aesthetics */
+    padding: 10px 12px; /* Combined padding properties for brevity */
     border: 1px solid #ccc;
     font-size: 1rem;
-    width: 100%; /* Make the inputs and textareas take full width of the parent */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    outline:none;
-}
-/* Input field styles */
-.add-project-container input:hover,
-.add-project-container textarea:hover,
-.add-certificate-container input:hover ,
-.add-certificate-container textarea:hover,
-.add-publication-container input:hover ,
-.add-publication-container textarea:hover,
-.default-container input:hover ,
-.default-container textarea:hover {
-border-color: var(--primary-color);
-}
-/* Input field styles */
-.add-project-container input:focus,
-.add-project-container textarea:focus,
-.add-certificate-container input:focus ,
-.add-certificate-container textarea:focus,
-.add-publication-container input:focus ,
-.add-publication-container textarea:focus,
-.default-container input:focus ,
-.default-container textarea:focus {
-border-color: var(--primary-color);
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
 }
 
+/* Hover and focus styles for inputs and textareas */
+.add-project-container input:hover,
+.add-certificate-container input:hover,
+.add-publication-container input:hover,
+.default-container input:hover,
+.add-project-container textarea:hover,
+.add-certificate-container textarea:hover,
+.add-publication-container textarea:hover,
+.default-container textarea:hover,
+.add-project-container input:focus,
+.add-certificate-container input:focus,
+.add-publication-container input:focus,
+.default-container input:focus,
+.add-project-container textarea:focus,
+.add-certificate-container textarea:focus,
+.add-publication-container textarea:focus,
+.default-container textarea:focus {
+    border-color: var(--primary-color);
+}
 
 /* Date input field styles */
 .add-project-container input[type='date'],
 .add-certificate-container input[type='date'],
 .add-publication-container input[type='date'] {
     border-radius: 5px;
-    padding-top: 10px; /* Increased padding for better aesthetics */
-    padding-bottom: 10px; /* Increased padding for better aesthetics */
-    padding-left: 12px; /* Increased padding for better aesthetics */
-    padding-right: 12px; /* Increased padding for better aesthetics */
+    padding: 10px 12px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    width: 100%; /* Make the inputs take full width of the parent */
+    width: 100%;
+    box-sizing: border-box;
     outline: none;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
-.add-project-container .project-start-date,
-.add-project-container .project-end-date,
-.add-certificate-container .certificate-date,
-.add-publication-container .publication-date {
-    margin-bottom: 15px; /* Added margin for better spacing */
+/* Flexbox layout for date inputs */
+.add-project-container .form-group,
+.add-certificate-container .form-group,
+.add-publication-container .form-group,
+.default-container .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Margin for better spacing */
 }
 
-/* Additional textarea styles for consistency */
+/* Flexbox layout for working present checkbox */
+.form-check {
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+.form-check div {
+    display: flex;
+    gap: 0px 10px;
+}
+/* Additional styles for textarea */
 .add-project-container textarea,
 .add-certificate-container textarea,
 .add-publication-container textarea,
