@@ -15,6 +15,7 @@
     text-align: center;
     cursor: pointer;
     border: none;
+    outline: none;
     
 }
 /* .resume-templates .templates .template:hover{
@@ -31,7 +32,7 @@
 .resume-templates .templates .template img:hover{
     border: 3px solid var(--primary-color);
 }
-.resume-templates .templates .template img .selected-template{
+.resume-templates .templates .template .selected-template{
     border: 3px solid var(--primary-color);
 }
 .resume-templates .templates .template p{
