@@ -1,19 +1,23 @@
 'use client'
 import AddButton from '@/Components/Buttons/AddButton'
 import ModalBox from '@/Components/UserProfile/Qualifications/ModalBox'
-import React, { useState,useCallback } from 'react'
+import React, { useState,useCallback,useEffect } from 'react'
 import './ResumeOthers.css'
 import AddMore from './AddMore'
-
+import {FaTrashAlt} from 'react-icons/fa'
+import { useResumeContext } from '@/Contexts/ResumeContext'
 
 
 function ResumeOthers() {
-    const [inputType,setInputType] = useState('Project') 
 
+    const { more, manageMore} = useResumeContext();
+    const [  formData, setFormData] = useState({})
+    
+    const [inputType,setInputType] = useState("Project")
     const handleChange = (e)=>{
         setInputType(e.target.value)
     }
-    const [more,manageMore] = useState([]);
+
     const showModal = useCallback(
         (title, state, index) => {
 
@@ -27,7 +31,7 @@ function ResumeOthers() {
         []
       );
       const closeModal = useCallback(() => {
-
+        setFormData({})
         manageModal({ display: "none" });
       }, []);
     
@@ -37,9 +41,50 @@ function ResumeOthers() {
         title: "Loading",
         state: "new",
       });
+      const removeItem = useCallback(
+        (id) => {
+          manageMore(prev=>{
+           return prev.filter((element,index)=>{
+            return index!=id;
+           })
+          })
+    
+        }
+      )
+    
+      const onSave =()=>{
+        manageMore(prev => ([...prev,formData])) 
+        closeModal()
+      }
+
 
   return (
     <div>
+      <h3 style={{display: 'block',
+fontSize: '1.17em',
+marginBlockStart: '1em',
+marginBlockEnd: '1em',
+marginInlineStart: '0px',
+marginInlineEnd: '0px',
+fontWeight: 'bold',
+unicodeBidi: 'isolate'}}>Others</h3>
+      <div>
+      {more.map((el,index) => (
+            <div className="education-container" key={el.institution_name}>
+              <div className="top-right-icons-container">
+                <div className="top-right-icons">
+                <FaTrashAlt className="minus-icon" onClick={()=>{removeItem(index)}}/>
+                </div>
+              </div>
+              <p className="institution-name">{el.type} Title :  {el.title}</p>
+              <p hidden={!el.startDate} ><span className="label">Start Year:</span> {el.startDate}</p>
+              <p hidden={!el.endDate || el.present}><span className="label">End Year:</span> {el.endDate}</p>
+              <p hidden={!el.date}><span className="label">Date:</span> {el.date}</p>
+              <p hidden={!el.journal}><span className="label">Journal:</span> {el.journal}</p>
+              <p hidden={!el.description}><span className="label">Descriptions:</span> {el.description}</p>
+            </div>
+          ))}
+      </div>
     <ul className="addmore">
         <li>
             <input type="radio" id="projects" value="Project" name="add" checked={inputType=='Project'}   onChange={handleChange}/>
@@ -62,8 +107,8 @@ function ResumeOthers() {
     <div>
         <AddButton onClick={()=>showModal('Add '+inputType,'add')}/>
       </div>
-    <ModalBox props={{ ...modal, onSave: ()=>{console.log("hi there");}, onClose: closeModal }}>
-        <AddMore  props={{inputType,more,manageMore}} />
+    <ModalBox props={{ ...modal, onSave: onSave, onClose: closeModal }}>
+        <AddMore  props={{inputType,formData, setFormData}} />
       </ModalBox>
 </div>
   )
