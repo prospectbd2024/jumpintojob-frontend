@@ -13,8 +13,24 @@ function ResumeContext({ children }) {
   const [experiences, setExperiences] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [templateType, setTemplateType] = useState(null);
+  const [template , setTemplate] = useState({});
   const [hobbies, setHobbies] = useState([])
+  const [resumeData, setResumeData] = useState({});
+  //template settings
+  const templateSettings = {
+    arrows: true,
+    dots: false,
+    infinite: true,
+    speed: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    slidesToShow: 4,
+    slidesToScroll: 2
+};
+  //resume others
+
+  const [more,manageMore] = useState([]);
+  //profile data
   const [profileData,setProfileData] = useState({
     title: "",
     firstName: "",
@@ -153,20 +169,73 @@ function ResumeContext({ children }) {
   }, [])
     
 
+// resume templates
+const resumeTemplates = [
+  { id: 1, name: 'classic', image: 'https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcmVzdW1lcy90ZWFjaGVyLXJlc3VtZS5wbmc~..png', type: 'resume' ,
+   template : '<p>{resumeData)}</p>' , template_type : 'jsx' },
+  { id: 2, name: 'modern', image: 'https://i.ibb.co/P1crN2n/resumetemplate2.png', type: 'resume',
+  template : '<p>hello world</p>' , template_type : 'jsx'  },
+  { id: 3, name: 'creative', image: 'https://gosumo-cvtemplate.com/wp-content/uploads/2019/06/Word-CV-Template-Dublin.png', type: 'cv' ,
+  template : '<p>hello world</p>' , template_type : 'jsx' },
+  { id: 4, name: 'fancy', image: 'https://techguruplus.com/wp-content/uploads/2022/12/Resume-CV-Templates-Word-doc-023.jpg', type: 'cv' ,
+  template : '<p>hello world</p>' , template_type : 'jsx' },
+  { id: 5, name: 'stylish', image: 'https://blog.hubspot.com/hs-fs/hubfs/resume-templates-word_2.webp?width=650&height=841&name=resume-templates-word_2.webp', type: 'resume',
+  template : '<p>hello world</p>' , template_type : 'jsx'  }
+]
+
   useEffect(()=>{
     setHobbies([{ name : "traveling"},{name : "Singing"}])
   },[])
-  
+// update resume data
+  useEffect(()=>{
+    setResumeData(prev=>({...prev,educations: educations}))
+
+  },[educations])
+// update resume data
+  useEffect(()=>{
+    setResumeData(prev=>({...prev,experiences : experiences}))
+
+  },[experiences])
+// update resume data
+useEffect(()=>{
+  setResumeData(prev=>({...prev,skills : skills}))
+
+},[skills])
+// update resume data
+useEffect(()=>{
+  setResumeData(prev=>({...prev,languages : languages}))
+
+},[languages])
+// update resume data
+useEffect(()=>{
+  setResumeData(prev=>({...prev,hobbies : hobbies}))
+},[hobbies])
+// update resume data
+useEffect(()=>{
+  setResumeData(prev=>({...prev,profile : profileData}))
+
+},[profileData])
+// update resume data
+useEffect(()=>{
+  setResumeData(prev=>({...prev,others : more}))
+},[more])
+useEffect(()=>{
+  console.log(resumeData);
+},[resumeData])
   return (
     <resumeContext.Provider value={{ currentStep, 
     setCurrentStep, educations, 
     setEducations, experiences, 
-    setExperiences, languages, 
-    setLanguages, skills, setSkills,
-     templateType, setTemplateType,
-     profileData,setProfileData,
-     hobbies, setHobbies  }} >
-      {children}
+    setExperiences,
+    languages, setLanguages, 
+    skills, setSkills,
+    template , setTemplate,
+    profileData,setProfileData,
+    hobbies, setHobbies ,
+    resumeData, setResumeData,
+    more,manageMore,templateSettings,
+    resumeTemplates }} >
+                          {children}
     </resumeContext.Provider>
   )
 }
