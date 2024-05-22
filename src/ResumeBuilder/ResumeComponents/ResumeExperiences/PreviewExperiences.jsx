@@ -6,7 +6,7 @@ const PreviewExperiences = ({props}) => {
 
 
 
-    const {resumeData ,setResumeData,state,setState} = props;
+    const {userProfileData ,setUserProfileData,state,setState} = props;
     useEffect(() => {
         if(state.type =='delete')
               {
@@ -23,16 +23,16 @@ const PreviewExperiences = ({props}) => {
     
 
         const deleteExperience = useCallback((id)=>{
-        const filterd_experiences = resumeData.experiences.filter((item) => item.id !=id );
+        const filterd_experiences = userProfileData.experiences.filter((item) => item.id !=id );
         console.log(filterd_experiences)
-        setResumeData( {...resumeData, experiences : filterd_experiences})
+        setUserProfileData( {...userProfileData, experiences : filterd_experiences})
     
     });
 
 
 
     return <div>
-    {resumeData && resumeData.experiences.map((experience,key) =>{
+    {userProfileData && userProfileData.experiences.map((experience,key) =>{
 
         
         

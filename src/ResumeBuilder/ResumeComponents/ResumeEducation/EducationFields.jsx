@@ -29,14 +29,14 @@ function EducationFields({ props }) {
     institution_name: "",
   };
   const [isWarning,setWarning] = useState(false)
-  const { setResumeData, resumeData, formIndex, state, setState } = props;
+  const { setUserProfileData, userProfileData, formIndex, state, setState } = props;
 
   const handleChange = useCallback((key, value) => {
     setEducationFields((prev) => {
       prev[key] = value;
       return prev;
     });
-    updateResumeData(educationFields);
+    updateuserProfileData(educationFields);
   });
 
   useEffect(() => {
@@ -45,26 +45,26 @@ function EducationFields({ props }) {
 
       setEducationFields(BaseFormat);
 
-      updateResumeData(BaseFormat);
+      updateuserProfileData(BaseFormat);
     }
     if (state.type == "update") {
-      let education_fields = resumeData.educations.find(
+      let education_fields = userProfileData.educations.find(
         (item) => item.id == state.id
       );
       setEducationFields(education_fields);
-      // updateResumeData(educationFields)
+      // updateuserProfileData(educationFields)
     }
     if (state.type == "dissmiss") {
       BaseFormat.id = state.id;
 
       setEducationFields(BaseFormat);
 
-      updateResumeData(BaseFormat);
+      updateuserProfileData(BaseFormat);
     }
   }, [state]);
 
-  const updateResumeData = useCallback((educationFields) => {
-    const resumeEducations = resumeData.educations;
+  const updateuserProfileData = useCallback((educationFields) => {
+    const resumeEducations = userProfileData.educations;
     // console.log('old ',resumeExperiences)
 
     const index = resumeEducations.findIndex(
@@ -79,7 +79,7 @@ function EducationFields({ props }) {
       resumeEducations[index] = educationFields;
     }
     console.log(resumeEducations);
-    setResumeData((prev) => {
+    setUserProfileData((prev) => {
       return { ...prev, educations: resumeEducations };
     });
   });

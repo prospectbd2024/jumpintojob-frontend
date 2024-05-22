@@ -4,11 +4,11 @@ import React, { useContext } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 
 function ShowSkillList({onDeleteFunctin,type}) {
-  const {resumeData} = useContext(UserContext);
+  const {userProfileData} = useContext(UserContext);
 
   return (
     <ul className="skills-list">
-    {resumeData && resumeData[type]?.map((skill, index) => (
+    {userProfileData && userProfileData[type]?.map((skill, index) => (
       <li className="skill" key={index}>
         <p>name : {skill.name}, rating : {skill.rating}</p>
         <button onClick={() => onDeleteFunctin(index)}>

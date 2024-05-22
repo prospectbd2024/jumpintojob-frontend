@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-function RenderTemplate({template, resumeData,currentStep}) {
+function RenderTemplate({template, userProfileData,currentStep}) {
 
   const [htmlTemplate,setHtmlTemplate] = useState("")
 
@@ -14,7 +14,7 @@ function RenderTemplate({template, resumeData,currentStep}) {
         },
         body: JSON.stringify({
           template_id: template.id,
-          resume_data : resumeData
+          resume_data : userProfileData
         }),
       });
       if (!response.ok) {
@@ -32,13 +32,13 @@ function RenderTemplate({template, resumeData,currentStep}) {
   useEffect(()=>{
 
     if(currentStep==7){
-      var resumeSize = Object.keys(resumeData).length;
+      var resumeSize = Object.keys(userProfileData).length;
       if(resumeSize>0){
         generateTemplateHtml()
       }
 
       }
-  },[currentStep,resumeData])
+  },[currentStep,userProfileData])
   return (
     <div dangerouslySetInnerHTML={{ __html: htmlTemplate }}></div>
   )

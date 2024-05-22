@@ -9,7 +9,7 @@ function SkillContextProvider({ children }) {
     console.log(data);
   };
 
-  const { resumeData, setResumeData } = useUserContext();
+  const { userProfileData, setUserProfileData } = useUserContext();
 
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = (e) => {
@@ -36,10 +36,10 @@ function SkillContextProvider({ children }) {
 
   useEffect(() => {
     // This effect runs whenever skillList changes
-    setResumeData({ ...resumeData, skills: skillList });
+    setUserProfileData({ ...userProfileData, skills: skillList });
   }, [skillList]);
   const demoSkill = {id : '', name : '',rating : 0}
-  // console.log(resumeData)
+  // console.log(userProfileData)
   return (
     <SkillContext.Provider
       value={{

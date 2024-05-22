@@ -13,16 +13,16 @@ function ResumeContext({ children }) {
 
 
   const { 
-    profileData, setProfileData, 
+    personalInformation, SetPersonalInformation, 
     experiences, setExperiences,
     educations, setEducations, 
     languages, setLanguages, 
     skills, setSkills,
     hobbies, setHobbies, 
     more, manageMore,
-    resumeData, setResumeData 
+    userProfileData, setUserProfileData 
   } = useUserProfileContext();
-  
+
   const [currentStep, setCurrentStep] = useState(7);
   const [resumeTemplates, setResumeTemplates] = useState([]);
   const [template, setTemplate] = useState({ id: 1 });
@@ -68,9 +68,9 @@ function ResumeContext({ children }) {
       languages, setLanguages,
       skills, setSkills,
       template, setTemplate,
-      profileData, setProfileData,
+      personalInformation, SetPersonalInformation,
       hobbies, setHobbies,
-      resumeData, setResumeData,
+      userProfileData, setUserProfileData,
       more, manageMore, templateSettings,
       resumeTemplates
     }} >

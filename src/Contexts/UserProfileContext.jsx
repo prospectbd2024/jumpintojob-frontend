@@ -48,14 +48,14 @@ function UserProfileContext({ children }) {
     const [currency, setCurrency] = useState('BDT'); // Default currency is USD
     const [preferredIndustry, setPreferredIndustry] = useState('');
     const [availability, setAvailability] = useState('');
-    const [profileData, setProfileData] = useState(pdata);
+    const [personalInformation, SetPersonalInformation] = useState(pdata);
     const [experiences, setExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
     const [languages, setLanguages] = useState([]);
     const [skills, setSkills] = useState([]);
     const [hobbies, setHobbies] = useState([])
     const [more, manageMore] = useState([]);
-    const [resumeData, setResumeData] = useState({ status: 'in-progress' });
+    const [userProfileData, setUserProfileData] = useState({ status: 'in-progress' });
     const [avatar, setAvatar] = useState(null);
     const [selectedAvatar, selectAvatar] = useState(null);
     useEffect(() => {
@@ -176,36 +176,36 @@ function UserProfileContext({ children }) {
 
     // update resume data
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, educations: educations }))
+        setUserProfileData(prev => ({ ...prev, educations: educations }))
     }, [educations])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, experiences: experiences }))
+        setUserProfileData(prev => ({ ...prev, experiences: experiences }))
     }, [experiences])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, skills: skills }))
+        setUserProfileData(prev => ({ ...prev, skills: skills }))
     }, [skills])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, languages: languages }))
+        setUserProfileData(prev => ({ ...prev, languages: languages }))
     }, [languages])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, hobbies: hobbies }))
+        setUserProfileData(prev => ({ ...prev, hobbies: hobbies }))
     }, [hobbies])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, personalInformation: profileData }))
-    }, [profileData])
+        setUserProfileData(prev => ({ ...prev, personalInformation: personalInformation }))
+    }, [personalInformation])
 
     useEffect(() => {
-        setResumeData(prev => ({ ...prev, others: more, status: 'done' }))
+        setUserProfileData(prev => ({ ...prev, others: more, status: 'done' }))
     }, [more])
 
     return (
         <userProfileContext.Provider value={{
-            profileData, setProfileData, 
+           personalInformation, SetPersonalInformation, 
             experiences, setExperiences,
             educations, setEducations, 
             languages, setLanguages, 
@@ -218,7 +218,7 @@ function UserProfileContext({ children }) {
             currency, setCurrency, 
             preferredIndustry, setPreferredIndustry, 
             availability, setAvailability,
-            resumeData, setResumeData,
+            userProfileData, setUserProfileData,
             avatar, setAvatar,
             selectedAvatar, selectAvatar
         }}>
