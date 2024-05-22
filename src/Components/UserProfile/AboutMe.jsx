@@ -140,8 +140,8 @@ const AboutMe = () => {
             </div>
           </div>
           <div>
-            <h4 suppressHydrationWarning={true}>{profile?.email}</h4>
-            <p>{profile?.user_type}</p>
+            <h4 suppressHydrationWarning={true}>{profileData?.email}</h4>
+            <p>{profileData?.user_type}</p>
           </div>
         </div>
         <div style={{ marginBottom: '10px' }}>
@@ -151,8 +151,8 @@ const AboutMe = () => {
             placeholder="Your First Name"
             id="first_name"
             name="firstName"
-            value={profileData.first_name || " "}
-            onChange={(e) => handleChange('first_name', e.target.value)}
+            value={profileData.firstName || " "}
+            onChange={(e) => handleChange('firstName', e.target.value)}
             style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
@@ -163,8 +163,32 @@ const AboutMe = () => {
             placeholder="Your Last Name"
             id="last_name"
             name="lastName"
-            value={profileData.last_name || " "}
-            onChange={(e) => handleChange('last_name', e.target.value)}
+            value={profileData.lastName || " "}
+            onChange={(e) => handleChange('lastName', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="email" style={{ display: 'block', marginBottom: '10px' }}>Email</label>
+          <input
+            type="text"
+            placeholder="Email"
+            id="email"
+            name="email"
+            value={profileData.email || " "}
+            onChange={(e) => handleChange('email', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="phone" style={{ display: 'block', marginBottom: '10px' }}>Phone Number</label>
+          <input
+            type="text"
+            placeholder="Your Phone Number"
+            id="phone"
+            name="phone"
+            value={profileData.phone || " "}
+            onChange={(e) => handleChange('phone', e.target.value)}
             style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
@@ -327,8 +351,8 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={profileData.currentAddress?.postal_code}
-                onChange={(e) => handleAddressChange('currentAddress', 'postal_code', e.target.value)}
+                value={profileData.currentAddress?.postalCode}
+                onChange={(e) => handleAddressChange('currentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
                   width: '90%',
@@ -376,8 +400,8 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={profileData.permanentAddress.postal_code}
-                onChange={(e) => handleAddressChange('permanentAddress', 'postal_code', e.target.value)}
+                value={profileData.permanentAddress.postalCode}
+                onChange={(e) => handleAddressChange('permanentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
                   width: '90%',

@@ -10,22 +10,23 @@ function UserProfileContext({ children }) {
     const pdata = {
         "title": "",
         "firstName": "",
+        "userType" : "",
         "lastName": "",
         "avatar": "", // Correcting 'avata' to 'avatar'
-        "cv_profile_image": "",
+        "cvProfileImage": "",
         "email": "",
         "phone": "",
         "currentAddress": {
             "city": "",
             "state": "",
             "country": "",
-            "postal_code": "" // Adding postal_code
+            "postalCode": "" // Adding postal_code
         },
         "permanentAddress": {
             "city": "",
             "state": "",
             "country": "",
-            "postal_code": "" // Adding postal_code
+            "postalCode": "" // Adding postal_code
         },
         "dateOfBirth": "", // New field for date of birth
         "gender": "", // New field for gender
@@ -57,42 +58,6 @@ function UserProfileContext({ children }) {
     const [resumeData, setResumeData] = useState({ status: 'in-progress' });
     const [avatar, setAvatar] = useState(null);
     const [selectedAvatar, selectAvatar] = useState(null);
-
-    useEffect(() => {
-        setProfileData({
-            "title": "",
-            "firstName": "",
-            "lastName": "",
-            "avatar": "", // Correcting 'avata' to 'avatar'
-            "cv_profile_image": "",
-            "email": "",
-            "phone": "",
-            "currentAddress": {
-                "city": "",
-                "state": "",
-                "country": "",
-                "postal_code": "" // Adding postal_code
-            },
-            "permanentAddress": {
-                "city": "",
-                "state": "",
-                "country": "",
-                "postal_code": "" // Adding postal_code
-            },
-            "dateOfBirth": "", // New field for date of birth
-            "gender": "", // New field for gender
-            "nationality": "", // New field for nationality
-            "religion": "", // New field for religion
-            "maritalStatus": "", // New field for marital status
-            "summary": "",
-            "mediaLinks": [
-                {
-                    "name": "Linkedin",
-                    "url": "www.linkedin.com"
-                }
-            ]
-        })
-    }, [])
     useEffect(() => {
         setExperiences([
             {
