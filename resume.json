@@ -10,12 +10,14 @@
 		"presentAddress": {
 			"city": "New York",
 			"state": "NY",
-			"country": "USA"
+			"country": "USA",
+            "postal_code" : "123"
 		},
 		"permanentAddress": {
 			"city": "New York",
 			"state": "NY",
-			"country": "USA"
+			"country": "USA",
+            "postal_code" : "123"
 		},
 		"profile_picture": "",
 		"religion": "",
@@ -96,5 +98,32 @@
         { "language": "English", "proficiency": "Fluent" },
         { "language": "Spanish", "proficiency": "Beginner" }
     ],
-    "hobbies": [{ "name": "traveling" },{ "name": "Singing" }]
+    "hobbies": [{ "name": "traveling" },{ "name": "Singing" }],
+    "others": [
+        {
+            "type": "Other",
+            "title": "Officiis consequatur",
+            "description": "Non dolorem magni nu"
+        },
+        {
+            "type": "Other",
+            "title": "Ut dolore illum odi",
+            "description": "Est aspernatur labor"
+        },
+        {
+            "type": "Publication",
+            "title": "Quisquam sunt commod",
+            "journal": "dd",
+            "date": "",
+            "abstract": "Ex quia enim quod vo"
+        },
+        {
+            "type": "Project",
+            "title": "Et dignissimos ratio",
+            "startDate": "2024-05-18",
+            "endDate": "2024-05-16",
+            "present": true,
+            "description": "Modi aut qui ea accu"
+        }
+    ]
 }

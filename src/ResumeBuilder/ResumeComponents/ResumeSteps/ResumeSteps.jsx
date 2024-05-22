@@ -43,10 +43,17 @@ const ResumeSteps = () => {
                         </div>
                         <span ></span>
                     </div>
-                    <div className={`step ${currentStep >= 6 ? 'active-step' : ''}`}>
+                    <div className={`step ${currentStep >= 4 ? 'active-step' : ''}`}>
                         <div className='step-title-container'>
-                            <h5>6</h5>
+                            <h5>4</h5>
                             <p>FINALIZE</p>
+                        </div>
+                        <span></span>
+                    </div>
+                    <div className={`step ${currentStep >= 7 ? 'active-step' : ''}`}>
+                        <div className='step-title-container'>
+                            <h5>7</h5>
+                            <p>Preview</p>
                         </div>
                     </div>
                 </div>

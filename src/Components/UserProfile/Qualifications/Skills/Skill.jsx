@@ -117,16 +117,16 @@ function Skill({ props }) {
               </div>
               <div className="skill-learned-from"> 
               <div>
-              <label><input type="checkbox" name="self"  checked={isChecked(skill?.learnedFrom,'self' )}  /> Self</label><br/>
+              <label><input type="checkbox" name="self"  defaultChecked={isChecked(skill?.learnedFrom,'self' )}  /> Self</label><br/>
               </div>
               <div>
-              <label><input type="checkbox" name="job"  checked={isChecked(skill?.learnedFrom,'service' )} /> Job</label><br/>
+              <label><input type="checkbox" name="job"  defaultChecked={isChecked(skill?.learnedFrom,'service' )} /> Job</label><br/>
               </div>
               <div>
-              <label><input type="checkbox" name="education" checked={isChecked(skill?.learnedFrom,'education' )} /> Education</label><br/>
+              <label><input type="checkbox" name="education" defaultChecked={isChecked(skill?.learnedFrom,'education' )} /> Education</label><br/>
               </div>
               <div>
-              <label><input type="checkbox" name="professional_training" checked={isChecked(skill?.learnedFrom,'training' )} /> Professional Training</label><br/>
+              <label><input type="checkbox" name="professional_training" defaultChecked={isChecked(skill?.learnedFrom,'training' )} /> Professional Training</label><br/>
               </div>
                 
               </div>

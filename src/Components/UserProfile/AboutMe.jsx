@@ -11,31 +11,38 @@ const AboutMe = () => {
   const [selectedAvatar, selectAvatar] = useState(null);
 
   const [profileData,setProfileData] = useState({
-    title: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    currentAddress: {
-      city: "",
-      state: "",
-      country: "",
-      postal_code : ""
+    "title": "",
+    "firstName": "",
+    "lastName": "",
+    "avatar": "", // Correcting 'avata' to 'avatar'
+    "cv_profile_image": "",
+    "email": "",
+    "phone": "",
+    "currentAddress": {
+        "city": "",
+        "state": "",
+        "country": "",
+        "postal_code": "" // Adding postal_code
     },
-    permanentAddress: {
-      city: "",
-      state: "",
-      country: "",
-      postal_code : ""
+    "permanentAddress": {
+        "city": "",
+        "state": "",
+        "country": "",
+        "postal_code": "" // Adding postal_code
     },
-    dateOfBirth: "", // New field for date of birth
-    gender: "", // New field for gender
-    nationality: "", // New field for nationality
-    religion: "", // New field for religion
-    maritalStatus: "", // New field for marital status
-    summary: "",
-    mediaLinks : [{name : "Linkedin", url: "www.linkedin.com"}],
-  });
+    "dateOfBirth": "", // New field for date of birth
+    "gender": "", // New field for gender
+    "nationality": "", // New field for nationality
+    "religion": "", // New field for religion
+    "maritalStatus": "", // New field for marital status
+    "summary": "",
+    "mediaLinks": [
+        {
+            "name": "Linkedin",
+            "url": "www.linkedin.com"
+        }
+    ]
+});
 
 
   const handleUpdateUserProfile = async (event) => {

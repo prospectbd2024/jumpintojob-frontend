@@ -36,29 +36,38 @@ function ResumeContext({ children }) {
   const [more,manageMore] = useState([]);
   //profile data
   const [profileData,setProfileData] = useState({
-    title: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    currentAddress: {
-      city: "",
-      state: "",
-      country: ""
+    "title": "",
+    "firstName": "",
+    "lastName": "",
+    "avatar": "", // Correcting 'avata' to 'avatar'
+    "cv_profile_image": "",
+    "email": "",
+    "phone": "",
+    "currentAddress": {
+        "city": "",
+        "state": "",
+        "country": "",
+        "postal_code": "" // Adding postal_code
     },
-    permanentAddress: {
-      city: "",
-      state: "",
-      country: ""
+    "permanentAddress": {
+        "city": "",
+        "state": "",
+        "country": "",
+        "postal_code": "" // Adding postal_code
     },
-    dateOfBirth: "", // New field for date of birth
-    gender: "", // New field for gender
-    nationality: "", // New field for nationality
-    religion: "", // New field for religion
-    maritalStatus: "", // New field for marital status
-    summary: "",
-    mediaLinks : [{name : "Linkedin", url: "www.linkedin.com"}],
-  });
+    "dateOfBirth": "", // New field for date of birth
+    "gender": "", // New field for gender
+    "nationality": "", // New field for nationality
+    "religion": "", // New field for religion
+    "maritalStatus": "", // New field for marital status
+    "summary": "",
+    "mediaLinks": [
+        {
+            "name": "Linkedin",
+            "url": "www.linkedin.com"
+        }
+    ]
+});
   useEffect(() => {
     setExperiences([
       {
@@ -216,14 +225,16 @@ useEffect(()=>{
 },[hobbies])
 // update resume data
 useEffect(()=>{
-  setResumeData(prev=>({...prev,profile : profileData}))
+  setResumeData(prev=>({...prev,personalInformation : profileData}))
 
 },[profileData])
 // update resume data
 useEffect(()=>{
   setResumeData(prev=>({...prev,others : more}))
 },[more])
-
+useEffect(()=>{
+  console.log(resumeData)
+},[resumeData])
   return (
     <resumeContext.Provider value={{ currentStep, 
     setCurrentStep, educations, 

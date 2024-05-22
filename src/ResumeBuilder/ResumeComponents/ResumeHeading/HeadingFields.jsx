@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {FaTrashAlt}  from 'react-icons/fa'
 function HeadingFields({ props }) {
   
@@ -23,6 +23,11 @@ function HeadingFields({ props }) {
       }
     }));
   };
+  useEffect(() => {
+     setProfileData(prev=>({...prev, cv_profile_image : selectedImage}))
+  }, [selectedImage])
+  
+
 
   const handleMediaLinkChange = (index, field, value) => {
     console.log(profileData.mediaLinks);

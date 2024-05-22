@@ -70,7 +70,7 @@ fontWeight: 'bold',
 unicodeBidi: 'isolate'}}>Others</h3>
       <div>
       {more.map((el,index) => (
-            <div className="education-container" key={el.institution_name}>
+            <div className="education-container" key={index}>
               <div className="top-right-icons-container">
                 <div className="top-right-icons">
                 <FaTrashAlt className="minus-icon" onClick={()=>{removeItem(index)}}/>
@@ -82,6 +82,7 @@ unicodeBidi: 'isolate'}}>Others</h3>
               <p hidden={!el.date}><span className="label">Date:</span> {el.date}</p>
               <p hidden={!el.journal}><span className="label">Journal:</span> {el.journal}</p>
               <p hidden={!el.description}><span className="label">Descriptions:</span> {el.description}</p>
+              <p hidden={!el.abstract}><span className="label">Abstract:</span> {el.abstract}</p>
             </div>
           ))}
       </div>
