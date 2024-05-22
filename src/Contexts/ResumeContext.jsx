@@ -19,12 +19,12 @@ function ResumeContext({ children }) {
     type: 'resume' ,
     template : '<p>{resumeData}</p>' , template_type : 'jsx' });
   const [hobbies, setHobbies] = useState([])
-  const [resumeData, setResumeData] = useState({});
+  const [resumeData, setResumeData] = useState({status : 'in-progress'});
   //template settings
   const templateSettings = {
     arrows: true,
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 1,
     autoplay: false,
     autoplaySpeed: 2000,
@@ -230,10 +230,10 @@ useEffect(()=>{
 },[profileData])
 // update resume data
 useEffect(()=>{
-  setResumeData(prev=>({...prev,others : more}))
+  setResumeData(prev=>({...prev,others : more, status : 'done'}))
 },[more])
 useEffect(()=>{
-  console.log(resumeData)
+  // console.log(resumeData)
 },[resumeData])
   return (
     <resumeContext.Provider value={{ currentStep, 

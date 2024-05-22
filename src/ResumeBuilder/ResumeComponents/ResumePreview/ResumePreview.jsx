@@ -5,7 +5,7 @@ import RenderTemplate from './RenderTemplate';
 const ResumePreview = () => {
     const { resumeData,template,currentStep } = useResumeContext();
     useEffect(()=>{
-        console.log(resumeData)
+        // console.log(resumeData)
     },[resumeData])
 
     return (

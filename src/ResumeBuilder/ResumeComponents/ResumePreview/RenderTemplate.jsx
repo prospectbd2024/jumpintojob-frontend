@@ -13,7 +13,7 @@ function RenderTemplate({template, resumeData,currentStep}) {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          template_id: 1,
+          template_id: template.id,
           resume_data : resumeData
         }),
       });
@@ -32,7 +32,10 @@ function RenderTemplate({template, resumeData,currentStep}) {
   useEffect(()=>{
 
     if(currentStep==7){
-      generateTemplateHtml()
+      var resumeSize = Object.keys(resumeData).length;
+      if(resumeSize>0){
+        generateTemplateHtml()
+      }
 
       }
   },[currentStep,resumeData])

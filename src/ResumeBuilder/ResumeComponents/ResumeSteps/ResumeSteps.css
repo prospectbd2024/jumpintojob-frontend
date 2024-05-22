@@ -1,6 +1,7 @@
 .resume-steps .step-title-container h5{
     background: var(--primary-color);
     color: #fff;
+    cursor: pointer;
 }
 .resume-steps .steps{
     width: 100%;
