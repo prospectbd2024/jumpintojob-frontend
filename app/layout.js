@@ -28,6 +28,7 @@ import { authOptions } from "app/api/auth/[...nextauth]/route"
 import Provider from '@/UserContext/SessionProvider'
 import CompanyContext from '@/Contexts/CompanyContext'
 import CategoryContext from '@/Contexts/CategoryContext'
+import UserProfileContext from '@/Contexts/UserProfileContext'
 
 async function  layout({children}) {
 
@@ -39,10 +40,11 @@ async function  layout({children}) {
       <JobContext>
       <CompanyContext>
       <CategoryContext>
-        
+        <UserProfileContext>
       <Provider session={session}> 
             {children}
       </Provider>
+        </UserProfileContext>
       </CategoryContext>
       </CompanyContext>
       </JobContext>

@@ -1,13 +1,16 @@
 "use client"
+import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import React, { useState } from 'react';
 
 const JobPreferences = () => {
-    const [jobType, setJobType] = useState('');
-    const [otherPreferences, setOtherPreferences] = useState('');
-    const [salaryExpectation, setSalaryExpectation] = useState('');
-    const [currency, setCurrency] = useState('BDT'); // Default currency is USD
-    const [preferredIndustry, setPreferredIndustry] = useState('');
-    const [availability, setAvailability] = useState('');
+
+
+
+    const { jobType, setJobType, otherPreferences,
+        setOtherPreferences, salaryExpectation,
+        setSalaryExpectation, currency,
+        setCurrency, preferredIndustry,
+        setPreferredIndustry, availability, setAvailability } = useUserProfileContext();
 
     const handleJobTypeChange = (e) => {
         setJobType(e.target.value);
@@ -39,7 +42,7 @@ const JobPreferences = () => {
 
     return (
         <div style={{ marginBottom: '30px' }}>
-            <h2 style={{ fontSize: '20px', marginBottom: '20px',display: 'grid',gridTemplateColumns: '1fr 2fr'}}>Job Preferences</h2>
+            <h2 style={{ fontSize: '20px', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 2fr' }}>Job Preferences</h2>
             <div style={{ marginTop: '60px' }}>
 
                 <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
@@ -72,29 +75,29 @@ const JobPreferences = () => {
                 )}
                 <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="salaryExpectation" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Salary Expectation:</label>
-                    <div style={{display: 'flex',gap: '0px 20px'}}>
+                    <div style={{ display: 'flex', gap: '0px 20px' }}>
 
-                   
-                    <input
-                        type="text"
-                        id="salaryExpectation"
-                        value={salaryExpectation}
-                        onChange={handleSalaryExpectationChange}
-                        placeholder="Enter salary expectation"
-                        style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
-                    />
-                    {/* Currency Selector */}
-                    <select
-                        value={currency}
-                        onChange={handleCurrencyChange}
-                        style={{ height: '30px', marginLeft: '10px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px' }}
-                    >
-                        <option value="BDT">BDT</option>
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        {/* Add more currencies as needed */}
-                    </select>
+
+                        <input
+                            type="text"
+                            id="salaryExpectation"
+                            value={salaryExpectation}
+                            onChange={handleSalaryExpectationChange}
+                            placeholder="Enter salary expectation"
+                            style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
+                        />
+                        {/* Currency Selector */}
+                        <select
+                            value={currency}
+                            onChange={handleCurrencyChange}
+                            style={{ height: '30px', marginLeft: '10px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px' }}
+                        >
+                            <option value="BDT">BDT</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            {/* Add more currencies as needed */}
+                        </select>
                     </div>
                 </div>
                 {/* <div  style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
