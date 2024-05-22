@@ -42,6 +42,11 @@ function UserProfileContext({ children }) {
         ]
     }
 
+    const saveProfile =()=>{
+        console.log(userProfileData);
+    }
+
+
     const [jobType, setJobType] = useState('');
     const [otherPreferences, setOtherPreferences] = useState('');
     const [salaryExpectation, setSalaryExpectation] = useState('');
@@ -203,6 +208,11 @@ function UserProfileContext({ children }) {
         setUserProfileData(prev => ({ ...prev, others: more, status: 'done' }))
     }, [more])
 
+    useEffect(()=>{
+        setUserProfileData(prev => ({ ...prev,  avata : selectedAvatar }))
+    },[selectedAvatar])
+
+
     return (
         <userProfileContext.Provider value={{
            personalInformation, SetPersonalInformation, 
@@ -220,7 +230,8 @@ function UserProfileContext({ children }) {
             availability, setAvailability,
             userProfileData, setUserProfileData,
             avatar, setAvatar,
-            selectedAvatar, selectAvatar
+            selectedAvatar, selectAvatar,
+            saveProfile
         }}>
             {children}
         </userProfileContext.Provider>

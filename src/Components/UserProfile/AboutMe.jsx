@@ -5,58 +5,13 @@ import { useUserContext } from "../../Contexts/UserContext";
 import UserImage from "@/assets/default-user.jpg";
 import { FaTrashAlt } from 'react-icons/fa';
 import { useUserProfileContext } from "@/Contexts/UserProfileContext";
+import SaveProfileButton from "../Buttons/SaveProfileButton";
 
 const AboutMe = () => {
 
   const { userData } = useUserContext();
 
   const { personalInformation, SetPersonalInformation ,avatar, setAvatar,selectedAvatar, selectAvatar } = useUserProfileContext();
-
-
-
-
-  const handleUpdateUserProfile = async (event) => {
-    event.preventDefault();
-
-    const updateUserProfile = {
-      ...personalInformation,
-      "avata": selectedAvatar,
-      "_method": "PUT"
-    }
-
-    const userProfileResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/update`,
-      {
-        method: "POST",
-        headers: {
-          "Conte-Type": "multipart/form-data",
-          Accept: "application/json",
-          Authorization: `Bearer ${userData?.data?.access_token}`,
-        },
-        body: updateUserProfile,
-      }
-    );
-
-    const updatedData = await userProfileResponse.json();
-    if (updatedData) {
-      Swal.fire({
-        title: "Update",
-        text: "Profile saved successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-        customClass: {
-          title: "swal-title",
-          text: "swal-text",
-          confirmButton: "swal-confirm-button",
-        },
-      });
-
-      setProfile(updatedData?.user);
-    } else {
-      console.log("Something is wrong with updating your data", updatedData);
-    }
-  };
-
 
   useEffect(() => {
     if (selectedAvatar) {
@@ -91,7 +46,6 @@ const AboutMe = () => {
     SetPersonalInformation({ ...personalInformation, mediaLinks: [...personalInformation.mediaLinks, { name: "", url: "" }] })
   };
   const handleAddressChange = (addressType, field, value) => {
-    console.log(value);
     SetPersonalInformation((prevData) => ({
       ...prevData,
       [addressType]: {
@@ -105,7 +59,7 @@ const AboutMe = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h2 style={{ fontSize: '20px', marginBottom: '15px' }}>Personal Information</h2>
-      <form onSubmit={handleUpdateUserProfile} style={{ display: 'grid', gap: '20px', gridTemplateColumns: '1fr 1fr' }}>
+      <div  style={{ display: 'grid', gap: '20px', gridTemplateColumns: '1fr 1fr' }}>
         <div style={{ display: 'flex', gap: '20px', marginBottom: '30px', alignItems: 'center', gridColumn: 'span 2' }}>
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
@@ -362,8 +316,8 @@ const AboutMe = () => {
                   border: '1px solid #80808057',
                   borderRadius: '5px',
                   '-moz-appearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
-                  '::-webkit-inner-spin-button': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
-                  '::-webkit-outer-spin-button': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
+                  '::-webkitInnerSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
+                  '::WebkitOuterSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
                 }}
               />
             </div>
@@ -417,9 +371,9 @@ const AboutMe = () => {
           </div>
         </div>
         <div style={{ gridColumn: "span 2", textAlign: "right" }}>
-          <button type="submit" style={{ background: "var(--primary-color)", color: "#fff", width: "120px", height: "40px", borderRadius: "5px", border: "none", fontSize: "16px", fontWeight: "bold", cursor: "pointer", transition: ".3s" }}>Save</button>
+          <SaveProfileButton/>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

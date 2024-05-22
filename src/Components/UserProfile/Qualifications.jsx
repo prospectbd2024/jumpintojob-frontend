@@ -7,6 +7,7 @@ import Language from './Qualifications/Language/Language';
 import Experiences from './Qualifications/Experience/Experiences';
 import Hobbies from './Qualifications/Hobbies/Hobbies';
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
+import SaveProfileButton from '../Buttons/SaveProfileButton';
 
 
 const Qualifications = () => {
@@ -43,6 +44,9 @@ const Qualifications = () => {
 
                 {/* Hobbies  */}
                  <Hobbies props={{hobbies, setHobbies}} />
+            </div>
+            <div style={{display: 'flex',justifyContent: 'flex-end',marginTop: '20px'}}>
+            <SaveProfileButton/>
             </div>
         </div>
     );

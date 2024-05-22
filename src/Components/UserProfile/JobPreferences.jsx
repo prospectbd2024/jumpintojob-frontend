@@ -1,10 +1,9 @@
 "use client"
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import React, { useState } from 'react';
+import SaveProfileButton from '../Buttons/SaveProfileButton';
 
 const JobPreferences = () => {
-
-
 
     const { jobType, setJobType, otherPreferences,
         setOtherPreferences, salaryExpectation,
@@ -36,9 +35,6 @@ const JobPreferences = () => {
         setAvailability(e.target.value);
     };
 
-    const handleSavePreferences = () => {
-        // Add logic here to save preferences
-    };
 
     return (
         <div style={{ marginBottom: '30px' }}>
@@ -125,7 +121,9 @@ const JobPreferences = () => {
                         {/* Add more options as needed */}
                     </select>
                 </div>
-                <button onClick={handleSavePreferences} style={{ background: 'var(--primary-color)', color: '#fff', width: '120px', height: '40px', borderRadius: '5px', border: 'none', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s' }}>Save</button>
+            <div style={{display: 'flex',justifyContent: 'flex-end',marginTop: '20px'}}>
+            <SaveProfileButton/>
+            </div>
             </div>
         </div>
     );
