@@ -1,7 +1,8 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 function RenderTemplate({template, userProfileData,currentStep}) {
 
   const [htmlTemplate,setHtmlTemplate] = useState("")
+  const iframeRef = useRef(null);
 
   const  generateTemplateHtml = async ()=>{
 
@@ -39,8 +40,32 @@ function RenderTemplate({template, userProfileData,currentStep}) {
 
       }
   },[currentStep,userProfileData])
+
+
+  const updateTemplateView =(htmlContent)=>{
+    const iframeDocument = iframeRef.current.contentDocument;
+    iframeDocument.open();
+    iframeDocument.write(htmlContent);
+    iframeDocument.close();
+    iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+
+
+useEffect(()=>{
+ 
+  updateTemplateView(htmlTemplate)
+},[htmlTemplate])
+
   return (
-    <div dangerouslySetInnerHTML={{ __html: htmlTemplate }}></div>
+        <iframe
+        ref={iframeRef}
+        width="100%"
+        height="1000"
+
+        style={{ border: 'none' }}
+        title="Embedded Document"
+      ></iframe>
+
   )
 }
 
