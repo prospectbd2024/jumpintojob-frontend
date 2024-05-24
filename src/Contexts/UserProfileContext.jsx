@@ -8,19 +8,19 @@ function UserProfileContext({ children }) {
 
 
     const pdata = {
-        "title": "",
-        "firstName": "",
+        "title": "Software Engineer",
+        "firstName": "Ahmed",
         "userType" : "",
-        "lastName": "",
+        "lastName": "Kibria",
         "avatar": "", // Correcting 'avata' to 'avatar'
         "cvProfileImage": "",
-        "email": "",
-        "phone": "",
+        "email": "gkibria121@gmail.com",
+        "phone": "+8801521254580",
         "currentAddress": {
-            "city": "",
-            "state": "",
-            "country": "",
-            "postalCode": "" // Adding postal_code
+            "city": "Narayanganj",
+            "state": "Dhaka",
+            "country": "Bangladesh",
+            "postalCode": "1204" // Adding postal_code
         },
         "permanentAddress": {
             "city": "",
@@ -175,6 +175,93 @@ function UserProfileContext({ children }) {
 
     useEffect(() => {
         setHobbies([{ name: "traveling" }, { name: "Singing" }])
+    }, [])
+
+    useEffect(() => {
+        manageMore([
+            // Projects
+            {
+              type: 'Project',
+              title: 'AI Chatbot Development',
+              startDate: '2023-01-01',
+              endDate: '2023-06-30',
+              present: false,
+              description: 'Developed an AI chatbot using natural language processing and machine learning techniques.'
+            },
+            {
+              type: 'Project',
+              title: 'E-commerce Website Redesign',
+              startDate: '2022-04-15',
+              endDate: '2022-10-20',
+              present: false,
+              description: 'Redesigned the user interface of an e-commerce website to improve user experience and increase sales.'
+            },
+            {
+              type: 'Project',
+              title: 'Mobile App for Fitness Tracking',
+              startDate: '2023-05-01',
+              endDate: '2023-12-01',
+              present: true,
+              description: 'Creating a mobile application to track fitness activities, set goals, and monitor progress.'
+            },
+            // Certificates
+            {
+              type: 'Certificate',
+              title: 'Certified Data Scientist',
+              date: '2023-02-15',
+              description: 'Completed a comprehensive data science certification program covering statistics, machine learning, and data visualization.'
+            },
+            {
+              type: 'Certificate',
+              title: 'Project Management Professional (PMP)',
+              date: '2021-08-12',
+              description: 'Earned PMP certification demonstrating skills in project management, team leadership, and strategic planning.'
+            },
+            {
+              type: 'Certificate',
+              title: 'AWS Certified Solutions Architect',
+              date: '2022-05-22',
+              description: 'Achieved AWS certification with expertise in designing and deploying scalable, highly available systems on AWS.'
+            },
+            // Publications
+            {
+              type: 'Publication',
+              title: 'Advances in Quantum Computing',
+              journal: 'Journal of Computer Science',
+              date: '2022-12-10',
+              abstract: 'This paper explores the latest advancements in quantum computing, including new algorithms and hardware developments.'
+            },
+            {
+              type: 'Publication',
+              title: 'The Future of Artificial Intelligence',
+              journal: 'AI Research Journal',
+              date: '2023-03-15',
+              abstract: 'A comprehensive review of current trends and future directions in artificial intelligence research and applications.'
+            },
+            {
+              type: 'Publication',
+              title: 'Blockchain Technology in Finance',
+              journal: 'Financial Innovations',
+              date: '2021-11-05',
+              abstract: 'An analysis of how blockchain technology is transforming financial services, including security, transparency, and efficiency.'
+            },
+            // Others
+            {
+              type: 'Other',
+              title: 'Volunteer at Local Animal Shelter',
+              description: 'Assisted with daily operations and care of animals at the local shelter, including organizing adoption events and raising awareness.'
+            },
+            {
+              type: 'Other',
+              title: 'Mentor at Coding Bootcamp',
+              description: 'Provided mentorship and guidance to students learning to code, helping them develop skills in programming and problem-solving.'
+            },
+            {
+              type: 'Other',
+              title: 'Organizer of Tech Meetup',
+              description: 'Organized monthly tech meetups to foster community engagement, share knowledge, and discuss the latest trends in technology.'
+            }
+          ])
     }, [])
 
 

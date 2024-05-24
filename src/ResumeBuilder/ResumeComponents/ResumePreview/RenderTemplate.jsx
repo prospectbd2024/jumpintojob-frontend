@@ -7,6 +7,7 @@ function RenderTemplate({template, userProfileData,currentStep}) {
   const  generateTemplateHtml = async ()=>{
 
     try {
+      console.log(userProfileData);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/html`, {
         method: 'POST',
         headers: {
