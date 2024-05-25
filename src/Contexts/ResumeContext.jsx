@@ -40,21 +40,19 @@ function ResumeContext({ children }) {
   };
 
 
-
-  useEffect(() => {
-    const fetchResumeTemplates = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setResumeTemplates(data.data);
-      } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
+  const fetchResumeTemplates = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
-
+      const data = await response.json();
+      setResumeTemplates(data.data);
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  };
+  useEffect(() => {
     fetchResumeTemplates();
   }, []); // Empty dependency array means this effect runs once after the initial render
 
@@ -72,7 +70,8 @@ function ResumeContext({ children }) {
       hobbies, setHobbies,
       userProfileData, setUserProfileData,
       more, manageMore, templateSettings,
-      resumeTemplates
+      resumeTemplates,
+      fetchResumeTemplates
     }} >
       {children}
     </resumeContext.Provider>

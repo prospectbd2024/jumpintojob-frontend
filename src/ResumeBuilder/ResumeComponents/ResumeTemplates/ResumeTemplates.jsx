@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './ResumeTemplates.css'
 import 'bear-react-carousel/dist/index.css';
 import Slider from 'react-slick';
@@ -9,13 +9,18 @@ import { useResumeContext } from '@/Contexts/ResumeContext';
 
 
 const ResumeTemplates = ({ }) => {
-    const { currentStep, setCurrentStep,template , setTemplate,templateSettings,resumeTemplates } = useResumeContext();
+    const { currentStep, setCurrentStep,template , setTemplate,templateSettings,resumeTemplates,fetchResumeTemplates } = useResumeContext();
+    
+    useEffect(() => {
+        fetchResumeTemplates();
+    }, [])
     
 
 
 
-
-    return (
+    return (<>
+    {
+        resumeTemplates &&
         <div className='resume-templates'>
             
             <div className="resume-templates-container container">
@@ -24,7 +29,7 @@ const ResumeTemplates = ({ }) => {
                 </div>
                 
                 <div className="templates">
-                    <Slider {...templateSettings} style={{maxWidth: '100%'}}>
+                    <Slider {...templateSettings} style={{maxWidth: '100%'}} key={resumeTemplates.length}>
                     {resumeTemplates.map(tmp => <div key={tmp.id} className={`template`} onClick={() => 
                         setTemplate(tmp)
                         
@@ -40,6 +45,9 @@ const ResumeTemplates = ({ }) => {
                 </div>
             </div>
         </div>
+    }
+    </>
+        
     );
 };
 
