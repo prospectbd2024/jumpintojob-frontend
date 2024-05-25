@@ -23,7 +23,7 @@ function ResumeContext({ children }) {
     userProfileData, setUserProfileData 
   } = useUserProfileContext();
 
-  const [currentStep, setCurrentStep] = useState(7);
+  const [currentStep, setCurrentStep] = useState(1);
   const [resumeTemplates, setResumeTemplates] = useState([]);
   const [template, setTemplate] = useState({ id: 1 });
 
