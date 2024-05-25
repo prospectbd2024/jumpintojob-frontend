@@ -110,7 +110,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="David"
-                name="first_name"
+                name="firstName"
                 id="first_name"
                 required
                 value={firstName}
@@ -126,7 +126,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Warner"
-                  name="last_name"
+                  name="lastName"
                   id="last_name"
                   required
                   value={lastName}

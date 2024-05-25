@@ -4,102 +4,14 @@ import Swal from "sweetalert2";
 import { useUserContext } from "../../Contexts/UserContext";
 import UserImage from "@/assets/default-user.jpg";
 import { FaTrashAlt } from 'react-icons/fa';
+import { useUserProfileContext } from "@/Contexts/UserProfileContext";
+import SaveProfileButton from "../Buttons/SaveProfileButton";
 
 const AboutMe = () => {
-  const { userData, profile, setProfile } = useUserContext();
-  const [avatar, setAvatar] = useState(null);
-  const [selectedAvatar, selectAvatar] = useState(null);
-  const [first_name, setFirstName] = useState(" ");
-  const [last_name, setLastName] = useState(" ");
-  const [gender, setGender] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [religion, setReligion] = useState("");
-  const [currentAddress, setCurrentAddress] = useState({
-    city: "",
-    state: "",
-    country: "",
-    postal_code: ""
-  });
-  const [permanentAddress, setPermanentAddress] = useState({
-    city: "",
-    state: "",
-    country: "",
-    postal_code: ""
-  });
-  const [mediaLinks, setMediaLinks] = useState([]);
 
-  const handleUpdateUserProfile = async (event) => {
-    event.preventDefault();
-    
-    const updateUserProfile = new FormData();
-    updateUserProfile.append("avatar", selectedAvatar);
-    updateUserProfile.append("current_address", currentAddress);
-    updateUserProfile.append("permanent_address", permanentAddress);
-    updateUserProfile.append("gender", gender);
-    updateUserProfile.append("marital_status", maritalStatus);
-    updateUserProfile.append("date_of_birth", dateOfBirth);
-    updateUserProfile.append("nationality", nationality);
-    updateUserProfile.append("religion", religion);
-    updateUserProfile.append("media_links", mediaLinks);
-    updateUserProfile.append("_method", "PUT");    
+  const { userData } = useUserContext();
 
-    const userProfileResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/update`,
-      {
-        method: "POST",
-        headers: {
-          "Conte-Type": "multipart/form-data",
-          Accept: "application/json",
-          Authorization: `Bearer ${userData?.data?.access_token}`,
-        },
-        body: updateUserProfile,
-      }
-    );
-
-    const updatedData = await userProfileResponse.json();
-    if (updatedData) {
-      Swal.fire({
-        title: "Update",
-        text: "Profile saved successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-        customClass: {
-          title: "swal-title",
-          text: "swal-text",
-          confirmButton: "swal-confirm-button",
-        },
-      });
-
-      setProfile(updatedData?.user);
-    } else {
-      console.log("Something is wrong with updating your data", updatedData);
-    }
-  };
-
-  useEffect(() => {
-    setAvatar(profile?.avatar);
-    setFirstName(profile?.first_name);
-    setLastName(profile?.last_name);
-    setCurrentAddress({
-      city: profile?.current_address?.city || "",
-      state: profile?.current_address?.state || "",
-      country: profile?.current_address?.country || "",
-      postal_code: profile?.current_address?.postal_code || ""
-    });
-    setPermanentAddress({
-      city: profile?.permanent_address?.city || "",
-      state: profile?.permanent_address?.state || "",
-      country: profile?.permanent_address?.country || "",
-      postal_code: profile?.permanent_address?.postal_code || ""
-    });
-    setGender(profile?.gender || "");
-    setMaritalStatus(profile?.marital_status || "");
-    setDateOfBirth(profile?.date_of_birth || "");
-    setNationality(profile?.nationality || "");
-    setReligion(profile?.religion || "");
-  }, [profile]);
+  const { personalInformation, SetPersonalInformation ,avatar, setAvatar,selectedAvatar, selectAvatar } = useUserProfileContext();
 
   useEffect(() => {
     if (selectedAvatar) {
@@ -111,115 +23,137 @@ const AboutMe = () => {
     selectAvatar(event.target.files[0]);
   };
 
-  const handleChange = (field, value, addressType) => {
-    switch (addressType) {
-      case "current":
-        setCurrentAddress((prevAddress) => ({
-          ...prevAddress,
-          [field]: value
-        }));
-        break;
-      case "permanent":
-        setPermanentAddress((prevAddress) => ({
-          ...prevAddress,
-          [field]: value
-        }));
-        break;
-      default:
-        break;
-    }
+  const handleChange = (field, value) => {
+    SetPersonalInformation((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
   };
 
   const handleMediaLinkChange = (index, field, value) => {
-    const updatedMediaLinks = [...mediaLinks];
+    const updatedMediaLinks = [...personalInformation.mediaLinks];
     updatedMediaLinks[index][field] = value;
-    setMediaLinks(updatedMediaLinks);
+    SetPersonalInformation({ ...personalInformation, mediaLinks: updatedMediaLinks })
   };
 
   const handleDeleteMediaLink = (index) => {
-    const updatedMediaLinks = [...mediaLinks];
+    const updatedMediaLinks = [...personalInformation.mediaLinks];
     updatedMediaLinks.splice(index, 1);
-    setMediaLinks(updatedMediaLinks);
+    SetPersonalInformation({ ...personalInformation, mediaLinks: updatedMediaLinks })
   };
 
   const handleAddMediaLink = () => {
-    setMediaLinks([...mediaLinks, { name: "", url: "" }]);
+    SetPersonalInformation({ ...personalInformation, mediaLinks: [...personalInformation.mediaLinks, { name: "", url: "" }] })
+  };
+  const handleAddressChange = (addressType, field, value) => {
+    SetPersonalInformation((prevData) => ({
+      ...prevData,
+      [addressType]: {
+        ...prevData[addressType],
+        [field]: value
+      }
+    }));
   };
 
 
-
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <h2 style={{fontSize: '20px', marginBottom: '15px'}}>Personal Information</h2>
-      <form onSubmit={handleUpdateUserProfile} style={{display: 'grid', gap: '20px' , gridTemplateColumns : '1fr 1fr'}}>
-        <div style={{display: 'flex', gap: '20px', marginBottom: '30px', alignItems: 'center' ,gridColumn: 'span 2'}}>
-          <div style={{position: "relative", display: "inline-block" }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <h2 style={{ fontSize: '20px', marginBottom: '15px' }}>Personal Information</h2>
+      <div  style={{ display: 'grid', gap: '20px', gridTemplateColumns: '1fr 1fr' }}>
+        <div style={{ display: 'flex', gap: '20px', marginBottom: '30px', alignItems: 'center', gridColumn: 'span 2' }}>
+          <div style={{ position: "relative", display: "inline-block" }}>
             <img
               src={avatar ? avatar : UserImage.src}
               alt="Avatar"
-              style={{width: "150px", height: "150px", borderRadius: "50%"}}
+              style={{ width: "150px", height: "150px", borderRadius: "50%" }}
             />
 
             <div
               style={{
-                position: "absolute",
-                bottom: "15px",
-                right: "40px",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                padding: "4px 8px",
-                borderRadius: "4px",
-                cursor: "pointer",
+                position: 'absolute',
+                width: '110px',
+                textAlign: 'center',
+                right: '12px',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                color: 'white',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                cursor: 'pointer'
               }}
             >
               <label htmlFor="avatar-upload">
-                <span style={{textDecoration: "underline"}}>Upload</span>
+                <span style={{ textDecoration: "none" }}>Upload</span>
               </label>
               <input
                 id="avatar-upload"
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                style={{display: "none"}}
+                style={{ display: "none" }}
               />
             </div>
           </div>
-          <div>
-            <h4 suppressHydrationWarning={true}>{profile?.email}</h4>
-            <p>{profile?.user_type}</p>
-          </div>
+          {/* <div>
+            <h2>{personalInformation?.firstName} {personalInformation?.lastName}</h2>
+            <h4 >{personalInformation?.email}</h4>
+            <p>{personalInformation?.user_type}</p>
+          </div> */}
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="first_name" style={{display : 'block' , marginBottom : '10px'}}>First Name</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="first_name" style={{ display: 'block', marginBottom: '10px' }}>First Name</label>
           <input
             type="text"
             placeholder="Your First Name"
             id="first_name"
             name="firstName"
-            value={first_name || " "}
-            onChange={(e) => setFirstName(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.firstName || " "}
+            onChange={(e) => handleChange('firstName', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="last_name" style={{display : 'block' , marginBottom : '10px'}}>Last Name</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="last_name" style={{ display: 'block', marginBottom: '10px' }}>Last Name</label>
           <input
             type="text"
             placeholder="Your Last Name"
             id="last_name"
             name="lastName"
-            value={last_name || " "}
-            onChange={(e) => setLastName(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.lastName || " "}
+            onChange={(e) => handleChange('lastName', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="gender" style={{display : 'block' , marginBottom : '10px'}}>Gender</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="email" style={{ display: 'block', marginBottom: '10px' }}>Email</label>
+          <input
+            type="text"
+            placeholder="Email"
+            id="email"
+            name="email"
+            value={personalInformation.email || " "}
+            onChange={(e) => handleChange('email', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="phone" style={{ display: 'block', marginBottom: '10px' }}>Phone Number</label>
+          <input
+            type="text"
+            placeholder="Your Phone Number"
+            id="phone"
+            name="phone"
+            value={personalInformation.phone || " "}
+            onChange={(e) => handleChange('phone', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="gender" style={{ display: 'block', marginBottom: '10px' }}>Gender</label>
           <select
             id="gender"
-            value={gender || ""}
-            onChange={(e) => setGender(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.gender || ""}
+            onChange={(e) => handleChange('gender', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           >
             <option value="">Select Gender</option>
             <option value="male">Male</option>
@@ -227,124 +161,153 @@ const AboutMe = () => {
             <option value="other">Other</option>
           </select>
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="maritalStatus" style={{display : 'block' , marginBottom : '10px'}}>Marital Status</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="maritalStatus" style={{ display: 'block', marginBottom: '10px' }}>Marital Status</label>
           <select
             id="maritalStatus"
-            value={maritalStatus || ""}
-            onChange={(e) => setMaritalStatus(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.maritalStatus || ""}
+            onChange={(e) => handleChange('maritalStatus', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           >
-            <option value="" style={{display : 'block' , marginBottom : '10px'}}>Select Marital Status</option>
+            <option value="" style={{ display: 'block', marginBottom: '10px' }}>Select Marital Status</option>
             <option value="single">Single</option>
             <option value="married">Married</option>
             <option value="divorced">Divorced</option>
             <option value="widowed">Widowed</option>
           </select>
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="dateOfBirth" style={{display : 'block' , marginBottom : '10px'}}>Date of Birth</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="dateOfBirth" style={{ display: 'block', marginBottom: '10px' }}>Date of Birth</label>
           <input
             type="date"
             id="dateOfBirth"
-            value={dateOfBirth || ""}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.dateOfBirth || ""}
+            onChange={(e) => handleChange('dateOfBirth', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="nationality" style={{display : 'block' , marginBottom : '10px'}}>Nationality</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label htmlFor="nationality" style={{ display: 'block', marginBottom: '10px' }}>Nationality</label>
           <input
             type="text"
             placeholder="Nationality"
             id="nationality"
-            value={nationality || ""}
-            onChange={(e) => setNationality(e.target.value)}
-            style={{height: '45px', width : '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.nationality || ""}
+            onChange={(e) => handleChange('nationality', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
-        <div style={{marginBottom: '10px'}}>
-          <label htmlFor="religion" style={{display : 'block' , marginBottom : '10px'}}>Religion</label>
+        <div style={{ marginBottom: '10px', }}>
+          <label htmlFor="religion" style={{ display: 'block', marginBottom: '10px' }}>Religion</label>
           <input
             type="text"
             placeholder="Religion"
             id="religion"
-            value={religion || ""}
-            onChange={(e) => setReligion(e.target.value)}
-            style={{height: '45px',width : '80%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+            value={personalInformation.religion || ""}
+            onChange={(e) => handleChange('religion', e.target.value)}
+            style={{ height: '45px', width: '80%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
           />
         </div>
-        <div style={{gridColumn : 'span 2'}}>
-          <h3 style={{marginBottom: '20px', fontSize: '20px'}}>Media Links</h3>
-          {mediaLinks.map((link, index) => (
-            <div className="media-link" key={index}>
-              <div style={{marginBottom: '10px'}}>
-                <label htmlFor="" style={{display : 'block' , paddingBottom : '5px'}}>Name</label>
+        <div style={{
+          gridColumn: 'span 2',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '7px',
+          marginBottom: '20px',
+          flexBasis: '48%',
+          position: 'relative'
+        }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '10px' }}>Media Links</h3>
+          {personalInformation?.mediaLinks.map((link, index) => (
+            <div className="media-link" key={index} style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3,1fr)'
+            }}>
+              <div style={{ marginBottom: '10px' }}>
+                <label htmlFor="" style={{ display: 'block', paddingBottom: '5px' }}>Name</label>
                 <input
                   type="text"
                   value={link.name}
                   onChange={(e) => handleMediaLinkChange(index, "name", e.target.value)}
-                  placeholder ='Linkdin'
-                  style={{height: '45px', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px', outline: 'none'}}
+                  placeholder='Linkdin'
+                  style={{
+                    padding: '12px 9px',
+                    outline: 'none',
+                    fontSize: '1rem',
+                    fontWeight: '400',
+                    borderRadius: '5px',
+                    border: '1px solid #a3a3a3',
+                    background: 'transparent',
+                    color: '#2c2c2c'
+                  }}
                 />
               </div>
-              <div style={{marginBottom: '10px'}}>
-                <label htmlFor="" style={{display : 'block' , paddingBottom : '5px'}}>URL</label>
+              <div style={{ marginBottom: '10px' }}>
+                <label htmlFor="" style={{ display: 'block', paddingBottom: '5px' }}>URL</label>
                 <input
                   type="text"
                   value={link.url}
                   placeholder="linkedin.com/in/me"
                   onChange={(e) => handleMediaLinkChange(index, "url", e.target.value)}
-                  style={{height: '45px', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' , outline: 'none'}}
+                  style={{
+                    padding: '12px 9px',
+                    outline: 'none',
+                    fontSize: '1rem',
+                    fontWeight: '400',
+                    borderRadius: '5px',
+                    border: '1px solid #a3a3a3',
+                    background: 'transparent',
+                    color: '#2c2c2c'
+                  }}
                 />
               </div>
-              <div style={{display : 'flex' , flexDirection : 'row' , justifyContent : 'center', alignItems : 'center'}}>
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <FaTrashAlt
-                  style={{cursor: "pointer", color: "red"}}
+                  style={{ cursor: "pointer", color: "red" }}
                   onClick={() => handleDeleteMediaLink(index)}
                 />
               </div>
             </div>
           ))}
-          {mediaLinks.length==0&& <div style={{fontSize : '18px', fontWeight: 'bold', margin : '0px 0px 20px 0px'}}>Please add Media links</div>}
-          <button type="button" onClick={handleAddMediaLink} style={{background: 'var(--primary-color)', color: '#fff', width: '70px', height: '30px', borderRadius: '5px', border: 'none', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s', marginBottom: '20px'}}>Add </button>
+          {personalInformation?.mediaLinks.length == 0 && <div style={{ fontSize: '18px', fontWeight: 'bold', margin: '0px 0px 20px 0px' }}>Please add Media links</div>}
+          <button type="button" onClick={handleAddMediaLink} style={{ background: 'var(--primary-color)', color: '#fff', width: '70px', height: '30px', borderRadius: '5px', border: 'none', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', transition: '.3s', marginBottom: '20px' }}>Add </button>
         </div>
-        <div style={{gridColumn : 'span 2',display : 'grid' , gridTemplateColumns : '1fr 1fr'}}>
-          <div style={{marginBottom: '10px'}}>
-            <h3 style={{marginBottom: '20px', fontSize: '20px'}}>Current Address</h3>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="city" style={{display : 'block' , marginBottom : '10px'}}>City</label>
+        <div style={{ gridColumn: 'span 2', display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+          <div style={{ marginBottom: '10px' }}>
+            <h3 style={{ marginBottom: '20px', fontSize: '20px' }}>Current Address</h3>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="city" style={{ display: 'block', marginBottom: '10px' }}>City</label>
               <input
                 type="text"
-                value={currentAddress.city}
-                onChange={(e) => handleChange("city", e.target.value, "current")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.currentAddress?.city}
+                onChange={(e) => handleAddressChange('currentAddress', 'city', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="state" style={{display : 'block' , marginBottom : '10px'}}>State</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="state" style={{ display: 'block', marginBottom: '10px' }}>State</label>
               <input
                 type="text"
-                value={currentAddress.state}
-                onChange={(e) => handleChange("state", e.target.value, "current")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.currentAddress?.state}
+                onChange={(e) => handleAddressChange('currentAddress', 'state', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="country" style={{display : 'block' , marginBottom : '10px'}}>Country</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="country" style={{ display: 'block', marginBottom: '10px' }}>Country</label>
               <input
                 type="text"
-                value={currentAddress.country}
-                onChange={(e) => handleChange("country", e.target.value, "current")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.currentAddress?.country}
+                onChange={(e) => handleAddressChange('currentAddress', 'country', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="postalCode" style={{display : 'block' , marginBottom : '10px'}}>Postal Code</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={currentAddress.postal_code}
-                onChange={(e) => handleChange("postal_code", e.target.value, "current")}
+                value={personalInformation.currentAddress?.postalCode}
+                onChange={(e) => handleAddressChange('currentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
                   width: '90%',
@@ -353,47 +316,47 @@ const AboutMe = () => {
                   border: '1px solid #80808057',
                   borderRadius: '5px',
                   '-moz-appearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
-                  '::-webkit-inner-spin-button': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
-                  '::-webkit-outer-spin-button': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
+                  '::-webkitInnerSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
+                  '::WebkitOuterSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
                 }}
               />
             </div>
           </div>
-          <div style={{marginBottom: '10px'}}>
-            <h3 style={{marginBottom: '20px', fontSize: '20px'}}>Permanent Address</h3>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="city" style={{display : 'block' , marginBottom : '10px'}}>City</label>
+          <div style={{ marginBottom: '10px' }}>
+            <h3 style={{ marginBottom: '20px', fontSize: '20px' }}>Permanent Address</h3>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="city" style={{ display: 'block', marginBottom: '10px' }}>City</label>
               <input
                 type="text"
-                value={permanentAddress.city}
-                onChange={(e) => handleChange("city", e.target.value, "permanent")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.permanentAddress.city}
+                onChange={(e) => handleAddressChange('permanentAddress', 'city', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="state" style={{display : 'block' , marginBottom : '10px'}}>State</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="state" style={{ display: 'block', marginBottom: '10px' }}>State</label>
               <input
                 type="text"
-                value={permanentAddress.state}
-                onChange={(e) => handleChange("state", e.target.value, "permanent")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.permanentAddress.state}
+                onChange={(e) => handleAddressChange('permanentAddress', 'state', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="country" style={{display : 'block' , marginBottom : '10px'}}>Country</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="country" style={{ display: 'block', marginBottom: '10px' }}>Country</label>
               <input
                 type="text"
-                value={permanentAddress.country}
-                onChange={(e) => handleChange("country", e.target.value, "permanent")}
-                style={{height: '45px',width : '90%',  padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px'}}
+                value={personalInformation.permanentAddress.country}
+                onChange={(e) => handleAddressChange('permanentAddress', 'country', e.target.value)}
+                style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
             </div>
-            <div style={{marginBottom: '10px'}}>
-              <label htmlFor="postalCode" style={{display : 'block' , marginBottom : '10px'}}>Postal Code</label>
+            <div style={{ marginBottom: '10px' }}>
+              <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={permanentAddress.postal_code}
-                onChange={(e) => handleChange("postal_code", e.target.value, "permanent")}
+                value={personalInformation.permanentAddress.postalCode}
+                onChange={(e) => handleAddressChange('permanentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
                   width: '90%',
@@ -408,9 +371,9 @@ const AboutMe = () => {
           </div>
         </div>
         <div style={{ gridColumn: "span 2", textAlign: "right" }}>
-          <button type="submit" style={{ background: "var(--primary-color)", color: "#fff", width: "120px", height: "40px", borderRadius: "5px", border: "none", fontSize: "16px", fontWeight: "bold", cursor: "pointer", transition: ".3s" }}>Save</button>
+          <SaveProfileButton/>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

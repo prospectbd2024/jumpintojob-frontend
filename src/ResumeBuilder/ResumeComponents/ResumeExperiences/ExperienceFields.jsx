@@ -15,14 +15,14 @@ function EperienceFiels({ props }) {
 
   const [isWarning, setWarning] = useState(false);
   const [experienceFields, setExperienceFields] = useState(BaseFormat);
-  const { setResumeData, resumeData, state, setState } = props;
+  const { setUserProfileData, userProfileData, state, setState } = props;
 
   const handleChange = useCallback((key, value) => {
     setExperienceFields((prev) => {
       prev[key] = value;
       return prev;
     });
-    updateResumeData(experienceFields);
+    updateuserProfileData(experienceFields);
   });
 
   useEffect(() => {
@@ -33,10 +33,10 @@ function EperienceFiels({ props }) {
       // console.log(state.index,BaseFormat)
       setExperienceFields(BaseFormat);
 
-      updateResumeData(BaseFormat);
+      updateuserProfileData(BaseFormat);
     }
     if (state.type == "update") {
-      let experience_fields = resumeData.experiences.find(
+      let experience_fields = userProfileData.experiences.find(
         (item) => item.id == state.id
       );
       setExperienceFields(experience_fields);
@@ -44,8 +44,8 @@ function EperienceFiels({ props }) {
     console.log('state should not change')
   }, [state]);
 
-  const updateResumeData = useCallback((experienceFields) => {
-    const resumeExperiences = resumeData.experiences;
+  const updateuserProfileData = useCallback((experienceFields) => {
+    const resumeExperiences = userProfileData.experiences;
     console.log("old ", resumeExperiences);
 
     const index = resumeExperiences.findIndex(
@@ -58,7 +58,7 @@ function EperienceFiels({ props }) {
       resumeExperiences[index] = experienceFields;
     }
     // console.log(resumeExperiences);
-    setResumeData((prev) => {
+    setUserProfileData((prev) => {
       return { ...prev, experiences: resumeExperiences };
     });
   });

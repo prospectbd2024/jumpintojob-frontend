@@ -1,0 +1,29 @@
+.eye-icon {
+    width: 30px;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.eye-slash-icon{
+    color: var(--secondary-color);
+    width: 30px;
+    cursor: pointer;
+}
+.eye-icons-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.eye-info {
+    font-size: 11px;
+    position: absolute;
+    bottom: -25px;
+    width: 100px;
+    opacity: 0;
+    transition: opacity 0.45s ease; /* Adding transition for smooth effect */
+    pointer-events: none;
+}
+
+.eye-icons-container:hover .eye-info {
+    opacity: 1;
+}

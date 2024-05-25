@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
 
     // For Resume
     const [currentStep, setCurrentStep] = useState(1);
-    const [resumeData, setResumeData] = useState({
+    const [userProfileData, setUserProfileData] = useState({
         firstName: "",
         lastName: "",
         email: "",
@@ -99,12 +99,12 @@ export const UserProvider = ({ children }) => {
   
     const handleSubmitResume = () => {
         useEffect(() => {
-            localStorage.setItem('userResume', JSON.stringify(resumeData))
-        }, [resumeData])
+            localStorage.setItem('userResume', JSON.stringify(userProfileData))
+        }, [userProfileData])
     }
 
     return (
-        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, resumeData, setResumeData, handleSubmitResume,bearerToken,profile,setProfile }}>
+        <UserContext.Provider value={{ userData, setUserData, clickedFeaturedJob, setClickedFeaturedJob, currentStep, setCurrentStep, userProfileData, setUserProfileData, handleSubmitResume,bearerToken,profile,setProfile }}>
             {children}
         </UserContext.Provider>
     );

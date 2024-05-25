@@ -5,7 +5,7 @@ import {  HiHeart } from "react-icons/hi";
 import ModalBox from "../ModalBox";
 import AddHobby from "./AddHobby";
 import "./Hobbies.css"; // Import CSS file
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 const Hobbies = ({ props }) => {
   const { hobbies, setHobbies } = props;

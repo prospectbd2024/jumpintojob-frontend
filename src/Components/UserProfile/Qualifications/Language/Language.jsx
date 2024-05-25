@@ -5,7 +5,7 @@ import { RiMedalFill } from "react-icons/ri";
 import "./Language.css";
 import ModalBox from "../ModalBox";
 import AddLanguage from "./AddLanguage";
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 function Language({ props }) {
   // State for managing languages

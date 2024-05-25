@@ -5,11 +5,12 @@ import { FaPencilAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
 import AddExperience from "./AddExperience";
 import "./Experience.css"; // Import CSS file
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
+import Visibility from "@/Components/Buttons/Visibility";
 
 const Experiences = ({ props }) => {
   const { experiences, setExperiences } = props;
-  const [experience, setExperience] = useState({ id: false });
+  const [experience, setExperience] = useState({ id: false ,visible_on_cv :true});
   const [modal, setModal] = useState({ display: "none", title: "Loading", state: "new" });
   const [experienceErrors, setExperienceErrors] = useState({});
 
@@ -68,7 +69,16 @@ const Experiences = ({ props }) => {
     return flag;
   }, [experience, setExperienceErrors]);
 
-
+  const manageVisibility=(id)=>{
+    setExperiences(prev=>{
+      return prev.map((exp,index)=>{
+       if (index!=id){
+        return exp;
+       }
+       return {...exp, visible_on_cv : ! exp.visible_on_cv}
+      })
+     })
+  }
   return (
     <>
       {experiences && experiences.length > 0 ? (
@@ -79,6 +89,7 @@ const Experiences = ({ props }) => {
           {experiences.map((exp, index) => (
             <div className="experience-container" key={index}>
               <div className="top-right-icons">
+              <Visibility   visibility={exp.visible_on_cv}   handleVisibility={()=>{manageVisibility(index)}} />
                 <FaTrashAlt className="minus-icon" onClick={() => removeExperience(index)} />
 
               </div>

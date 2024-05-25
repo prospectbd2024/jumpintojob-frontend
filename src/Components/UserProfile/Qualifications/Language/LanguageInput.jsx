@@ -67,10 +67,6 @@ function LanguageInput({ props }) {
     // setSuggestedLanguages([]);
   };
 
-
-  useEffect(()=>{
-   console.log(suggestedLanguages);  
-  },[suggestedLanguages])
   const search= (element, key)=>{
     return element?.toLowerCase()?.indexOf(key?.toLowerCase());
 

@@ -3,7 +3,7 @@ import './PreviewEducation.css'
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 const PreviewEducation = ({ props }) => {
-    const {resumeData,state, setState,setResumeData} = props;
+    const {userProfileData,state, setState,setUserProfileData} = props;
     
    useEffect(() => {
 
@@ -17,17 +17,17 @@ const PreviewEducation = ({ props }) => {
    }, [state])
 
     const deleteEducation = useCallback((id)=>{
-    const educations = resumeData.educations.filter((item) => item.id !=id );
-    setResumeData({...resumeData,educations: educations})
+    const educations = userProfileData.educations.filter((item) => item.id !=id );
+    setUserProfileData({...userProfileData,educations: educations})
     console.log(educations)
   
       });
      
 
     return <div >
-    {/* {console.log(resumeData)} */}
+    {/* {console.log(userProfileData)} */}
    
-   {resumeData && resumeData.educations.map((education,key)=>{
+   {userProfileData && userProfileData.educations.map((education,key)=>{
         const { institution_name, institution_location, degree, education_starting_year, education_graduation_year, field_study,id } = education;
         if (id==0){
             return <div key={id}></div>  //if item is in the  demo data structure 

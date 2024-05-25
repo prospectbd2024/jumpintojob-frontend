@@ -1,20 +1,20 @@
 "use client"
-import { FaTrashAlt } from "react-icons/fa"; 
 import React,{useCallback,useState} from "react";
 import { HiAcademicCap } from "react-icons/hi";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt,FaTrashAlt ,FaEye,FaEyeSlash } from "react-icons/fa";
 import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
 import "./Education.css"; // Import CSS file
 import ModalBox from "../ModalBox";
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
+import Visibility from "@/Components/Buttons/Visibility";
 
 const Education = ({ props }) => {
 
   const { educations,setEducations } = props;
-  const [education,setEducation] = useState({id : false});
+  const [education,setEducation] = useState({id : false, visible_on_cv : true});
   const [modal,manageModal] = useState({display :  'none' ,title : 'Loading' , state : 'new' });
   const [educationErrors, setEducationErrors] = useState({});
-
+  const [visibility, setVisibility] = useState(false)
   const removeEduction = useCallback(
     (id) => {
       setEducations(prev=>{
@@ -109,7 +109,16 @@ const validation = useCallback(()=>{
   return flag;
 },[education,educationErrors])
 
-
+const manageVisibility=(id)=>{
+  setEducations(prev=>{
+    return prev.map((education,index)=>{
+     if (index!=id){
+      return education;
+     }
+     return {...education, visible_on_cv : ! education.visible_on_cv}
+    })
+   })
+}
 
   return (
     <>
@@ -120,8 +129,12 @@ const validation = useCallback(()=>{
           </div>
           {educations.map((education,index) => (
             <div className="education-container" key={education.institution_name}>
-              <div className="top-right-icons">
+              <div className="top-right-icons-container">
+                <div className="top-right-icons">
+                <Visibility   visibility={education.visible_on_cv}   handleVisibility={()=>{manageVisibility(index)}} />
+
                 <FaTrashAlt className="minus-icon" onClick={()=>{removeEduction(index)}}/>
+                </div>
               </div>
               <p className="institution-name">{education.institution_name}</p>
               <p>{education.institution_location}</p>

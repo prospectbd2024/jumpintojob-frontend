@@ -156,7 +156,7 @@
     transition: .3s;
 }
 .company-item {
-    border: 1px solid var(--secondery-color);
+    border: 1px solid var(--secondary-color);
     padding: 20px;
     margin: 20px;
     border-radius: 10px;

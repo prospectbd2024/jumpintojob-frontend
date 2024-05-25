@@ -7,7 +7,7 @@ import "./Skill.css"; // Import CSS file
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
 import Rating from "./Rating";
-import AddButton from "@/Components/AddButton/AddButton";
+import AddButton from "@/Components/Buttons/AddButton";
 
 function Skill({ props }) {
   const { skills, setSkills } = props;
@@ -87,6 +87,18 @@ function Skill({ props }) {
     return flag;
 
   },[skill,skills])
+ 
+  const isChecked=(list, item  )=>{
+
+    let flag = false;
+    list.map((e)=>{
+      if(e==item){
+        flag = true;
+      }
+    })
+    return flag;
+
+  }
   return (
     <div className="skills-content education-content">
       <div className="qualifications-header">
@@ -103,13 +115,23 @@ function Skill({ props }) {
               <div className="skill-rating"> 
               <Rating props={{rating: skill.rating, setRating : ()=>{} , mode : 'r'}} onChange={()=>{}} />
               </div>
-              {/* <div>
-                {skill.learnedFrom.map((el,index)=>{
-                  return <div key={index} className="skill-name" >{el}</div>
-                })}
-              </div> */}
+              <div className="skill-learned-from"> 
+              <div>
+              <label><input type="checkbox" name="self"  defaultChecked={isChecked(skill?.learnedFrom,'self' )}  /> Self</label><br/>
+              </div>
+              <div>
+              <label><input type="checkbox" name="job"  defaultChecked={isChecked(skill?.learnedFrom,'service' )} /> Job</label><br/>
+              </div>
+              <div>
+              <label><input type="checkbox" name="education" defaultChecked={isChecked(skill?.learnedFrom,'education' )} /> Education</label><br/>
+              </div>
+              <div>
+              <label><input type="checkbox" name="professional_training" defaultChecked={isChecked(skill?.learnedFrom,'training' )} /> Professional Training</label><br/>
+              </div>
+                
+              </div>
+
               <div className='skill-actions'> 
-        
               <FaTrashAlt
                 className="remove-skill"
                 onClick={() => {

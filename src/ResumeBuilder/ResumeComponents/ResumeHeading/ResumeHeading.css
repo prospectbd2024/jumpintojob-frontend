@@ -8,10 +8,33 @@
     gap: 20px;
   }
   
-  .resume-heading-content .image-upload {
-    /* Styles for the image upload section */
-  }
-  
+ .resume-profile-image {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+  flex-basis: 48%;
+  position: relative;
+ }
+ .resume-profile-image label{
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+ }
+ .resume-profile-image input{
+  padding: 12px 9px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 5px;
+  border: 1px solid #a3a3a3;
+  background: transparent;
+  color: #2c2c2c;
+  width: 96%;
+ }
+ .resume-profile-image input:hover{
+ border-color: var(--primary-color);
+ }
   .resume-heading-content .heading-form .heading-form-main {
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +49,17 @@
     flex-basis: 48%;
     position: relative;
   }
-  
+  .resume-input-field select {
+    height: 45px;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 17px;
+    border: 1px solid #80808057;
+    border-radius: 5px;
+  }
+  .gender-container hr {
+    width: 80% !;
+  }
   .resume-heading-content .heading-form .resume-input-field label,.media-links label {
     font-size: 1rem;
     font-weight: 700;
