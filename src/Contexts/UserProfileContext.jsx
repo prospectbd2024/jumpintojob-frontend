@@ -58,7 +58,7 @@ function UserProfileContext({ children }) {
             );
         
             // Print the response data
-            console.log(response.data.data );
+            // console.log(response.data.data );
             SetPersonalInformation(  response.data.data.payload.personalInformation);
             setEducations(response.data.data.payload.educations);
             setExperiences(response.data.data.payload.experiences);
