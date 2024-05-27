@@ -57,14 +57,14 @@ function UserProfileContext({ children }) {
           );
       
           // Print the response data
-          console.log(response.data.payload);
-          SetPersonalInformation(  response.data.payload.personalInformation);
-          setEducations(response.data.payload.educations);
-          setExperiences(response.data.payload.experiences);
-          setSkills(response.data.payload.skills);
-          setLanguages(response.data.payload.languages);
-          setHobbies(response.data.payload.hobbies);
-          manageMore(response.data.payload.others)
+          console.log(response.data.data );
+          SetPersonalInformation(  response.data.data.payload.personalInformation);
+          setEducations(response.data.data.payload.educations);
+          setExperiences(response.data.data.payload.experiences);
+          setSkills(response.data.data.payload.skills);
+          setLanguages(response.data.data.payload.languages);
+          setHobbies(response.data.data.payload.hobbies);
+          manageMore(response.data.data.payload.others)
          
       };
       
