@@ -45,26 +45,31 @@ function UserProfileContext({ children }) {
     const getUserProfile = async (userData) => {
          
           // Make the GET request to fetch user profile data
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/${userData?.data.user.user_id}`,
-            {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userData?.data?.access_token}`
+          try{
+            const response = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/${userData?.data.user.user_id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${userData?.data?.access_token}`
+                }
               }
-            }
-          );
-      
-          // Print the response data
-          console.log(response.data.data );
-          SetPersonalInformation(  response.data.data.payload.personalInformation);
-          setEducations(response.data.data.payload.educations);
-          setExperiences(response.data.data.payload.experiences);
-          setSkills(response.data.data.payload.skills);
-          setLanguages(response.data.data.payload.languages);
-          setHobbies(response.data.data.payload.hobbies);
-          manageMore(response.data.data.payload.others)
+            );
+        
+            // Print the response data
+            console.log(response.data.data );
+            SetPersonalInformation(  response.data.data.payload.personalInformation);
+            setEducations(response.data.data.payload.educations);
+            setExperiences(response.data.data.payload.experiences);
+            setSkills(response.data.data.payload.skills);
+            setLanguages(response.data.data.payload.languages);
+            setHobbies(response.data.data.payload.hobbies);
+            manageMore(response.data.data.payload.others)
+
+          }catch(e){
+            console.log(e);
+          }
          
       };
       
