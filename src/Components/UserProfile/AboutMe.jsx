@@ -88,6 +88,7 @@ const AboutMe = () => {
                 id="avatar-upload"
                 type="file"
                 accept="image/*"
+                value={undefined}
                 onChange={handleFileChange}
                 style={{ display: "none" }}
               />
@@ -279,7 +280,7 @@ const AboutMe = () => {
               <label htmlFor="city" style={{ display: 'block', marginBottom: '10px' }}>City</label>
               <input
                 type="text"
-                value={personalInformation.currentAddress?.city}
+                value={personalInformation.currentAddress?.city|| ""}
                 onChange={(e) => handleAddressChange('currentAddress', 'city', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -288,7 +289,7 @@ const AboutMe = () => {
               <label htmlFor="state" style={{ display: 'block', marginBottom: '10px' }}>State</label>
               <input
                 type="text"
-                value={personalInformation.currentAddress?.state}
+                value={personalInformation.currentAddress?.state|| ""}
                 onChange={(e) => handleAddressChange('currentAddress', 'state', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -297,7 +298,7 @@ const AboutMe = () => {
               <label htmlFor="country" style={{ display: 'block', marginBottom: '10px' }}>Country</label>
               <input
                 type="text"
-                value={personalInformation.currentAddress?.country}
+                value={personalInformation.currentAddress?.country|| ""}
                 onChange={(e) => handleAddressChange('currentAddress', 'country', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -306,7 +307,7 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={personalInformation.currentAddress?.postalCode}
+                value={personalInformation.currentAddress?.postalCode|| ""}
                 onChange={(e) => handleAddressChange('currentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
@@ -315,8 +316,8 @@ const AboutMe = () => {
                   fontSize: '17px',
                   border: '1px solid #80808057',
                   borderRadius: '5px',
-                  '-moz-appearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
-                  '::-webkitInnerSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
+                  'MozAppearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
+                  '::webkitInnerSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
                   '::WebkitOuterSpinButton': 'none', /* Hide increase/decrease buttons on Chrome and Safari */
                 }}
               />
@@ -328,7 +329,7 @@ const AboutMe = () => {
               <label htmlFor="city" style={{ display: 'block', marginBottom: '10px' }}>City</label>
               <input
                 type="text"
-                value={personalInformation.permanentAddress.city}
+                value={personalInformation.permanentAddress.city|| ""}
                 onChange={(e) => handleAddressChange('permanentAddress', 'city', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -337,7 +338,7 @@ const AboutMe = () => {
               <label htmlFor="state" style={{ display: 'block', marginBottom: '10px' }}>State</label>
               <input
                 type="text"
-                value={personalInformation.permanentAddress.state}
+                value={personalInformation.permanentAddress.state|| ""}
                 onChange={(e) => handleAddressChange('permanentAddress', 'state', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -346,7 +347,7 @@ const AboutMe = () => {
               <label htmlFor="country" style={{ display: 'block', marginBottom: '10px' }}>Country</label>
               <input
                 type="text"
-                value={personalInformation.permanentAddress.country}
+                value={personalInformation.permanentAddress.country|| ""}
                 onChange={(e) => handleAddressChange('permanentAddress', 'country', e.target.value)}
                 style={{ height: '45px', width: '90%', padding: '0 10px', fontSize: '17px', border: '1px solid #80808057', borderRadius: '5px' }}
               />
@@ -355,7 +356,7 @@ const AboutMe = () => {
               <label htmlFor="postalCode" style={{ display: 'block', marginBottom: '10px' }}>Postal Code</label>
               <input
                 type="number"
-                value={personalInformation.permanentAddress.postalCode}
+                value={personalInformation.permanentAddress.postalCode|| ""}
                 onChange={(e) => handleAddressChange('permanentAddress', 'postalCode', e.target.value)}
                 style={{
                   height: '45px',
@@ -364,14 +365,14 @@ const AboutMe = () => {
                   fontSize: '17px',
                   border: '1px solid #80808057',
                   borderRadius: '5px',
-                  '-moz-appearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
+                  'MozAppearance': 'textfield', /* Hide increase/decrease buttons on Firefox */
                 }}
               />
             </div>
           </div>
         </div>
         <div style={{ gridColumn: "span 2", textAlign: "right" }}>
-          <SaveProfileButton/>
+          <SaveProfileButton onSave={()=>{console.log("saved");}}/>
         </div>
       </div>
     </div>
