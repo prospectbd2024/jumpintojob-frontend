@@ -49,13 +49,14 @@ const AllJobs = ({children}) => {
       
 
     const filterJob =(query)=>{
+        console.log(query);
 
         try{
-            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search/${query}`)
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}`)
             .then(res => res.json())
             .then(data => {
                 setFilteredJobs(data.data);
-                // console.log(data.data);
+                console.log(data.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -81,7 +82,7 @@ const AllJobs = ({children}) => {
             <div className="all-jobs-main" >
                 <div className="all-jobs-content container">
                     <div className="show-all-jobs  scroll-container">
-                        <JobListView props ={{ filteredJobs : allJobs, limit : jobsToShow ,clickedJob : clickedJob,handleClickedJob }}/>
+                        <JobListView props ={{ filteredJobs : filteredJobs, limit : jobsToShow ,clickedJob : clickedJob,handleClickedJob }}/>
                         <MoreJobButton props={{shouldShowButton,jobsToShowIncrement,setJobsToShow}}/>
 
                     </div>
