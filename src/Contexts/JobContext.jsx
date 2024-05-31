@@ -15,18 +15,36 @@ function JobContext({children}) {
     const [allJobs, setAllJobs] = useState([]);
     const [selectedJob,setSelectedJob]= useState({});
     const [clickedJob, setClickedJob] = useState();
+    const [jobPage, setJobPage] = useState({currentPage: 1, type: 'fetch' , totalPages: 10 });
+    const [shouldShowButton , setShowButton] = useState(true);
+
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
-                // console.log(data.data);
+                setJobPage({type: 'fetch', ...data.pagination })
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 // Handle errors appropriately (e.g., show an error message to the user)
             });
     }, []);
+
+    const getMoreJobs= (page)=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`)
+        .then(res => res.json())
+        .then(data => {
+            setAllJobs(data.data);
+            setJobPage({type: 'fetch', ...data.pagination })
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // Handle errors appropriately (e.g., show an error message to the user)
+        });
+    }
+
+  
 
 
     const getJob = useCallback((id)=>{
@@ -44,7 +62,6 @@ function JobContext({children}) {
         allJobs.map((job)=>{
             if(job.id==id){
                 setSelectedJob(job)
-
             }
 
         })
@@ -62,11 +79,27 @@ function JobContext({children}) {
             const updatedUrl = pathname.replace(/\/\d+$/, `/${e}`);
             window.history.pushState({}, '', updatedUrl);
         }
-  
-        
     }
+    
+   
+
+    useEffect(()=>{
+        if(jobPage.type=='get'){
+            getMoreJobs(jobPage.currentPage)
+            console.log('getting jobs');
+        }
+
+    },[jobPage])
   return (
-    <jobContext.Provider value={{allJobs, setAllJobs,selectedJob,setSelectedJob,getJob,selectJob,handleClickedJob,clickedJob, setClickedJob}}>
+    <jobContext.Provider value={{
+        allJobs, setAllJobs,
+        selectedJob,setSelectedJob,
+        getJob,selectJob,
+        handleClickedJob,
+        clickedJob, setClickedJob,
+        jobPage, setJobPage,
+        shouldShowButton , setShowButton
+        }}>
         {children}
     </jobContext.Provider>
   )

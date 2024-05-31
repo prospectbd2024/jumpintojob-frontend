@@ -8,35 +8,35 @@ import DefaultJobDetails from './DefaultJobDetails';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';
 import Link from 'next/link';
-import MoreJobButton from './MoreJobButton';
+import Pagination from './Pagination';
 
 
 
 
 const AllJobs = ({children}) => {
 
-    const {allJobs,clickedJob,handleClickedJob} =useJobContext()
+    const {
+        allJobs,clickedJob,
+        setAllJobs,
+        handleClickedJob,
+        jobPage, setJobPage
+        } =useJobContext()
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [jobsToShow, setJobsToShow] = useState(6)
-
-    const jobsToShowIncrement = 6;
+    const [query,setQuery] = useState("")
 
     useEffect(() => {
         setFilteredJobs(allJobs)
+        console.log(allJobs);
     }, [allJobs])
     
-    const totalJobs =filteredJobs.length;
-    const shouldShowButton = jobsToShow < totalJobs;
+
     const handleFilteredJobs = useCallback( (event) => {
 
         event.preventDefault();
         const searchKey = event.target.jobTitle.value.toLowerCase();
         const location = event.target.jobLocation.value.toLowerCase();
-        console.log(searchKey,location);
-        const query = createQueryString( {searchKey : searchKey, location : location}  );
-
-        filterJob(query)
-         
+        setQuery(createQueryString( {searchKey : searchKey, location : location}));
+       
     })
     const createQueryString = (paramsObj) => {
         const params = new URLSearchParams();
@@ -47,8 +47,11 @@ const AllJobs = ({children}) => {
         return params.toString();
       };
       
+    useEffect(()=>{
+        filterJobs(query)
+    },[query])
 
-    const filterJob =(query)=>{
+    const filterJobs =(query)=>{
         console.log(query);
 
         try{
@@ -56,7 +59,8 @@ const AllJobs = ({children}) => {
             .then(res => res.json())
             .then(data => {
                 setFilteredJobs(data.data);
-                console.log(data.data);
+                // setJobPage({type : 'search_result', ...data.pagination})
+                // console.log({type : 'search_result', ...data.pagination})
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -68,10 +72,7 @@ const AllJobs = ({children}) => {
             console.log(e);
         }
 
- 
-
     }
-
 
 
 
@@ -82,8 +83,8 @@ const AllJobs = ({children}) => {
             <div className="all-jobs-main" >
                 <div className="all-jobs-content container">
                     <div className="show-all-jobs  scroll-container">
-                        <JobListView props ={{ filteredJobs : filteredJobs, limit : jobsToShow ,clickedJob : clickedJob,handleClickedJob }}/>
-                        <MoreJobButton props={{shouldShowButton,jobsToShowIncrement,setJobsToShow}}/>
+                        <JobListView props ={{ filteredJobs : filteredJobs,clickedJob : clickedJob,handleClickedJob }}/>
+                        <Pagination jobPage={jobPage} setJobPage={setJobPage} />
 
                     </div>
                     <div>
