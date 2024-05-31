@@ -9,9 +9,9 @@ import AddButton from "@/Components/Buttons/AddButton";
 import Visibility from "@/Components/Buttons/Visibility";
 
 const Education = ({ props }) => {
-
+  const educationInterface  ={id : false, visible_on_cv : true,education_graduation_year:""}
   const { educations,setEducations } = props;
-  const [education,setEducation] = useState({id : false, visible_on_cv : true});
+  const [education,setEducation] = useState(educationInterface);
   const [modal,manageModal] = useState({display :  'none' ,title : 'Loading' , state : 'new' });
   const [educationErrors, setEducationErrors] = useState({});
   const [visibility, setVisibility] = useState(false)
@@ -42,7 +42,7 @@ const showModal =useCallback(( title ,state,index)=>{
 
 
 const closeModal=useCallback (()=>{
-  setEducation({})
+  setEducation(educationInterface)
   setEducationErrors({})
   manageModal(
     {
