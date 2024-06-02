@@ -9,18 +9,18 @@ function Pagination({ jobPage, setJobPage }) {
 
     const handleNext = () => {
         if (currentPage < totalPages) {
-            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage + 1 ,type: 'get'}));
+            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage + 1 , status : 'process'}));
         }
     };
 
     const handlePrevious = () => {
         if (currentPage > 1) {
-            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage - 1 ,type: 'get' }));
+            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage - 1, status : 'process'}));
         }
     };
 
     const handlePageClick = (pageNumber) => {
-        setJobPage(prev => ({ ...prev, currentPage: pageNumber, type: 'get' }));
+        setJobPage(prev => ({ ...prev, currentPage: pageNumber, status : 'process'}));
     };
 
     const renderPageNumbers = () => {

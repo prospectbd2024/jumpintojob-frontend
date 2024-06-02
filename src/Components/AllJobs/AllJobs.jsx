@@ -19,14 +19,15 @@ const AllJobs = ({children}) => {
         allJobs,clickedJob,
         setAllJobs,
         handleClickedJob,
-        jobPage, setJobPage
+        jobPage, setJobPage,
+        query,setQuery
         } =useJobContext()
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [query,setQuery] = useState("")
+  
 
     useEffect(() => {
         setFilteredJobs(allJobs)
-        console.log(allJobs);
+
     }, [allJobs])
     
 
@@ -42,37 +43,13 @@ const AllJobs = ({children}) => {
         const params = new URLSearchParams();
         
         for (const [key, value] of Object.entries(paramsObj)) {
-          params.set(key, value);
+            if (value && value!=''){
+                params.set(key, value);
+            }
         }
         return params.toString();
       };
       
-    useEffect(()=>{
-        filterJobs(query)
-    },[query])
-
-    const filterJobs =(query)=>{
-        console.log(query);
-
-        try{
-            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}`)
-            .then(res => res.json())
-            .then(data => {
-                setFilteredJobs(data.data);
-                // setJobPage({type : 'search_result', ...data.pagination})
-                // console.log({type : 'search_result', ...data.pagination})
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                // Handle errors appropriately (e.g., show an error message to the user)
-            });
-    
-        }
-        catch(e){
-            console.log(e);
-        }
-
-    }
 
 
 

@@ -15,15 +15,15 @@ function JobContext({children}) {
     const [allJobs, setAllJobs] = useState([]);
     const [selectedJob,setSelectedJob]= useState({});
     const [clickedJob, setClickedJob] = useState();
-    const [jobPage, setJobPage] = useState({currentPage: 1, type: 'fetch' , totalPages: 10 });
+    const [jobPage, setJobPage] = useState({currentPage: 1, type: 'fetch' , totalPages: 10 , status : 'new'});
     const [shouldShowButton , setShowButton] = useState(true);
-
+    const [query,setQuery] = useState("")
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
-                setJobPage({type: 'fetch', ...data.pagination })
+                setJobPage({type: 'get', ...data.pagination })
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -36,16 +36,13 @@ function JobContext({children}) {
         .then(res => res.json())
         .then(data => {
             setAllJobs(data.data);
-            setJobPage({type: 'fetch', ...data.pagination })
+            setJobPage({type: 'get', ...data.pagination , status : 'done' })
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             // Handle errors appropriately (e.g., show an error message to the user)
         });
     }
-
-  
-
 
     const getJob = useCallback((id)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/show/${id}`)
@@ -84,12 +81,48 @@ function JobContext({children}) {
    
 
     useEffect(()=>{
-        if(jobPage.type=='get'){
+        if(jobPage.type=='get' && jobPage.status=='process'){
             getMoreJobs(jobPage.currentPage)
-            console.log('getting jobs');
+            // console.log('getting jobs');
+        }
+        if(jobPage.type=='search'&& jobPage.status=='process'){
+            filterJobs(query)
+            // console.log('search jobs');
         }
 
     },[jobPage])
+
+
+    useEffect(()=>{
+        if (query!=''){
+            filterJobs(query)
+            setJobPage(prev=>({...prev, type:'search' , currentPage : 1}))
+        }
+    },[query])
+
+    const filterJobs =(query)=>{
+        // console.log(query);
+
+        try{
+            // console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}&page=${jobPage.currentPage}`);
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}&page=${jobPage.currentPage}`)
+            .then(res => res.json())
+            .then(data => {
+                setAllJobs(data.data);
+                setJobPage({type : 'search', ...data.pagination , status : 'done'})
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors appropriately (e.g., show an error message to the user)
+            });
+    
+        }
+        catch(e){
+            console.log(e);
+        }
+
+    }
+
   return (
     <jobContext.Provider value={{
         allJobs, setAllJobs,
@@ -98,7 +131,8 @@ function JobContext({children}) {
         handleClickedJob,
         clickedJob, setClickedJob,
         jobPage, setJobPage,
-        shouldShowButton , setShowButton
+        shouldShowButton , setShowButton,
+        query,setQuery
         }}>
         {children}
     </jobContext.Provider>
