@@ -61,7 +61,7 @@ const AllJobs = ({children}) => {
                 <div className="all-jobs-content container">
                     <div className="show-all-jobs  scroll-container">
                         <JobListView props ={{ filteredJobs : filteredJobs,clickedJob : clickedJob,handleClickedJob }}/>
-                        <Pagination jobPage={jobPage} setJobPage={setJobPage} />
+                       {jobPage.currentPage==1 && allJobs.length<10 && <Pagination jobPage={jobPage} setJobPage={setJobPage} />} 
 
                     </div>
                     <div>
