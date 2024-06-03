@@ -51,12 +51,12 @@ const JobDetails = ({props}) => {
                     </div>
                 </div>
                 <div className="job-details-main">
-                    <p><span>Job Description </span>{job.description}</p>
-                    <p><span>Job Responsibilities </span>{job.resposibilities}</p>
                     <p><span>Job Type </span>{job.availability}</p>
                     <p><span>Salary </span>{job.salary}</p>
                     <p><span>Educational Requirements </span>{job.educational_requirements}</p>
                     <p><span>Required Expereinces </span>{job.experience}</p>
+                    <p><span>Job Description </span>{job.description}</p>
+                    <p><span>Job Responsibilities </span>{job.responsibilities}</p>
                 </div>
             </div>}
         </div>

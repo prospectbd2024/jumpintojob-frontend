@@ -10,7 +10,8 @@ import Visibility from "@/Components/Buttons/Visibility";
 
 const Experiences = ({ props }) => {
   const { experiences, setExperiences } = props;
-  const [experience, setExperience] = useState({ id: false ,visible_on_cv :true});
+  const experienceInterface = { id: false ,visible_on_cv :true,currently_working: ''};
+  const [experience, setExperience] = useState(experienceInterface);
   const [modal, setModal] = useState({ display: "none", title: "Loading", state: "new" });
   const [experienceErrors, setExperienceErrors] = useState({});
 
@@ -29,7 +30,7 @@ const Experiences = ({ props }) => {
   }, [experiences]);
 
   const closeModal = useCallback(() => {
-    setExperience({});
+    setExperience(experienceInterface);
     setExperienceErrors({});
     setModal({ display: "none" });
   }, []);

@@ -4,13 +4,13 @@ import React from 'react'
 import { HiOutlineBookmark } from 'react-icons/hi'
 
 function JobListView({props}) {
-    const {filteredJobs, limit,clickedJob,handleClickedJob }=props;
+    const {filteredJobs,clickedJob,handleClickedJob }=props;
   return (
     <div className="all-jobs-container">
     {
         
-        filteredJobs.slice(0, limit).map(job =>
-            <div className={`single-job ${clickedJob===job.id?'clicked-job': ''}`} key={job.id} href={""}  onClick={() => {handleClickedJob(job.id);}} >
+        filteredJobs.map((job,index) =>
+            <div className={`single-job ${clickedJob===job.id?'clicked-job': ''}`} key={index} href={""}  onClick={() => {handleClickedJob(job.id);}} >
                 <div className="single-job-header">
                     <h2>{job.job_title}</h2>
                     <HiOutlineBookmark/>

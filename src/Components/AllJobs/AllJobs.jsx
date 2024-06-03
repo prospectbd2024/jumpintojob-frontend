@@ -8,39 +8,48 @@ import DefaultJobDetails from './DefaultJobDetails';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';
 import Link from 'next/link';
-import MoreJobButton from './MoreJobButton';
+import Pagination from './Pagination';
 
 
 
 
 const AllJobs = ({children}) => {
 
-    const {allJobs,clickedJob,handleClickedJob} =useJobContext()
+    const {
+        allJobs,clickedJob,
+        setAllJobs,
+        handleClickedJob,
+        jobPage, setJobPage,
+        query,setQuery
+        } =useJobContext()
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [jobsToShow, setJobsToShow] = useState(6)
-
-    const jobsToShowIncrement = 6;
+  
 
     useEffect(() => {
         setFilteredJobs(allJobs)
+
     }, [allJobs])
     
-    const totalJobs =filteredJobs.length;
-    const shouldShowButton = jobsToShow < totalJobs;
+
     const handleFilteredJobs = useCallback( (event) => {
 
         event.preventDefault();
-        const jobTitle = event.target.jobTitle.value.toLowerCase();
-        const jobLocation = event.target.jobLocation.value.toLowerCase();
-
-        const filterJobs = allJobs.filter(job =>
-            (!jobTitle || ((job.job_title + job.job_description + job.address).toLowerCase().includes(jobTitle))) &&
-            (!jobLocation || job.address.toLowerCase().includes(jobLocation))
-        );
-
-        setFilteredJobs(filterJobs);
+        const searchKey = event.target.jobTitle.value.toLowerCase();
+        const location = event.target.jobLocation.value.toLowerCase();
+        setQuery(createQueryString( {searchKey : searchKey, location : location}));
+       
     })
-
+    const createQueryString = (paramsObj) => {
+        const params = new URLSearchParams();
+        
+        for (const [key, value] of Object.entries(paramsObj)) {
+            if (value && value!=''){
+                params.set(key, value);
+            }
+        }
+        return params.toString();
+      };
+      
 
 
 
@@ -51,8 +60,8 @@ const AllJobs = ({children}) => {
             <div className="all-jobs-main" >
                 <div className="all-jobs-content container">
                     <div className="show-all-jobs  scroll-container">
-                        <JobListView props ={{ filteredJobs : allJobs, limit : jobsToShow ,clickedJob : clickedJob,handleClickedJob }}/>
-                        <MoreJobButton props={{shouldShowButton,jobsToShowIncrement,setJobsToShow}}/>
+                        <JobListView props ={{ filteredJobs : filteredJobs,clickedJob : clickedJob,handleClickedJob }}/>
+                       {jobPage.currentPage==1 && allJobs.length<10 ? "" :<Pagination jobPage={jobPage} setJobPage={setJobPage} />} 
 
                     </div>
                     <div>

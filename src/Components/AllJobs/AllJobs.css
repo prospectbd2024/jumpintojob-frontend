@@ -74,7 +74,7 @@
     gap: 15px;
 }
 .show-all-jobs{}
-.show-all-jobs button {
+/* .show-all-jobs button {
     background: #111;
     color: #fff;
     margin-top: 25px;
@@ -89,7 +89,7 @@
 }
 .show-all-jobs button:hover{
     background-color: #2ECC71;
-}
+} */
 .show-all-jobs .jobs-reached-end-message {
     margin-top: 25px;
     width: 86%;
