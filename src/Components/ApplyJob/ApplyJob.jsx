@@ -93,7 +93,7 @@ const ApplyJob = ({job}) => {
               <div className='resume-preview'>
                 <h4>Preview Resume</h4>
                 <div className='resume-preview-container'> 
-                <RenderTemplate template={{ id: 1 }} userProfileData={userProfileData} currentStep={7} />
+                <RenderTemplate template={{ id: 1 }} userProfileData={userProfileData} currentStep={7} className={"resume-iframe"} />
                 </div>
               </div>
 

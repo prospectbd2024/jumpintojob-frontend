@@ -1,9 +1,10 @@
 import React,{useEffect,useState,useRef} from 'react'
-function RenderTemplate({template, userProfileData,currentStep}) {
+function RenderTemplate({template, userProfileData,currentStep, className , style ={}}) {
 
   const [htmlTemplate,setHtmlTemplate] = useState("")
   const iframeRef = useRef(null);
 
+  console.log(className , style);
   const  generateTemplateHtml = async ()=>{
     try {
       console.log(userProfileData);
@@ -65,8 +66,8 @@ useEffect(()=>{
         ref={iframeRef}
         width="100%"
         height="1000"
-
-        style={{ border: 'none' }}
+        className ={className}
+        style={{ border: 'none' ,...style}}
         title="Embedded Document"
       ></iframe>
 

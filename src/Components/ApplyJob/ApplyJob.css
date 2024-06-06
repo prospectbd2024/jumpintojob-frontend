@@ -214,13 +214,20 @@
     color: var(--darker-secondary-color);
 }
 .resume-preview .resume-preview-container {
-    height: 600px;
+    height: fit-content;
     width: 100%;
     border: 1px solid var(--secondary-color);
     border-radius: 5px;
+    position: relative;
 }
 
-
+.resume-preview .resume-preview-container .resume-iframe{
+    border: none;
+    /* height: 1000px !important; */
+    width: 1000px ;
+    transform: scale(0.7) ;
+    transform-origin: 0 0 ;
+}
 .upload-container {
     background: #fff;
     padding: 20px;
