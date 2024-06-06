@@ -1,4 +1,5 @@
 "use client"
+import { FaCloudUploadAlt } from "react-icons/fa"; 
 import React from 'react';
 import './ApplyJob.css'
 import { useEffect } from 'react';
@@ -8,33 +9,30 @@ import {useParams} from 'next/navigation';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { HiDocument, HiOutlineUpload } from "react-icons/hi";
+import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 
-const ApplyJob = () => {
-  const { id } = useParams();
-  const jobsData = [];
-  const [applyJobData, setApplyJobData] = useState([]);
+const ApplyJob = ({job}) => {
+
+  const {personalInformation} = useUserProfileContext();
   const [coverLetterOption, setCoverLetterOption] = useState('text')
-  useEffect(() => {
-    if (jobsData.data.length > 0) {
-      const sortedJob = jobsData.data.find(job => job.id == id);
-      setApplyJobData(sortedJob)
-    }
-  }, [])
+  const [phone, setPhone] = useState('');
 
   const handleCoverLetter = (e) => {
     setCoverLetterOption(e);
   }
-  console.log(applyJobData)
+  useEffect(()=>{
+    setPhone(personalInformation.phone)
+  },[personalInformation])
   return (
     <div className='job-application-form'>
       <div className="job-application-form-content container">
         <div className="job-application-header">
           <div>
-            <img src={applyJobData.image} alt="" />
+            <img src={job.image} alt="" />
           </div>
           <div>
-            <h5>{applyJobData.job_title}</h5>
-            <p>{applyJobData.address}</p>
+            <h5>{job.job_title}</h5>
+            <p>{job.address}</p>
           </div>
         </div>
         <div className="job-application-main">
@@ -43,55 +41,57 @@ const ApplyJob = () => {
               <h4>Add your contact information</h4>
               <div className='application-input'>
                 <label htmlFor="first_name">First Name</label>
-                <input type="text" placeholder='First Name' id="first_name" />
+                <input type="text" placeholder='First Name' id="first_name" disabled value={personalInformation.firstName} />
               </div>
               <div className='application-input'>
                 <label htmlFor="last_name">Last Name</label>
-                <input type="text" placeholder='Last Name' id="last_name" />
+                <input type="text" placeholder='Last Name' id="last_name" disabled value={personalInformation.lastName}  />
               </div>
               <div className='application-input'>
                 <label htmlFor="email">Email</label>
-                <input type="email" placeholder='Email' id="email" />
+                <input type="email" placeholder='Email' id="email"  disabled value={personalInformation.email}/>
               </div>
               <div className='application-input'>
-                <label htmlFor="citystate">City, State <span>(optional)</span></label>
-                <input type="text" placeholder='City and State' id="citystate" />
+                <label htmlFor="citystate">City, State <span> </span></label>
+                <input type="text" placeholder='City and State' id="citystate" disabled value={personalInformation.currentAddress.city+ (personalInformation.currentAddress.state?", "+ personalInformation.currentAddress.state:"")}   />
               </div>
               <div className='application-input'>
-                <label htmlFor="country">Country <span>(optional)</span></label>
-                <select name="" id="country">
-                  <option value="select">Select</option>
-                  <option value="select">Australia</option>
-                  <option value="select">Argentina</option>
-                  <option value="select">Afghanistan</option>
-                  <option value="select">Bangladesh</option>
-                  <option value="select">Bhutan</option>
-                </select>
+                <label htmlFor="country">Country <span> </span></label>
+                <input type="text" placeholder='Country' id="country" disabled value={personalInformation.currentAddress.country}  />
               </div>
               <div className='phone'>
                 <label htmlFor="phone">Phone</label>
-                <PhoneInput className="phone-input"
-                  country={'us'}
-                  // value={phone}
-                  // onChange={handlePhone}
-                  inputProps={{
-                    name: 'phone',
-                    required: true,
-                    placeholder: 'Enter your phone number with country code',
-                  }}
-                />
+                <PhoneInput
+              className="phone-input"
+              country={'bd'}
+              value={phone}
+
+              inputProps={{
+                name: 'phone',
+                required: true,
+                placeholder: 'Enter your phone number with country code',
+              }}
+               />
               </div>
             </div>
             <div className="step-applicant-resume-info">
-              <h4>Upload your resume and cover letter</h4>
+              {/* <h4>Upload your resume and cover letter (optional)</h4>
               <div className="upload-resume">
-                {/* <p>Upload resume for employer</p> */}
+                
                 <div>
                   <input type="file" />
                   <HiDocument className='document' />
                   <HiOutlineUpload className='upload' />
                   <p>Use files like pdf, doc, docx, rtf or text</p>
                   <button>Upload Resume</button>
+                </div>
+              </div> */}
+
+
+              <div className='resume-preview'>
+                <h4>Preview Resume</h4>
+                <div className='resume-preview-container'> 
+
                 </div>
               </div>
 
@@ -107,12 +107,15 @@ const ApplyJob = () => {
                   </div>
                 </div>
                 {coverLetterOption !== 'text' ?
-                  <div>
-                    <input type="file" />
-                    <HiDocument className='document' />
-                    <HiOutlineUpload className='upload' />
-                    <p>Use files like pdf, doc, docx, rtf or text</p>
-                    <button>Upload Cover Letter</button>
+
+                  <div className='upload-input-container'>
+                      <div >
+                        
+                        <FaCloudUploadAlt className='file-upload' />
+                        <p>Use files like pdf, doc, docx, rtf or text</p>
+                        <button type="button" className='file-upload-button'>Upload Cover Letter</button>
+                      </div>
+                    <input type="file" className='file' />
                   </div>
                   :
                   <textarea name="" id="" cols="30" rows="10" placeholder='Type coverletter'></textarea>
