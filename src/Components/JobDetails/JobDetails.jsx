@@ -3,10 +3,11 @@ import React from 'react';
 import { FaUpRightFromSquare } from "react-icons/fa6";
 import Link from 'next/link';
 import Swal from 'sweetalert2';
+import { useUserContext } from '@/Contexts/UserContext';
 
 
 const JobDetails = ({props}) => {
-
+    const {userData}  = useUserContext();
     const {job} = props;
 
     const handleApplyJob = () => {
