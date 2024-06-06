@@ -19,6 +19,10 @@ function RenderTemplate({template, userProfileData,currentStep}) {
         }),
       });
       if (!response.ok) {
+        console.log("Request", {
+          template_id: template.id,
+          resume_data : userProfileData
+        });
         console.log(response);
         throw new Error('Network response was not ok');
       }

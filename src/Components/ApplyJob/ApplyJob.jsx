@@ -10,18 +10,20 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { HiDocument, HiOutlineUpload } from "react-icons/hi";
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
+import RenderTemplate from "@/ResumeBuilder/ResumeComponents/ResumePreview/RenderTemplate";
+import { useResumeContext } from "@/Contexts/ResumeContext";
 
 const ApplyJob = ({job}) => {
 
-  const {personalInformation} = useUserProfileContext();
+  const {personalInformation,userProfileData} = useUserProfileContext();
   const [coverLetterOption, setCoverLetterOption] = useState('text')
   const [phone, setPhone] = useState('');
-
   const handleCoverLetter = (e) => {
     setCoverLetterOption(e);
   }
   useEffect(()=>{
     setPhone(personalInformation.phone)
+    console.log(userProfileData);
   },[personalInformation])
   return (
     <div className='job-application-form'>
@@ -91,7 +93,7 @@ const ApplyJob = ({job}) => {
               <div className='resume-preview'>
                 <h4>Preview Resume</h4>
                 <div className='resume-preview-container'> 
-
+                <RenderTemplate template={{ id: 1 }} userProfileData={userProfileData} currentStep={7} />
                 </div>
               </div>
 
