@@ -1,4 +1,5 @@
 "use client"
+import { FaFileUpload } from "react-icons/fa"; 
 import { FaCloudUploadAlt } from "react-icons/fa"; 
 import React from 'react';
 import './ApplyJob.css'
@@ -12,7 +13,7 @@ import { HiDocument, HiOutlineUpload } from "react-icons/hi";
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import RenderTemplate from "@/ResumeBuilder/ResumeComponents/ResumePreview/RenderTemplate";
 import { useResumeContext } from "@/Contexts/ResumeContext";
-
+import ResumePreview from "@/ResumeBuilder/ResumeComponents/ResumeTemplates/ResumePreview";
 const ApplyJob = ({job}) => {
 
   const {personalInformation,userProfileData} = useUserProfileContext();
@@ -21,6 +22,7 @@ const ApplyJob = ({job}) => {
   const handleCoverLetter = (e) => {
     setCoverLetterOption(e);
   }
+ 
   useEffect(()=>{
     setPhone(personalInformation.phone)
     console.log(userProfileData);
@@ -77,23 +79,15 @@ const ApplyJob = ({job}) => {
               </div>
             </div>
             <div className="step-applicant-resume-info">
-              {/* <h4>Upload your resume and cover letter (optional)</h4>
-              <div className="upload-resume">
-                
-                <div>
-                  <input type="file" />
-                  <HiDocument className='document' />
-                  <HiOutlineUpload className='upload' />
-                  <p>Use files like pdf, doc, docx, rtf or text</p>
-                  <button>Upload Resume</button>
-                </div>
-              </div> */}
-
-
+ 
               <div className='resume-preview'>
+                <div className='header'>
                 <h4>Preview Resume</h4>
+                <div>Complete your resume/cv with <a  target="_blank" href={'/resumebuilder'}>Resume Builder</a></div>
+                </div>
+                
                 <div className='resume-preview-container'> 
-                <RenderTemplate template={{ id: 1 }} userProfileData={userProfileData} currentStep={7} className={"resume-iframe"} />
+                <ResumePreview className={'resume-iframe'} />
                 </div>
               </div>
 
@@ -112,15 +106,15 @@ const ApplyJob = ({job}) => {
 
                   <div className='upload-input-container'>
                       <div >
-                        
-                        <FaCloudUploadAlt className='file-upload' />
+                        <FaFileUpload  className='file-upload'  />
+                        {/* <FaCloudUploadAlt/> */}
                         <p>Use files like pdf, doc, docx, rtf or text</p>
-                        <button type="button" className='file-upload-button'>Upload Cover Letter</button>
+                        <button type="button" className='file-upload-button'>Upload Forwarding Letter</button>
                       </div>
                     <input type="file" className='file' />
                   </div>
                   :
-                  <textarea name="" id="" cols="30" rows="10" placeholder='Type coverletter'></textarea>
+                  <textarea name="" id="" cols="30" rows="10" placeholder='Type forwarding letter'></textarea>
                 }
               </div>
 
@@ -129,7 +123,7 @@ const ApplyJob = ({job}) => {
             <input type="checkbox" id="available" />
             <label htmlFor="available">I'm available to join immediately</label>
             </div>
-            <button className='apply-job-button' type="submit">SUBMIT</button>
+            <button className='apply-job-button' type="button">SUBMIT</button>
           </form>
         </div>
       </div>

@@ -40,7 +40,6 @@
 }
 
 .resume-prev-next-buttons {
-    margin-top: 50px;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -76,4 +75,9 @@
 .slick-prev {
     left: 0px!important;
     z-index: 1!important;
+}
+.navigation-buttons{
+    display: flex;
+    justify-content: space-between ;
+    margin-top : 40px; 
 }

@@ -1,7 +1,8 @@
+import { useResumeContext } from '@/Contexts/ResumeContext';
 import React,{useEffect,useState,useRef} from 'react'
 function RenderTemplate({template, userProfileData,currentStep, className , style ={}}) {
+const {  htmlTemplate,setHtmlTemplate } = useResumeContext();
 
-  const [htmlTemplate,setHtmlTemplate] = useState("")
   const iframeRef = useRef(null);
 
   console.log(className , style);

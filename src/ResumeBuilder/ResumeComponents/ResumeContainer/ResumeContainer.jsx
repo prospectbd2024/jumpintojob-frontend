@@ -11,9 +11,10 @@ import ResumeFinalize from "../ResumeFinalize/ResumeFinalize";
 import SkillContextProvider from "@/Contexts/SkillContext";
 import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 import { useResumeContext } from "@/Contexts/ResumeContext";
+import SaveProfileButton from "@/Components/Buttons/SaveProfileButton";
 
 const ResumeContainer = () => {
-  const { currentStep, setCurrentStep  } = useResumeContext();
+  const { currentStep, setCurrentStep,saveCV   } = useResumeContext();
 
 
 
@@ -36,8 +37,21 @@ const ResumeContainer = () => {
           {currentStep==6  && <ResumeFinalize />}
           {currentStep==7  && <ResumePreview />}
 
-          <PrevNextButton props={{setCurrentStep,currentStep}} />
-     
+            <div className='navigation-buttons'>
+              <PrevNextButton props={{setCurrentStep,currentStep}} />
+              {currentStep==7 ?  <button  type="button" style={{background: 'var(--primary-color)',
+              color: 'rgb(255, 255, 255)',
+              width: '120px',
+              height: '40px',
+              borderRadius: '5px',
+              border: 'none',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease 0s'}} onClick={ saveCV }>Save</button> : <></>}
+             
+            </div>
+
         </div>
       </div>
     </div>
