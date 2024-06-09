@@ -66,6 +66,7 @@ function UserProfileContext({ children }) {
             setLanguages(response.data.data.payload.languages);
             setHobbies(response.data.data.payload.hobbies);
             manageMore(response.data.data.payload.others)
+            setAvailability(response.data.data.payload.availability)
 
           }catch(e){
             console.log(e);
@@ -93,7 +94,7 @@ function UserProfileContext({ children }) {
 
     const saveProfile = useCallback(
         async () => {
-            console.log(userProfileData);
+ 
           try {
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/update/${userData?.data.user.user_id}`,
@@ -165,6 +166,9 @@ function UserProfileContext({ children }) {
 
     },[userData])
 
+    useEffect(()=>{
+      setUserProfileData(prev => ({ ...prev,  availability : availability }))
+  },[availability])
 
 
     return (

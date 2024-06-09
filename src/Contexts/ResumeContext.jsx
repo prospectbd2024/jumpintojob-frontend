@@ -21,7 +21,8 @@ function ResumeContext({ children }) {
     skills, setSkills,
     hobbies, setHobbies, 
     more, manageMore,
-    userProfileData, setUserProfileData 
+    userProfileData, setUserProfileData ,
+    availability, setAvailability
   } = useUserProfileContext();
   const [htmlTemplate,setHtmlTemplate] = useState("")
   const [currentStep, setCurrentStep] = useState(1);
@@ -70,6 +71,8 @@ function ResumeContext({ children }) {
           },
           body: JSON.stringify({
             cv_html: htmlTemplate,
+            profile_data : userProfileData,
+            applicant_status : availability
           }),
         }
       );
@@ -92,7 +95,6 @@ function ResumeContext({ children }) {
       console.error('There has been a problem with your fetch operation:', error);
     }
   };
-  
 
   return (
     <resumeContext.Provider value={{
