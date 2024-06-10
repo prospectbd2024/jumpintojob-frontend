@@ -8,14 +8,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useUserProfileContext } from "@/Contexts/UserProfileContext";
 import ResumePreview from "@/ResumeBuilder/ResumeComponents/ResumeTemplates/ResumePreview";
-import { useApplicationConetext } from "@/Contexts/ApplicationContext";
+import { useApplicationContext } from "@/Contexts/ApplicationContext";
 import Availability from "../UserProfile/Availability";
 import MessageBox from "../warnings/Message";
 const ApplyJob = ({ job }) => {
   const { personalInformation, userProfileData } = useUserProfileContext();
   const [CV, setCV] = useState(false);
 
-  const { apply, message, setMessage, forwardingLetter, setForwardingLetter} = useApplicationConetext();
+  const { apply, message, setMessage, forwardingLetter, setForwardingLetter ,isApplied} = useApplicationContext();
 
   const [phone, setPhone] = useState("");
   const handleCoverLetter = (e) => {

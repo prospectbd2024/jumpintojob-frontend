@@ -4,12 +4,13 @@ import { FaUpRightFromSquare } from "react-icons/fa6";
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { useUserContext } from '@/Contexts/UserContext';
+import { useApplicationContext } from '@/Contexts/ApplicationContext';
 
 
 const JobDetails = ({props}) => {
     const {userData}  = useUserContext();
     const {job} = props;
-
+    const {isApplied} = useApplicationContext();
     const handleApplyJob = () => {
         if (userData) {
             // Use window.open() to open the URL in a new tab
@@ -48,7 +49,9 @@ const JobDetails = ({props}) => {
                             <h2>{job.job_title}</h2>
                             <p>{job.address}</p>
                         </div>
-                        <button onClick={handleApplyJob}>Apply Now <FaUpRightFromSquare/></button>
+                        {!isApplied(job.id) ? <button onClick={handleApplyJob}   >Apply Now <FaUpRightFromSquare/></button>
+                        :<button className='applied'>Applied </button>}
+                        
                     </div>
                 </div>
                 <div className="job-details-main">
