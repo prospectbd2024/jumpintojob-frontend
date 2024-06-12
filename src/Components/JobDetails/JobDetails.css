@@ -79,6 +79,9 @@
     gap: 10px;
     transition: .3s;
 }
+.job-details-header-job .applied:hover {
+     background-color: grey;
+}
 .job-details-header-job button:hover{
     background-color: #2daf63;
     

@@ -1,13 +1,19 @@
 "use client"
-import ApplyJob from '@/Components/ApplyJob/ApplyJob'
-import { useUserContext } from '@/Contexts/UserContext'
 import React from 'react'
+import ApplyJob from '@/Components/ApplyJob/ApplyJob'
+import { useParams } from 'next/navigation';
+import { useJobContext } from '@/Contexts/JobContext';
 
-function page() {
-    const {jobs} = useUserContext();
-  return (
-    < ApplyJob jobs={jobs}/>
-  )
+function Page() {
+    const { allJobs } = useJobContext();
+    const { id } = useParams();
+    const job = allJobs?.find(job => job.id == id);
+
+    if (!job) {
+        return <div>Job not found</div>
+    }
+
+    return <ApplyJob job={job} />
 }
 
-export default page
+export default Page;

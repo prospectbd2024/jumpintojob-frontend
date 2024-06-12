@@ -49,7 +49,7 @@ const ResumeSteps = () => {
                     </div>
                     <div className={`step ${currentStep >= 6 ? 'active-step' : ''}`} onClick={()=>{changeStep(6)}}>
                         <div className='step-title-container'>
-                            <h5>4</h5>
+                            <h5>6</h5>
                             <p>FINALIZE</p>
                         </div>
                         <span></span>

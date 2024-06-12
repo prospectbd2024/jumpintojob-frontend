@@ -2,6 +2,7 @@
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import React, { useState } from 'react';
 import SaveProfileButton from '../Buttons/SaveProfileButton';
+import Availability from './Availability';
 
 const JobPreferences = () => {
 
@@ -29,10 +30,6 @@ const JobPreferences = () => {
 
     const handlePreferredIndustryChange = (e) => {
         setPreferredIndustry(e.target.value);
-    };
-
-    const handleAvailabilityChange = (e) => {
-        setAvailability(e.target.value);
     };
 
 
@@ -107,20 +104,7 @@ const JobPreferences = () => {
                         style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
                     />
                 </div> */}
-                <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                    <label htmlFor="availability" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Describe your status:</label>
-                    <select
-                        id="availability"
-                        value={availability}
-                        onChange={handleAvailabilityChange}
-                        style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '200px' }}
-                    >
-                        <option value="readyToJoin">Ready To Join</option>
-                        <option value="currentlyInJob">Currently In A Job</option>
-                        <option value="lookingForJob">Looking For Better Job</option>
-                        {/* Add more options as needed */}
-                    </select>
-                </div>
+                 <Availability />
             <div style={{display: 'flex',justifyContent: 'flex-end',marginTop: '20px'}}>
             <SaveProfileButton/>
             </div>

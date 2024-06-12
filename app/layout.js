@@ -29,6 +29,7 @@ import Provider from '@/UserContext/SessionProvider'
 import CompanyContext from '@/Contexts/CompanyContext'
 import CategoryContext from '@/Contexts/CategoryContext'
 import UserProfileContext from '@/Contexts/UserProfileContext'
+import ApplicationContext from '@/Contexts/ApplicationContext'
 
 async function  layout({children}) {
 
@@ -41,9 +42,11 @@ async function  layout({children}) {
       <CompanyContext>
       <CategoryContext>
         <UserProfileContext>
+          <ApplicationContext>
       <Provider session={session}> 
             {children}
       </Provider>
+          </ApplicationContext>
         </UserProfileContext>
       </CategoryContext>
       </CompanyContext>

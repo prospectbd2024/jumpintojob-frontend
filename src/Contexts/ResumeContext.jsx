@@ -1,7 +1,8 @@
 "use client"
 import React, { useContext, createContext, useState, useEffect, useCallback, cache } from 'react'
 import { useUserProfileContext } from './UserProfileContext';
-
+import { useUserContext } from './UserContext';
+import Swal from 'sweetalert2'
 
 export const resumeContext = createContext();
 export const useResumeContext = () => useContext(resumeContext);
@@ -20,13 +21,14 @@ function ResumeContext({ children }) {
     skills, setSkills,
     hobbies, setHobbies, 
     more, manageMore,
-    userProfileData, setUserProfileData 
+    userProfileData, setUserProfileData ,
+    availability, setAvailability
   } = useUserProfileContext();
-
+  const [htmlTemplate,setHtmlTemplate] = useState("")
   const [currentStep, setCurrentStep] = useState(1);
   const [resumeTemplates, setResumeTemplates] = useState([]);
   const [template, setTemplate] = useState({ id: 1 });
-
+  const {userData} = useUserContext();
   //template settings
   const templateSettings = {
     arrows: true,
@@ -55,7 +57,44 @@ function ResumeContext({ children }) {
   useEffect(() => {
     fetchResumeTemplates();
   }, []); // Empty dependency array means this effect runs once after the initial render
-
+  const saveCV = async () => {
+    try {
+      let bearerToken = userData.data.access_token;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/cv/store`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Accept: "application/json",
+            "Authorization": `Bearer ${bearerToken}`,
+          },
+          body: JSON.stringify({
+            cv_html: htmlTemplate,
+            profile_data : userProfileData,
+            applicant_status : availability
+          }),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      // You can also handle the response data here if needed
+      const data = await response.json();
+      console.log('Success:', data);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "CV updated successfull!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  };
 
   return (
     <resumeContext.Provider value={{
@@ -71,7 +110,9 @@ function ResumeContext({ children }) {
       userProfileData, setUserProfileData,
       more, manageMore, templateSettings,
       resumeTemplates,
-      fetchResumeTemplates
+      fetchResumeTemplates,
+      htmlTemplate,setHtmlTemplate,
+      saveCV
     }} >
       {children}
     </resumeContext.Provider>

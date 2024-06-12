@@ -6,6 +6,7 @@ import './ResumeOthers.css'
 import AddMore from './AddMore'
 import {FaTrashAlt} from 'react-icons/fa'
 import { useResumeContext } from '@/Contexts/ResumeContext'
+import Availability from '@/Components/UserProfile/Availability'
 
 
 function ResumeOthers() {
@@ -103,6 +104,9 @@ unicodeBidi: 'isolate'}}>Others</h3>
             <input type="radio" value="Other"  id="more" name="add" onChange={handleChange}/>
             <label htmlFor="more">Other</label>
             {/* <input type="text" value="more" /> */}
+        </li>
+        <li>
+          <Availability />
         </li>
     </ul>
     <div>

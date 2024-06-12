@@ -13,7 +13,7 @@ const ResumeHeader = () => {
                         <span>Resume Builder</span>
                     </div>
                     <div className="resume-header-button">
-                        <Link href="/"><button>Job Board</button></Link>
+                        <Link href="/findjobs"><button>Job Board</button></Link>
                     </div>
                 </div>
             </div>

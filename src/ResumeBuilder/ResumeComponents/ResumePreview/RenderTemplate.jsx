@@ -1,12 +1,14 @@
+import { useResumeContext } from '@/Contexts/ResumeContext';
 import React,{useEffect,useState,useRef} from 'react'
-function RenderTemplate({template, userProfileData,currentStep}) {
+function RenderTemplate({template, userProfileData,currentStep, className , style ={}}) {
+const {  htmlTemplate,setHtmlTemplate } = useResumeContext();
 
-  const [htmlTemplate,setHtmlTemplate] = useState("")
   const iframeRef = useRef(null);
 
+  console.log(className , style);
   const  generateTemplateHtml = async ()=>{
     try {
-      console.log(userProfileData);
+ 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/html`, {
         method: 'POST',
         headers: {
@@ -19,6 +21,10 @@ function RenderTemplate({template, userProfileData,currentStep}) {
         }),
       });
       if (!response.ok) {
+        console.log("Request", {
+          template_id: template.id,
+          resume_data : userProfileData
+        });
         console.log(response);
         throw new Error('Network response was not ok');
       }
@@ -61,8 +67,8 @@ useEffect(()=>{
         ref={iframeRef}
         width="100%"
         height="1000"
-
-        style={{ border: 'none' }}
+        className ={className}
+        style={{ border: 'none' ,...style}}
         title="Embedded Document"
       ></iframe>
 
