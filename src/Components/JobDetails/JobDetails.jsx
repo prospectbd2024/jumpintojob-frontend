@@ -1,10 +1,9 @@
 "use client"
-import React from 'react';
-import { FaUpRightFromSquare } from "react-icons/fa6";
-import Link from 'next/link';
-import Swal from 'sweetalert2';
-import { useUserContext } from '@/Contexts/UserContext';
 import { useApplicationContext } from '@/Contexts/ApplicationContext';
+import { useUserContext } from '@/Contexts/UserContext';
+import Link from 'next/link';
+import { FaUpRightFromSquare } from "react-icons/fa6";
+import Swal from 'sweetalert2';
 
 
 const JobDetails = ({props}) => {
