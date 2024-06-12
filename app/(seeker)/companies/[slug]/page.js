@@ -1,12 +1,10 @@
 "use client"
-import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
-import Link from 'next/link';
-import { useUserContext } from '@/Contexts/UserContext';
-import CompanyDetails from '@/Components/Companies/CompanyDetails';
-import MoreJobButton from '@/Components/AllJobs/MoreJobButton';
 import JobListView from '@/Components/AllJobs/JobListView';
+import CompanyDetails from '@/Components/Companies/CompanyDetails';
 import JobDetails from '@/Components/JobDetails/JobDetails';
+import { useUserContext } from '@/Contexts/UserContext';
+import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 function Page() {
     const { slug } = useParams();
@@ -16,7 +14,7 @@ function Page() {
     const [clickedJob, setCLickedJob] = useState(0);
     const [job,setJob] = useState({}); 
     let bearerToken = '';
-
+ 
     const handleClickedJob = useCallback((id)=>{
         setCLickedJob(id)
         allJobs.map((job)=>{
