@@ -109,12 +109,12 @@ unicodeBidi: 'isolate'}}>Others</h3>
           <Availability />
         </li>
     </ul>
-    <div>
-        <AddButton onClick={()=>showModal('Add '+inputType,'add')}/>
-      </div>
     <ModalBox props={{ ...modal, onSave: onSave, onClose: closeModal }}>
         <AddMore  props={{inputType,formData, setFormData}} />
       </ModalBox>
+    <div>
+        <AddButton onClick={()=>showModal('Add '+inputType,'add')}/>
+     </div>
 </div>
   )
 }
