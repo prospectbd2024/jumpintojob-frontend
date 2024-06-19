@@ -1,8 +1,9 @@
-.companies{
+/* General Styles */
+.companies {
     margin: 20px 0;
 }
-.companies-content{}
-.companies-content{}
+.companies-content {}
+.companies-content {}
 .companies-content .companies-tabs {
     display: grid;
     grid-template-columns: 350px auto;
@@ -10,7 +11,7 @@
 }
 .companies-content .companies-tabs .companies-tablist {
     background: #fff;
-    padding: 0 0 0 0;
+    padding: 0;
     border-radius: 10px;
     box-shadow: 11px 10px 40px #34343417;
     height: 90vh;
@@ -30,14 +31,15 @@
     transition: .3s;
 }
 .companies-content .companies-tabs .companies-tablist li:hover {
-    border-left: 5px solid var(--primary-color); 
-    color: var(--primary-color); 
+    border-left: 5px solid var(--primary-color);
+    color: var(--primary-color);
     box-shadow: 5px 12px 12px #e9e9e961;
 }
-.default-category{
-    border-left: 5px solid var(--primary-color)!important; color: #3498DB!important; box-shadow: 5px 12px 12px #e9e9e961;
+.default-category {
+    border-left: 5px solid var(--primary-color)!important;
+    color: #3498DB!important;
+    box-shadow: 5px 12px 12px #e9e9e961;
 }
-
 .companies-content .companies-tabs .companies-tabs-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -47,9 +49,10 @@
     border: 1px solid #80808057;
     padding: 15px 15px 0 15px;
     border-radius: 10px;
+    margin-bottom: 15px;
 }
-.company-item .company-item-content{}
-.company-item .company-item-content .company-item-content-banner{}
+.company-item .company-item-content {}
+.company-item .company-item-content .company-item-content-banner {}
 .company-item .company-item-content .company-item-content-banner img {
     width: 100%;
     height: 180px;
@@ -72,22 +75,26 @@
     border-radius: 10px;
     box-shadow: 0px 0px 15px #8080801c;
 }
-.company-item .company-item-content .company-item-content-main .main-items a{
+.company-item .company-item-content .company-item-content-main .main-items a {
     text-decoration: none;
     color: #061421;
 }
-.company-item .company-item-content .company-item-content-main .main-items a h3{
-    
+.company-item .company-item-content .company-item-content-main .main-items a h3 {
+    font-size: 18px;
 }
-.company-item .company-item-content .company-item-content-main .main-items p{
+.company-item .company-item-content .company-item-content-main .main-items p {
     color: var(--darker-secondary-color);
+    font-size: 14px;
 }
-.company-item .company-item-content .company-item-content-main div .company_description{
+.company-item .company-item-content .company-item-content-main div .company_description {
     color: #060606;
+    font-size: 14px;
 }
-.company-item .company-item-content .company-item-content-footer{
+.company-item .company-item-content .company-item-content-footer {
     display: flex;
+    flex-direction: row;
     gap: 15px;
+    align-items: center;
 }
 .company-item .company-item-content .company-item-content-footer .company-button {
     width: 130px;
@@ -96,19 +103,19 @@
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 14px;
+    text-align: center;
 }
 .company-item .company-item-content .company-item-content-footer .company-details-button {
     background: var(--primary-color);
     color: #fff;
-    
 }
 .company-item .company-item-content .company-item-content-footer .company-jobs-button {
     background: transparent;
     border: 1px solid #80808057;
     transition: .3s;
 }
-
-.companies-tabs{
+.companies-tabs {
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans', sans-serif;
@@ -117,11 +124,11 @@
     grid-gap: 30px;
     gap: 30px;
 }
-.companies-tablist{
+.companies-tablist {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
     background: #fff;
-    padding: 0 0 0 0;
+    padding: 0;
     border-radius: 10px;
     box-shadow: 11px 10px 40px #34343417;
     height: 90vh;
@@ -130,7 +137,7 @@
     top: 70px;
     left: 0;
 }
-.company-category-selected{
+.company-category-selected {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
     border-left: 5px solid var(--primary-color)!important;
@@ -163,82 +170,175 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     cursor: default;
 }
-
 .company-cover {
     border-radius: 10px 10px 0 0;
 }
-
 .company-cover-image {
     width: 100%;
     height: 250px;
 }
-
 .company-item-content {
     display: flex;
     flex-direction: column;
 }
-
 .company-item-details {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
 }
-
 .company-logo {
     display: flex;
     align-items: center;
 }
-
 .company-logo-container {
     margin-right: 20px;
 }
-
 .company-logo-image {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
-
 .company-info-container {
     margin-left: 10px;
     display: flex;
     flex-direction: column;
 }
-
 .company-title {
     margin: 0;
     font-size: 24px;
     color: #333;
 }
-
 .company-status {
     margin: 0;
     color: #666;
 }
-
 .company-category {
     text-align: center;
 }
-
 .company-category-text {
     margin: 0;
     color: #666;
     font-size: 18px;
 }
-
 .company-size {
     margin: 0;
     color: #666;
     font-size: 18px;
 }
-
 .company-description-text {
     text-align: justify;
     color: #666;
     font-size: 16px;
 }
-
 .company-description-container {
     padding: 20px;
+}
+.user-home-company {}
+.user-home-company .company-item {
+    margin-bottom: 15px;
+    height: fit-content;
+}
+.company-item .company-item-content-banner img {
+    height: 130px;
+}
+.company-item .main-items div a h3 {
+    font-size: 13px;
+    padding-top: 20px;
+}
+.company-item .company-item-content-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.company-item .company-item-content-footer a .company-button {
+    width: 120px;
+}
+.company-item-content-main .main-items {
+    margin-top: 10px;
+}
+@media (min-width: 900px) {
+    .company-item .company-item-content-footer {
+        flex-direction: row;
+    }
+}
+.company_description {
+    color: var(--darker-secondary-color);
+}
+.main-items img {
+    background-color: white;
+}
+.company-item .main-items div a h3 {
+    font-size: 13px;
+    padding-top: 20px;
+}
+.company-item .main-items p {
+    font-size: 13px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .company-item .company-item-content .company-item-content-banner img {
+        height: 150px;
+    }
+    .company-item .company-item-content .company-item-content-main {
+        top: -20px;
+        left: 5px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items img {
+        width: 60px;
+        height: 60px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items a h3 {
+        font-size: 16px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items p {
+        font-size: 12px;
+    }
+    .company-item .company-item-content .company-item-content-main div .company_description {
+        font-size: 12px;
+    }
+    .company-item .company-item-content .company-item-content-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .company-item .company-item-content .company-item-content-footer .company-button {
+        width: 100px;
+        height: 35px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 480px) {
+    .company-item .company-item-content .company-item-content-banner img {
+        height: 130px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items {
+        gap: 10px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items img {
+        width: 50px;
+        height: 50px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items a h3 {
+        font-size: 14px;
+    }
+    .company-item .company-item-content .company-item-content-main .main-items p {
+        font-size: 10px;
+    }
+    .company-item .company-item-content .company-item-content-main div .company_description {
+        font-size: 10px;
+    }
+    .company-item .company-item-content .company-item-content-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .company-item .company-item-content .company-item-content-footer .company-button {
+        width: 80px;
+        height: 30px;
+        font-size: 10px;
+    }
 }

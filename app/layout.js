@@ -3,7 +3,6 @@ import './globals.css'
 import './responsive.css'
 import '@/Home/WhyUs/WhyUs.css'
 import '@/Components/AllJobs/AllJobs.css'
-import '@/Components/Companies/Companies.css'
 import '@/Layout/Header/Header.css'
 import "@/Components/Login/Login.css"
 import '@/Components/Register/Register.css'

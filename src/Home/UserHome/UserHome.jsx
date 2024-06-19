@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { FcBriefcase, FcBusinessman, FcFinePrint, FcOnlineSupport } from "react-icons/fc";
 import { useJobContext } from '@/Contexts/JobContext';
 import { useCompanyContext } from '@/Contexts/CompanyContext';
+import Companies from './Companies';
 
 const UserHome = () => {
     const { setClickedFeaturedJob,profile } = useUserContext();
@@ -26,47 +27,8 @@ const UserHome = () => {
 
         <div className='user-home'>
             <div className="user-home-content container">
-                <div className="user-home-companies res-second-div">
-                    <h4>Featured Companies:</h4>
-                    {companies.length > 0 ?
-                        <div className='user-home-company'>
-                            {
-                                companies.slice(0, 3).map((company, index) => <div key={index} className='company-item'>
-                                    <div className="company-item-content">
-                                        <div className="company-item-content-banner">
-                                            <img src={company.conver_image} alt="" />
-                                        </div>
-                                        <div className="company-item-content-main">
-                                            <div className='main-items'>
-                                                <img src={company.logo} alt="" />
-                                                <div>
-                                                    <Link href=""><h3>{company.name}</h3></Link>
-                                                    <p>Verified Profile</p>
-                                                </div>
-                                            </div>
-                                            <div className='main-items'>
-                                                <p>{company.company_type}</p>
-                                                <p>Location: {company.location}</p>
-                                            </div>
-                                            <div className='main-items'>
-                                                <p className='company_description'>{company.description?.slice(0, 90)}...</p>
-                                            </div>
-                                            <div className="company-item-content-footer">
-                                                <Link href=""><button className='company-button company-details-button'>View Details</button></Link>
-                                                <Link href=""><button className='company-button company-jobs-button'>View Jobs</button></Link>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>)
-                            }
-                        </div>
-                        :
-                        <div className=''>
-                            <h4 className=''>No Company Available</h4>
-                        </div>
-                    }
+                <div>
+                    <Companies props={{companies}} />
                 </div>
                 <div className="user-home-jobs res-first-div">
                     <h4>Featured Jobs:</h4>
@@ -156,7 +118,7 @@ const UserHome = () => {
 
                             </div>
                         </div>
-                        <div className='home-subscribe'>
+                        {/* <div className='home-subscribe'>
                             <div className="dashboard-resume">
                                 <img src="https://img.freepik.com/free-vector/landing-page-concept-new-message_52683-25720.jpg?w=996&t=st=1695997740~exp=1695998340~hmac=02f0a9d4d08173205c030adafb433a61738cf32c478a6b7036560d5e226f605d" alt="" />
                                 <h3>Start your career with top companies</h3>
@@ -165,7 +127,7 @@ const UserHome = () => {
                                     service.</p>
                                 <button>Subscribe</button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

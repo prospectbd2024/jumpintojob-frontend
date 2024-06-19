@@ -4,7 +4,7 @@ import CategoryList from "./CategoryList";
 import CompanyListView from "./CompanyListView";
 import { useCompanyContext } from "@/Contexts/CompanyContext";
 import { useCategoryContext } from "@/Contexts/CategoryContext";
-
+import '@/Components/Companies/Companies.css'
 const Companies = () => {
   const {getCompanies,companies} = useCompanyContext();
   const {jobCategories} = useCategoryContext();
