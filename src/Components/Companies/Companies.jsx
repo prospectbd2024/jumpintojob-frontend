@@ -1,14 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
-import CategoryList from "./CategoryList"; 
-import { useCompanyContext } from "@/Contexts/CompanyContext";
+import React, {   useState } from "react";
+import CategoryList from "./CategoryList";  
 import { useCategoryContext } from "@/Contexts/CategoryContext";
 import '@/Components/Companies/Companies.css'
 import {useRouter} from 'next/navigation'
-const Companies = ({children}) => {
-  const {getCompanies,companies} = useCompanyContext();
-  const {jobCategories} = useCategoryContext();
-  const router = useRouter();
+const Companies = ({children}) => { 
+  const {jobCategories} = useCategoryContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
 
  
@@ -22,8 +19,6 @@ const Companies = ({children}) => {
         <div className="companies-tabs">
         <CategoryList props={{selectedCategory, categories: jobCategories}} />
         {children}
-
-
         </div>
       </div>
     </div>

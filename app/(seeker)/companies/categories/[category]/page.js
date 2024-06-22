@@ -13,25 +13,24 @@ function Page() {
           category: category
         };
         const queryString = new URLSearchParams(queryParams).toString();
+        console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`)
           .then((res) => res.json())
           .then((data) => {
+            setCompanies(data.data);
             console.log(data.data);
           });
       },[])
 
-      
-    useEffect(()=>{
-        setCompanies([])
-    },[])
-
+    
     useEffect(()=>{
         fetchCompanes(category)
     },[category]);
 
 
-    return (
+    return (companies.length >0?
         <CompanyListView props={{companies}} />
+        :<>No {category } jobs found</>
     );
 }
 
