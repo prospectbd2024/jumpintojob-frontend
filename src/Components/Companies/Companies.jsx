@@ -1,38 +1,24 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
-import CategoryList from "./CategoryList";
-import CompanyListView from "./CompanyListView";
-import { useCompanyContext } from "@/Contexts/CompanyContext";
+import React, {   useState } from "react";
+import CategoryList from "./CategoryList";  
 import { useCategoryContext } from "@/Contexts/CategoryContext";
-
-const Companies = () => {
-  const {getCompanies,companies} = useCompanyContext();
-  const {jobCategories} = useCategoryContext();
-
+import '@/Components/Companies/Companies.css'
+import {useRouter} from 'next/navigation'
+const Companies = ({children}) => { 
+  const {jobCategories} = useCategoryContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
 
-  const handleCategoryChange = useCallback(
-    (event) => {
-
-      setSelectedCategory(event);
-      getCompanies(event);
-
-    },
-    [setSelectedCategory]
-    );
-
+ 
   return (
     <div className="companies">
       <div className="section-header companies-header">
         <h2>Browse For Companies</h2>
-        <p>Lorem aliasg elit. Saepe, alias. Atqudolor?</p>
+        <p>Find your dream company</p>
       </div>
       <div className="companies-content container">
         <div className="companies-tabs">
-        <CategoryList props={{handleCategoryChange, selectedCategory, categories: jobCategories}} />
-        <CompanyListView props={{companies}} />
-
-
+        <CategoryList props={{selectedCategory, categories: jobCategories}} />
+        {children}
         </div>
       </div>
     </div>

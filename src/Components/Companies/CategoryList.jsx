@@ -1,45 +1,63 @@
+"use client";
 import React from 'react'
-
+import {useRouter,useParams} from 'next/navigation'
+ 
 function CategoryList({props}) {
-    const {categories,handleCategoryChange, selectedCategory} = props;
+    const {categories, selectedCategory} = props;
+    const router = useRouter();
+
+    const { category } = useParams();
+    const categorySlug = category;
+ 
   return (
     <div className="companies-tablist">
     <div
+     style={{textDecoration :'none' , marginTop : '10px'}}
+ 
+    onClick={()=>{
+      router.push('/companies/categories/all-industries');
+    }}
       key={"all"}
-      onClick={() => handleCategoryChange("all")}
       className={`${
         selectedCategory == "all"
           ? "company-category-selected"
           : "company-tab"
       }`}
     >
-      All Industries
+      All Industries 
     </div>
     {categories.map((category) => {
       return (
         <div
           key={category.category_name}
-          onClick={() => handleCategoryChange(category.id)}
+          onClick={()=>{
+            router.push('/companies/categories/'+category.category_slug);
+          }}
           className={`${
-            selectedCategory == category.id
+            categorySlug ==category.category_slug
               ? "company-category-selected"
               : "company-tab"
           }`}
         >
-          {category.category_name}
+          
+          {category.category_name}  ({category.jobCount})
         </div>
       );
     })}
     <div
       key={"others"}
-      onClick={() => handleCategoryChange("others")}
+      href='/companies/categories/others'
+      
+      onClick={()=>{
+        router.push('/companies/categories/others');
+      }}
       className={`${
         selectedCategory == "others"
           ? "company-category-selected"
           : "company-tab"
       }`}
     >
-      Other
+        Others 
     </div>
   </div>
   )

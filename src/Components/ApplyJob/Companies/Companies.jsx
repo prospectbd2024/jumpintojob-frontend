@@ -25,7 +25,7 @@ const Companies = () => {
     <div className="companies">
       <div className="section-header companies-header">
         <h2>Browse For Companies</h2>
-        <p>Lorem aliasg elit. Saepe, alias. Atqudolor?</p>
+        <p>Find your dream company</p>
       </div>
       <div className="companies-content container">
         <div className="companies-tabs">

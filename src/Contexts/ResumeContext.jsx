@@ -27,7 +27,7 @@ function ResumeContext({ children }) {
   const [htmlTemplate,setHtmlTemplate] = useState("")
   const [currentStep, setCurrentStep] = useState(1);
   const [resumeTemplates, setResumeTemplates] = useState([]);
-  const [template, setTemplate] = useState({ id: 1 });
+
   const {userData} = useUserContext();
   //template settings
   const templateSettings = {
@@ -41,7 +41,7 @@ function ResumeContext({ children }) {
     slidesToScroll: 2
   };
 
-
+  const { saveProfile } = useUserProfileContext();
   const fetchResumeTemplates = async () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates`);
@@ -58,6 +58,7 @@ function ResumeContext({ children }) {
     fetchResumeTemplates();
   }, []); // Empty dependency array means this effect runs once after the initial render
   const saveCV = async () => {
+    saveProfile()
     try {
       let bearerToken = userData.data.access_token;
       const response = await fetch(
@@ -104,7 +105,6 @@ function ResumeContext({ children }) {
       setExperiences,
       languages, setLanguages,
       skills, setSkills,
-      template, setTemplate,
       personalInformation, SetPersonalInformation,
       hobbies, setHobbies,
       userProfileData, setUserProfileData,

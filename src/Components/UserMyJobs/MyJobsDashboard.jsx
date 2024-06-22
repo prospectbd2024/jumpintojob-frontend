@@ -135,14 +135,14 @@ const MyJobsDashboard = () => {
                                 <li className='whatsapp-social'><Link href={""}><FaWhatsappSquare /> /kazisolah114</Link></li>
                             </ul>
                         </div>
-                        <div className="dashboard-resume">
+                        {/* <div className="dashboard-resume">
                             <img src="https://img.freepik.com/free-vector/landing-page-concept-new-message_52683-25720.jpg?w=996&t=st=1695997740~exp=1695998340~hmac=02f0a9d4d08173205c030adafb433a61738cf32c478a6b7036560d5e226f605d" alt="" />
                             <h3>Start your career with top companies</h3>
                             <p>Looking for a job? Increase the  chance of
                                 getting hired with subscribing to our email
                                 service.</p>
                             <button>Subscribe</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

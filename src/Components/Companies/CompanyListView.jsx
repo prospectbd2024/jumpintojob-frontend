@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from "next/link";
+import CompanyCoverImage from './CompanyCoverImage';
 function CompanyListView({props}) {
    const {companies}= props;
     return (
@@ -8,7 +9,7 @@ function CompanyListView({props}) {
       return <div key={company.name} className="company-item">
          <div className="company-item-content">
         <div className="company-item-content-banner">
-          <img src={company.cover_image} alt="" />
+        <CompanyCoverImage company={company}/>
         </div>
         <div className="company-item-content-main">
           <div className="main-items">

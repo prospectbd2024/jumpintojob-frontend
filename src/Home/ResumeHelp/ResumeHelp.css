@@ -27,7 +27,7 @@
     margin-bottom: 25px;
 }
 .resume-help-contents .resume-help-text-item a{}
-.resume-help-contents .resume-help-text-item a button {
+.resume-help-contents .resume-help-text-item a {
     background: #2ECC71;
     border: none;
     width: 180px;
@@ -38,7 +38,9 @@
     cursor: pointer;
     color: #fff;
     transition: .3s;
+    text-decoration:  none;
+    padding: 10px;
 }
-.resume-help-contents .resume-help-text-item a button:hover{
+.resume-help-contents .resume-help-text-item a:hover{
     background-color: #28b161;
 }
