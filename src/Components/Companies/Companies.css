@@ -50,6 +50,7 @@
     padding: 15px 15px 0 15px;
     border-radius: 10px;
     margin-bottom: 15px;
+    height: fit-content;
  
 }
 .company-item .company-item-content {}

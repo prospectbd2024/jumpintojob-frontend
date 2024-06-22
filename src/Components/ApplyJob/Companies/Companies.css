@@ -46,12 +46,14 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px 20px;
+
 }
 .company-item {
     border: 1px solid #80808057;
     padding: 15px 15px 0 15px;
     border-radius: 10px;
-    max-height: 100px;
+    height: fit-content;
+
 }
 .company-item .company-item-content{}
 .company-item .company-item-content .company-item-content-banner{}

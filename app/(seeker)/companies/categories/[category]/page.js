@@ -18,7 +18,7 @@ function Page() {
           .then((res) => res.json())
           .then((data) => {
             setCompanies(data.data);
-            console.log(data.data);
+            console.log(data.data??[]);
           });
       },[])
 
@@ -27,8 +27,9 @@ function Page() {
         fetchCompanes(category)
     },[category]);
 
-
-    return (companies.length >0?
+      
+ 
+    return (companies?.length >0?
         <CompanyListView props={{companies}} />
         :<>No {category } jobs found</>
     );

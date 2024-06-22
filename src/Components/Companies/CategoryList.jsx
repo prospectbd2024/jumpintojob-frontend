@@ -8,7 +8,7 @@ function CategoryList({props}) {
 
     const { category } = useParams();
     const categorySlug = category;
-    console.log(categorySlug);
+ 
   return (
     <div className="companies-tablist">
     <div
@@ -25,7 +25,6 @@ function CategoryList({props}) {
       }`}
     >
       All Industries 
-     
     </div>
     {categories.map((category) => {
       return (
@@ -40,7 +39,8 @@ function CategoryList({props}) {
               : "company-tab"
           }`}
         >
-          {category.category_name} ({category.jobCount})
+          
+          {category.category_name}  ({category.jobCount})
         </div>
       );
     })}

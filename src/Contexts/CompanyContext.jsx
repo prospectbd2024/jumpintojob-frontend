@@ -20,8 +20,8 @@ function CompanyContext({children}) {
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`)
         .then((res) => res.json())
         .then((data) => {
-          setCompanies(data.data);
-          console.log(data.data);
+          setCompanies(data.data??[]);
+           
         });
     },[])
 
