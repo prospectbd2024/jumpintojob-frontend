@@ -5,17 +5,17 @@ import 'bear-react-carousel/dist/index.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useResumeContext } from '@/Contexts/ResumeContext';
+import { useResumeContext } from '@/Contexts/ResumeContext'; 
+import  { useUserProfileContext } from '@/Contexts/UserProfileContext';
 
 
 const ResumeTemplates = ({ }) => {
-    const { currentStep, setCurrentStep,template , setTemplate,templateSettings,resumeTemplates,fetchResumeTemplates } = useResumeContext();
-    
+    const { currentStep, setCurrentStep,templateSettings,resumeTemplates,fetchResumeTemplates } = useResumeContext();
+    const {template , setTemplate} = useUserProfileContext();
     useEffect(() => {
         fetchResumeTemplates();
     }, [])
-    
-
+ 
 
 
     return (<>
@@ -34,7 +34,7 @@ const ResumeTemplates = ({ }) => {
                         setTemplate(tmp)
                         
                         }>
-                        <img src={tmp.image} alt=""  className={`${template.id === tmp.id ? 'selected-template' : ''}`} />
+                        <img src={tmp.image} alt=""  className={`${template?.id === tmp.id ? 'selected-template' : ''}`} />
                         <p>{tmp.name} {tmp.type}</p>
                     </div>)}
                     </Slider>

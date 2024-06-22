@@ -67,6 +67,7 @@ function UserProfileContext({ children }) {
             setHobbies(response.data.data.payload.hobbies);
             manageMore(response.data.data.payload.others)
             setAvailability(response.data.data.payload.availability)
+            setTemplate(response.data.data.payload.template)
 
           }catch(e){
             console.log(e);
@@ -91,9 +92,10 @@ function UserProfileContext({ children }) {
     const [userProfileData, setUserProfileData] = useState({ status: 'in-progress' });
     const [avatar, setAvatar] = useState(null);
     const [selectedAvatar, selectAvatar] = useState(null);
-
+    const [template, setTemplate] = useState({ id: 1 });
     const saveProfile = useCallback(
-        async () => {
+      async () => {
+    
  
           try {
             const response = await axios.post(
@@ -170,7 +172,9 @@ function UserProfileContext({ children }) {
       setUserProfileData(prev => ({ ...prev,  availability : availability }))
   },[availability])
 
-
+  useEffect(()=>{
+    setUserProfileData(prev => ({ ...prev,  template : template }))
+},[template])
     return (
         <userProfileContext.Provider value={{
            personalInformation, SetPersonalInformation, 
@@ -189,7 +193,8 @@ function UserProfileContext({ children }) {
             userProfileData, setUserProfileData,
             avatar, setAvatar,
             selectedAvatar, selectAvatar,
-            saveProfile
+            saveProfile,
+            template , setTemplate
         }}>
             {children}
         </userProfileContext.Provider>
