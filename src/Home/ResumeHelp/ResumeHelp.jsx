@@ -25,7 +25,7 @@ const ResumeHelp = () => {
                     <div className="resume-help-text-item">
                         <h2>Don't have a resume yet? Create one to make it stand out to employers</h2>
                         <p>A good proffessional resume helps you to catch the attention of any requireters</p>
-                        <a><button>Build Resume</button></a>
+                        <a><Link href='/resumebuilder'>Build Resume</Link></a>
                     </div>
                     <div className="resume-help-image-item">
                         <img src="https://img.freepik.com/free-vector/business-meeting-brainstorming-men-women-sitting-standing-negotiating-presentation-discussion_575670-246.jpg?w=996&t=st=1693574151~exp=1693574751~hmac=9052844e13684754e17d31826917e85bba7a0a44ccf03b276373e9f3f05b168b" alt=""  suppressHydrationWarning={true} />

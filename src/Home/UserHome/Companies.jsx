@@ -10,9 +10,8 @@ function Companies({props}) {
     {companies.length > 0 ?
         <div className='user-home-company'>
             {
-                companies.slice(0, 3).map((company, index) =>  <CompanyCard props={{company , index}} />)
-
-               
+                companies.slice(0, 3).map((company, index) =>  <CompanyCard key={index} props={{company , index}} />)
+    
             }
         </div>
         :

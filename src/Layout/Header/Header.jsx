@@ -167,7 +167,7 @@ const Header = () => {
                                 </div>
                                 :
                                 <div>
-                                    <Link href="signin" className='mobile-login-btn'><button><HiOutlineUser /> Sign in</button></Link>
+                                    <Link href="/signin" className='mobile-login-btn'><button><HiOutlineUser /> Sign in</button></Link>
                                 </div>
                             }
                             <div className='menu-close-open'>
@@ -233,12 +233,12 @@ const Header = () => {
                                     userLoggedout?.result ?
                                         <ul>
                                             <li><Link href="/register" className='register-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUserAdd />Register</Link></li>
-                                            <li><Link href="signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li>
+                                            <li><Link href="/signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li>
                                         </ul>
                                         :
                                         <ul>
                                             <li><Link href="/register" className='register-btn'><HiOutlineUserAdd />Register</Link></li>
-                                            <li><Link href="signin" className='login-btn'><HiOutlineUser />Sign In</Link></li>
+                                            <li><Link href="/signin" className='login-btn'><HiOutlineUser />Sign In</Link></li>
                                         </ul>
                             }
                         </div>
@@ -292,12 +292,12 @@ const Header = () => {
                                 userLoggedout?.result ?
                                     <ul>
                                         <li><Link href="/register" className='register-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUserAdd />Register</Link></li>
-                                        <li><Link href="signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li>
+                                        <li><Link href="/signin" className='login-btn' onClick={() => setMobileMenuClicked(false)}><HiOutlineUser />Sign In</Link></li>
                                     </ul>
                                     :
                                     <ul>
                                         <li><Link href="/register" className='register-btn'><HiOutlineUserAdd />Register</Link></li>
-                                        <li><Link href="signin" className='login-btn'><HiOutlineUser />Sign In</Link></li>
+                                        <li><Link href="/signin" className='login-btn'><HiOutlineUser />Sign In</Link></li>
                                     </ul>
                         }
                     </div>

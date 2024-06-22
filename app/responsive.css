@@ -127,6 +127,7 @@
     .companies-content .companies-tabs .companies-tablist {
         position: unset !important;
         height: 150px !important;
+        padding: 20px 0 20px 0;
     }
 
     .companies-content .companies-tabs .companies-tablist li {

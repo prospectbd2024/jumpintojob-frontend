@@ -1,13 +1,15 @@
 import React from "react";
 import Link from 'next/link'
 import './CompanyCard.css';
+import CompanyCoverImage from "./CompanyCoverImage";
 function CompanyCard({props}) {
     const {index, company} = props;
   return (
     <div key={index} className="company-item">
       <div className="company-item-content">
         <div className="company-item-content-banner">
-          <img src={company.conver_image} alt="" />
+        <CompanyCoverImage company={company}/>
+        
         </div>
         <div className="company-item-content-main">
           <div className="main-items">
@@ -27,7 +29,8 @@ function CompanyCard({props}) {
             <p className="company_description">{company.description?.slice(0, 90)}...</p>
           </div>
           <div className="company-item-content-footer">
-            <Link href={`/companies/${company.slug}`}>
+           
+            <Link href={`/companies/${company.links.show}`}>
               <button className="company-button company-details-button">View Details</button>
             </Link>
             <Link href="">

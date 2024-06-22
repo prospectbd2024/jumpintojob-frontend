@@ -1,9 +1,12 @@
+"use client"
 import React from 'react'
-import Companies from '@/Components/Companies/Companies'
+import { useCompanyContext } from '@/Contexts/CompanyContext';
+import CompanyListView from '@/Components/Companies/CompanyListView';
 
 function page() {
+  const {companies} = useCompanyContext();
   return (
-    <Companies/>
+    <CompanyListView props={{companies}} />
   )
 }
 

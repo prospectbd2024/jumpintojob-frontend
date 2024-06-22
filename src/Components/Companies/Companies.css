@@ -11,7 +11,7 @@
 }
 .companies-content .companies-tabs .companies-tablist {
     background: #fff;
-    padding: 0;
+    padding: 20px 0 20px 0;
     border-radius: 10px;
     box-shadow: 11px 10px 40px #34343417;
     height: 90vh;
@@ -50,6 +50,7 @@
     padding: 15px 15px 0 15px;
     border-radius: 10px;
     margin-bottom: 15px;
+ 
 }
 .company-item .company-item-content {}
 .company-item .company-item-content .company-item-content-banner {}
