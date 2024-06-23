@@ -11,10 +11,11 @@ import ResumePreview from "@/ResumeBuilder/ResumeComponents/ResumeTemplates/Resu
 import { useApplicationContext } from "@/Contexts/ApplicationContext";
 import Availability from "../UserProfile/Availability";
 import MessageBox from "../warnings/Message";
+import { useUserContext } from "@/Contexts/UserContext";
 const ApplyJob = ({ job }) => {
   const { personalInformation, userProfileData } = useUserProfileContext();
   const [CV, setCV] = useState(false);
-
+  const {userData} = useUserContext();
   const { apply, message, setMessage, forwardingLetter, setForwardingLetter ,isApplied} = useApplicationContext();
 
   const [phone, setPhone] = useState("");
@@ -22,7 +23,30 @@ const ApplyJob = ({ job }) => {
     setForwardingLetter({type : e , value: null})
      
   };
+  const handleClick = () => {
+    if (userData) {
+  
+        CV && apply(job, CV)
+        
+        
+    } else {
+        Swal.fire({
+            title: 'User must login before applying!',
+            text: "Do you want to login?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/signin");
+            }
+        })
+    }
 
+}
+ 
   const handleTextChange =(e)=>{
      
       setForwardingLetter({type : 'text' ,value : e.target.value})
@@ -43,11 +67,11 @@ const ApplyJob = ({ job }) => {
       <div className="job-application-form-content container">
         <div className="job-application-header">
           <div>
-            <img src={job.image} alt="" />
+            <img src={job?.image} alt="" />
           </div>
           <div>
-            <h5>{job.job_title}</h5>
-            <p>{job.address}</p>
+            <h5>{job?.job_title}</h5>
+            <p>{job?.address}</p>
           </div>
         </div>
         <MessageBox message={message.message} type={message.type} />
@@ -63,15 +87,15 @@ const ApplyJob = ({ job }) => {
               <h4>Review your contact information</h4>
               <div className="application-input">
                 <label htmlFor="first_name">First Name</label>
-                <input type="text" placeholder="First Name" id="first_name" disabled value={personalInformation.firstName} />
+                <input type="text" placeholder="First Name" id="first_name" disabled value={personalInformation?.firstName} />
               </div>
               <div className="application-input">
                 <label htmlFor="last_name">Last Name</label>
-                <input type="text" placeholder="Last Name" id="last_name" disabled value={personalInformation.lastName} />
+                <input type="text" placeholder="Last Name" id="last_name" disabled value={personalInformation?.lastName} />
               </div>
               <div className="application-input">
                 <label htmlFor="email">Email</label>
-                <input type="email" placeholder="Email" id="email" disabled value={personalInformation.email} />
+                <input type="email" placeholder="Email" id="email" disabled value={personalInformation?.email} />
               </div>
               <div className="application-input">
                 <label htmlFor="citystate">
@@ -92,7 +116,7 @@ const ApplyJob = ({ job }) => {
                 <label htmlFor="country">
                   Country <span> </span>
                 </label>
-                <input type="text" placeholder="Country" id="country" disabled value={personalInformation.currentAddress.country} />
+                <input type="text" placeholder="Country" id="country" disabled value={personalInformation?.currentAddress?.country} />
               </div>
               <div className="phone">
                 <label htmlFor="phone">Phone</label>
@@ -161,7 +185,7 @@ const ApplyJob = ({ job }) => {
             <Availability />
 
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <button className={` ${!CV ? "apply-restriction" : "apply-job-button"}`} type="button" onClick={() => CV && apply(job, CV)}>
+              <button className={` ${!CV ? "apply-restriction" : "apply-job-button"}`} type="button" onClick={handleClick} >
                 Apply
               </button>
             </div>

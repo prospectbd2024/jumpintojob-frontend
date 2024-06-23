@@ -4,19 +4,30 @@ import "./CompanyCard.css";
 import CompanyCoverImage from "./CompanyCoverImage";
 import { useUserContext } from "@/Contexts/UserContext";
 import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2';
 function CompanyCard({ props }) {
   const { index, company } = props;
   const router = useRouter();
   const { userData } = useUserContext();
   const handleClick = (link) => {
     if (userData) {
-      router.push(link);
-    }
-    else{
-      router.push("/signin");
+      router.push(link)
+    } else {
+      Swal.fire({
+        title: "You must login first!",
+        text: "Do you want to login?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/signin");
+        }
+      });
     }
   };
-
   return (
     <div key={company.name} className="company-item">
       <div className="company-item-content">

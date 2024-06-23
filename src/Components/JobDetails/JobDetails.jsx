@@ -3,11 +3,13 @@ import { useApplicationContext } from '@/Contexts/ApplicationContext';
 import { useUserContext } from '@/Contexts/UserContext';
 import Link from 'next/link';
 import { FaUpRightFromSquare } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 import Swal from 'sweetalert2';
 
 
 const JobDetails = ({props}) => {
     const {userData}  = useUserContext();
+    const loginNavigate = useRouter();
     const {job} = props;
     const {isApplied} = useApplicationContext();
     const handleApplyJob = () => {
