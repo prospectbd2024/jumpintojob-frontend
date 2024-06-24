@@ -3,8 +3,7 @@ import React, { useEffect } from "react";
 import JobDetails from "@/Components/JobDetails/JobDetails";
 
 import { useParams } from "next/navigation";
-import { useJobContext } from "@/Contexts/JobContext";
-import JobDetailsSkeleton from "@/Skeletons/JobDetails";
+import { useJobContext } from "@/Contexts/JobContext"; 
 
 function Page() {
   const { getJob, selectedJob, setClickedJob } = useJobContext();

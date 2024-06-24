@@ -1,0 +1,79 @@
+.user-home-profile {
+    margin-bottom: 50px;
+  }
+  
+  .user-home-profile h4 {
+    margin-bottom: 15px;
+    color: var(--darker-secondary-color);
+    font-size: 18px;
+    font-weight: 400;
+  }
+  
+  .user-home-profile .user-home-profile-content {
+    margin-bottom: 15px;
+  }
+  
+  .user-home-profile .home-profile {
+    border: 1px solid #80808057;
+    border-radius: 10px;
+    padding: 20px 0;
+  }
+  
+  .user-home-profile .user-profile-main {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #80808057;
+  }
+  
+  .user-home-profile .user-profile-main img {
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    margin-bottom: 8px;
+  }
+  
+  .user-home-profile .user-profile-main h3 {
+    font-size: 15px;
+  }
+  
+  .user-home-profile .user-profile-main p {
+    color: var(--darker-secondary-color);
+    margin-top: 5px;
+  }
+  
+  .user-home-profile .user-profile-main .user-address {
+    color: var(--darker-secondary-color);
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .user-home-profile .user-profile-main .user-address svg {
+    color: #ff7800;
+    margin-right: 6px;
+  }
+  
+  .user-home-profile .user-profile-info {
+    padding: 20px 25px;
+  }
+  
+  .user-home-profile .profile-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .user-home-profile .profile-info svg {
+    font-size: 30px;
+  }
+  
+  .user-home-profile .profile-info div p {
+    font-size: 15px;
+    color: var(--darker-secondary-color);
+    margin-bottom: 4px;
+  }
+  
+  .user-home-profile .profile-info div h6 {
+    font-size: 14px;
+  }
+  
