@@ -5,7 +5,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const ApplyButtonSectionSkeleton = () => (
   <div style={{ display: "flex", justifyContent: "flex-end" }}>
-    <Skeleton width={150} height={40} />
+    <Skeleton width={200} height={40} />
   </div>
 );
 

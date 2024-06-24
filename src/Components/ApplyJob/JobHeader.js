@@ -1,7 +1,10 @@
 // JobHeader.jsx
+import JobHeaderSkeleton from "@/Skeletons/JobHeaderSkeleton";
 import React from "react";
 
-const JobHeader = ({ job }) => (
+const JobHeader = ({ job,loading }) => (job&& Object.keys(job).length===0)?
+<JobHeaderSkeleton />
+:(
   <div className="job-application-header">
     <div>
       <img src={job?.image} alt="" />

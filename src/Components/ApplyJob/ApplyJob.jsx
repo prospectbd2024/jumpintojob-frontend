@@ -70,13 +70,13 @@ const ApplyJob = ({ job }) => {
   return (
     <div className="job-application-form">
       <div className="job-application-form-content container">
-        <JobHeader job={job} />
+        <JobHeader job={job} loading={loading} />
         <MessageBox message={message.message} type={message.type} />
         <div className="job-application-main">
           <CreateCvWarning CV={CV} />
           <form>
             <ContactInformation personalInformation={personalInformation} phone={phone} />
-            <ResumeSection loading={loading} setCV={setCV} />
+            <ResumeSection loading={loading} setCV={setCV} CV={CV} />
             <CoverLetterSection
               forwardingLetter={forwardingLetter}
               handleFileChange={handleFileChange}

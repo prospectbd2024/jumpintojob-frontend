@@ -1,70 +1,54 @@
-// CoverLetterSection.jsx
+// CoverLetterSection.js
 import React from "react";
 import { FaFileUpload } from "react-icons/fa";
-import CoverLetterSectionSkeleton from "@/Skeletons/CoverLetterSectionSkeleton";
+import './CoverLetterSection.css';
 
-const CoverLetterSection = ({
-  forwardingLetter,
-  handleFileChange,
-  handleTextChange,
-  handleCoverLetter,
-  loading,
-}) => (
-  <div className="upload-coverletter upload-resume">
-    {loading ? (
-      <CoverLetterSectionSkeleton />
-    ) : (
-      <div>
-        <div className="cover-letter-options">
-          <div className="cover-letter-radio">
-            <input
-              type="radio"
-              id="text-letter"
-              name="text"
-              defaultChecked
-              onClick={() => handleCoverLetter("text")}
-            />
-            <label htmlFor="text-letter">Text</label>
-          </div>
-          <div className="cover-letter-radio">
-            <input
-              type="radio"
-              id="upload-letter"
-              name="text"
-              onClick={() => handleCoverLetter("file")}
-            />
-            <label htmlFor="upload-letter">Upload</label>
-          </div>
+const CoverLetterSection = ({ forwardingLetter, handleCoverLetter, handleTextChange, handleFileChange }) => (
+  <div className="upload-coverletter">
+    <div className="cover-letter-options">
+      <label className="cover-letter-radio">
+        <input 
+          type="radio" 
+          name="coverLetterType" 
+          value="text" 
+          checked={forwardingLetter.type === "text"} 
+          onChange={() => handleCoverLetter("text")} 
+        />
+        Text
+      </label>
+      <label className="cover-letter-radio">
+        <input 
+          type="radio" 
+          name="coverLetterType" 
+          value="file" 
+          checked={forwardingLetter.type === "file"} 
+          onChange={() => handleCoverLetter("file")} 
+        />
+        Upload
+      </label>
+    </div>
+    {forwardingLetter.type === "file" ? (
+      <div className="upload-input-container">
+        <div className="file-upload-wrapper">
+          {forwardingLetter?.value?.name ? (
+            <div className="file-name">{forwardingLetter.value.name}</div>
+          ) : (
+            <FaFileUpload className="file-upload-icon" />
+          )}
+          <p className="file-upload-hint">Use files like pdf, doc, docx, rtf or text</p>
+          <label className="file-upload-button">
+            Upload Forwarding Letter
+            <input type="file" className="file-input" onChange={handleFileChange} accept=".pdf,.doc,.docx,.rtf,.txt" />
+          </label>
         </div>
-        {forwardingLetter.type !== "text" ? (
-          <div className="upload-input-container">
-            <div>
-              {!forwardingLetter?.value?.name ? (
-                <FaFileUpload className="file-upload" />
-              ) : (
-                <div>{forwardingLetter?.value?.name}</div>
-              )}
-
-              <p>Use files like pdf, doc, docx, rtf or text</p>
-              <button type="button" className="file-upload-button">
-                Upload Forwarding Letter
-              </button>
-            </div>
-
-            <input type="file" className="file" onChange={handleFileChange} />
-          </div>
-        ) : (
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="Type forwarding letter"
-            value={forwardingLetter.value ?? ""}
-            onChange={handleTextChange}
-          ></textarea>
-        )}
       </div>
+    ) : (
+      <textarea
+        placeholder="Type your forwarding letter here..."
+        value={forwardingLetter.value || ""}
+        onChange={handleTextChange}
+        className="cover-letter-textarea"
+      ></textarea>
     )}
   </div>
 );

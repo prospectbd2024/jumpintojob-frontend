@@ -9,7 +9,7 @@ const ContactInformationSkeleton = () => (
     {[...Array(6)].map((_, i) => (
       <div className="application-input" key={i}>
         <Skeleton width={100} height={20} />
-        <Skeleton width={300} height={40} />
+        <Skeleton width={'100%'} height={40} />
       </div>
     ))}
   </div>

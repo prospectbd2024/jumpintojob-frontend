@@ -13,7 +13,7 @@ const ApplyJobSkeleton = () => (
       <JobHeaderSkeleton />
       <div className="job-application-main">
         <div className="create-cv-warning">
-          <Skeleton width={300} height={20} />
+          <Skeleton width={'300px'} height={20} />
         </div>
         <form>
           <ContactInformationSkeleton />
