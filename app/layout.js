@@ -8,7 +8,6 @@ import "@/Components/Login/Login.css";
 import "@/Components/Register/Register.css";
 import "@/Home/UserHome/UserHome.css";
 import "@/Components/UserProfile/UserProfile.css";
-import "@/Components/JobDetails/JobDetails.css";
 import "@/Components/JobCategory/JobCategory.css";
 import "@/Components/UserMyJobs/UserMyJobs.css";
 import "@/EmployersComponents/ForEmployersHome/ForEmployersJobBanner/ForEmployersJobBanner.css";

@@ -1,0 +1,77 @@
+/* src/Components/SkeletonLoader/SkeletonLoader.css */
+
+.skeleton-job {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #f4f4f4;
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton-header,
+.skeleton-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skeleton-title,
+.skeleton-company,
+.skeleton-address,
+.skeleton-description,
+.skeleton-salary,
+.skeleton-date {
+  background-color: #ccc;
+  border-radius: 4px;
+  animation: flicker 1.5s infinite;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 24px;
+  margin-bottom: 8px;
+}
+
+.skeleton-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #ccc;
+}
+
+.skeleton-company {
+  width: 50%;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.skeleton-address {
+  width: 60%;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.skeleton-description {
+  width: 90%;
+  height: 40px;
+  margin-bottom: 16px;
+}
+
+.skeleton-salary {
+  width: 40%;
+  height: 20px;
+}
+
+.skeleton-date {
+  width: 20%;
+  height: 20px;
+}

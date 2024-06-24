@@ -66,7 +66,7 @@ function Page() {
 
                     </div>
                     <div>
-                    {job && <JobDetails props={{job: job}} />} 
+                    { <JobDetails props={{job: job}} />} 
                     </div>
 
                 </div>

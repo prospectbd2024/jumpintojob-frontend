@@ -5,8 +5,17 @@
 .featured-jobs-items {
     width: 100%!important;
     display: grid!important;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px!important;
+}
+.featured-jobs-items  .featured-jobs-header{
+     grid-column: span 2;
+     margin-bottom: 15px;
+     color: var(--darker-secondary-color);
+     font-size: 18px;
+     font-weight: 400;
+     height: fit-content;
+     margin-bottom: 0; /* Remove bottom margin for the first item */
 }
 .featured-jobs-show-more-btn {
     text-align: center;

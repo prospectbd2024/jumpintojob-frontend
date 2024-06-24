@@ -1,0 +1,90 @@
+.job-details-skeleton {
+    /* Add any additional styles for the outer container if needed */
+  }
+  
+  .job-details-content-skeleton {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f4f4f4;
+  }
+  
+  .job-details-header-skeleton,
+  .job-details-main-skeleton {
+    margin-bottom: 16px;
+  }
+  
+  .job-details-header-skeleton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     
+  }
+  
+  .job-details-header-company-skeleton {
+    display: flex;
+    align-items: center;
+  }
+  
+  .skeleton-image-skeleton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 16px;
+  }
+  
+  .skeleton-company-skeleton {
+    width: 150px;
+    height: 20px;
+    background-color: #ccc;
+  }
+  
+  .job-details-header-job-skeleton {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+  }
+  
+  .skeleton-title-skeleton {
+    width: 200px;
+    height: 24px;
+    background-color: #ccc;
+    margin-bottom: 8px;
+  }
+  
+  .skeleton-location-skeleton {
+    width: 100px;
+    height: 16px;
+    background-color: #ccc;
+  }
+  
+  .skeleton-button-skeleton {
+    width: 100px;
+    height: 40px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  .skeleton-info-skeleton {
+    width: 100%;
+    height: 30px;
+    background-color: #ccc;
+    margin-bottom: 8px;
+  }
+  
+  .skeleton-info-skeleton:nth-child(1) {
+    height: 100px; 
+  }
+  .skeleton-info-skeleton:nth-child(6) {
+    height: 100px; 
+  }
+  .skeleton-info-skeleton:nth-child(7) {
+    height:250px; 
+  }
+  .skeleton-info-skeleton:last-child {
+    margin-bottom: 0;
+  }
+  

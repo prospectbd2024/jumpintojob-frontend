@@ -1,32 +1,45 @@
-"use client"
-import Link from 'next/link';
-import React from 'react'
-import { HiOutlineBookmark } from 'react-icons/hi'
+import React, { useState, useEffect } from "react";
+import SkeletonLoader from "../../Skeletons/SkeletonLoader"; // Import the SkeletonLoader component
+import SingleJob from "./SingleJob";
 
-function JobListView({props}) {
-    const {filteredJobs,clickedJob,handleClickedJob }=props;
+const JobListView = ({ props }) => {
+  const { filteredJobs, clickedJob, handleClickedJob } = props;
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading
+
+  // Simulate data fetching
+  useEffect(() => {
+    // Assuming filteredJobs is initially empty and gets updated later
+
+    if(filteredJobs && filteredJobs.length>0){
+      setIsLoading(false)
+    }
+    else{
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+    }
+  }, [filteredJobs]);
+
   return (
     <div className="all-jobs-container">
-    {
-        
-        filteredJobs.map((job,index) =>
-            <div className={`single-job ${clickedJob===job.id?'clicked-job': ''}`} key={index} href={""}  onClick={() => {handleClickedJob(job.id);}} >
-                <div className="single-job-header">
-                    <h2>{job.job_title}</h2>
-                    <HiOutlineBookmark/>
-                </div>
-                <h3>{job.company_name}</h3>
-                <p>{job.address}</p>
-                <p>{job.description.slice(0, 100)}...</p>
-                <div className="single-job-bottom" >
-                    <p className='single-job-salary'>{job.salary} <span>(Estimated)</span></p>
-                    <p className='posting-date'>22d</p>
-                </div>
-            </div>
-        )
-    }
-</div>
-  )
-}
+      {isLoading ? (
+        // Display multiple skeleton loaders while loading
+        <>
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+        </>
+      ) : filteredJobs && filteredJobs.length > 0 ? (
+        // Render the list of jobs if filteredJobs has items
+        filteredJobs.map((job, index) => (
+          <SingleJob key={index} job={job} clickedJob={clickedJob} handleClickedJob={handleClickedJob} />
+        ))
+      ) : (
+        // Render a message when filteredJobs is empty
+        <p>No jobs available</p>
+      )}
+    </div>
+  );
+};
 
-export default JobListView
+export default JobListView;

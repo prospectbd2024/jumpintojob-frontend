@@ -8,11 +8,6 @@ function Page() {
     const { allJobs } = useJobContext();
     const { id } = useParams();
     const job = allJobs?.find(job => job.id == id);
-
-    if (!job) {
-        return <div>Job not found</div>
-    }
-
     return <ApplyJob job={job} />
 }
 

@@ -1,0 +1,45 @@
+.job-skeleton {
+    padding: 16px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+  
+  .job-skeleton-header {
+    height: 24px;
+    width: 80%;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+  }
+  
+  .job-skeleton-company {
+    height: 16px;
+    width: 50%;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+  }
+  
+  .job-skeleton-description {
+    height: 60px;
+    width: 100%;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+  }
+  
+  .job-skeleton-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .job-skeleton-salary {
+    height: 16px;
+    width: 30%;
+    background-color: #e0e0e0;
+  }
+  
+  .job-skeleton-date {
+    height: 16px;
+    width: 20%;
+    background-color: #e0e0e0;
+  }
+  
