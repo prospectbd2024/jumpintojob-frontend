@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CompanyDetails.css";
 import CompanyCoverImage from "./CompanyCoverImage";
+import LoadingSpinner from "./LoadingSpinner";
+import SkeletonPlaceholder from "./SkeletonPlaceholder";
+
 function CompanyDetails({ company }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if( Object.keys(company).length !==0){
+      setIsLoading(false)
+       
+    }
+    console.log(company);
+  }, [company]);
+
+  if (isLoading) {
+    return <SkeletonPlaceholder />;
+  }
+
   return (
     <div key={company.name} className="company-item">
       <div className="company-item-content">
         <div className="company-item-cover company-cover">
-        <CompanyCoverImage company={company}/>
+          <CompanyCoverImage company={company} />
         </div>
         <div className="company-item-details">
           <div className="company-logo company-logo-container">
@@ -17,12 +34,20 @@ function CompanyDetails({ company }) {
             </div>
           </div>
           <div className="company-category">
-            <p className="company-category-text">{company.category ? company.category : ""}</p>
-            {company.size ? <p className="company-size">Company Size: {company.size}</p> : <></>}
+            <p className="company-category-text">
+              {company.category ? company.category : ""}
+            </p>
+            {company.size ? (
+              <p className="company-size">Company Size: {company.size}</p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="company-description company-description-container">
-          <p className="company-description-text">{company.description ? company.description : ""}</p>
+          <p className="company-description-text">
+            {company.description ? company.description : ""}
+          </p>
         </div>
       </div>
     </div>
