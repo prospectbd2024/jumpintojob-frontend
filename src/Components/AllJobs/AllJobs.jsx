@@ -64,9 +64,9 @@ const AllJobs = ({children}) => {
                        {jobPage.currentPage==1 && allJobs.length<10 ? "" :<Pagination jobPage={jobPage} setJobPage={setJobPage} />} 
 
                     </div>
-                    <div>
+                    <>
                      {children}
-                    </div>
+                    </>
 
                 </div>
             </div>

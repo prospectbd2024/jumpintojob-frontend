@@ -8,11 +8,11 @@ function CompanyDetails({ company }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if( Object.keys(company).length !==0){
+    // Simulate data fetching delay
+    if(company && Object.keys(company).length >0){
       setIsLoading(false)
-       
     }
-    console.log(company);
+
   }, [company]);
 
   if (isLoading) {

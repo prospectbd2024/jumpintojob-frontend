@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import "./CompanyCard.css";
 import CompanyCoverImage from "./CompanyCoverImage";
 import { useUserContext } from "@/Contexts/UserContext";
 import { useRouter } from "next/navigation";
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'; 
 function CompanyCard({ props }) {
   const { index, company } = props;
   const router = useRouter();
