@@ -9,8 +9,8 @@ import { useUserContext } from "../../Contexts/UserContext";
 import { useJobContext } from "@/Contexts/JobContext";
 import { useCompanyContext } from "@/Contexts/CompanyContext";
 import SingleJob from "@/Components/AllJobs/SingleJob";
-import JobCard from "@/Skeletons/JobCard";
 import ShowMoreJobsSkeleton from "@/Skeletons/ShowMoreJobsSkeleton";
+import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 const FeaturedJobs = () => {
   const { setClickedFeaturedJob } = useUserContext();
   const { allJobs, setAllJobs } = useJobContext();
@@ -36,12 +36,12 @@ const FeaturedJobs = () => {
             <h2>Featured jobs at Jump Into Job</h2>
           </div>
           <div className="featured-jobs-items all-jobs-container">
-            <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
           </div>
           <ShowMoreJobsSkeleton />
         </div>

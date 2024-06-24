@@ -4,25 +4,21 @@ import CompanyCardSkeleton from "@/Skeletons/CompanyCardSkeleton";
 import { useCompanyContext } from "@/Contexts/CompanyContext";
 import "./FeaturedCompanies.css";
 
-function FeaturedCompanies({ props }) {
-  const { isLoggedIn } = props;
+function FeaturedCompanies({ isLoggedIn }) {
   const { companies } = useCompanyContext();
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay (remove this in real usage)
     if (companies.length > 0) {
       setLoading(false);
     }
   }, [companies]);
 
   return (
-    <div className="user-home-companies-container" style={{marginTop : isLoggedIn? '0px' : '20px'}}>
-      {isLoggedIn ? (
-        <h4 style={{ marginBottom: "15px", color: "var(--darker-secondary-color)", fontSize: "18px", fontWeight: "400" }}>Featured Companies:</h4>
-      ) : (
-        <h4 style={{ textAlign: "center", marginBlock: " 10px" }}>Featured Companies:</h4>
-      )}
+    <div className={`user-home-companies-container ${isLoggedIn ? 'logged-in' : ''}`}>
+      <h4 className={isLoggedIn ? 'logged-in-title' : 'logged-out-title'}>
+        Featured Companies:
+      </h4>
       <div
         className="user-home-companies"
         style={{

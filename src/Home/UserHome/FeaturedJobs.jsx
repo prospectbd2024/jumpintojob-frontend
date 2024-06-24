@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SingleJob from '@/Components/AllJobs/SingleJob';
-import  JobCard from  '@/Skeletons/JobCard';
+import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 import Link from 'next/link'
 import ShowMoreButton from '@/Components/Buttons/ShowMoreJobs';
 const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
@@ -25,16 +25,16 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
           // Show skeleton loaders while loading
           <>
 
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
-             <JobCard />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
+             <JobCardSkeleton />
        
           </>
         ) : <>{

@@ -29,7 +29,7 @@ const UserHome = () => {
   return (
     <div className='user-home'>
       <div className="user-home-content container">
-        <FeaturedCompanies props={{ companies ,isLoggedIn : true}} />
+        <FeaturedCompanies isLoggedIn={true} />
         <FeaturedJobs
           allJobs={allJobs}
        
