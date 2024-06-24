@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import SkeletonLoader from "../../Skeletons/SkeletonLoader"; // Import the SkeletonLoader component
+import React, { useState, useEffect } from "react"; 
 import SingleJob from "./SingleJob";
+import SkeletonLoader from "@/Skeletons/JobListView";
 
 const JobListView = ({ props }) => {
   const { filteredJobs, clickedJob, handleClickedJob } = props;

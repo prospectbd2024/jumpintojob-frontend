@@ -1,0 +1,23 @@
+.user-home-companies-container {
+    margin-top: 20px;
+  }
+  
+  .user-home-companies-container h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .user-home-company {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .user-home-companies {
+    display: grid;
+    max-width: 1368px;
+     margin-inline: auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
