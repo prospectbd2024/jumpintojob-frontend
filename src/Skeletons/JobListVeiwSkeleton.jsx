@@ -1,9 +1,9 @@
 // src/Components/SkeletonLoader/SkeletonLoader.jsx
 
 import React from 'react';
-import './JobListView.css';
+import './JobListVeiwSkeleton.css';
 
-const SkeletonLoader = () => {
+const JobListVeiwSkeleton = () => {
   return (
     <div className="skeleton-job">
       <div className="skeleton-header">
@@ -21,4 +21,4 @@ const SkeletonLoader = () => {
   );
 };
 
-export default SkeletonLoader;
+export default JobListVeiwSkeleton;

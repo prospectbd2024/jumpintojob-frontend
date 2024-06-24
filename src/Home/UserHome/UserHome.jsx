@@ -6,8 +6,8 @@ import FeaturedJobs from './FeaturedJobs';
 import UserProfile from './UserProfile';
 import { useJobContext } from '@/Contexts/JobContext';
 import { useCompanyContext } from '@/Contexts/CompanyContext';
-import Companies from './FeaturedCompanies';
 import {useRouter} from 'next/navigation';
+import FeaturedCompanies from './FeaturedCompanies';
 const UserHome = () => {
   const { setClickedFeaturedJob, profile } = useUserContext();
   const { allJobs } = useJobContext(); // Assuming you have a JobContext
@@ -29,7 +29,7 @@ const UserHome = () => {
   return (
     <div className='user-home'>
       <div className="user-home-content container">
-        <Companies props={{ companies }} />
+        <FeaturedCompanies props={{ companies ,isLoggedIn : true}} />
         <FeaturedJobs
           allJobs={allJobs}
        

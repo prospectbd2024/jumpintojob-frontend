@@ -30,7 +30,7 @@ const Home = () => {
                 <div>
                     <Banner></Banner>
                     <FeaturedJobs></FeaturedJobs>
-                    <FeaturedCompanies />
+                    <FeaturedCompanies props={{isLoggedIn : false}} />
                     <WhyUs></WhyUs>
                 </div>
             }

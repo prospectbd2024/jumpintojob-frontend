@@ -1,5 +1,5 @@
 .user-home-companies-container {
-    margin-top: 20px;
+   
   }
   
   .user-home-companies-container h4 {
@@ -17,7 +17,7 @@
     display: grid;
     max-width: 1368px;
      margin-inline: auto;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
   }
   
