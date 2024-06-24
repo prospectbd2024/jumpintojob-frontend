@@ -1,66 +1,78 @@
-"use client";
-import React from 'react'
-import {useRouter,useParams} from 'next/navigation'
- 
-function CategoryList({props}) {
-    const {categories, selectedCategory} = props;
-    const router = useRouter();
+import React, { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+ import CategoryListSkeleton from '@/Skeletons/CategoryList';
 
-    const { category } = useParams();
-    const categorySlug = category;
- 
+function CategoryList({ props }) {
+  const { categories, selectedCategory } = props;
+  const router = useRouter();
+  const { category } = useParams();
+  const categorySlug = category;
+
+  const [loading, setLoading] = useState(true); // State to manage loading
+
+  useEffect(() => {
+    // Simulate loading delay (replace with actual data fetching logic)
+    if(categories?.length>0){
+      setLoading(false)
+    }else{
+          setTimeout(() => {
+            setLoading(false); // Set loading to false after delay
+          }, 4000); // Example delay of 2 seconds (2000 milliseconds)
+    }
+  }, [categories]);
+
+  if (loading) {
+    return <CategoryListSkeleton />; // Render skeleton loading while fetching data
+  }
+
   return (
     <div className="companies-tablist">
-    <div
-     style={{textDecoration :'none' , marginTop : '10px'}}
- 
-    onClick={()=>{
-      router.push('/companies/categories/all-industries');
-    }}
-      key={"all"}
-      className={`${
-        selectedCategory == "all"
-          ? "company-category-selected"
-          : "company-tab"
-      }`}
-    >
-      All Industries 
-    </div>
-    {categories.map((category) => {
-      return (
+      {/* Your existing category list rendering logic */}
+      {/* Example skeleton loader would be replaced with your actual category list */}
+      <div style={{ textDecoration: 'none', marginTop: '10px' }}>
+        {/* Example: Render all industries */}
         <div
-          key={category.category_name}
-          onClick={()=>{
-            router.push('/companies/categories/'+category.category_slug);
+          onClick={() => {
+            router.push('/companies/categories/all-industries');
           }}
           className={`${
-            categorySlug ==category.category_slug
-              ? "company-category-selected"
-              : "company-tab"
+            selectedCategory == 'all' ? 'company-category-selected' : 'company-tab'
           }`}
         >
-          
-          {category.category_name}  ({category.jobCount})
+          All Industries
         </div>
-      );
-    })}
-    <div
-      key={"others"}
-      href='/companies/categories/others'
-      
-      onClick={()=>{
-        router.push('/companies/categories/others');
-      }}
-      className={`${
-        selectedCategory == "others"
-          ? "company-category-selected"
-          : "company-tab"
-      }`}
-    >
-        Others 
+
+        {/* Render categories dynamically */}
+        {categories.map((category) => (
+          <div
+            key={category.category_name}
+            onClick={() => {
+              router.push('/companies/categories/' + category.category_slug);
+            }}
+            className={`${
+              categorySlug == category.category_slug
+                ? 'company-category-selected'
+                : 'company-tab'
+            }`}
+          >
+            {category.category_name} ({category.jobCount})
+          </div>
+        ))}
+
+        {/* Example: Render 'Others' category */}
+        <div
+          onClick={() => {
+            router.push('/companies/categories/others');
+          }}
+          className={`${
+            selectedCategory == 'others' ? 'company-category-selected' : 'company-tab'
+          }`}
+        >
+          Others
+        </div>
+      </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default CategoryList
+export default CategoryList;

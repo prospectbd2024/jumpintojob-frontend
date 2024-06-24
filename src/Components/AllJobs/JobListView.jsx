@@ -11,7 +11,7 @@ const JobListView = ({ props }) => {
     // Assuming filteredJobs is initially empty and gets updated later
 
     if(filteredJobs && filteredJobs.length>0){
-      setIsLoading(true)
+      setIsLoading(false)
     }
     else{
       setTimeout(() => {

@@ -1,0 +1,14 @@
+/* SkeletonLoader.css */
+
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .skeleton-item {
+    height: 20px; /* Example height */
+    width: 100%;
+    background-color: #f0f0f0; /* Example background color */
+    margin-bottom: 10px; /* Example margin */
+  }
+  
