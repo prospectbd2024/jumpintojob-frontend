@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { FaUpRightFromSquare } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
-import './JobDetails.css';
-import JobDetailsSkeleton from '@/Skeletons/JobDetails';
+import './JobDetails.css';  
+import JobCardSkeleton from '@/Skeletons/JobCardSkeleton';
 
 const JobDetails = ({ props }) => {
   const { userData } = useUserContext();
@@ -49,7 +49,7 @@ const JobDetails = ({ props }) => {
 
   // Conditional rendering based on loading state and job existence
   if (loading) {
-    return <JobDetailsSkeleton />;
+    return <JobCardSkeleton />;
   } else if (!job) {
     return (
       <div className="job-details">

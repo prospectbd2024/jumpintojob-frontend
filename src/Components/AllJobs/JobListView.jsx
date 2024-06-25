@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import SkeletonLoader from "../../Skeletons/SkeletonLoader"; // Import the SkeletonLoader component
-import SingleJob from "./SingleJob";
+import React, { useState, useEffect } from "react"; 
+import SingleJob from "./SingleJob"; 
+import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
+ 
 
 const JobListView = ({ props }) => {
   const { filteredJobs, clickedJob, handleClickedJob } = props;
@@ -25,9 +26,9 @@ const JobListView = ({ props }) => {
       {isLoading ? (
         // Display multiple skeleton loaders while loading
         <>
-          <SkeletonLoader />
-          <SkeletonLoader />
-          <SkeletonLoader />
+          <JobCardSkeleton />
+          <JobCardSkeleton />
+          <JobCardSkeleton />
         </>
       ) : filteredJobs && filteredJobs.length > 0 ? (
         // Render the list of jobs if filteredJobs has items

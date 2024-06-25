@@ -1,0 +1,34 @@
+.featured-jobs-show-more-skeleton {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .skeleton-button {
+    background: #e0e0e0;
+    margin: 0 auto;
+    width: 300px;
+    height: 52px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .skeleton-button::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #e0e0e0, #f0f0f0, #e0e0e0);
+    animation: skeleton-loading 1.5s infinite;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+  

@@ -1,7 +1,7 @@
 import React from 'react';
-import './JobCard.css'; // Import your CSS file for styling the skeleton
+import './JobCardSkeleton.css'; // Import your CSS file for styling the skeleton
 
-const JobSkeleton = () => {
+const JobCardSkeleton = () => {
   return (
     <div className="job-skeleton">
       <div className="job-skeleton-header"></div>
@@ -15,4 +15,4 @@ const JobSkeleton = () => {
   );
 };
 
-export default JobSkeleton;
+export default JobCardSkeleton;

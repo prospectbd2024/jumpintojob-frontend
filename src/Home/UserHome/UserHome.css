@@ -1,28 +1,32 @@
-.user-home{
+.user-home {
     margin-top: 20px;
     margin-bottom: 50px;
-}
-
-.user-home-content {
+  }
+  
+  .user-home-content {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 25px;
-}
-.user-home-content h4 {
+  }
+  
+  .user-home-content h4 {
     margin-bottom: 15px;
     color: var(--darker-secondary-color);
     font-size: 18px;
     font-weight: 400;
-}
-.user-home-content .user-home-companies{}
-
-.user-home-content .user-home-jobs{}
-.featured-jobs-more {
+  }
+  
+  .user-home-content .user-home-jobs div {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px !important;
+  }
+  
+  .featured-jobs-more {
     text-align: center;
     margin-top: 50px;
-}
-.featured-jobs-more a{}
-.featured-jobs-more a button {
+  }
+  
+  .featured-jobs-more a button {
     font-weight: bold;
     width: 180px;
     height: 45px;
@@ -33,80 +37,10 @@
     font-size: 15px;
     cursor: pointer;
     transition: .3s;
-}
-.featured-jobs-more a button:hover{
+  }
+  
+  .featured-jobs-more a button:hover {
     background: var(--primary-color);
     color: #fff;
-}
-.user-home-content .user-home-jobs div {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px!important;
-}
-
-
-.user-home-content .user-home-profile{}
-.user-home-content .user-home-profile .user-home-profile-content{}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile{
-    margin-bottom: 15px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile {
-    border: 1px solid #80808057;
-    border-radius: 10px;
-    padding: 20px 0;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 35px;
-    border-bottom: 1px solid #80808057;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main img {
-    width: 50px;
-    border: 1px solid gray;
-    border-radius: 50px;
-    margin-bottom: 8px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main h3{
-    font-size: 15px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main p {
-    color: var(--darker-secondary-color);
-    margin-top: 5px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main .user-address {
-    color: var(--darker-secondary-color);
-    margin-top: 5px;
-    font-size: 14px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-main .user-address svg {
-    color: #ff7800;
-    margin-right: 6px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info{
-    padding: 20px 25px;;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info{
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info svg{
-    font-size: 30px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div {}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div p {
-    font-size: 15px;
-    color: var(--darker-secondary-color);
-    margin-bottom: 4px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-profile .home-user-profile .user-profile-info .profile-info div h6{
-    font-size: 14px;
-}
-
-.user-home-content .user-home-profile .user-home-profile-content .home-subscribe{
-    border: 1px solid #80808057;
-    border-radius: 10px;
-}
-.user-home-content .user-home-profile .user-home-profile-content .home-subscribe .dashboard-resume{
-    border-radius: 10px;
-}
+  }
+  

@@ -1,9 +1,9 @@
 // SkeletonLoader.jsx
 
 import React from 'react';
-import './CategoryList.css'; // Optional: CSS for styling
+import './CategoryListSkeleton.css'; // Optional: CSS for styling
 
-const CategoryList = () => (
+const CategoryListSkeleton = () => (
   <div className="skeleton-loader">
     <div className="skeleton-item"></div>
     <div className="skeleton-item"></div>
@@ -35,4 +35,4 @@ const CategoryList = () => (
   </div>
 );
 
-export default CategoryList;
+export default CategoryListSkeleton;

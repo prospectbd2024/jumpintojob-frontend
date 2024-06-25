@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
- import CategoryListSkeleton from '@/Skeletons/CategoryList';
+import { useRouter, useParams } from 'next/navigation'; 
+import CategoryListSkeleton from '@/Skeletons/CategoryListSkeleton';
 
 function CategoryList({ props }) {
   const { categories, selectedCategory } = props;

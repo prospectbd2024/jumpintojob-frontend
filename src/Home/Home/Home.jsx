@@ -3,10 +3,10 @@ import React, { useContext,useState,useEffect } from 'react';
 import Banner from '../Banner/Banner';
 import WhyUs from '../WhyUs/WhyUs';
 import FeaturedJobs from '../FeaturedJobs/FeaturedJobs';
-import ResumeHelp from '../ResumeHelp/ResumeHelp';
-import FeaturedCompanies from '../FeaturedCompanies/FeaturedCompanies';
+import ResumeHelp from '../ResumeHelp/ResumeHelp'; 
 import { useUserContext } from '../../Contexts/UserContext';
 import UserHome from '../UserHome/UserHome';
+import FeaturedCompanies from '../UserHome/FeaturedCompanies';
 
 const Home = () => {
     const { userData } = useUserContext();
@@ -30,7 +30,7 @@ const Home = () => {
                 <div>
                     <Banner></Banner>
                     <FeaturedJobs></FeaturedJobs>
-                    <FeaturedCompanies></FeaturedCompanies>
+                    <FeaturedCompanies props={{isLoggedIn : false}} />
                     <WhyUs></WhyUs>
                 </div>
             }

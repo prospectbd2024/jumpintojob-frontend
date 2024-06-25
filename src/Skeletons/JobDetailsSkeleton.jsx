@@ -1,5 +1,5 @@
 import React from 'react';
-import './JobDetails.css'; // Corrected CSS file name
+import './JobDetailsSkeleton.css'; // Corrected CSS file name
 
 const JobDetailsSkeleton = () => {
   return (
