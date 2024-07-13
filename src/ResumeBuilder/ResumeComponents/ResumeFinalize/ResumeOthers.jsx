@@ -105,9 +105,6 @@ unicodeBidi: 'isolate'}}>Others</h3>
             <label htmlFor="more">Other</label>
             {/* <input type="text" value="more" /> */}
         </li>
-        <li>
-          <Availability />
-        </li>
     </ul>
     <ModalBox props={{ ...modal, onSave: onSave, onClose: closeModal }}>
         <AddMore  props={{inputType,formData, setFormData}} />
@@ -115,6 +112,11 @@ unicodeBidi: 'isolate'}}>Others</h3>
     <div>
         <AddButton onClick={()=>showModal('Add '+inputType,'add')}/>
      </div>
+        <div style={{
+          marginTop: '40px'
+        }}>
+          <Availability />
+        </div>
 </div>
   )
 }
