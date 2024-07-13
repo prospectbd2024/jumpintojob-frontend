@@ -8,7 +8,7 @@
     gap: 20px;
   }
   
- .resume-profile-image {
+ /* .resume-profile-image {
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -31,10 +31,51 @@
   background: transparent;
   color: #2c2c2c;
   width: 96%;
+  height: 150px;
  }
  .resume-profile-image input:hover{
  border-color: var(--primary-color);
- }
+ } */
+/* .dp {
+  height: 100px;
+  width: auto;
+} */
+ .resume-profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.resume-profile-image label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.resume-profile-image input {
+  display: none;
+}
+
+.resume-profile-image img {
+  padding: 3px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
   .resume-heading-content .heading-form .heading-form-main {
     display: flex;
     flex-wrap: wrap;
@@ -45,8 +86,8 @@
     display: flex;
     flex-direction: column;
     gap: 7px;
-    margin-bottom: 20px;
-    flex-basis: 48%;
+    margin-bottom: 5px;
+    flex-basis: 49%;
     position: relative;
   }
   .resume-input-field select {
@@ -54,7 +95,8 @@
     width: 100%;
     padding: 0 10px;
     font-size: 17px;
-    border: 1px solid #80808057;
+    color: #7b7b7b;
+    border: 1px solid #828080;
     border-radius: 5px;
   }
   .gender-container hr {
@@ -72,13 +114,13 @@
     font-size: 1rem;
     font-weight: 400;
     border-radius: 5px;
-    border: 1px solid #a3a3a3;
+    border: 1px solid #828080;
     background: transparent;
-    color: #2c2c2c;
+    color: #7b7b7b;
   }
   .resume-heading-content .heading-form .heading-textarea textarea {
-    height: 170px;
-    width: 97%;
+    height: 100px;
+    width: 98%;
     resize: none;
     border-radius: 5px;
     padding: 12px 9px;
@@ -177,6 +219,7 @@
     margin-top: 10px;
  }
  .media-links{
+  margin-top: 20px;
     flex: 1;
     max-width: 97.5%;
     display: flex;
@@ -190,9 +233,8 @@
     color: #fff;
     border:none;
     padding: 10px 20px 10px 20px;
-    border-radius: 2px;
+    border-radius: 5px;
     margin-bottom: 20px;
-
  }
  .media-link{
     display: grid;
