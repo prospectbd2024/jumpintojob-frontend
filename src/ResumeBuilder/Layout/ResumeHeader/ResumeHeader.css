@@ -7,12 +7,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.resume-header-content .resume-header-title {
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-}
-.resume-header-content .resume-header-title h2{}
+/* .resume-header-content .resume-header-title h2{} */
 .resume-header-content .resume-header-title span {
     font-size: 14px;
     color: var(--primary-link-color);
@@ -32,9 +27,27 @@
 .resume-header-content .resume-header-button button:hover{
     background: #2f89c5;
 }
-.resume-header-content .resume-header-button a{}
-.resume-header-content .resume-header-button button{}
+/* .resume-header-content .resume-header-button a{}
+.resume-header-content .resume-header-button button{} */
 .jump-job-logo {
     width: 130px;
     height: 40px;
+}
+.jump-job-logo {
+    width: 150px;
+    height: 50px; 
+}
+
+.title {
+    font-size: 20px; 
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: start;
+    margin-left: 15px; 
+}
+
+.resume-header-content .resume-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
