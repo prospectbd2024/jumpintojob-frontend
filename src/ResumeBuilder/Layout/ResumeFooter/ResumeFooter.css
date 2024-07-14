@@ -1,11 +1,10 @@
 .resume-footer{
     /* position: absolute; */
-    bottom: 0;
-    width: 100%; /* Ensures the footer spans the entire width of its container */
+    width: 100%; 
     padding: 20px 0;
-    border-top: 1px solid gray;
+    border-top: 1px solid rgb(216, 216, 216);
 }
-.resume-footer-content{}
+/* .resume-footer-content{} */
 .resume-footer-content div {
     display: flex;
     align-items: center;
@@ -29,6 +28,6 @@
     transition: .1s;
 }
 .resume-footer-content div ul li a:hover{
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: black;
 }
