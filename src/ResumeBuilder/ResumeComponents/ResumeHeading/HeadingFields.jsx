@@ -83,6 +83,7 @@ function HeadingFields({ props }) {
     }
   }, [selectedImage, SetPersonalInformation]);
   return (
+    <div className="resume-border">
     <div className={`resume-heading-content  'resume-heading-content-yesimg' : 'resume-heading-content-noimg'`}>
       {
       // templateType == 'cv' &&
@@ -90,15 +91,19 @@ function HeadingFields({ props }) {
       }
       <div   className="heading-form">
       <div className="dp">
+  <div className="resume-profile-image">
+    <input type="file" id="profileImage" onChange={handleImageChange} />
+    {imagePreview ? (
+      <img src={imagePreview} alt="Profile Preview" />
+    ) : (
+      <div className="empty-profile-image"></div>
+    )}
+    <label htmlFor="profileImage" className="custom-file-upload">
+      Select Image
+    </label>
+  </div>
+</div>
 
-      <div className="resume-profile-image">
-      <input type="file" id="profileImage" onChange={handleImageChange} />
-      {imagePreview && <img src={imagePreview} alt="Profile Preview" />}
-      <label htmlFor="profileImage" className="custom-file-upload">
-        Select Image
-      </label>
-    </div>
-      </div>
         <h3>Personal Information</h3>
         <div className="heading-form-main">
           <div className='resume-input-field'>
@@ -234,6 +239,7 @@ function HeadingFields({ props }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
