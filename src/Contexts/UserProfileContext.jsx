@@ -159,7 +159,7 @@ function UserProfileContext({ children }) {
 
     useEffect(()=>{
       SetPersonalInformation(prev => ({ ...prev,  avatar : avatar }))
-        console.log("avatar base64",avatar);
+        // console.log("avatar base64",avatar);
     },[avatar])
 
     useEffect(()=>{
