@@ -100,8 +100,10 @@ function HeadingFields({ props }) {
       <div className="dp">
   <div className="resume-profile-image">
     <input type="file" id="profileImage" onChange={handleImageChange} />
+ 
     {imagePreview ||personalInformation.cv_profile_image ? (
       <img src={personalInformation.cv_profile_image??imagePreview}  ref={fileInputRef} alt="Profile Preview" />
+ 
     ) : (
       <div className="empty-profile-image"></div>
     )}
