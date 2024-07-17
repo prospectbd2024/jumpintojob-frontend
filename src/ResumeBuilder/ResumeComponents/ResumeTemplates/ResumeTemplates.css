@@ -74,10 +74,10 @@
 
 }
 .slick-next {
-    right: 30px!important;
+    right: 10px!important;
 }
 .slick-prev {
-    left: 0px!important;
+    left: 10px!important;
     z-index: 1!important;
 }
 .navigation-buttons{
