@@ -68,7 +68,6 @@ function UserProfileContext({ children }) {
             manageMore(response.data.data.payload.others)
             setAvailability(response.data.data.payload.availability)
             setTemplate(response.data.data.payload.template)
-
           }catch(e){
             console.log(e);
           }
