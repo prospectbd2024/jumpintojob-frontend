@@ -159,8 +159,9 @@ function UserProfileContext({ children }) {
     }, [more])
 
     useEffect(()=>{
-        setUserProfileData(prev => ({ ...prev,  avata : selectedAvatar }))
-    },[selectedAvatar])
+      SetPersonalInformation(prev => ({ ...prev,  avatar : avatar }))
+        console.log("avatar base64",avatar);
+    },[avatar])
 
     useEffect(()=>{
           // Call the function to get and print user profile

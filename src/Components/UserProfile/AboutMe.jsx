@@ -15,8 +15,13 @@ const AboutMe = () => {
 
   useEffect(() => {
     if (selectedAvatar) {
-      setAvatar(URL.createObjectURL(selectedAvatar));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(selectedAvatar);
     }
+    
   }, [selectedAvatar]);
 
   const handleFileChange = (event) => {
@@ -63,7 +68,7 @@ const AboutMe = () => {
         <div style={{ display: 'flex', gap: '20px', marginBottom: '30px', alignItems: 'center', gridColumn: 'span 2' }}>
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
-              src={avatar ? avatar : UserImage.src}
+              src={personalInformation.avatar ??  UserImage.src}
               alt="Avatar"
               style={{ width: "150px", height: "150px", borderRadius: "50%" }}
             />
