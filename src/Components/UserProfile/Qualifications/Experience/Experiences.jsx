@@ -45,7 +45,7 @@ const Experiences = ({ props }) => {
       closeModal();
       console.log(experiences);
     } else {
-      console.log(experienceErrors);
+      // console.log(experienceErrors);
     }
   }, [experience, modal, experienceErrors, setExperiences, closeModal]);
 

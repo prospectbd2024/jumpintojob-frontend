@@ -33,7 +33,7 @@ function HeadingFields({ props }) {
 
 
   const handleMediaLinkChange = (index, field, value) => {
-    console.log(personalInformation.mediaLinks);
+    // console.log(personalInformation.mediaLinks);
     const updatedMediaLinks = [...personalInformation.mediaLinks];
     updatedMediaLinks[index][field] = value;
     SetPersonalInformation({...personalInformation, mediaLinks : updatedMediaLinks })
@@ -82,7 +82,6 @@ function HeadingFields({ props }) {
 
   useEffect(() => {
     if (selectedImage) {
-      console.log("this use effect not te be called",selectedImage);
       SetPersonalInformation((prevData) => ({
         ...prevData,
         cv_profile_image: selectedImage,

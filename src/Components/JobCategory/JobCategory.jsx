@@ -9,7 +9,7 @@ const JobCategory = () => {
         .then(res => res.json())
         .then(data => setJobCategory(data))
     }, [])
-    console.log(jobCategory)
+    // console.log(jobCategory)
     return (
         <div className='job-category'>
             <div className="job-category-content container">
