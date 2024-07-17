@@ -1,17 +1,19 @@
-import React, { useState ,useEffect} from "react";
+import { useResumeContext } from "@/Contexts/ResumeContext";
+import React, { useState ,useEffect, useCallback, useRef} from "react";
 import {FaTrashAlt}  from 'react-icons/fa'
 function HeadingFields({ props }) {
   
   const { personalInformation, SetPersonalInformation } = props;
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const {selectedImage, setSelectedImage,imagePreview, setImagePreview} = useResumeContext();
 
+  const fileInputRef = useRef(null);
   const handleChange = (field, value) => {
     SetPersonalInformation((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
+ 
 
   const handleAddressChange = (addressType, field, value) => {
     SetPersonalInformation((prevData) => ({
@@ -22,9 +24,11 @@ function HeadingFields({ props }) {
       }
     }));
   };
-  // useEffect(() => {
-  //    SetPersonalInformation(prev=>({...prev, cv_profile_image : selectedImage}))
-  // }, [selectedImage])
+  useEffect(() => {
+     if(selectedImage){
+       SetPersonalInformation(prev=>({...prev, cv_profile_image : selectedImage}))
+     }
+  }, [selectedImage])
   
 
 
@@ -53,7 +57,7 @@ function HeadingFields({ props }) {
     hr.classList.add('focused')
     
   }
-  const handleBlur=( event)=>{
+  const handleBlur= ( event)=>{
     let element = event.target;
     element.classList.remove('focused')
     let parentNode = element.parentNode;
@@ -61,27 +65,30 @@ function HeadingFields({ props }) {
     hr.classList.remove('focused')
   }
   
-
-  const handleImageChange = (event) => {
+  const handleImageChange = useCallback((event) => {
+   
     const file = event.target.files[0];
-    setSelectedImage(file);
+    
+    if (file) {
+      console.log(file);
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
+      setSelectedImage(reader.result);
     };
-    if (file) {
       reader.readAsDataURL(file);
     }
-  };
+  }, []); // Add any dependencies if needed
 
   useEffect(() => {
     if (selectedImage) {
+      console.log("this use effect not te be called",selectedImage);
       SetPersonalInformation((prevData) => ({
         ...prevData,
         cv_profile_image: selectedImage,
       }));
     }
-  }, [selectedImage, SetPersonalInformation]);
+  }, [selectedImage]);
   return (
     <div className="resume-border">
     <div className={`resume-heading-content  'resume-heading-content-yesimg' : 'resume-heading-content-noimg'`}>
@@ -93,8 +100,8 @@ function HeadingFields({ props }) {
       <div className="dp">
   <div className="resume-profile-image">
     <input type="file" id="profileImage" onChange={handleImageChange} />
-    {imagePreview ? (
-      <img src={imagePreview} alt="Profile Preview" />
+    {imagePreview ||personalInformation.cv_profile_image ? (
+      <img src={personalInformation.cv_profile_image??imagePreview}  ref={fileInputRef} alt="Profile Preview" />
     ) : (
       <div className="empty-profile-image"></div>
     )}

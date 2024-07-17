@@ -27,7 +27,8 @@ function ResumeContext({ children }) {
   const [htmlTemplate,setHtmlTemplate] = useState("")
   const [currentStep, setCurrentStep] = useState(1);
   const [resumeTemplates, setResumeTemplates] = useState([]);
-
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const {userData} = useUserContext();
   //template settings
   const templateSettings = {
@@ -112,7 +113,9 @@ function ResumeContext({ children }) {
       resumeTemplates,
       fetchResumeTemplates,
       htmlTemplate,setHtmlTemplate,
-      saveCV
+      saveCV,
+      selectedImage, setSelectedImage,
+      imagePreview, setImagePreview
     }} >
       {children}
     </resumeContext.Provider>
