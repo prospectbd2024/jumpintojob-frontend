@@ -41,11 +41,12 @@
 .remove-skill {
   /* border: 1px solid #ccc; */
   /* border-radius: 8px; */
-  margin-top: -20px;
+  margin-top: -33px;
   padding-right: 10px; /* Add padding to separate border from skills */
   cursor: pointer;
   color: #ff5733;
   margin-left: 10px;
+  font-size: 23px;
 }
 
 .skill-actions {
