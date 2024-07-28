@@ -1,41 +1,35 @@
-// LanguageProperties.js
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./LanguageProperties.css";
 
 function LanguageProperties({ props }) {
-  const { selectedLanguage,setLanguage } = props;
-  const [proficiency, setProficiency] = useState("");
-
-  useEffect(() => {
-    // Fetch proficiency levels
-  }, []);
+  const { selectedLanguage, setLanguage } = props;
 
   const handleProficiencyChange = (e) => {
-    setProficiency(e.target.value);
-    if(
-      selectedLanguage?.language
-    ){
-      setLanguage(prev=>({...prev,proficiency : e.target.value}))
-    }
-  
+    setLanguage(prev => ({ ...prev, proficiency: e.target.value }));
   };
 
+  useEffect(() => {
+    if (!selectedLanguage.proficiency) {
+      setLanguage(prev => ({ ...prev, proficiency: 'Beginner' }));
+    }
+  }, [selectedLanguage, setLanguage]);
+
   return (
-    <div className="language-properties-container"  >
+    <div className="language-properties-container">
       <div>
-      <label htmlFor="proficiency">Select Proficiency Level <span style={{color: 'red'}}>*</span> </label>
+        <label htmlFor="proficiency">Select Proficiency Level <span style={{color: 'red'}}>*</span></label>
       </div>
       <div>
-      <select
-        id="proficiency"
-        value={proficiency}
-        className='language-proficiency-options'
-        onChange={handleProficiencyChange}
-      >
-       <option>Beginner</option>
-       <option>Fluent</option>
-       <option>Native</option>
-      </select>
+        <select
+          id="proficiency"
+          value={selectedLanguage.proficiency || 'Beginner'}
+          className='language-proficiency-options'
+          onChange={handleProficiencyChange}
+        >
+          <option value="Beginner">Beginner</option>
+          <option value="Fluent">Fluent</option>
+          <option value="Native">Native</option>
+        </select>
       </div>
     </div>
   );
