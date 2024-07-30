@@ -1,63 +1,63 @@
 @import "global";
-.resume-steps {
-    margin-top: 45px;
+.resume-progress {
+   
 }
-.resume-steps .step-title-container h5{
-    background: var(--primary-color);
-    color: #fff;
+.resume-progress .step-title-container h5{
+    background: $color-primary;
+    color: $color-white;
     cursor: pointer;
 }
-.resume-steps .steps{
+.resume-progress .steps{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
 }
-.resume-steps .resume-steps-container  .steps .step{
+.resume-progress .resume-progress__container  .steps .step{
     position: relative;
 }
-.resume-steps .resume-steps-container  .steps .step .step-title-container{
+.resume-progress .resume-progress__container  .steps .step .step-title-container{
     position: absolute;
     left: 55px;
 }
-.resume-steps .step span {
+.resume-progress .step span {
     position: absolute;
     top: 14px;
     left: 85px;
     width: 100%;
     height: 2px;
-    background: #cecece;
+    background: $color-grey-dark-2;
     z-index: -1;
 }
-.resume-steps .active-step .step-title-container h5{
-    color: white;
-    background: var(--primary-color);
+.resume-progress .active-step .step-title-container h5{
+    color: $color-white;
+    background: $color-primary;
 }
-.resume-steps .active-step span{
-    background: var(--primary-color);
+.resume-progress .active-step span{
+    background: $color-primary;
 }
-.resume-steps .resume-steps-container  .steps .step .filled{
-    background-color: var(--primary-color);
+.resume-progress .resume-progress__container  .steps .step .filled{
+    background-color: $color-primary;
 }
-.resume-steps .resume-steps-container  .steps .step .empty{
-    background-color: var(--primary-color);
+.resume-progress .resume-progress__container  .steps .step .empty{
+    background-color: $color-primary;
 }
-.resume-steps .step h5{
+.resume-progress .step h5{
     font-size: 14px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid $color-primary;
     width: 25px;
     height: 25px;
-    background-color: white;
+    background-color: $color-white;
     line-height: 25px;
     text-align: center;
     border-radius: 100px;
     display: inline-block;
-    color:var(--primary-color);
+    color:$color-primary;
     margin-bottom: 8px;
 }
 
 
-.resume-steps .step p{
+.resume-progress .step p{
     font-size: 14px;
     color: var(--darker-secondary-color);
 }

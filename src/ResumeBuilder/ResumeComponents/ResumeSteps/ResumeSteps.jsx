@@ -9,8 +9,8 @@ const ResumeSteps = () => {
 
     const { currentStep, setCurrentStep } = useResumeContext();
     return (
-        <div className='resume-steps'>
-            <div className="resume-steps-container container">
+        <div className='resume-progress u-margin-top-medium'>
+            <div className="resume-progress__container">
                 <div className="steps">
                     <div className={`step ${currentStep >= 1 ? 'active-step' : ''}`} onClick={()=>{changeStep(1)}}>
                         <div className='step-title-container' >

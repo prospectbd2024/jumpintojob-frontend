@@ -3,7 +3,7 @@
 .resume-footer {
     width: 100%; 
     padding: 20px 0;
-    border-top: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid $color-grey-light-2;
 }
 
 .resume-footer-content div {
@@ -18,7 +18,7 @@
 }
 
 .resume-footer-content div ul p {
-    color: var(--darker-secondary-color);
+    color: $color-grey-dark-1;
     font-size: 15px;
 }
 
@@ -28,11 +28,11 @@
 
 .resume-footer-content div ul li a {
     text-decoration: none;
-    color: #3694d3;
+    color: $color-primary-light-2;
     font-size: 15px;
     transition: .1s;
 }
 
 .resume-footer-content div ul li a:hover {
-    color: black;
+    color: $color-black;
 }
