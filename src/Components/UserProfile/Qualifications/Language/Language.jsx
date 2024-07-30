@@ -1,25 +1,20 @@
-import { FaTrashAlt } from "react-icons/fa"; 
-// Language.js
 import React, { useState, useCallback } from "react";
 import { RiMedalFill } from "react-icons/ri";
+import { FaTrashAlt } from "react-icons/fa";
 import "./Language.css";
 import ModalBox from "../ModalBox";
 import AddLanguage from "./AddLanguage";
 import AddButton from "@/Components/Buttons/AddButton";
 
 function Language({ props }) {
-  // State for managing languages
   const { languages, setLanguages } = props;
-  const [language,setLanguage] = useState({});
-
-  // State for managing modal display
+  const [language, setLanguage] = useState({});
   const [modal, setModal] = useState({
     display: "none",
     title: "Loading",
     state: "new",
   });
 
-  // Function to remove a language
   const removeLanguage = useCallback(
     (id) => {
       setLanguages((prev) => prev.filter((lang, index) => index !== id));
@@ -27,46 +22,37 @@ function Language({ props }) {
     [setLanguages]
   );
 
-  // Function to show modal
   const showModal = useCallback((title) => {
     setModal((prev) => ({ title: title, display: "block" }));
+    setLanguage({}); // Reset language when opening modal
   }, []);
 
-  // Function to close modal
   const closeModal = useCallback(() => {
     setModal({ display: "none" });
+    setLanguage({}); // Reset language when closing modal
   }, []);
 
-  const saveLanguage = ()=>{
-  
-    setLanguages((prev)=>([...prev,language]))
-    closeModal();
-
-  }
+  const saveLanguage = useCallback(() => {
+    if (language.language && language.proficiency) {
+      setLanguages((prev) => [...prev, language]);
+      closeModal();
+    }
+  }, [language, setLanguages, closeModal]);
 
   return (
     <div className="languages-content education-content">
-      {/* Render the header */}
       <div className="qualifications-header">
         <RiMedalFill />
         <h3>Languages</h3>
       </div>
       
-      {/* Render the list of languages */}
-      {languages && (
+      {languages && languages.length > 0 ? (
         <div className="languages-container qualifications-container">
-          {languages.map((language, index) => (
+          {languages.map((lang, index) => (
             <div className="language-item" key={index}>
-              {/* Display language name */}
-              <div className="language-name">{language.language}</div>
-              
-              {/* Display language proficiency */}
-              <div className="language-proficiency">{language.proficiency}</div>
-              
-              {/* Display remove button */}
-              <div className="language-actions"> 
-         
-         
+              <div className="language-name">{lang.language}</div>
+              <div className="language-proficiency">{lang.proficiency}</div>
+              <div className="language-actions">
                 <FaTrashAlt
                   className="remove-language"
                   onClick={() => removeLanguage(index)}
@@ -75,19 +61,16 @@ function Language({ props }) {
             </div>
           ))}
         </div>
+      ) : (
+        <div className="no-languages">Please Add Languages</div>
       )}
-
-      {/* If no languages are present, display a message */}
-      {languages.length === 0 && <div className="no-languages">Please Add Languages</div>}
       
-      {/* Add language button */}
       <div>
-        <AddButton onClick={()=>showModal('Add Language','add')}/>
+        <AddButton onClick={() => showModal('Add Language')}/>
       </div>
       
-      {/* Modal for adding/editing language */}
-      <ModalBox props={{ ...modal, onClose: closeModal ,onSave : saveLanguage }}>
-        <AddLanguage props={{ selectedLanguage: language , setLanguage }} />
+      <ModalBox props={{ ...modal, onClose: closeModal, onSave: saveLanguage }}>
+        <AddLanguage props={{ selectedLanguage: language, setLanguage, selectedLanguages: languages }} />
       </ModalBox>
     </div>
   );

@@ -1,10 +1,9 @@
-// Suggestions.js
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import "./Suggestions.css";
 
 function Suggestions({props}) {
-  const {setSkill} = props;
+  const {setSkill, selectedSkills} = props;
   const [suggestedSkills, setSuggestedSkills] = useState([]);
 
   useEffect(() => {
@@ -16,20 +15,22 @@ function Suggestions({props}) {
       return res.json();
     })
     .then(data => {
-      setSuggestedSkills(data.data);
+      const filteredSkills = data.data.filter(skill => 
+        !selectedSkills.some(selectedSkill => selectedSkill.name === skill.name)
+      );
+      setSuggestedSkills(filteredSkills);
     })
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
     });
-  
-   
-  }, []);
+  }, [selectedSkills]);
+
   return (
     <div className="suggested-skills">
       <p className="suggested-heading">Suggested based on your profile</p>
       <ul className="suggested-list">
         {suggestedSkills &&
-          suggestedSkills.map((skill,index) => {
+          suggestedSkills.map((skill, index) => {
             return (
               <li
                 key={index}

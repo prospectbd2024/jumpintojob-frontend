@@ -1,35 +1,36 @@
-// SkillProperties.js
-import React,{useState,useEffect} from 'react';
-import SkillRating from './Rating'; // Import the SkillRating component
-import './SkillProperties.css'; // Import the CSS file
+import React, {useState, useEffect} from 'react';
+import SkillRating from './Rating';
+import './SkillProperties.css';
 import HowSkillLearned from './HowSkillLearned';
 
-
 function SkillProperties({props}) {
-  const {setSkill,selectedSkill} = props;
-  const [rating, setRating] = useState(0); // State to track the selected rating
+  const {setSkill, selectedSkill} = props;
+  const [rating, setRating] = useState(0);
   const [learnedFrom, setLearnedFrom] = useState([]);
-  useEffect(()=>{
-    if(selectedSkill.name){
-      setSkill(prev=>({...prev, rating : rating}))
-    }
-  },[rating])
 
-  useEffect(()=>{
-    setSkill(prev=>({...prev, learnedFrom : learnedFrom}))
-  },[learnedFrom])
-  useEffect(()=>{
+  useEffect(() => {
+    if(selectedSkill.name){
+      setSkill(prev => ({...prev, rating: rating}));
+    }
+  }, [rating, selectedSkill.name, setSkill]);
+
+  useEffect(() => {
+    setSkill(prev => ({...prev, learnedFrom: learnedFrom}));
+  }, [learnedFrom, setSkill]);
+
+  useEffect(() => {
     if(!selectedSkill.rating){
-      setRating(0)
+      setRating(0);
     }
     if(!selectedSkill.learnedFrom){
-      setLearnedFrom([])
+      setLearnedFrom([]);
     }
-  },[selectedSkill])
+  }, [selectedSkill]);
+
   return (
     <div className="skill-properties-container">
-      <SkillRating  props={{rating,setRating ,mode: 'rw'}}  onChange={()=>{ }} /> {/* Render the SkillRating component */}
-       <HowSkillLearned props={{learnedFrom, setLearnedFrom}}/>
+      <SkillRating props={{rating, setRating, mode: 'rw'}} onChange={() => {}} />
+      <HowSkillLearned props={{learnedFrom, setLearnedFrom}} />
     </div>
   );
 }
