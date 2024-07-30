@@ -9,7 +9,7 @@ import ResumeExperiences from "../ResumeExperiences/ResumeExperiences";
 import ResumeSkills from "../ResumeSkills/ResumeSkills";
 import ResumeFinalize from "../ResumeFinalize/ResumeFinalize";
 import SkillContextProvider from "@/Contexts/SkillContext";
-import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
+import NavButtons from "@/ResumeBuilder/Layout/Button/NavButtons";
 import { useResumeContext } from "@/Contexts/ResumeContext";
 import SaveProfileButton from "@/Components/Buttons/SaveProfileButton";
 
@@ -38,7 +38,7 @@ const ResumeContainer = () => {
           {currentStep==7  && <ResumePreview />}
 
             <div className='navigation-buttons'>
-              <PrevNextButton props={{setCurrentStep,currentStep}} />
+              <NavButtons props={{setCurrentStep,currentStep}}  hideNext={currentStep==7 } />
               {currentStep==7 ?  <button  type="button" style={{background: 'var(--primary-color)',
               color: 'rgb(255, 255, 255)',
               width: '120px',

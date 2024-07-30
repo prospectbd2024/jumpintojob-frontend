@@ -1,87 +1,53 @@
 /* .resume-templates{} */
-.resume-form-header h3 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-size: larger;
-    /* color: var(--darker-secondary-color); */
+.heading-info 
+{
+    &__title {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: larger;
+        /* color: var(--darker-secondary-color); */
+    }
+    &__span{
+        color: var(--primary-color);
+    }
+
 }
-.resume-form-header h3 span{
-    color: var(--primary-color);
-}
-.resume-templates .templates {
+
+
+// .resume-templates {
+    
+// }
+
+.template-slider {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.resume-templates .templates .template{
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    outline: none;
+
+    &__element{
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        
+    }
+    &__element-img {
+        width: 300px;
+        height: 400px;
+        margin-bottom: 15px;
+        border: 3px solid rgb(230, 230, 230);
+        transition: .1 ease-in-out;
+
+        &:hover{
+            border: 3px solid var(--primary-color);
+        }
+        &--selected{
+            border: 3px solid var(--primary-color);
+        }
     
-}
-/* .resume-templates .templates .template:hover{
-    
-} */
-
-.resume-templates .templates .template img {
-    width: 300px;
-    height: 400px;
-    margin-bottom: 15px;
-    border: 3px solid rgb(230, 230, 230);
-    transition: .1 ease-in-out;
-}
-.resume-templates .templates .template img:hover{
-    border: 3px solid var(--primary-color);
-}
-.resume-templates .templates .template .selected-template{
-    border: 3px solid var(--primary-color);
-}
-.resume-templates .templates .template p{
-    color: var(--darker-secondary-color);
+    }
+    &__element-name{
+        color: var(--darker-secondary-color);
+    }
 }
 
-.resume-prev-next-buttons {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-.resume-prev-next-buttons button {
-    width: 140px;
-    height: 45px;
-    line-height: 45px;
-    font-weight: bold;
-    border: none;
-    font-size: 15px;
-    cursor: pointer;
-}
-.resume-prev-next-buttons .prev-button{
-    border: 1px solid #111;
-    background: transparent;
-    color: #111;
-    border-radius: 3px;
-    margin-top: 15px;
-}
-.resume-prev-next-buttons .next-button {
-    background: var(--primary-color);
-    color: #fff;
-    border-radius: 3px;
-    margin-top: 15px;
-}
-.slick-prev:before, .slick-next:before {
-    font-size: 27px!important;
-    color: #919191!important;
-
-}
-.slick-next {
-    right: 10px!important;
-}
-.slick-prev {
-    left: 10px!important;
-    z-index: 1!important;
-}
-.navigation-buttons{
-    display: flex;
-    justify-content: space-between ;
-    margin-top : 40px; 
-}
+ 

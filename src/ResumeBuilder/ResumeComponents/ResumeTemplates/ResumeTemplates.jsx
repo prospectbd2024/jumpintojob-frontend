@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useResumeContext } from '@/Contexts/ResumeContext'; 
 import  { useUserProfileContext } from '@/Contexts/UserProfileContext';
+import NavButtons from '@/ResumeBuilder/Layout/Button/NavButtons';
 
 
 const ResumeTemplates = ({ }) => {
@@ -23,26 +24,24 @@ const ResumeTemplates = ({ }) => {
         resumeTemplates &&
         <div className='resume-templates'>
             
-            <div className="resume-templates-container container">
-                <div className="resume-form-header">
-                    <h3>Please pick a <span>template</span> below</h3>
+            <div className="resume-templates__container">
+                <div className="heading-info">
+                    <h3 className='heading-info__title'>Please pick a <span className='heading-info__span'>template</span> below</h3>
                 </div>
                 
-                <div className="templates">
+                <div className="template-slider">
                     <Slider {...templateSettings} style={{maxWidth: '100%'}} key={resumeTemplates.length}>
-                    {resumeTemplates.map(tmp => <div key={tmp.id} className={`template`} onClick={() => 
+                    {resumeTemplates.map(tmp => <div key={tmp.id} className={`template-slider__element`} onClick={() => 
                         setTemplate(tmp)
                         
                         }>
-                        <img src={tmp.image} alt=""  className={`${template?.id === tmp.id ? 'selected-template' : ''}`} />
-                        <p>{tmp.name} {tmp.type}</p>
+                        <img src={tmp.image} alt=""  className={ `template-slider__element-img ${template?.id === tmp.id ? 'template-slider__element-img--selected' : ''}`} />
+                        <p className='template-slider__element-name'>{tmp.name} {tmp.type}</p>
                     </div>)}
                     </Slider>
                 </div>
                 
-                <div className="resume-prev-next-buttons">
-                    <button className='next-button' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
-                </div>
+                <NavButtons props={{setCurrentStep }}  hidePrev={true} />
             </div>
         </div>
     }
