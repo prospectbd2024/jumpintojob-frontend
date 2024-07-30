@@ -3,12 +3,13 @@ import React, { useCallback, useState } from "react";
 import { HiAcademicCap } from "react-icons/hi";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
-import "./Education.css"; // Import CSS file
+import "./Education.scss"; // Import SCSS file
 import ModalBox from "../ModalBox";
 import AddButton from "@/Components/Buttons/AddButton";
 import Visibility from "@/Components/Buttons/Visibility";
 
 const Education = ({ props }) => {
+
   const educationInterface = {
     id: false,
     visible_on_cv: true,
@@ -121,50 +122,49 @@ const Education = ({ props }) => {
     <>
       {educations && educations.length > 0 ? (
         <>
-          <div className="header">
+          <div className="education__header">
             <HiAcademicCap /> Educations
           </div>
           {educations.map((education, index) => (
-            <div className="education-container" key={education.institution_name}>
-              <div className="top-right-icons-container">
-                <div className="top-right-icons">
+            <div className="education__container" key={education.institution_name}>
+              <div className="education__top-icons-container">
+                <div className="education__top-icons">
                   <Visibility
                     visibility={education.visible_on_cv}
                     handleVisibility={() => {
                       manageVisibility(index);
                     }}
                   />
-                  <FaTrashAlt className="minus-icon" onClick={() => removeEduction(index)} />
+                  <FaTrashAlt className="education__top-icons-minus" onClick={() => removeEduction(index)} />
                 </div>
               </div>
-              <p className="institution-name">{education.institution_name}</p>
+              <p className="education__institution-name">{education.institution_name}</p>
               <p>{education.institution_location}</p>
               <p>
-                <span className="label">Degree:</span> {education.degree}
+                <span className="education__label">Degree:</span> {education.degree}
               </p>
               <p>
-                <span className="label">Field of Study:</span> {education.field_study}
+                <span className="education__label">Field of Study:</span> {education.field_study}
               </p>
               <p>
-                <span className="label">Start Year:</span> {education.education_starting_year}
+                <span className="education__label">Start Year:</span> {education.education_starting_year}
               </p>
               {education.education_graduation_year && (
                 <p>
-                  <span className="label">Graduation Year:</span> {education.education_graduation_year}
+                  <span className="education__label">Graduation Year:</span> {education.education_graduation_year}
                 </p>
               )}
               <p>
-                <span className="label">CGPA/GPA:</span> {education.cgpa}
+                <span className="education__label">CGPA/GPA:</span> {education.cgpa}
               </p>
               <p>
-                <span className="label">Grades:</span> {education.grades}
+                <span className="education__label">Grades:</span> {education.grades}
               </p>
               <p>
-                <span className="label">Achievements:</span> {education.education_achievements}
+                <span className="education__label">Achievements:</span> {education.education_achievements}
               </p>
-              <div className="bottom-right-icons">
+              <div className="education__edit-icon">
                 <FaPencilAlt
-                  className="edit-icon"
                   onClick={() => {
                     showModal("Edit Education", "update", index);
                   }}
@@ -174,7 +174,7 @@ const Education = ({ props }) => {
           ))}
         </>
       ) : (
-        <div className="no-educations">Please add education</div>
+        <div className="education__no-educations">Please add education</div>
       )}
       <div>
         <AddButton onClick={() => showModal("Add Education", "add")} />
