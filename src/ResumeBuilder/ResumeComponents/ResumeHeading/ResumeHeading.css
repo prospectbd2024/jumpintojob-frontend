@@ -144,17 +144,26 @@
   margin-bottom: 10px;
 }
 
+.resume-heading-content .heading-form .resume-input-field input::placeholder, .media-links input::placeholder {
+  font-size: 0.8rem;
+}
+
 .resume-heading-content .heading-form .resume-input-field input, .media-links input {
-  padding: 12px 9px;
+  padding: 10px 9px;
+  padding-top: 20px;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 550;
   border-radius: 5px;
   border: 1px solid #828080;
   background: transparent;
   color: #828080;
+   
+ 
 }
-
+.resume-heading-content .heading-form .resume-input-field input:focus{
+  border-bottom: 4px solid var(--primary-color);
+}
 .resume-heading-content .heading-form .heading-textarea textarea {
   height: 100px;
   width: 100%;
@@ -320,6 +329,7 @@
 .input-container input {
   width: 100%;
   padding: 16px 16px 16px 16px;
+  font-size: 15px;
   font-weight: 300;
   background-color: white;
   border: 2px solid #d1d5db;
