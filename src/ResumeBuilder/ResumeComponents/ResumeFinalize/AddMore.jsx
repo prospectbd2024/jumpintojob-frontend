@@ -53,48 +53,52 @@ function AddMore({ props }) {
   };
 
   const renderProjectForm = () => (
-    <div className="add-project-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="add-more__container">
+      <div className="add-more__form-group">
+        <label className="add-more__label">Title:</label>
         <input
+          className="add-more__input"
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Start Date:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Start Date:</label>
         <input
+          className="add-more__input add-more__input--date"
           type="date"
           name="startDate"
           value={formData.startDate || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>End Date:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">End Date:</label>
         <input
+          className="add-more__input add-more__input--date"
           type="date"
           name="endDate"
           value={formData.endDate || ''}
           onChange={handleChange}
         />
-        <div className="form-check" >
-          <div >
-          <input
-            type="checkbox"
-            name="present"
-            checked={formData.present || false}
-            onChange={handleChange}
-          />
-          <label>Present</label>
+        <div className="add-more__form-check">
+          <div className="add-more__form-check-inner">
+            <input
+              type="checkbox"
+              name="present"
+              checked={formData.present || false}
+              onChange={handleChange}
+            />
+            <label>Present</label>
           </div>
         </div>
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Description:</label>
         <textarea
+          className="add-more__textarea"
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
@@ -104,28 +108,31 @@ function AddMore({ props }) {
   );
 
   const renderCertificateForm = () => (
-    <div className="add-certificate-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="add-more__container">
+      <div className="add-more__form-group">
+        <label className="add-more__label">Title:</label>
         <input
+          className="add-more__input"
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Date:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Date:</label>
         <input
+          className="add-more__input add-more__input--date"
           type="date"
           name="date"
           value={formData.date || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Description:</label>
         <textarea
+          className="add-more__textarea"
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
@@ -135,37 +142,41 @@ function AddMore({ props }) {
   );
 
   const renderPublicationForm = () => (
-    <div className="add-publication-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="add-more__container">
+      <div className="add-more__form-group">
+        <label className="add-more__label">Title:</label>
         <input
+          className="add-more__input"
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Journal/Conference:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Journal/Conference:</label>
         <input
+          className="add-more__input"
           type="text"
           name="journal"
           value={formData.journal || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Date:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Date:</label>
         <input
+          className="add-more__input add-more__input--date"
           type="date"
           name="date"
           value={formData.date || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Abstract:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Abstract:</label>
         <textarea
+          className="add-more__textarea"
           name="abstract"
           value={formData.abstract || ''}
           onChange={handleChange}
@@ -175,19 +186,21 @@ function AddMore({ props }) {
   );
 
   const renderDefaultForm = () => (
-    <div className="default-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="add-more__container">
+      <div className="add-more__form-group">
+        <label className="add-more__label">Title:</label>
         <input
+          className="add-more__input"
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
         />
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="add-more__form-group">
+        <label className="add-more__label">Description:</label>
         <textarea
+          className="add-more__textarea"
           name="description"
           value={formData.description || ''}
           onChange={handleChange}

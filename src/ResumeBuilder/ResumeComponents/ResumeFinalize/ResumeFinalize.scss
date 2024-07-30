@@ -1,30 +1,49 @@
 @import "global";
-.resume-finalize-content{}
-.resume-finalize-content .addmore-btn {
-    width: 110px;
-    font-weight: bold;
-    height: 35px;
-    background: var(--primary-color);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-.addmore {
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-.addmore li {
-    list-style: none;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.addmore li label{
-    color: #343434;
-}
-.addmore li input{}
-.addmore li input[type="text"] {
-    width: 100px;
-    outline: none;
+
+.resume-finalize {
+  &__header {
+    h3 {
+      span {
+        // Add any specific styles for the span if needed
+      }
+    }
+  }
+
+  &__content {
+    // Add any specific styles for the content container if needed
+
+    .addmore {
+      margin-top: 50px;
+      margin-bottom: 30px;
+
+      &-btn {
+        width: 110px;
+        font-weight: bold;
+        height: 35px;
+        background: var(--primary-color);
+        border: none;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      li {
+        list-style: none;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        label {
+          color: #343434;
+        }
+
+        input {
+          &[type="text"] {
+            width: 100px;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
 }
