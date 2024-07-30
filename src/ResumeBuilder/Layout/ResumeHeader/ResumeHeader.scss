@@ -2,52 +2,46 @@
 .resume-header {
     padding: 15px 0;
     border-bottom: 1px solid #dbdbdb;
+    // &__container{
+
+    // }
+    &__content{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+    }
+    &__title-box{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    &__button{
+        &:hover {
+            background: #2f89c5;
+        }
+        &--text{
+            width: 130px;
+            height: 45px;
+            font-weight: bold;
+            border-radius: 5px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+    }
+    &__title {
+        display: inline;
+        font-size: 14px; 
+        font-weight: 700;
+        color: var(--primary-color);
+        text-align: start;
+        margin-left: 15px; 
+        
+    }
 }
 
-.resume-header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.resume-header-content .resume-header-title span {
-    font-size: 14px;
-    color: var(--primary-link-color);
-}
-
-.resume-header-content .resume-header-button button {
-    width: 130px;
-    height: 45px;
-    font-weight: bold;
-    border-radius: 5px;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-    font-size: 15px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.resume-header-content .resume-header-button button:hover {
-    background: #2f89c5;
-}
-
-.jump-job-logo {
-    width: 150px;
-    height: 50px; 
-}
-
-.title {
-    font-size: 20px; 
-    font-weight: 700;
-    color: var(--primary-color);
-    text-align: start;
-    margin-left: 15px; 
-}
-
-.resume-header-content .resume-header-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
