@@ -17,8 +17,7 @@ import "@/EmployersComponents/ForEmployersHome/ForEmployersLiveData/ForEmployers
 import "@/EmployersComponents/ForEmployersPostJob/ForEmployersPostJob.css";
 import "@/EmployersComponents/ManageJobs/ManageJobs.css";
 import "@/ResumeBuilder/ResumeComponents/ResumeEducation/PreviewEducation.scss";
-import "@/ResumeBuilder/ResumeComponents/ResumeFinalize/ResumeFinalize.scss";
-import "@/ResumeBuilder/ResumeComponents/ResumeSteps/ResumeSteps.scss"; 
+import "@/ResumeBuilder/ResumeComponents/ResumeFinalize/ResumeFinalize.scss"; 
 import { UserProvider } from "@/Contexts/UserContext";
 import "./variables.css";
 import JobContext from "@/Contexts/JobContext";
