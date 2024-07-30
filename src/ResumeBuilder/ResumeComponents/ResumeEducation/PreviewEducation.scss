@@ -1,57 +1,73 @@
 @import "global";
+
 .preview-education {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid gray;
-    padding: 20px;
-}
-.preview-education .preview-number{
-    width: auto;
-}
-.preview-education .preview-number h2 {
-    font-size: 45px;
-}
-.preview-education .preview-content {
-    width: 70%;
-}
-.preview-education .preview-content h4 {
-    font-size: 15px;
-}
-.preview-education .preview-content p {
-    font-weight: 400;
-    font-size: 15px;
-}
-.preview-education .preview-content div{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 10px;
-}
-.preview-education .preview-content div p{
-    font-size: 13px;
-    color: var(--darker-secondary-color);
-}
-.preview-education .preview-actions {
-    width: auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-.preview-education .preview-actions button {
-    width: 40px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    line-height: 50px;
-    text-align: center;
-}
-.preview-education .preview-actions button svg {
-    font-size: 20px;
-    color: #fff;
-}
-.preview-education .preview-actions .delete{
-    background: #ac381d;
-}
-.preview-education .preview-actions .edit{
-    background: var(--primary-color);
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid gray;
+        padding: 20px;
+    }
+
+    &__number {
+        width: auto;
+
+        &-text {
+            font-size: 45px;
+        }
+    }
+
+    &__content {
+        width: 70%;
+    }
+
+    &__title {
+        font-size: 15px;
+    }
+
+    &__institution {
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    &__details {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    &__location,
+    &__duration {
+        font-size: 13px;
+        color: var(--darker-secondary-color);
+    }
+
+    &__actions {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+        line-height: 50px;
+        text-align: center;
+
+        svg {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        &--delete {
+            background: #ac381d;
+        }
+
+        &--edit {
+            background: var(--primary-color);
+        }
+    }
 }
