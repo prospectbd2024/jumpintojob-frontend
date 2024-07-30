@@ -1,47 +1,9 @@
-.resume-heading {
-    /* Add general styles for the resume heading */
-    
-  }
-
-  
-  .resume-heading-content-yesimg {
+ .resume-heading-content-yesimg {
     display: grid;
     grid-template-columns: 120px auto;
     gap: 20px;
   }
-  
- /* .resume-profile-image {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin-bottom: 20px;
-  flex-basis: 48%;
-  position: relative;
- }
- .resume-profile-image label{
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 10px;
- }
- .resume-profile-image input{
-  padding: 12px 9px;
-  outline: none;
-  font-size: 1rem;
-  font-weight: 400;
-  border-radius: 5px;
-  border: 1px solid #a3a3a3;
-  background: transparent;
-  color: #2c2c2c;
-  width: 96%;
-  height: 150px;
- }
- .resume-profile-image input:hover{
- border-color: var(--primary-color);
- } */
-/* .dp {
-  height: 100px;
-  width: auto;
-} */
+ 
 .resume-profile-image {
   display: flex;
   flex-direction: column;
@@ -244,9 +206,7 @@
   gap: 8px;
 }
 
-.currently-here {
-  /* Styles for 'Currently here' checkbox */
-}
+ 
 
 .resume-heading-content .heading-form .resume-input-field input[type="checkbox"] {
   width: 15px;

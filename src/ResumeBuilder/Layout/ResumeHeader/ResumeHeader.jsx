@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import './ResumeHeader.css';
+import './ResumeHeader.scss';
 import Logo from '@/assets/Logo';
 
 const ResumeHeader = () => {

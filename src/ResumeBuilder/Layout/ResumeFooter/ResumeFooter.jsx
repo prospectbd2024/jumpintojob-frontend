@@ -1,6 +1,6 @@
 import React from 'react';
 import  Link  from 'next/link';
-import './ResumeFooter.css'
+import './ResumeFooter.scss'
 
 const ResumeFooter = () => {
     return (

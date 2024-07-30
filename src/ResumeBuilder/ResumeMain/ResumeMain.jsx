@@ -4,7 +4,7 @@ import ResumeHeader from '../Layout/ResumeHeader/ResumeHeader';
 import ResumeFooter from '../Layout/ResumeFooter/ResumeFooter';
 import ResumeContainer from '../ResumeComponents/ResumeContainer/ResumeContainer';
 import ResumeContext from '@/Contexts/ResumeContext';
-import styles from './ResumeBuilder.module.css';
+import styles from './ResumeBuilder.module.scss';
 
 const ResumeBuilder = () => {
     const [loading, setLoading] = useState(true);
