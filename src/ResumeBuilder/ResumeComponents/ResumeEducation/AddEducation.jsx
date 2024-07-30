@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback } from 'react';
-import './AddEducation.css';
+import './AddEducation.scss';
 
 function AddEducation({ props }) {
     const { education, setEducation, saveChanges, educationErrors } = props;

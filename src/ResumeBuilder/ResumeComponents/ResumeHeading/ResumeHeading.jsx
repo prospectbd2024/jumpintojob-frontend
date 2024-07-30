@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserContext } from '../../../Contexts/UserContext';
-import './ResumeHeading.css'
+import './ResumeHeading.scss'
 import HeadingFields from './HeadingFields';
 import { useResumeContext } from '@/Contexts/ResumeContext';
 

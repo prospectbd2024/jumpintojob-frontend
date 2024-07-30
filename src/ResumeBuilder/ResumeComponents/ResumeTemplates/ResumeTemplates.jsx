@@ -1,6 +1,6 @@
 "use client"
 import React, { useState,useEffect } from 'react';
-import './ResumeTemplates.css'
+import './ResumeTemplates.scss'
 import 'bear-react-carousel/dist/index.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";

@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from "react";
-import "../ResumeHeading/ResumeHeading.css";
+import "../ResumeHeading/ResumeHeading.scss";
 import Education from "@/Components/UserProfile/Qualifications/Education/Education";
 import { useResumeContext } from "@/Contexts/ResumeContext";
 

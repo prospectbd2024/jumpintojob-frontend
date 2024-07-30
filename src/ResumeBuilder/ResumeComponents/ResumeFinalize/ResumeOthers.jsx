@@ -2,7 +2,7 @@
 import AddButton from '@/Components/Buttons/AddButton'
 import ModalBox from '@/Components/UserProfile/Qualifications/ModalBox'
 import React, { useState,useCallback,useEffect } from 'react'
-import './ResumeOthers.css'
+import './ResumeOthers.scss'
 import AddMore from './AddMore'
 import {FaTrashAlt} from 'react-icons/fa'
 import { useResumeContext } from '@/Contexts/ResumeContext'

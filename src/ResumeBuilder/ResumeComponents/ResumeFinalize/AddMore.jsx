@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './AddMore.css';
+import './AddMore.scss';
 
 function AddMore({ props }) {
   const { inputType, formData = {}, setFormData } = props;

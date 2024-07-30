@@ -1,5 +1,5 @@
 import React from 'react';
-import './ResumeSteps.css'
+import './ResumeSteps.scss'
 import { useResumeContext } from '@/Contexts/ResumeContext';
 
 const ResumeSteps = () => {

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import './PreviewEducation.css'
+import './PreviewEducation.scss'
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 const PreviewEducation = ({ props }) => {

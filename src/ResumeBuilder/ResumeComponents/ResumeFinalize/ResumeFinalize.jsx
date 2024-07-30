@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import './ResumeFinalize.css';
+import './ResumeFinalize.scss';
 import ResumeOthers from './ResumeOthers';
 import { useResumeContext } from '@/Contexts/ResumeContext';
 import Language from '@/Components/UserProfile/Qualifications/Language/Language';
