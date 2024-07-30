@@ -1,0 +1,31 @@
+@import "global";
+
+.resume-navigations {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  
+    &__button {
+      width: 140px;
+      height: 45px;
+      line-height: 45px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 15px; // Moved margin-top here for consistency
+  
+      &--prev {
+        border: 1px solid $color-black;
+        background: transparent;
+        color: #111;
+        border-radius: 3px;
+      }
+  
+      &--next {
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 3px;
+      }
+    }
+  }
+  
