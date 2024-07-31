@@ -2,7 +2,7 @@
 
 .skills-content {
   margin-top: 20px;
-  min-height: 33vh;
+  /* min-height: 33vh; */
 }
 
 .qualifications-header {
@@ -114,5 +114,5 @@
   padding-block: 10px;
   font-size: large;
   font-weight: bold;
-  min-height: 20vh;
+  /* min-height: 20vh; */
 }
