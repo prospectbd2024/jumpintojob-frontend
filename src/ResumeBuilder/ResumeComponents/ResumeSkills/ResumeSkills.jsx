@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useResumeContext } from '@/Contexts/ResumeContext';
 import Skill from '@/Components/UserProfile/Qualifications/Skills/Skill';
+import "../ResumeHeading/ResumeHeading.css";
 
 const ResumeSkills = () => {
     const { skills, setSkills } = useResumeContext();
@@ -19,7 +20,7 @@ const ResumeSkills = () => {
     };
 
     return (
-        <div className='resume-skills'>
+        <div className='resume-skills resume-border'>
             <div className="resume-skills-container container">
                 <Skill props={{
                     skills,

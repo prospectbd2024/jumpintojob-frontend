@@ -8,8 +8,11 @@ const ResumeEducation = () => {
   const {  educations,setEducations} = useResumeContext();
 
   return (
+    <div className="resume-border">
+
     <div className="resume-education">
       <Education props={{educations,setEducations}}/>
+    </div>
     </div>
   );
 };
