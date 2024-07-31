@@ -6,7 +6,7 @@ const {  htmlTemplate,setHtmlTemplate } = useResumeContext();
 const {template} = useUserProfileContext();
   const iframeRef = useRef(null);
 
-  console.log(className , style);
+  // console.log(className , style);
   const  generateTemplateHtml = async ()=>{
     try {
  

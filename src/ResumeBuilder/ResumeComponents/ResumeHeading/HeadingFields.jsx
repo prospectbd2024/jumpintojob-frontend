@@ -115,7 +115,7 @@ function HeadingFields({ props }) {
         <div className="heading-form-main">
           <div className='resume-input-field input-container'>
             <input type="text" placeholder=" " id="title" value={personalInformation.title} onChange={(e) => handleChange('title', e.target.value)}  onFocus={handleFocus} onBlur={handleBlur} />
-            <label For="title">Title</label>
+            <label htmlFor="title">Title</label>
             <hr />
           </div>
           <div className='resume-input-field input-container'>
