@@ -1,19 +1,26 @@
 import { useResumeContext } from "@/Contexts/ResumeContext";
-import React, { useState ,useEffect, useCallback, useRef} from "react";
-import {FaTrashAlt}  from 'react-icons/fa'
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { FaTrashAlt } from 'react-icons/fa';
+import Cropper from 'react-easy-crop';
+
 function HeadingFields({ props }) {
-  
   const { personalInformation, SetPersonalInformation } = props;
-  const {selectedImage, setSelectedImage,imagePreview, setImagePreview} = useResumeContext();
+  const { selectedImage, setSelectedImage, imagePreview, setImagePreview } = useResumeContext();
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [tempFile, setTempFile] = useState(null);
 
   const fileInputRef = useRef(null);
+
   const handleChange = (field, value) => {
     SetPersonalInformation((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
- 
 
   const handleAddressChange = (addressType, field, value) => {
     SetPersonalInformation((prevData) => ({
@@ -24,98 +31,149 @@ function HeadingFields({ props }) {
       }
     }));
   };
-  useEffect(() => {
-     if(selectedImage){
-       SetPersonalInformation(prev=>({...prev, cv_profile_image : selectedImage}))
-     }
-  }, [selectedImage])
-  
 
+  useEffect(() => {
+    if (selectedImage) {
+      SetPersonalInformation(prev => ({ ...prev, cv_profile_image: selectedImage }))
+    }
+  }, [selectedImage])
 
   const handleMediaLinkChange = (index, field, value) => {
-    // console.log(personalInformation.mediaLinks);
     const updatedMediaLinks = [...personalInformation.mediaLinks];
     updatedMediaLinks[index][field] = value;
-    SetPersonalInformation({...personalInformation, mediaLinks : updatedMediaLinks })
+    SetPersonalInformation({ ...personalInformation, mediaLinks: updatedMediaLinks })
   };
 
   const handleDeleteMediaLink = (index) => {
     const updatedMediaLinks = [...personalInformation.mediaLinks];
     updatedMediaLinks.splice(index, 1);
-    SetPersonalInformation({...personalInformation, mediaLinks : updatedMediaLinks })
+    SetPersonalInformation({ ...personalInformation, mediaLinks: updatedMediaLinks })
   };
 
   const handleAddMediaLink = () => {
-    // console.log(personalInformation);
-    SetPersonalInformation(  { ...personalInformation   ,  mediaLinks:     [ ...personalInformation?.mediaLinks, { name: "", url: "" }]});
+    SetPersonalInformation({ ...personalInformation, mediaLinks: [...personalInformation?.mediaLinks, { name: "", url: "" }] });
   };
-  const handleFocus=(event)=>{
-    // let element = event.target;
-    // element.classList.add('focused')
-    // let parentNode = element.parentNode;
-    // let hr = parentNode.querySelector('hr');
-    // hr.classList.add('focused')
+
+  const handleFocus = (event) => {
+    // Focus handling logic if needed
   }
-  const handleBlur= ( event)=>{
-    // let element = event.target;
-    // element.classList.remove('focused')
-    // let parentNode = element.parentNode;
-    // let hr = parentNode.querySelector('hr');
-    // hr.classList.remove('focused')
+
+  const handleBlur = (event) => {
+    // Blur handling logic if needed
   }
-  
+
   const handleImageChange = useCallback((event) => {
-   
     const file = event.target.files[0];
-    
     if (file) {
-      console.log(file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-      setSelectedImage(reader.result);
-    };
+      setTempFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setShowCropper(true);
+      };
       reader.readAsDataURL(file);
     }
-  }, []); // Add any dependencies if needed
+  }, [setImagePreview]);
 
-  useEffect(() => {
-    if (selectedImage) {
-      SetPersonalInformation((prevData) => ({
-        ...prevData,
-        cv_profile_image: selectedImage,
-      }));
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const createImage = (url) =>
+    new Promise((resolve, reject) => {
+      const image = new Image();
+      image.addEventListener('load', () => resolve(image));
+      image.addEventListener('error', (error) => reject(error));
+      image.src = url;
+    });
+
+  const getCroppedImg = async (imageSrc, pixelCrop) => {
+    const image = await createImage(imageSrc);
+    const canvas = document.createElement('canvas');
+    canvas.width = pixelCrop.width;
+    canvas.height = pixelCrop.height;
+    const ctx = canvas.getContext('2d');
+
+    ctx.drawImage(
+      image,
+      pixelCrop.x,
+      pixelCrop.y,
+      pixelCrop.width,
+      pixelCrop.height,
+      0,
+      0,
+      pixelCrop.width,
+      pixelCrop.height
+    );
+
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        resolve(URL.createObjectURL(blob));
+      }, 'image/jpeg');
+    });
+  };
+
+  const handleCropSave = useCallback(async () => {
+    if (croppedAreaPixels) {
+      const croppedImage = await getCroppedImg(imagePreview, croppedAreaPixels);
+      setSelectedImage(croppedImage);
+      setShowCropper(false);
     }
-  }, [selectedImage]);
+  }, [croppedAreaPixels, imagePreview, setSelectedImage]);
+
   return (
     <div className="resume-border">
-    <div className={`resume-heading-content  'resume-heading-content-yesimg' : 'resume-heading-content-noimg'`}>
-      {
-      // templateType == 'cv' &&
+      <div className={`resume-heading-content`}>
+        <div className="heading-form">
+          <div className="dp">
+            <div className="resume-profile-image">
+              <input type="file" id="profileImage" onChange={handleImageChange} ref={fileInputRef} />
 
-      }
-      <div   className="heading-form">
-      <div className="dp">
-  <div className="resume-profile-image">
-    <input type="file" id="profileImage" onChange={handleImageChange} />
- 
-    {imagePreview ||personalInformation.cv_profile_image ? (
-      <img src={personalInformation.cv_profile_image??imagePreview}  ref={fileInputRef} alt="Profile Preview" />
- 
-    ) : (
-      <div className="empty-profile-image"></div>
-    )}
-    <label htmlFor="profileImage" className="custom-file-upload">
-      Select Image
-    </label>
-        <h3>Personal Information</h3>
-  </div>
-</div>
+              {(imagePreview || personalInformation.cv_profile_image) && !showCropper ? (
+                <img src={personalInformation.cv_profile_image ?? imagePreview} alt="Profile Preview" />
+              ) : (
+                <div className="empty-profile-image"></div>
+              )}
+
+              <label htmlFor="profileImage" className="custom-file-upload">
+                Select Image
+              </label>
+              <h3>Personal Information</h3>
+            </div>
+          </div>
+
+          {showCropper && (
+            <div className="cropper-container">
+              <Cropper
+                image={imagePreview}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onCropComplete={onCropComplete}
+              />
+              <div className="cropper-controls">
+                <input
+                  type="range"
+                  value={zoom}
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  aria-labelledby="Zoom"
+                  onChange={(e) => setZoom(e.target.value)}
+                  className="zoom-range"
+                />
+                <button onClick={handleCropSave} className="save-crop-btn">Save</button>
+                <button onClick={() => setShowCropper(false)} className="cancel-crop-btn">Cancel</button>
+              </div>
+            </div>
+          )}
 
         <div className="heading-form-main">
           <div className='resume-input-field input-container'>
             <input type="text" placeholder=" " id="title" value={personalInformation.title} onChange={(e) => handleChange('title', e.target.value)}  onFocus={handleFocus} onBlur={handleBlur} />
-            <label htmlFor="title">Title</label>
+            <label For="title">Title</label>
             <hr />
           </div>
           <div className='resume-input-field input-container'>
@@ -174,17 +232,14 @@ function HeadingFields({ props }) {
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="current-city" value={personalInformation.currentAddress?.city} onChange={(e) => handleAddressChange('currentAddress', 'city', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="current-city">City</label>
-                {/* <hr /> */}
               </div>
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="current-state" value={personalInformation.currentAddress?.state} onChange={(e) => handleAddressChange('currentAddress', 'state', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="current-state">State or District</label>
-                {/* <hr /> */}
               </div>
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="current-country" value={personalInformation.currentAddress?.country} onChange={(e) => handleAddressChange('currentAddress', 'country', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="current-country">Country</label>
-                {/* <hr /> */}
               </div>
             </div>
             <div className="address-section">
@@ -192,61 +247,58 @@ function HeadingFields({ props }) {
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="permanent-city" value={personalInformation.permanentAddress?.city} onChange={(e) => handleAddressChange('permanentAddress', 'city', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="permanent-city">City</label>
-                {/* <hr /> */}
               </div>
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="permanent-state" value={personalInformation.permanentAddress?.state} onChange={(e) => handleAddressChange('permanentAddress', 'state', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="permanent-state">State or District</label>
-                {/* <hr /> */}
               </div>
               <div className='input-container resume-input-field'>
                 <input type="text" placeholder=' ' id="permanent-country" value={personalInformation.permanentAddress?.country} onChange={(e) => handleAddressChange('permanentAddress', 'country', e.target.value)} onFocus={handleFocus} onBlur={handleBlur} />
                 <label htmlFor="permanent-country">Country</label>
-                {/* <hr /> */}
               </div>
             </div>
           </div>
-        <div className='heading-textarea resume-input-field '>
-        <h4>SUMMARY</h4>
-          <textarea name="summary" id="summary" cols="30" rows="10" placeholder='Write your career summary' value={personalInformation.summary} onChange={(e) => handleChange('summary', e.target.value)}onFocus={handleFocus} onBlur={handleBlur} ></textarea>
-          <hr />
-        </div>
 
-        <div className='resume-input-field media-links'>
-            <h3>Media Links</h3>   
-          {/* Media Links */}
-          {personalInformation.mediaLinks?.map((link, index) => (
-            <div className="media-link" key={index}>
-              <div className="media-link-name-container">
-                <label htmlFor="">Name</label>
-                <input
-                  type="text"
-                  value={link.name}
-                  placeholder='LinkedIn'
-                  onChange={(e) => handleMediaLinkChange(index, "name", e.target.value)}
-                />
+          <div className='heading-textarea resume-input-field '>
+            <h4>SUMMARY</h4>
+            <textarea name="summary" id="summary" cols="30" rows="10" placeholder='Write your career summary' value={personalInformation.summary} onChange={(e) => handleChange('summary', e.target.value)} onFocus={handleFocus} onBlur={handleBlur}></textarea>
+            <hr />
+          </div>
+
+          <div className='resume-input-field media-links'>
+            <h3>Media Links</h3>
+            {personalInformation.mediaLinks?.map((link, index) => (
+              <div className="media-link" key={index}>
+                <div className="media-link-name-container">
+                  <label htmlFor="">Name</label>
+                  <input
+                    type="text"
+                    value={link.name}
+                    placeholder='LinkedIn'
+                    onChange={(e) => handleMediaLinkChange(index, "name", e.target.value)}
+                  />
+                </div>
+                <div className="media-link-url-container">
+                  <label htmlFor="">URL</label>
+                  <input
+                    type="text"
+                    value={link.url}
+                    placeholder="linkedin.com/me"
+                    onChange={(e) => handleMediaLinkChange(index, "url", e.target.value)}
+                  />
+                </div>
+                <div className="delete-btn-container">
+                  <FaTrashAlt
+                    style={{ cursor: "pointer", color: "red" }}
+                    onClick={() => handleDeleteMediaLink(index)}
+                  />
+                </div>
               </div>
-              <div className="media-link-url-container">
-              <label htmlFor="">URL</label>
-                <input
-                  type="text"
-                  value={link.url}
-                  placeholder="linkedin.com/me"
-                  onChange={(e) => handleMediaLinkChange(index, "url", e.target.value)}
-                />
-              </div>
-              <div className="delete-btn-container">
-                <FaTrashAlt
-                  style={{ cursor: "pointer", color: "red" }}
-                  onClick={() => handleDeleteMediaLink(index)}
-                />
-              </div>
-            </div>
-          ))}
-        <button onClick={handleAddMediaLink}>Add Media Link</button>
+            ))}
+            <button onClick={handleAddMediaLink}>Add Media Link</button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
