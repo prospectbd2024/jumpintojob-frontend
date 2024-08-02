@@ -139,17 +139,6 @@ function Skill({ props }) {
       <ModalBox props={{ ...modal, onSave: saveSkill, onClose: closeModal }}>
         <AddSkill props={{selectedSkill: skill, setSkill, skillErrors, selectedSkills}} />
       </ModalBox>
-      {/* <div className='resume-input-field input-container'>
-        <input 
-          type="text" 
-          name="skill" 
-          id="skill" 
-          placeholder="Search skill" 
-          value={skill.name || ''} 
-          onChange={handleChange} 
-        />
-        <label htmlFor="skill">Skill</label>
-      </div> */}
       {searchResults.length > 0 && (
         <ul className='search-results'>
           {searchResults.map((result, index) => (
