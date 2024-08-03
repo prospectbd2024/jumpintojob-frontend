@@ -1,8 +1,7 @@
-// AddHobby.jsx
 import React from "react";
-import './AddHobby.css'
+
 const AddHobby = ({ props }) => {
-  const { hobby, setHobby, saveChanges, hobbyErrors } = props;
+  const { hobby, setHobby, hobbyErrors } = props;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -10,9 +9,10 @@ const AddHobby = ({ props }) => {
   };
 
   return (
-    <div className="add-hobby-container">
-      <label htmlFor="name" className="add-hobby-label">
+    <div className="mb-5">
+      <label htmlFor="name" className="block font-bold text-lg mb-2">
         Hobby
+        <abbr title="Required" className="text-red-500">*</abbr>
       </label>
       <input
         type="text"
@@ -20,9 +20,10 @@ const AddHobby = ({ props }) => {
         name="name"
         value={hobby.name || ""}
         onChange={handleChange}
-        className={`add-hobby-input`}
+        className={`block w-full p-2 border rounded-md outline-none ${hobbyErrors.name ? 'border-red-500' : 'border-gray-300'}`}
+        aria-required="true"
       />
-      {hobbyErrors.name && <p className="error-message">Hobby name is required!</p>}
+      {hobbyErrors.name && <p className="text-red-500 text-sm mt-1">Hobby name is required!</p>}
     </div>
   );
 };

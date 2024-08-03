@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-import "./LanguageInput.css";
+import React, { useState, useCallback, useEffect } from "react"; 
 
 function LanguageInput({ props }) {
   const { selectedLanguage, setLanguage, selectedLanguages } = props;
@@ -58,24 +57,28 @@ function LanguageInput({ props }) {
   }, [selectedLanguage]);
 
   return (
-    <div className="language-input-container">
-      <label htmlFor="language" className="language-label">
+    <div className="relative">
+      <label htmlFor="language" className="font-bold text-lg">
         Select Language
       </label>
       <input
         type="text"
         id="language"
-        className="language-input"
+        className="w-full p-2 mt-1 border border-secondary rounded box-border outline-none"
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
         value={searchKey}
         onChange={handleChange}
       />
       {showSearchSuggestion && suggestedLanguages.length > 0 && (
-        <div className="language-suggestions-container">
-          <ul className="language-suggestions-list">
+        <div className="absolute top-full left-0 w-full min-h-10 bg-white border border-secondary border-t-0 rounded-b overflow-hidden z-10">
+          <ul className="list-none p-0 m-0">
             {suggestedLanguages.map((language, index) => (
-              <li key={index} onMouseDown={() => onLanguageClick(language)}>
+              <li
+                key={index}
+                className="p-2 cursor-pointer transition-colors duration-300 hover:bg-gray-100"
+                onMouseDown={() => onLanguageClick(language)}
+              >
                 {language.language}
               </li>
             ))}

@@ -1,10 +1,8 @@
-import { FaTrashAlt } from "react-icons/fa"; 
-// Hobbies.js
 import React, { useCallback, useState } from "react";
-import {  HiHeart } from "react-icons/hi";
+import { HiHeart } from "react-icons/hi";
+import { FaTrashAlt } from "react-icons/fa";
 import ModalBox from "../ModalBox";
 import AddHobby from "./AddHobby";
-import "./Hobbies.css"; // Import CSS file
 import AddButton from "@/Components/Buttons/AddButton";
 
 const Hobbies = ({ props }) => {
@@ -17,11 +15,19 @@ const Hobbies = ({ props }) => {
   });
   const [hobbyErrors, setHobbyErrors] = useState({});
 
+  const updateHobby = useCallback(
+    (index, updatedHobby) => {
+      const temp = hobbies.map((h, i) => (i === index ? updatedHobby : h));
+      setHobbies(temp);
+    },
+    [hobbies, setHobbies]
+  );
+
   const removeHobby = useCallback(
     (id) => {
       setHobbies((prev) => prev.filter((h, index) => index !== id));
     },
-    [hobbies]
+    [setHobbies]
   );
 
   const showModal = useCallback(
@@ -36,7 +42,7 @@ const Hobbies = ({ props }) => {
         index: index,
       });
     },
-    [hobbies]
+    [hobbies, setHobby]
   );
 
   const closeModal = useCallback(() => {
@@ -44,27 +50,6 @@ const Hobbies = ({ props }) => {
     setHobbyErrors({});
     manageModal({ display: "none" });
   }, []);
-
-  const saveChanges = useCallback(() => {
-    if (validation()) {
-      if (modal.state === "update") {
-        updateHobby(modal.index, hobby);
-      } else {
-        setHobbies((prev) => [...prev, hobby]);
-      }
-      closeModal();
-    } else {
-      console.log(hobbyErrors);
-    }
-  }, [hobby, hobbyErrors]);
-
-  const updateHobby = useCallback(
-    (index, hobby) => {
-      const temp = hobbies.map((h, i) => (i === index ? hobby : h));
-      setHobbies(temp);
-    },
-    [hobbies]
-  );
 
   const validation = useCallback(() => {
     const required = ["name"];
@@ -80,39 +65,45 @@ const Hobbies = ({ props }) => {
     });
 
     return flag;
-  }, [hobby, hobbyErrors]);
+  }, [hobby]);
+
+  const saveChanges = useCallback(() => {
+    if (validation()) {
+      if (modal.state === "update") {
+        updateHobby(modal.index, hobby);
+      } else {
+        setHobbies((prev) => [...prev, hobby]);
+      }
+      closeModal();
+    } else {
+      console.log(hobbyErrors);
+    }
+  }, [hobby, hobbyErrors, modal, closeModal, updateHobby, setHobbies, validation]);
 
   return (
-    <div className="hobbies-content">
-      <div className="qualifications-header">
-        <HiHeart />
+    <div className="mt-10 mb-12">
+      <div className="flex items-center mb-4 text-2xl font-bold">
+        <HiHeart className="mr-2 text-red-500" />
         <h3>Hobbies</h3>
       </div>
       {hobbies && hobbies.length > 0 ? (
-        <div className="hobbies-container">
+        <div>
           {hobbies.map((hobby, index) => (
-            <div className="hobby-item" key={index}>
-              <div className="hobby-name">
-              <p >{hobby.name}</p>
+            <div className="flex justify-between items-center mb-3" key={index}>
+              <div className="border border-gray-300 rounded-lg p-3 font-bold text-lg">
+                <p>{hobby.name}</p>
               </div>
-              <div>
-
-                <FaTrashAlt
-                className="remove-hobby"
-                style={{color : 'red'}}
+              <FaTrashAlt
+                className="text-red-500 cursor-pointer"
                 onClick={() => removeHobby(index)}
               />
-              </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="no-hobbies">Please add hobbies</div>
+        <div className="py-3 text-lg font-bold">Please add hobbies</div>
       )}
-
-      <div>
-        <AddButton onClick={()=>showModal('Add Hobby','add')}/>
-      </div>
+      <AddButton onClick={() => showModal('Add Hobby', 'add')} />
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddHobby props={{ hobby, setHobby, saveChanges, hobbyErrors }} />
       </ModalBox>
