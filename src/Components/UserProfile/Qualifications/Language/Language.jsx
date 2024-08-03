@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { RiMedalFill } from "react-icons/ri";
 import { FaTrashAlt } from "react-icons/fa";
-import "./Language.css";
 import ModalBox from "../ModalBox";
 import AddLanguage from "./AddLanguage";
 import AddButton from "@/Components/Buttons/AddButton";
@@ -40,21 +39,23 @@ function Language({ props }) {
   }, [language, setLanguages, closeModal]);
 
   return (
-    <div className="languages-content education-content">
-      <div className="qualifications-header">
-        <RiMedalFill />
-        <h3>Languages</h3>
+    <div className="mt-5">
+      <div className="flex items-center mb-2">
+        <RiMedalFill className="text-2xl text-yellow-500" />
+        <h3 className="ml-2 text-xl font-semibold">Languages</h3>
       </div>
       
       {languages && languages.length > 0 ? (
-        <div className="languages-container qualifications-container">
+        <div className="space-y-2">
           {languages.map((lang, index) => (
-            <div className="language-item" key={index}>
-              <div className="language-name">{lang.language}</div>
-              <div className="language-proficiency">{lang.proficiency}</div>
-              <div className="language-actions">
+            <div className="grid grid-cols-3 gap-2 items-center mb-2" key={index}>
+              <div className="bg-gray-200 border border-secondary rounded-xl p-2 text-lg font-bold">
+                {lang.language}
+              </div>
+              <div className="text-gray-700">{lang.proficiency}</div>
+              <div className="flex justify-end">
                 <FaTrashAlt
-                  className="remove-language"
+                  className="text-red-500 cursor-pointer text-xl ml-2"
                   onClick={() => removeLanguage(index)}
                 />
               </div>
@@ -62,11 +63,11 @@ function Language({ props }) {
           ))}
         </div>
       ) : (
-        <div className="no-languages">Please Add Languages</div>
+        <div className="p-2 text-lg font-bold">Please Add Languages</div>
       )}
       
       <div>
-        <AddButton onClick={() => showModal('Add Language')}/>
+        <AddButton onClick={() => showModal('Add Language')} />
       </div>
       
       <ModalBox props={{ ...modal, onClose: closeModal, onSave: saveLanguage }}>
