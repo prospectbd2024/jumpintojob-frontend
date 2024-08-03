@@ -32,7 +32,7 @@ const ResumeContainer = () => {
             {currentStep === 7 && (
               <button
                 type="button"
-                className="bg-[var(--primary-color)] text-white w-30 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition-all duration-300 ease"
+                className="bg-[var(--primary-color)] px-3 text-white w-30 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition-all duration-300 ease"
                 onClick={saveCV}
               >
                 Save
