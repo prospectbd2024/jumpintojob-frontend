@@ -28,7 +28,7 @@ function SearchSection({ handleFilteredJobs }) {
           <input
             type="submit"
             value="Search"
-            className="h-10 border-none bg-primary text-white w-28 text-sm font-bold rounded cursor-pointer transition-colors hover:bg-blue-700"
+            className="h-10 border-none bg-primary text-white w-28 bg-primary-color text-sm font-bold rounded cursor-pointer transition-colors hover:scale-110"
           />
         </form>
       </div>

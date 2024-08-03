@@ -27,12 +27,14 @@ const UserHome = () => {
 
   return (
     <div className='mt-5 mb-12'>
-      <div className="container mx-auto  grid-cols-3 gap-6">
-        <FeaturedCompanies isLoggedIn={true} />
+      <div className="container mx-auto">
         <FeaturedJobs
-          allJobs={allJobs}
-          handleClickedFeaturedJob={handleClickedFeaturedJob}
+        className={"flex-grow"}
+        jobClassName={'grid grid-cols-3 gap-4'}
+        allJobs={allJobs}
+        handleClickedFeaturedJob={handleClickedFeaturedJob}
         />
+        <FeaturedCompanies isLoggedIn={true} className={''}  />
         {/* <UserProfile profile={profile} /> */}
       </div>
     </div>

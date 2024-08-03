@@ -4,7 +4,7 @@ import CompanyCardSkeleton from "@/Skeletons/CompanyCardSkeleton";
 import { useCompanyContext } from "@/Contexts/CompanyContext";
 import "./FeaturedCompanies.css";
 
-function FeaturedCompanies({ isLoggedIn }) {
+function FeaturedCompanies({ isLoggedIn , className }) {
   const { companies } = useCompanyContext();
   const [loading, setLoading] = useState(true);
 
@@ -15,15 +15,13 @@ function FeaturedCompanies({ isLoggedIn }) {
   }, [companies]);
 
   return (
-    <div className={`mt-5 ${isLoggedIn ? 'logged-in' : ''}`}>
-      <h4 className={isLoggedIn ? 'logged-in-title' : 'logged-out-title'}>
+    <div className={`mt-5 ${isLoggedIn ? 'logged-in' : ''} ` }>
+      <h4 className={"text-center text-darker-secondary-color text-2xl "}>
         Featured Companies:
       </h4>
       <div
-        className="grid grid-cols-3 gap-x-3 gap-y-24 container mx-auto"
-        style={{
-          gridTemplateColumns: isLoggedIn ? "repeat(1, 1fr)" : "repeat(4, 1fr)",
-        }}>
+        className={`grid container mx-auto ${isLoggedIn ? " grid-cols-4 gap-x-3 gap-y-24 " : "grid-cols-4 "} `}
+         >
         {loading ? (
           <>
             {[...Array(6)].map((_, index) => (
@@ -32,7 +30,7 @@ function FeaturedCompanies({ isLoggedIn }) {
           </>
         ) : (
           <>
-            {companies.slice(0, isLoggedIn ? 3 : 8).map((company, index) => (
+            {companies.slice(0,  8).map((company, index) => (
               <CompanyCard key={index} props={{ company, index }} />
             ))}
           </>
