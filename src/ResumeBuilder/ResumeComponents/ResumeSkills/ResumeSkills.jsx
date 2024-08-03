@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useResumeContext } from '@/Contexts/ResumeContext';
-import Skill from '@/Components/UserProfile/Qualifications/Skills/Skill';
-// import "../ResumeHeading/ResumeHeading.css";
+import Skill from '@/Components/UserProfile/Qualifications/Skills/Skill'; 
 
 const ResumeSkills = () => {
     const { skills, setSkills } = useResumeContext();
