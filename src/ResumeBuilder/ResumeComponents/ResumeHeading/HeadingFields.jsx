@@ -2,7 +2,7 @@ import { useResumeContext } from "@/Contexts/ResumeContext";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { FaTrashAlt } from 'react-icons/fa';
 import Cropper from 'react-easy-crop';
-import './ResumeHeading.css'
+import './HeadingFields.css'
 function HeadingFields({ props }) {
   const { personalInformation, SetPersonalInformation } = props;
   const { selectedImage, setSelectedImage, imagePreview, setImagePreview } = useResumeContext();

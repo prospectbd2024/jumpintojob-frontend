@@ -1,7 +1,6 @@
 import React from "react";
 import LanguageInput from "./LanguageInput";
-import LanguageProperties from "./LanguageProperties";
-import "tailwindcss/tailwind.css"; // Import Tailwind CSS if not already imported
+import LanguageProperties from "./LanguageProperties"; 
 
 function AddLanguage({ props }) {
   const { selectedLanguage, setLanguage, selectedLanguages } = props;
