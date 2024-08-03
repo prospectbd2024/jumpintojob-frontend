@@ -28,7 +28,7 @@ const ResumeTemplates = ({ }) => {
                     <h3>Please pick a <span>template</span> below</h3>
                 </div>
                 
-                <div className="templates">
+                <div className="templates flex items-center justify-between">
                     <Slider {...templateSettings} style={{maxWidth: '100%'}} key={resumeTemplates.length}>
                     {resumeTemplates.map(tmp => <div key={tmp.id} className={`template`} onClick={() => 
                         setTemplate(tmp)
@@ -40,8 +40,8 @@ const ResumeTemplates = ({ }) => {
                     </Slider>
                 </div>
                 
-                <div className="resume-prev-next-buttons">
-                    <button className='next-button' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
+                <div className="flex gap-2.5 items-center">
+                    <button className='bg-[var(--primary-color)] text-white rounded-sm mt-3.75 w-[140px] h-[45px] leading-[45px] font-bold border-none text-base cursor-pointer' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
                 </div>
             </div>
         </div>

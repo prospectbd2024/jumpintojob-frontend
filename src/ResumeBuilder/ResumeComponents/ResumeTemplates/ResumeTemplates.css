@@ -8,11 +8,7 @@
 .resume-form-header h3 span{
     color: var(--primary-color);
 }
-.resume-templates .templates {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+ 
 .resume-templates .templates .template{
     text-align: center;
     cursor: pointer;

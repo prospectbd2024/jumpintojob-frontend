@@ -12,7 +12,7 @@ function ModalBox({children,props }) {
       <div className="flex items-center justify-between mb-5 pb-1 border-b border-gray-300">
         <h3>{title}</h3>
         <HiX
-          className=""
+          className="text-[#c82333] text-[24px] cursor-pointer transition-colors duration-300 hover:bg-[#f7adb5] hover:rounded-lg"
           onClick={onClose}
 
         />
