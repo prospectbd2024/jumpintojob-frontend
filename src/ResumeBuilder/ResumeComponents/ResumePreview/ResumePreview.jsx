@@ -9,7 +9,7 @@ const ResumePreview = () => {
     },[userProfileData])
 
     return (
-            <div>
+            <div className='border border-gray-300 p-5 rounded-lg bg-white mb-5'>
             {/* <h3>Preview</h3> */}
                 <RenderTemplate template={template} userProfileData={userProfileData} currentStep={currentStep} />
             </div>

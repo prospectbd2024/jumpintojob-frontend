@@ -92,7 +92,7 @@ function Skill({ props }) {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 border border-gray-300 p-5 rounded-lg bg-white mb-5">
       <div className="flex items-center mb-2">
         <RiMedalFill className="text-2xl text-yellow-500" />
         <h3 className="ml-2 text-xl font-semibold">Skills</h3>

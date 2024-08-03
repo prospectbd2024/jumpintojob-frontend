@@ -74,7 +74,7 @@ const Experiences = ({ props }) => {
   };
 
   return (
-    <>
+    <div className="border border-gray-300 p-5 rounded-lg bg-white mb-5">
       {experiences && experiences.length > 0 ? (
         <>
           <div className="flex items-center text-lg font-bold mt-5 mb-4">
@@ -137,7 +137,7 @@ const Experiences = ({ props }) => {
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddExperience props={{ experience, setExperience, experienceErrors }} />
       </ModalBox>
-    </>
+    </div>
   );
 };
 
