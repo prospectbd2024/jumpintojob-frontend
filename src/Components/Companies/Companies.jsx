@@ -2,8 +2,7 @@
 import React, {   useState } from "react";
 import CategoryList from "./CategoryList";  
 import { useCategoryContext } from "@/Contexts/CategoryContext";
-import '@/Components/Companies/Companies.css'
-import {useRouter} from 'next/navigation'
+import '@/Components/Companies/Companies.css' 
 const Companies = ({children}) => { 
   const {jobCategories} = useCategoryContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All Industries");

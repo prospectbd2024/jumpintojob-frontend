@@ -4,19 +4,14 @@ import React from 'react'
 function SaveProfileButton() {
   const { saveProfile } = useUserProfileContext();
   return (
-    <button onClick={saveProfile} 
-    style={{ 
-      background: "var(--primary-color)", 
-      color: "#fff", 
-      width: "120px", 
-      height: "40px",
-      borderRadius: "5px", 
-      border: "none", 
-      fontSize: "16px", 
-      fontWeight: "bold", 
-      cursor: "pointer", 
-      transition: ".3s" }}>save</button>
+    <button
+      onClick={saveProfile}
+      className="bg-primary text-white w-32 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition duration-300 ease-in-out hover:bg-primary-dark
+      "
+    >
+      Save
+    </button>
   )
 }
 
-export default SaveProfileButton
+export default SaveProfileButton;
