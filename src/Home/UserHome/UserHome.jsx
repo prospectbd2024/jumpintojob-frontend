@@ -1,38 +1,37 @@
-import React from 'react';
-import './UserHome.css';
+import React, { useEffect } from 'react';
 import { useUserContext } from '../../Contexts/UserContext';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import FeaturedJobs from './FeaturedJobs';
 import UserProfile from './UserProfile';
 import { useJobContext } from '@/Contexts/JobContext';
 import { useCompanyContext } from '@/Contexts/CompanyContext';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import FeaturedCompanies from './FeaturedCompanies';
+
 const UserHome = () => {
   const { setClickedFeaturedJob, profile } = useUserContext();
   const { allJobs } = useJobContext(); // Assuming you have a JobContext
   const { companies } = useCompanyContext(); // Assuming you have a CompanyContext
-  const router= useRouter();
-  // Simulating client-side check
+  const router = useRouter();
   let isClient = false;
-  setInterval(() => {
-    isClient = true;
-  }, 1000);
- 
- 
-  useJobContext()
+
+  useEffect(() => {
+    setTimeout(() => {
+      isClient = true;
+    }, 1000);
+  }, []);
+
   const handleClickedFeaturedJob = (jobId) => {
     setClickedFeaturedJob(jobId);
-    router.push("/findjobs/jobdetails/"+jobId);
+    router.push("/findjobs/jobdetails/" + jobId);
   };
 
   return (
-    <div className='user-home'>
-      <div className="user-home-content container">
+    <div className='mt-5 mb-12'>
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         <FeaturedCompanies isLoggedIn={true} />
         <FeaturedJobs
           allJobs={allJobs}
-       
           handleClickedFeaturedJob={handleClickedFeaturedJob}
         />
         <UserProfile profile={profile} />

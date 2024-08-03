@@ -50,8 +50,8 @@ const FeaturedJobs = () => {
   }
 
   return (
-    <div className="featured-jobs-section">
-      <div className="featured-jobs-content container">
+    <div className="featured-jobs-section ">
+      <div className="featured-jobs-content container mx-auto">
         <div className="featured-jobs-header section-header">
           <h2>Featured jobs at Jump Into Job</h2>
         </div>
