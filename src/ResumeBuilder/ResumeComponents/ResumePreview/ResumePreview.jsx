@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { useResumeContext } from '@/Contexts/ResumeContext';
 import RenderTemplate from './RenderTemplate';
-import "../ResumeHeading/ResumeHeading.css";
+// import "../ResumeHeading/ResumeHeading.css";
 
 const ResumePreview = () => {
     const { userProfileData,template,currentStep } = useResumeContext();

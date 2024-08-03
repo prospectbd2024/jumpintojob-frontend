@@ -2,7 +2,7 @@ import { useResumeContext } from "@/Contexts/ResumeContext";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { FaTrashAlt } from 'react-icons/fa';
 import Cropper from 'react-easy-crop';
-
+import './ResumeHeading.css'
 function HeadingFields({ props }) {
   const { personalInformation, SetPersonalInformation } = props;
   const { selectedImage, setSelectedImage, imagePreview, setImagePreview } = useResumeContext();
@@ -122,7 +122,7 @@ function HeadingFields({ props }) {
   }, [croppedAreaPixels, imagePreview, setSelectedImage]);
 
   return (
-    <div className="resume-border">
+    <div className="border border-gray-300 p-5 rounded-lg bg-white mb-5">
       <div className={`resume-heading-content`}>
         <div className="heading-form">
           <div className="dp">
