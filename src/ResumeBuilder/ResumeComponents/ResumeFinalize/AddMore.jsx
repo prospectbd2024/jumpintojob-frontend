@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './AddMore.css';
 
 function AddMore({ props }) {
   const { inputType, formData = {}, setFormData } = props;
@@ -10,7 +9,7 @@ function AddMore({ props }) {
       switch (inputType) {
         case 'Project':
           return {
-            type : 'Project',
+            type: 'Project',
             title: '',
             startDate: '',
             endDate: '',
@@ -19,14 +18,14 @@ function AddMore({ props }) {
           };
         case 'Certificate':
           return {
-            type : 'Certificate',
+            type: 'Certificate',
             title: '',
             date: '',
             description: '',
           };
         case 'Publication':
           return {
-            type : 'Publication',
+            type: 'Publication',
             title: '',
             journal: '',
             date: '',
@@ -34,7 +33,7 @@ function AddMore({ props }) {
           };
         default:
           return {
-            type : 'Other',
+            type: 'Other',
             title: '',
             description: '',
           };
@@ -53,144 +52,156 @@ function AddMore({ props }) {
   };
 
   const renderProjectForm = () => (
-    <div className="add-project-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="w-100 max-w-sm">
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Title:</label>
         <input
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Start Date:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Start Date:</label>
         <input
           type="date"
           name="startDate"
           value={formData.startDate || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>End Date:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">End Date:</label>
         <input
           type="date"
           name="endDate"
           value={formData.endDate || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
-        <div className="form-check" >
-          <div >
+        <div className="flex items-center mt-2">
           <input
             type="checkbox"
             name="present"
             checked={formData.present || false}
             onChange={handleChange}
+            className="mr-2"
           />
-          <label>Present</label>
-          </div>
+          <label className="text-base">Present</label>
         </div>
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Description:</label>
         <textarea
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
         />
       </div>
     </div>
   );
 
   const renderCertificateForm = () => (
-    <div className="add-certificate-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="w-100 max-w-sm">
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Title:</label>
         <input
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Date:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Date:</label>
         <input
           type="date"
           name="date"
           value={formData.date || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Description:</label>
         <textarea
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
         />
       </div>
     </div>
   );
 
   const renderPublicationForm = () => (
-    <div className="add-publication-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="w-100 max-w-sm">
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Title:</label>
         <input
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Journal/Conference:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Journal/Conference:</label>
         <input
           type="text"
           name="journal"
           value={formData.journal || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Date:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Date:</label>
         <input
           type="date"
           name="date"
           value={formData.date || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Abstract:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Abstract:</label>
         <textarea
           name="abstract"
           value={formData.abstract || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
         />
       </div>
     </div>
   );
 
   const renderDefaultForm = () => (
-    <div className="default-container">
-      <div className="form-group">
-        <label>Title:</label>
+    <div className="w-100 max-w-sm">
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Title:</label>
         <input
           type="text"
           name="title"
           value={formData.title || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full"
         />
       </div>
-      <div className="form-group">
-        <label>Description:</label>
+      <div className="flex flex-col mb-4">
+        <label className="text-base font-semibold mb-2">Description:</label>
         <textarea
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
         />
       </div>
     </div>

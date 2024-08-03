@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
 function AddAreaOfExpertise({ props }) {
@@ -6,7 +6,7 @@ function AddAreaOfExpertise({ props }) {
   const [maxError, setMaxError] = useState("");
 
   const handleChange = (index, field, value) => {
-    const newExpertises = [...experience.expertises];
+    const newExpertises = [...(experience.expertises || [])];
     newExpertises[index] = { ...newExpertises[index], [field]: value };
     setExperience((prevExperience) => ({
       ...prevExperience,
@@ -24,73 +24,60 @@ function AddAreaOfExpertise({ props }) {
   };
 
   const handleAdd = () => {
-    if (experience?.expertises?.length < 3) {
+    if (!experience.expertises || experience.expertises.length < 3) {
       setExperience((prevExperience) => ({
         ...prevExperience,
-        expertises: [...prevExperience.expertises, { name: "", months: "" }],
+        expertises: [...(prevExperience.expertises || []), { name: "", months: "" }],
       }));
-    }
-    else if (!experience.expertises){
-      setExperience((prevExperience) => ({
-        ...prevExperience,
-        expertises: [ { name: "", months: "" }],
-      }));
-    }
-     else {
+    } else {
       setMaxError("You can only add a maximum of 3 areas of expertise");
-      setTimeout(() => {
-        setMaxError("");
-      }, 3000); // Remove error message after 3 seconds
+      setTimeout(() => setMaxError(""), 3000);
     }
   };
 
   return (
-    <div className="add-experience-input-field area-expertise-input-container">
-      <label>
+    <div className="flex flex-col space-y-2">
+      <label className="text-sm font-semibold">
         Area of Expertise
-        <abbr title="Required" className="required"></abbr>
+        <abbr title="Required" className="text-red-500 ml-1">*</abbr>
       </label>
-      <div>
+      <div className="space-y-2">
         {experience?.expertises?.map((element, index) => (
-          <div className="add-experience-experties" key={index}>
-            <div className="">
-              <input
-                type="text"
-                value={element.name}
-                onChange={(e) => handleChange(index, "name", e.target.value)}
-              />
-            </div>
-            <div className="">
-              <input
-                type="number"
-                className=""
-                placeholder="Months"
-                style={{ width: "60px", outline: "none" }}
-                min="0"
-                value={element.months}
-                onChange={(e) => handleChange(index, "months", e.target.value)}
-              />
-            </div>
-            <div className="delete-btn-container">
-              <FaTrashAlt
-                style={{ cursor: "pointer", color: "red" }}
-                onClick={() => handleDelete(index)}
-              />
-            </div>
+          <div key={index} className="flex items-center space-x-4">
+            <input
+              type="text"
+              value={element.name}
+              onChange={(e) => handleChange(index, "name", e.target.value)}
+              className="flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Expertise"
+            />
+            <input
+              type="number"
+              value={element.months}
+              onChange={(e) => handleChange(index, "months", e.target.value)}
+              className="w-20 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Months"
+              min="0"
+            />
+            <FaTrashAlt
+              className="text-red-500 cursor-pointer hover:text-red-700"
+              onClick={() => handleDelete(index)}
+            />
           </div>
         ))}
       </div>
-
-      <div id="addButton" className="" style={{ display: "block" }}>
-        <button className="add-experience-experties-add-btn" onClick={handleAdd}>
-          <i className=" "></i>Add New
+      <div>
+        <button 
+          onClick={handleAdd}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300"
+        >
+          Add New
         </button>
       </div>
-      <div className="max-error">{maxError}</div>
+      {maxError && <div className="text-red-500 text-sm">{maxError}</div>}
       {experienceErrors.expertises && (
-        <div className="max-error">Please add Expertises</div>
+        <div className="text-red-500 text-sm">Please add Expertises</div>
       )}
-      <input type="hidden" name="userType" id="userType" value="" />
     </div>
   );
 }

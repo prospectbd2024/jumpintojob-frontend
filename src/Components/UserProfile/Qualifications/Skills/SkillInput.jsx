@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useState, useCallback, useEffect } from "react";
-// import "./SkillInput.css";
 
 function SkillInput({ props }) {
   const { setSkill, selectedSkill, selectedSkills } = props;
@@ -11,18 +10,18 @@ function SkillInput({ props }) {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/skills`)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return res.json();
-    })
-    .then(data => {
-      setAllSkills(data.data);
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setAllSkills(data.data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -58,24 +57,30 @@ function SkillInput({ props }) {
   }, [selectedSkill]);
 
   return (
-    <div className="add-skill-input-container">
-      <label htmlFor="skill" className="add-skill-label">
+    <div className="relative">
+      <label htmlFor="skill" className="font-bold text-lg">
         Select Skill
       </label>
       <input
         type="text"
         id="skill"
-        className="add-skill-input"
+        className="w-full mt-1 p-2 border border-gray-300 rounded-md outline-none"
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
         value={searchKey}
         onChange={handleChange}
       />
       {showSearchSuggestion && suggestedSkills.length > 0 && (
-        <div className="suggestions-container">
-          <ul className="suggestions-list">
+        <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-300 rounded-b-md shadow-lg z-10">
+          <ul className="list-none p-0 m-0">
             {suggestedSkills.map((skill, index) => (
-              <li key={index} onMouseDown={() => onSkillClick(skill)}>{skill.name}</li>
+              <li
+                key={index}
+                onMouseDown={() => onSkillClick(skill)}
+                className="p-2 cursor-pointer transition-colors duration-300 hover:bg-gray-100"
+              >
+                {skill.name}
+              </li>
             ))}
           </ul>
         </div>

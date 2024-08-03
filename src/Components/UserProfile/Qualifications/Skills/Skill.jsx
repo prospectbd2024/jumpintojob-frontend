@@ -1,8 +1,7 @@
 "use client";
-import { FaTrashAlt } from "react-icons/fa"; 
+import { FaTrashAlt } from "react-icons/fa";
 import React, { useCallback, useState } from "react";
 import { RiMedalFill } from "react-icons/ri";
-import "./Skill.css";
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
 import Rating from "./Rating";
@@ -31,7 +30,7 @@ function Skill({ props }) {
 
   const closeModal = useCallback(() => {
     setSkill({});
-    setSkillErrors({})
+    setSkillErrors({});
     manageModal({
       display: "none",
     });
@@ -65,8 +64,8 @@ function Skill({ props }) {
 
   const saveSkill = useCallback(() => {
     if (validation(skill)) {
-      saveChanges(skill)
-      closeModal()
+      saveChanges(skill);
+      closeModal();
     } else {
       console.log(skillErrors);
     }
@@ -74,7 +73,7 @@ function Skill({ props }) {
 
   const isChecked = (list, item) => {
     return list && list.includes(item);
-  }
+  };
 
   const handleChange = (e) => {
     setSkill(prev => ({ ...prev, name: e.target.value }));
@@ -93,38 +92,42 @@ function Skill({ props }) {
   };
 
   return (
-    <div className="skills-content education-content">
-      <div className="qualifications-header">
-        <RiMedalFill />
-        <h3>Skills</h3>
+    <div className="mt-5 border border-gray-300 p-5 rounded-lg bg-white mb-5">
+      <div className="flex items-center mb-2">
+        <RiMedalFill className="text-2xl text-yellow-500" />
+        <h3 className="ml-2 text-xl font-semibold">Skills</h3>
       </div>
       {skills && (
-        <div className="skills-container qualifications-container">
+        <div className="space-y-2">
           {skills.map((skill, index) => (
-            <div className="skill-item" key={index}>
+            <div className="grid grid-cols-4 gap-2 items-center mb-2" key={index}>
+              <div className="bg-gray-200 border border-secondary rounded-xl p-2 text-lg font-bold">
+                {skill.name}
+              </div>
               <div>
-                <div className="skill-name">{skill.name}</div>
+                <Rating props={{ rating: skill.rating, setRating: () => {}, mode: 'r' }} onChange={() => {}} />
               </div>
-              <div className="skill-rating"> 
-                <Rating props={{rating: skill.rating, setRating: () => {}, mode: 'r'}} onChange={() => {}} />
+              <div className="font-bold text-sm flex space-x-2">
+                <label className="flex items-center">
+                  <input type="checkbox" name="self" defaultChecked={isChecked(skill?.learnedFrom, 'self')} />
+                  <span className="ml-1">Self</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" name="job" defaultChecked={isChecked(skill?.learnedFrom, 'service')} />
+                  <span className="ml-1">Job</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" name="education" defaultChecked={isChecked(skill?.learnedFrom, 'education')} />
+                  <span className="ml-1">Education</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" name="professional_training" defaultChecked={isChecked(skill?.learnedFrom, 'training')} />
+                  <span className="ml-1">Professional Training</span>
+                </label>
               </div>
-              <div className="skill-learned-from"> 
-                <div>
-                  <label><input type="checkbox" name="self" defaultChecked={isChecked(skill?.learnedFrom, 'self')} /> Self</label><br/>
-                </div>
-                <div>
-                  <label><input type="checkbox" name="job" defaultChecked={isChecked(skill?.learnedFrom, 'service')} /> Job</label><br/>
-                </div>
-                <div>
-                  <label><input type="checkbox" name="education" defaultChecked={isChecked(skill?.learnedFrom, 'education')} /> Education</label><br/>
-                </div>
-                <div>
-                  <label><input type="checkbox" name="professional_training" defaultChecked={isChecked(skill?.learnedFrom, 'training')} /> Professional Training</label><br/>
-                </div>
-              </div>
-              <div className='skill-actions'> 
+              <div className="flex justify-end items-center">
                 <FaTrashAlt
-                  className="remove-skill"
+                  className="text-red-500 cursor-pointer text-xl"
                   onClick={() => removeSkill(index)}
                 />
               </div>
@@ -132,17 +135,21 @@ function Skill({ props }) {
           ))}
         </div>
       )}
-      {skills.length === 0 && <div className="no-skills">Please Add Skills</div>}
+      {skills.length === 0 && <div className="p-2 text-lg font-bold">Please Add Skills</div>}
       <div>
-        <AddButton onClick={() => showModal('Add Skill', 'add')}/>
+        <AddButton onClick={() => showModal('Add Skill', 'add')} />
       </div>
       <ModalBox props={{ ...modal, onSave: saveSkill, onClose: closeModal }}>
-        <AddSkill props={{selectedSkill: skill, setSkill, skillErrors, selectedSkills}} />
+        <AddSkill props={{ selectedSkill: skill, setSkill, skillErrors, selectedSkills }} />
       </ModalBox>
       {searchResults.length > 0 && (
-        <ul className='search-results'>
+        <ul className='absolute top-full left-0 w-full bg-white border border-secondary rounded-b-md shadow-lg mt-2 z-10'>
           {searchResults.map((result, index) => (
-            <li key={index} onClick={() => handleSelect(result)}>
+            <li
+              key={index}
+              className='p-2 cursor-pointer hover:bg-gray-100'
+              onClick={() => handleSelect(result)}
+            >
               {result.name}
             </li>
           ))}

@@ -1,14 +1,13 @@
 import React from "react";
 import LanguageInput from "./LanguageInput";
-import LanguageProperties from "./LanguageProperties";
-import "./AddLanguage.css";
+import LanguageProperties from "./LanguageProperties"; 
 
 function AddLanguage({ props }) {
   const { selectedLanguage, setLanguage, selectedLanguages } = props;
 
   return (
-    <div className="add-language-container">
-      <p className="add-language-heading">
+    <div className="bg-white p-5">
+      <p className="text-xl mb-4">
         Add languages to your profile
       </p>
       
