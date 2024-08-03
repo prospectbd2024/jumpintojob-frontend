@@ -1,15 +1,14 @@
-/* @tailwind base;
+/* styles/globals.css */
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
-*{
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  box-sizing: border-box;
+/* Custom global styles */
+* {
+  @apply m-0 p-0 box-border font-sans;
 }
 
-
+/* 
 .container{
   max-width: 1368px;
   margin: 0 auto;
@@ -89,4 +88,4 @@
   cursor: pointer;
   text-decoration: none;
 }
-
+ */
