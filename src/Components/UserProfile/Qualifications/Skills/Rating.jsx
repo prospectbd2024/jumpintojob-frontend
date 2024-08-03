@@ -44,7 +44,7 @@ function Rating({ props, onChange }) {
         Skill rating<span className="text-red-500">*</span>
       </div>
       <div
-        className="flex space-x-1"
+        className="flex  "
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
@@ -58,9 +58,8 @@ function Rating({ props, onChange }) {
           >
             <CustomSVG
               className={`${
-                value % 1 !== 0 ? 'scale-x-[-1]' : ''
-              }`}
-              pathClassName={`${value <= (hoveredRating || rating) ? 'fill-yellow-500' : 'fill-gray-300'}`}
+                value % 1 !== 0 ? '' : 'scale-x-[-1]'
+              } ${value <= (hoveredRating || rating) ? 'fill-yellow-300' : 'fill-white'}`} 
             />
           </span>
         ))}

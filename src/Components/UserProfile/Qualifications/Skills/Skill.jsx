@@ -101,29 +101,22 @@ function Skill({ props }) {
         <div className="space-y-2">
           {skills.map((skill, index) => (
             <div className="grid grid-cols-4 gap-2 items-center mb-2" key={index}>
-              <div className="bg-gray-200 border border-secondary rounded-xl p-2 text-lg font-bold">
+              <div className="bg-gray-200 border border-secondary rounded-xl p-2 text-lg font-bold text-center">
                 {skill.name}
               </div>
               <div>
                 <Rating props={{ rating: skill.rating, setRating: () => {}, mode: 'r' }} onChange={() => {}} />
               </div>
-              <div className="font-bold text-sm flex space-x-2">
-                <label className="flex items-center">
-                  <input type="checkbox" name="self" defaultChecked={isChecked(skill?.learnedFrom, 'self')} />
-                  <span className="ml-1">Self</span>
-                </label>
-                <label className="flex items-center">
-                  <input type="checkbox" name="job" defaultChecked={isChecked(skill?.learnedFrom, 'service')} />
-                  <span className="ml-1">Job</span>
-                </label>
-                <label className="flex items-center">
-                  <input type="checkbox" name="education" defaultChecked={isChecked(skill?.learnedFrom, 'education')} />
-                  <span className="ml-1">Education</span>
-                </label>
-                <label className="flex items-center">
-                  <input type="checkbox" name="professional_training" defaultChecked={isChecked(skill?.learnedFrom, 'training')} />
-                  <span className="ml-1">Professional Training</span>
-                </label>
+              <div className="font-bold text-sm flex space-x-2" >
+                {
+                   
+                  
+                  skill?.learnedFrom?.map(el => {
+                    return <span className="ml-2 p-1 pl-2 border rounded-lg bg-gray-200">{el.label
+
+                    }</span>;
+                  }) 
+                }
               </div>
               <div className="flex justify-end items-center">
                 <FaTrashAlt
