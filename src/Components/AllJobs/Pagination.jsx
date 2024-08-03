@@ -1,6 +1,5 @@
 import { FaChevronLeft,FaChevronRight } from "react-icons/fa"; 
-import React from 'react';
-import './Pagination.css';
+import React from 'react'; 
 
 function Pagination({ jobPage, setJobPage }) {
     const { currentPage, totalPages } = jobPage;
@@ -75,23 +74,23 @@ function Pagination({ jobPage, setJobPage }) {
     };
 
     return (
-        <div className="pagination-container">
-            <button 
-                className="arrow-button" 
-                onClick={handlePrevious} 
-                disabled={currentPage <= 1}
-            >
+    <div className="flex justify-center items-center my-5 font-sans">
+        <button 
+            className="flex items-center justify-center w-10 h-10 text-primary border-2 border-primary rounded-full transition-colors duration-300 ease-in-out disabled:cursor-not-allowed disabled:text-darker-secondary disabled:border-darker-secondary hover:bg-primary hover:text-white" 
+            onClick={handlePrevious} 
+            disabled={currentPage <= 1}
+        >
             <FaChevronLeft />
-            </button>
-            {renderPageNumbers()}
-            <button 
-                className="arrow-button" 
-                onClick={handleNext} 
-                disabled={currentPage >= totalPages}
-            >
-                <FaChevronRight />
-            </button>
-        </div>
+        </button>
+        {renderPageNumbers()}
+        <button 
+            className="flex items-center justify-center w-10 h-10 text-primary border-2 border-primary rounded-full transition-colors duration-300 ease-in-out disabled:cursor-not-allowed disabled:text-darker-secondary disabled:border-darker-secondary hover:bg-primary hover:text-white" 
+            onClick={handleNext} 
+            disabled={currentPage >= totalPages}
+        >
+            <FaChevronRight />
+        </button>
+    </div>
     );
 }
 
