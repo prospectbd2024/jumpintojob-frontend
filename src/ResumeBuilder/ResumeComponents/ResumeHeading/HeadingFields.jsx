@@ -135,7 +135,7 @@ function HeadingFields({ props }) {
                 <div className="empty-profile-image"></div>
               )}
 
-              <label htmlFor="profileImage" className="custom-file-upload">
+              <label htmlFor="profileImage" className="text-base   font-semibold mb-2.5 inline-block py-2.5 px-5 bg-primary-color text-white rounded cursor-pointer">
                 Select Image
               </label>
               <h3>Personal Information</h3>
