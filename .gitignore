@@ -25,3 +25,8 @@ package-lock.json
 *.sln
 *.sw?
 .next/*
+
+# npm
+
+
+*-lock.json
