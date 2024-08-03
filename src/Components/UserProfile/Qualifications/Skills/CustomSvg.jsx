@@ -49,8 +49,7 @@ function CustomSVG({ className, style, pathClassName, pathStyle }) {
             strokeLinecap: 'butt',
             strokeDashoffset: '0',
             strokeLinejoin: 'miter',
-            strokeMiterlimit: '4',
-            fill: 'none', // Remove fill
+            strokeMiterlimit: '4', 
             opacity: '1',
             ...pathStyle,
           }}

@@ -107,10 +107,14 @@ function Skill({ props }) {
               <div>
                 <Rating props={{ rating: skill.rating, setRating: () => {}, mode: 'r' }} onChange={() => {}} />
               </div>
-              <div className="font-bold text-sm flex space-x-2">
+              <div className="font-bold text-sm flex space-x-2" >
                 {
+                   
+                  
                   skill?.learnedFrom?.map(el => {
-                    return <span className="ml-1">{el}</span>;
+                    return <span className="ml-2 p-1 pl-2 border rounded-lg bg-gray-200">{el.label
+
+                    }</span>;
                   }) 
                 }
               </div>

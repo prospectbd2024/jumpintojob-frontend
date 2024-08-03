@@ -59,7 +59,7 @@ function Rating({ props, onChange }) {
             <CustomSVG
               className={`${
                 value % 1 !== 0 ? '' : 'scale-x-[-1]'
-              } ${value <= (hoveredRating || rating) ? 'fill-yellow-500' : 'fill-gray-300'}`} 
+              } ${value <= (hoveredRating || rating) ? 'fill-yellow-300' : 'fill-white'}`} 
             />
           </span>
         ))}
