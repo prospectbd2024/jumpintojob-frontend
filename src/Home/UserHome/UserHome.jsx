@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useUserContext } from '../../Contexts/UserContext';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import FeaturedJobs from './FeaturedJobs';
 import UserProfile from './UserProfile';
 import { useJobContext } from '@/Contexts/JobContext';
@@ -28,13 +27,13 @@ const UserHome = () => {
 
   return (
     <div className='mt-5 mb-12'>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="container mx-auto  grid-cols-3 gap-6">
         <FeaturedCompanies isLoggedIn={true} />
         <FeaturedJobs
           allJobs={allJobs}
           handleClickedFeaturedJob={handleClickedFeaturedJob}
         />
-        <UserProfile profile={profile} />
+        {/* <UserProfile profile={profile} /> */}
       </div>
     </div>
   );

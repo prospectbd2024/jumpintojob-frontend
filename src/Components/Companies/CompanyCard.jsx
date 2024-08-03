@@ -31,7 +31,7 @@ function CompanyCard({ props }) {
   };
 
   return (
-    <div key={company.name} className="border border-gray-300 p-4 rounded-lg mb-4 h-fit">
+    <div key={company.name} className="border border-gray-300 p-4 rounded-lg mb-4 h-fit w-80">
       <div className="relative">
         <div className="overflow-hidden rounded-lg">
           <CompanyCoverImage company={company} />
