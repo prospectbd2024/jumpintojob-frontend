@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import "./CompanyCard.css";
 import CompanyCoverImage from "./CompanyCoverImage";
 import { useUserContext } from "@/Contexts/UserContext";
 import { useRouter } from "next/navigation";
 import Swal from 'sweetalert2'; 
+
 function CompanyCard({ props }) {
   const { index, company } = props;
   const router = useRouter();
   const { userData } = useUserContext();
+
   const handleClick = (link) => {
     if (userData) {
       router.push(link)
@@ -28,42 +29,43 @@ function CompanyCard({ props }) {
       });
     }
   };
+
   return (
-    <div key={company.name} className="company-item">
-      <div className="company-item-content">
-        <div className="company-item-content-banner">
+    <div key={company.name} className="border border-gray-300 p-4 rounded-lg mb-4 h-fit">
+      <div className="relative">
+        <div className="overflow-hidden rounded-lg">
           <CompanyCoverImage company={company} />
         </div>
-        <div className="company-item-content-main">
-          <div className="main-items">
-            <img src={company.logo} alt="" />
+        <div className="relative -top-8 left-2 max-w-[98%]">
+          <div className="flex gap-5 mb-4 items-end">
+            <img src={company.logo} alt={company.name} className="w-20 h-20 bg-white rounded-lg shadow-md" />
             <div>
               <Link href={""}>
-                <h3>{company.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-800">{company.name}</h3>
               </Link>
-              <p>Verified Profile</p>
+              <p className="text-gray-500">Verified Profile</p>
             </div>
           </div>
-          <div className="main-items">
-            <p>{company.category}</p>
-            {company.size ? <p>Company Size: {company.size}</p> : ""}
+          <div className="flex gap-5 mb-4 items-end">
+            <p className="text-gray-600">{company.category}</p>
+            {company.size && <p className="text-gray-600">Company Size: {company.size}</p>}
           </div>
-          <div className="main-items">
-            <p className="company_description">{company.description ? company.description.slice(0, 140) + "..." : ""}</p>
+          <div className="flex gap-5 mb-4">
+            <p className="text-gray-800">{company.description ? company.description.slice(0, 140) + "..." : ""}</p>
           </div>
-          <div className="company-item-content-footer">
-            <div
-              onClick={() => {
-                handleClick(`/companies/${company.links.show}`);
-              }}>
-              <button className="company-button company-details-button">View Details</button>
-            </div>
-            <div
-              onClick={() => {
-                handleClick(`/companies/${company.links.show}#company-jobs`);
-              }}>
-              <button className="company-button company-jobs-button">View Jobs</button>
-            </div>
+          <div className="flex gap-4">
+            <button 
+              onClick={() => handleClick(`/companies/${company.links.show}`)}
+              className="w-32 h-10 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600"
+            >
+              View Details
+            </button>
+            <button 
+              onClick={() => handleClick(`/companies/${company.links.show}#company-jobs`)}
+              className="w-32 h-10 bg-transparent border border-gray-300 text-gray-800 font-bold rounded-md hover:bg-gray-100"
+            >
+              View Jobs
+            </button>
           </div>
         </div>
       </div>

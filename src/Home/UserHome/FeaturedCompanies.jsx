@@ -15,12 +15,12 @@ function FeaturedCompanies({ isLoggedIn }) {
   }, [companies]);
 
   return (
-    <div className={`user-home-companies-container ${isLoggedIn ? 'logged-in' : ''}`}>
+    <div className={`mt-5 ${isLoggedIn ? 'logged-in' : ''}`}>
       <h4 className={isLoggedIn ? 'logged-in-title' : 'logged-out-title'}>
         Featured Companies:
       </h4>
       <div
-        className="user-home-companies"
+        className="grid grid-cols-3 gap-x-3 gap-y-24 container mx-auto"
         style={{
           gridTemplateColumns: isLoggedIn ? "repeat(1, 1fr)" : "repeat(4, 1fr)",
         }}>
