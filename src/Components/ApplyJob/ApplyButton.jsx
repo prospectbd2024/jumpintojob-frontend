@@ -1,11 +1,11 @@
-// ApplyButton.jsx
 import React from "react";
 import router from 'next/router';
+import Swal from 'sweetalert2';
 
 const ApplyButton = ({ CV, handleClick, userData }) => (
-  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+  <div className="flex justify-end">
     <button
-      className={` ${!CV ? "apply-restriction" : "apply-job-button"}`}
+      className={` ${!CV ? "bg-gray-600 text-white border-gray-600 hover:bg-transparent hover:text-gray-600 hover:border-gray-600" : "bg-primary text-white border-none hover:bg-transparent hover:text-primary hover:border-primary"} px-4 py-2 font-bold rounded-md transition-all duration-300`}
       type="button"
       onClick={() => {
         if (userData) {

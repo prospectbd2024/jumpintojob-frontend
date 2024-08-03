@@ -1,44 +1,46 @@
-// ResumeSection.jsx
 import React, { useEffect, useState } from "react";
 import ResumePreview from "@/ResumeBuilder/ResumeComponents/ResumeTemplates/ResumePreview";
 import ResumeSectionSkeleton from "@/Skeletons/ResumeSectionSkeleton";
 
-const ResumeSection = ({   setCV,CV }) => {
-  
-  const [loading,setLoading] = useState(true)
+const ResumeSection = ({ setCV, CV }) => {
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    if(CV && Object.keys(CV).length>0){
-      setLoading(false)
-    }
-    else{
+  useEffect(() => {
+    if (CV && Object.keys(CV).length > 0) {
+      setLoading(false);
+    } else {
       setTimeout(() => {
-        setLoading(false)
+        setLoading(false);
       }, 5000);
     }
-  },[CV])
+  }, [CV]);
 
-  if(loading){
-    return <ResumeSectionSkeleton />
+  if (loading) {
+    return <ResumeSectionSkeleton />;
   }
 
-
-  return <div className="step-applicant-resume-info">
-      <div className="resume-preview">
-        <div className="header">
-          <h4>Preview Resume</h4>
-          <div>
+  return (
+    <div className="border border-gray-300 rounded-lg p-6 mt-6">
+      <div className="text-gray-700 mb-5">
+        <div className="flex items-center justify-between mb-4">
+          <h4 className="text-lg font-semibold">Preview Resume</h4>
+          <div className="text-sm">
             Complete your resume/cv with{" "}
-            <a target="_blank" href={"/resumebuilder"}>
+            <a
+              target="_blank"
+              href={"/resumebuilder"}
+              className="text-blue-500 underline"
+            >
               Resume Builder
             </a>
           </div>
         </div>
-        <div className="resume-preview-container">
-          <ResumePreview setCV={setCV} className={"resume-iframe"} />
+        <div className="border border-gray-300 rounded-md p-4">
+          <ResumePreview setCV={setCV} className="w-full" />
         </div>
       </div>
-  </div>
-}
+    </div>
+  );
+};
 
 export default ResumeSection;

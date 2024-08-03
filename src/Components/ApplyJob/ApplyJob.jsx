@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./ApplyJob.css";
 import { useUserProfileContext } from "@/Contexts/UserProfileContext";
 import { useApplicationContext } from "@/Contexts/ApplicationContext";
 import { useUserContext } from "@/Contexts/UserContext";
 import router from 'next/router';
+import Swal from 'sweetalert2';  // Make sure you have this installed for SweetAlert
 import MessageBox from "../warnings/Message";
 import JobHeader from "./JobHeader";
 import CreateCvWarning from "./CreateCvWarning";
@@ -68,13 +68,13 @@ const ApplyJob = ({ job }) => {
   }
 
   return (
-    <div className="job-application-form">
-      <div className="job-application-form-content container">
+    <div className="max-w-2xl mx-auto p-8">
+      <div className="space-y-8">
         <JobHeader job={job} loading={loading} />
         <MessageBox message={message.message} type={message.type} />
-        <div className="job-application-main">
+        <div className="border border-gray-300 rounded-lg p-6 mt-8">
           <CreateCvWarning CV={CV} />
-          <form>
+          <form className="space-y-8">
             <ContactInformation personalInformation={personalInformation} phone={phone} />
             <ResumeSection loading={loading} setCV={setCV} CV={CV} />
             <CoverLetterSection

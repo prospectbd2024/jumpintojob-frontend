@@ -1,11 +1,16 @@
-// CreateCvWarning.jsx
 import React from "react";
-import { FaFileUpload } from "react-icons/fa";
 
 const CreateCvWarning = ({ CV }) => (
-  <div className="create-cv-warning" hidden={CV}>
+  <div
+    className={`text-gray-700 mb-5 ${CV ? 'hidden' : 'block'} text-center`}
+  >
     Please create your resume/cv with{" "}
-    <a target="_blank" href={"/resumebuilder"}>
+    <a 
+      className="text-blue-500 underline" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      href="/resumebuilder"
+    >
       Resume Builder
     </a>
   </div>
