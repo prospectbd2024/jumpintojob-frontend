@@ -1,124 +1,138 @@
-'use client'
-import AddButton from '@/Components/Buttons/AddButton'
-import ModalBox from '@/Components/UserProfile/Qualifications/ModalBox'
-import React, { useState,useCallback,useEffect } from 'react'
-import './ResumeOthers.css'
-import AddMore from './AddMore'
-import {FaTrashAlt} from 'react-icons/fa'
-import { useResumeContext } from '@/Contexts/ResumeContext'
-import Availability from '@/Components/UserProfile/Availability'
-
+'use client';
+import AddButton from '@/Components/Buttons/AddButton';
+import ModalBox from '@/Components/UserProfile/Qualifications/ModalBox';
+import React, { useState, useCallback } from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useResumeContext } from '@/Contexts/ResumeContext';
+import AddMore from './AddMore';
+import Availability from '@/Components/UserProfile/Availability';
 
 function ResumeOthers() {
+    const { more, manageMore } = useResumeContext();
+    const [formData, setFormData] = useState({});
+    const [inputType, setInputType] = useState('Project');
 
-    const { more, manageMore} = useResumeContext();
-    const [  formData, setFormData] = useState({})
-    
-    const [inputType,setInputType] = useState("Project")
-    const handleChange = (e)=>{
-        setInputType(e.target.value)
-    }
+    const handleChange = (e) => {
+        setInputType(e.target.value);
+    };
 
     const showModal = useCallback(
         (title, state, index) => {
-
-          manageModal({
-            title: title,
-            display: "block",
-            state: state,
-            index: index,
-          });
+            manageModal({
+                title: title,
+                display: 'block',
+                state: state,
+                index: index,
+            });
         },
         []
-      );
-      const closeModal = useCallback(() => {
-        setFormData({})
-        manageModal({ display: "none" });
-      }, []);
-    
+    );
+
+    const closeModal = useCallback(() => {
+        setFormData({});
+        manageModal({ display: 'none' });
+    }, []);
 
     const [modal, manageModal] = useState({
-        display: "none",
-        title: "Loading",
-        state: "new",
-      });
-      const removeItem = useCallback(
+        display: 'none',
+        title: 'Loading',
+        state: 'new',
+    });
+
+    const removeItem = useCallback(
         (id) => {
-          manageMore(prev=>{
-           return prev.filter((element,index)=>{
-            return index!=id;
-           })
-          })
-    
-        }
-      )
-    
-      const onSave =()=>{
-        manageMore(prev => ([...prev,formData])) 
-        closeModal()
-      }
+            manageMore((prev) =>
+                prev.filter((_, index) => index !== id)
+            );
+        },
+        [manageMore]
+    );
 
+    const onSave = () => {
+        manageMore((prev) => [...prev, formData]);
+        closeModal();
+    };
 
-  return (
-    <div>
-      <h3 style={{display: 'block',
-fontSize: '1.17em',
-marginBlockStart: '1em',
-marginBlockEnd: '1em',
-marginInlineStart: '0px',
-marginInlineEnd: '0px',
-fontWeight: 'bold',
-unicodeBidi: 'isolate'}}>Others</h3>
-      <div>
-      {more.map((el,index) => (
-            <div className="education-container" key={index}>
-              <div className="top-right-icons-container">
-                <div className="top-right-icons">
-                <FaTrashAlt className="minus-icon" onClick={()=>{removeItem(index)}}/>
-                </div>
-              </div>
-              <p className="institution-name">{el.type} Title :  {el.title}</p>
-              <p hidden={!el.startDate} ><span className="label">Start Year:</span> {el.startDate}</p>
-              <p hidden={!el.endDate || el.present}><span className="label">End Year:</span> {el.endDate}</p>
-              <p hidden={!el.date}><span className="label">Date:</span> {el.date}</p>
-              <p hidden={!el.journal}><span className="label">Journal:</span> {el.journal}</p>
-              <p hidden={!el.description}><span className="label">Descriptions:</span> {el.description}</p>
-              <p hidden={!el.abstract}><span className="label">Abstract:</span> {el.abstract}</p>
+    return (
+        <div className="p-6">
+            <h3 className="text-xl font-bold mb-6">Others</h3>
+            <div className="space-y-4">
+                {more.map((el, index) => (
+                    <div className="border p-4 rounded-md shadow-sm space-y-2" key={index}>
+                        <div className="flex justify-end">
+                            <FaTrashAlt
+                                className="text-red-500 cursor-pointer hover:text-red-700"
+                                onClick={() => removeItem(index)}
+                            />
+                        </div>
+                        <p className="font-semibold">{el.type} Title: {el.title}</p>
+                        {el.startDate && <p><span className="font-medium">Start Year:</span> {el.startDate}</p>}
+                        {(el.endDate || el.present) && <p><span className="font-medium">End Year:</span> {el.endDate}</p>}
+                        {el.date && <p><span className="font-medium">Date:</span> {el.date}</p>}
+                        {el.journal && <p><span className="font-medium">Journal:</span> {el.journal}</p>}
+                        {el.description && <p><span className="font-medium">Description:</span> {el.description}</p>}
+                        {el.abstract && <p><span className="font-medium">Abstract:</span> {el.abstract}</p>}
+                    </div>
+                ))}
             </div>
-          ))}
-      </div>
-    <ul className="addmore">
-        <li>
-            <input type="radio" id="projects" value="Project" name="add" checked={inputType=='Project'}   onChange={handleChange}/>
-            <label htmlFor="projects">Add projects</label>
-        </li>
-        <li>
-            <input type="radio" id="certificates" value="Certificate" name="add" onChange={handleChange}/>
-            <label htmlFor="certificates">Add certificates</label>
-        </li>
-        <li>
-            <input type="radio" value="Publication"   id="publications"name="add" onChange={handleChange} />
-            <label htmlFor="publications">Add publications</label>
-        </li>
-        <li>
-            <input type="radio" value="Other"  id="more" name="add" onChange={handleChange}/>
-            <label htmlFor="more">Other</label>
-            {/* <input type="text" value="more" /> */}
-        </li>
-    </ul>
-    <ModalBox props={{ ...modal, onSave: onSave, onClose: closeModal }}>
-        <AddMore  props={{inputType,formData, setFormData}} />
-      </ModalBox>
-    <div>
-        <AddButton onClick={()=>showModal('Add '+inputType,'add')}/>
-     </div>
-        <div style={{
-          marginTop: '40px'
-        }}>
-          <Availability />
+            <ul className="mt-6 space-y-3">
+                <li className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        id="projects"
+                        value="Project"
+                        name="add"
+                        checked={inputType === 'Project'}
+                        onChange={handleChange}
+                        className="text-blue-600"
+                    />
+                    <label htmlFor="projects">Add projects</label>
+                </li>
+                <li className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        id="certificates"
+                        value="Certificate"
+                        name="add"
+                        onChange={handleChange}
+                        className="text-blue-600"
+                    />
+                    <label htmlFor="certificates">Add certificates</label>
+                </li>
+                <li className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        id="publications"
+                        value="Publication"
+                        name="add"
+                        onChange={handleChange}
+                        className="text-blue-600"
+                    />
+                    <label htmlFor="publications">Add publications</label>
+                </li>
+                <li className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        id="more"
+                        value="Other"
+                        name="add"
+                        onChange={handleChange}
+                        className="text-blue-600"
+                    />
+                    <label htmlFor="more">Other</label>
+                </li>
+            </ul>
+            <ModalBox props={{ ...modal, onSave, onClose: closeModal }}>
+                <AddMore props={{ inputType, formData, setFormData }} />
+            </ModalBox>
+            <div className="mt-10">
+                <AddButton onClick={() => showModal('Add ' + inputType, 'add')} />
+            </div>
+            <div className="mt-10">
+                <Availability />
+            </div>
         </div>
-</div>
-  )
+    );
 }
 
-export default ResumeOthers
+export default ResumeOthers;
