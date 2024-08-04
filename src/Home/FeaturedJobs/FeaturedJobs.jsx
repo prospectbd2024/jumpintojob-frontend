@@ -1,24 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { HiOutlineArrowNarrowRight, HiOutlineBookmark, HiOutlineCursorClick } from "react-icons/hi";
+import React, { useEffect, useState } from "react"; 
 import Link from "next/link";
-import "./FeaturedJobs.css";
-import { FaUpRightFromSquare } from "react-icons/fa6";
-import { useMediaQuery } from "@uidotdev/usehooks";
 import { useUserContext } from "../../Contexts/UserContext";
-import { useJobContext } from "@/Contexts/JobContext";
-import { useCompanyContext } from "@/Contexts/CompanyContext";
+import { useJobContext } from "@/Contexts/JobContext"; 
 import SingleJob from "@/Components/AllJobs/SingleJob";
 import ShowMoreJobsSkeleton from "@/Skeletons/ShowMoreJobsSkeleton";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
+
 const FeaturedJobs = () => {
   const { setClickedFeaturedJob } = useUserContext();
-  const { allJobs, setAllJobs } = useJobContext();
+  const { allJobs } = useJobContext();
   const [isLoading, setIsLoading] = useState(true);
 
   const handleClickedFeaturedJob = (e) => {
     setClickedFeaturedJob(e);
   };
+
   useEffect(() => {
     if (allJobs && allJobs.length > 0) {
       setIsLoading(false);
@@ -27,50 +24,44 @@ const FeaturedJobs = () => {
         setIsLoading(false);
       }, 3000);
     }
-  }, []);
-  if (isLoading) {
-    return (
-      <div className="featured-jobs-section">
-        <div className="featured-jobs-content container">
-          <div className="featured-jobs-header section-header">
-            <h2>Featured jobs at Jump Into Job</h2>
-          </div>
-          <div className="featured-jobs-items all-jobs-container">
-            <JobCardSkeleton />
-            <JobCardSkeleton />
-            <JobCardSkeleton />
-            <JobCardSkeleton />
-            <JobCardSkeleton />
-            <JobCardSkeleton />
-          </div>
-          <ShowMoreJobsSkeleton />
-        </div>
-      </div>
-    );
-  }
+  }, [allJobs]);
 
   return (
-    <div className="featured-jobs-section">
-      <div className="featured-jobs-content container">
-        <div className="featured-jobs-header section-header">
+    <div className="py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-6 text-xl font-medium text-gray-700">
           <h2>Featured jobs at Jump Into Job</h2>
         </div>
-        {allJobs.length > 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-2 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <JobCardSkeleton key={i} />
+            ))}
+            <ShowMoreJobsSkeleton />
+          </div>
+        ) : allJobs.length > 0 ? (
           <div>
-            <div className="featured-jobs-items all-jobs-container">
+            <div className="grid grid-cols-2 gap-6">
               {allJobs.slice(0, 6).map((job) => (
-                <SingleJob job={job} clickedJob={handleClickedFeaturedJob} handleClickedJob={handleClickedFeaturedJob} />
+                <SingleJob
+                  key={job.id}
+                  job={job}
+                  clickedJob={handleClickedFeaturedJob}
+                  handleClickedJob={handleClickedFeaturedJob}
+                />
               ))}
             </div>
-            <div className="featured-jobs-show-more-btn">
-              <button>
-                <Link href="/findjobs">Show More Jobs</Link>
-              </button>
+            <div className="text-center mt-10">
+              <Link href="/findjobs">
+                <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">
+                  Show More Jobs
+                </button>
+              </Link>
             </div>
           </div>
         ) : (
-          <div className="no-jobs-available">
-            <h4 className="">No Jobs Available</h4>
+          <div className="text-center">
+            <h4>No Jobs Available</h4>
           </div>
         )}
       </div>

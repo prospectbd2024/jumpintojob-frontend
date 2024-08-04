@@ -1,32 +1,29 @@
-import { FaChevronLeft,FaChevronRight } from "react-icons/fa"; 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import React from 'react';
-import './Pagination.css';
 
 function Pagination({ jobPage, setJobPage }) {
     const { currentPage, totalPages } = jobPage;
 
-
-
     const handleNext = () => {
         if (currentPage < totalPages) {
-            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage + 1 , status : 'process'}));
+            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage + 1, status: 'process' }));
         }
     };
 
     const handlePrevious = () => {
         if (currentPage > 1) {
-            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage - 1, status : 'process'}));
+            setJobPage(prev => ({ ...prev, currentPage: prev.currentPage - 1, status: 'process' }));
         }
     };
 
     const handlePageClick = (pageNumber) => {
-        setJobPage(prev => ({ ...prev, currentPage: pageNumber, status : 'process'}));
+        setJobPage(prev => ({ ...prev, currentPage: pageNumber, status: 'process' }));
     };
 
     const renderPageNumbers = () => {
         const pageNumbers = [];
         const maxPageNumbersToShow = 3;
-        const ellipsis = <span key="ellipsis" className="ellipsis">...</span>;
+        const ellipsis = <span key="ellipsis" className="px-3 text-primary">...</span>;
 
         let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbersToShow / 2));
         let endPage = Math.min(totalPages, startPage + maxPageNumbersToShow - 1);
@@ -37,7 +34,13 @@ function Pagination({ jobPage, setJobPage }) {
 
         if (startPage > 1) {
             pageNumbers.push(
-                <button key={1} className="page-number" onClick={() => handlePageClick(1)}>1</button>
+                <button
+                    key={1}
+                    className={`px-4 py-2 mx-1 border rounded-full transition-colors duration-300 ${currentPage === 1 ? 'bg-primary-color text-white' : 'bg-secondary-color text-primary-color hover:bg-primary hover:text-white'}`}
+                    onClick={() => handlePageClick(1)}
+                >
+                    1
+                </button>
             );
             if (startPage > 2) {
                 pageNumbers.push(ellipsis);
@@ -48,7 +51,7 @@ function Pagination({ jobPage, setJobPage }) {
             pageNumbers.push(
                 <button
                     key={i}
-                    className={`page-number${i === currentPage ? ' current' : ''}`}
+                    className={`px-4 py-2 mx-1 border rounded-full transition-colors duration-300 ${i === currentPage ? 'bg-primary-color text-white' : 'bg-secondary-color text-primary-color hover:bg-primary hover:text-white'}`}
                     onClick={() => handlePageClick(i)}
                 >
                     {i}
@@ -63,7 +66,7 @@ function Pagination({ jobPage, setJobPage }) {
             pageNumbers.push(
                 <button
                     key={totalPages}
-                    className="page-number"
+                    className={`px-4 py-2 mx-1 border rounded-full transition-colors duration-300 ${currentPage === totalPages ? 'bg-primary text-white' : 'bg-secondary text-primary hover:bg-primary hover:text-white'}`}
                     onClick={() => handlePageClick(totalPages)}
                 >
                     {totalPages}
@@ -75,18 +78,18 @@ function Pagination({ jobPage, setJobPage }) {
     };
 
     return (
-        <div className="pagination-container">
-            <button 
-                className="arrow-button" 
-                onClick={handlePrevious} 
+        <div className="flex justify-center items-center my-5 font-sans">
+            <button
+                className="flex items-center justify-center w-10 h-10 text-primary border-2 border-primary rounded-full transition-colors duration-300 ease-in-out disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-400 hover:bg-primary hover:text-white"
+                onClick={handlePrevious}
                 disabled={currentPage <= 1}
             >
-            <FaChevronLeft />
+                <FaChevronLeft />
             </button>
             {renderPageNumbers()}
-            <button 
-                className="arrow-button" 
-                onClick={handleNext} 
+            <button
+                className="flex items-center justify-center w-10 h-10 text-primary border-2 border-primary rounded-full transition-colors duration-300 ease-in-out disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-400 hover:bg-primary hover:text-white"
+                onClick={handleNext}
                 disabled={currentPage >= totalPages}
             >
                 <FaChevronRight />

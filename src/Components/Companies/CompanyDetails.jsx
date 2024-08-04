@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./CompanyDetails.css";
 import CompanyCoverImage from "./CompanyCoverImage";
 import LoadingSpinner from "./LoadingSpinner";
 import SkeletonPlaceholder from "./SkeletonPlaceholder";
@@ -9,10 +8,9 @@ function CompanyDetails({ company }) {
 
   useEffect(() => {
     // Simulate data fetching delay
-    if(company && Object.keys(company).length >0){
-      setIsLoading(false)
+    if (company && Object.keys(company).length > 0) {
+      setIsLoading(false);
     }
-
   }, [company]);
 
   if (isLoading) {
@@ -20,34 +18,30 @@ function CompanyDetails({ company }) {
   }
 
   return (
-    <div key={company.name} className="company-item">
-      <div className="company-item-content">
-        <div className="company-item-cover company-cover">
-          <CompanyCoverImage company={company} />
+    <div className="border border-gray-300 rounded-lg overflow-hidden shadow-md my-4">
+      <div className="flex flex-col">
+        <div className="w-full h-[500px] overflow-hidden">
+          <CompanyCoverImage company={company} className="w-full h-full object-cover" />
         </div>
-        <div className="company-item-details">
-          <div className="company-logo company-logo-container">
-            <img src={company.logo} alt="" className="company-logo-image" />
-            <div className="company-info company-info-container">
-              <h3 className="company-title">{company.name}</h3>
-              <p className="company-status">Verified Profile</p>
+        <div className="p-5 flex flex-col items-start">
+          <div className="flex items-center mb-4">
+            <img
+              src={company.logo}
+              alt=""
+              className="w-15 h-15 object-cover rounded-full border-2 border-white shadow-md mr-4"
+            />
+            <div className="flex flex-col">
+              <h3 className="text-xl font-bold text-gray-800">{company.name}</h3>
+              <p className="text-green-500 font-semibold text-sm">Verified Profile</p>
             </div>
           </div>
-          <div className="company-category">
-            <p className="company-category-text">
-              {company.category ? company.category : ""}
-            </p>
-            {company.size ? (
-              <p className="company-size">Company Size: {company.size}</p>
-            ) : (
-              <></>
-            )}
+          <div className="mt-3">
+            <p className="text-gray-600 text-lg">{company.category || ""}</p>
+            {company.size && <p className="text-gray-500 text-sm">Company Size: {company.size}</p>}
           </div>
         </div>
-        <div className="company-description company-description-container">
-          <p className="company-description-text">
-            {company.description ? company.description : ""}
-          </p>
+        <div className="p-5 bg-gray-100 border-t border-gray-200">
+          <p className="text-gray-800 text-lg leading-relaxed">{company.description || ""}</p>
         </div>
       </div>
     </div>

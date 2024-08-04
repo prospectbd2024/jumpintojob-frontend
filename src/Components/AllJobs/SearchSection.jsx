@@ -1,25 +1,39 @@
-"use client"
-import { HiOutlineBriefcase,HiOutlineLocationMarker } from 'react-icons/hi'
-import React from 'react'
+"use client";
+import { HiOutlineBriefcase, HiOutlineLocationMarker } from 'react-icons/hi';
+import React from 'react';
 
-function SearchSection({handleFilteredJobs}) {
+function SearchSection({ handleFilteredJobs }) {
   return (
-    <div className="all-jobs-search-section container">
-    <div className="search-content">
-        <form action="" onSubmit={handleFilteredJobs}>
-            <div>
-                <HiOutlineBriefcase/>
-                <input type="text" name="jobTitle" placeholder='Job title or keywords' />
-            </div>
-            <div>
-                <HiOutlineLocationMarker/>
-                <input type="text" name='jobLocation' placeholder='Location' />
-            </div>
-            <input type="submit" value="Search" />
+    <div className="mb-8 container">
+      <div className="text-center mx-auto w-3/5">
+        <form onSubmit={handleFilteredJobs} className="flex items-center gap-6">
+          <div className="flex items-center gap-5 border border-gray-300 p-2 rounded relative">
+            <HiOutlineBriefcase className="text-primary" />
+            <input
+              type="text"
+              name="jobTitle"
+              placeholder="Job title or keywords"
+              className="w-72 h-10 border-none outline-none text-sm"
+            />
+          </div>
+          <div className="flex items-center gap-5 border border-gray-300 p-2 rounded relative">
+            <HiOutlineLocationMarker className="text-primary" />
+            <input
+              type="text"
+              name="jobLocation"
+              placeholder="Location"
+              className="w-72 h-10 border-none outline-none text-sm"
+            />
+          </div>
+          <input
+            type="submit"
+            value="Search"
+            className="h-10 border-none bg-primary text-white w-28 bg-primary-color text-sm font-bold rounded cursor-pointer transition-colors hover:scale-110"
+          />
         </form>
+      </div>
     </div>
-</div>
-  )
+  );
 }
 
-export default SearchSection
+export default SearchSection;

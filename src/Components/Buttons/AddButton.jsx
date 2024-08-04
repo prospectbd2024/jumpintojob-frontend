@@ -3,32 +3,18 @@ import { FaPlus } from 'react-icons/fa'; // Importing the plus icon from react-i
 
 function AddButton({ onClick }) {
   return (
-    <div style={{ display :"flex" , justifyContent : 'space-between', paddingTop : '20px' }} onClick={onClick}>
-      <div  style={styles.container} >
-      Add
+    <div 
+      className="flex justify-between pt-5 cursor-pointer" 
+      onClick={onClick}
+    >
+      <div className="flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md">
+        Add
       </div>
-        <div>
-        <FaPlus style={styles.icon} />
-        </div>
+      <div className="flex items-center">
+        <FaPlus className="ml-2 text-white" />
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    // display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '10px 20px',
-    backgroundColor: 'var(--primary-color)',
-    color: 'white',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    userSelect: 'none',
-  },
-  icon: {
-    marginRight: '5px',
-  },
-};
 
 export default AddButton;

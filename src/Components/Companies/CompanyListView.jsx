@@ -30,7 +30,7 @@ function CompanyListView({ props }) {
     );
   }
   return (
-    <div className="companies-tabs-content">
+    <div className="grid grid-cols-3 gap-x-6 gap-y-20">
       {companies.map((company, index) => (
         <CompanyCard key={index} props={{ company }} />
       ))}

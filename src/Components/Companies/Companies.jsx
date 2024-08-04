@@ -1,25 +1,22 @@
 "use client";
-import React, {   useState } from "react";
+import React, { useState } from "react";
 import CategoryList from "./CategoryList";  
 import { useCategoryContext } from "@/Contexts/CategoryContext";
-import '@/Components/Companies/Companies.css'
-import {useRouter} from 'next/navigation'
+// import '@/Components/Companies/Companies.css'; // If you still need some custom CSS
+
 const Companies = ({children}) => { 
-  const {jobCategories} = useCategoryContext(); 
+  const { jobCategories } = useCategoryContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All Industries");
 
- 
   return (
-    <div className="companies">
-      <div className="section-header companies-header">
-        <h2>Browse For Companies</h2>
-        <p>Find your dream company</p>
+    <div className="my-5 container mx-auto">
+      <div className="section-header mb-5 text-center">
+        <h2 className="text-2xl font-semibold">Browse For Companies</h2>
+        <p className="text-gray-600">Find your dream company</p>
       </div>
-      <div className="companies-content container">
-        <div className="companies-tabs">
+      <div className="container grid grid-cols-[350px_auto] gap-8">
         <CategoryList props={{selectedCategory, categories: jobCategories}} />
         {children}
-        </div>
       </div>
     </div>
   );

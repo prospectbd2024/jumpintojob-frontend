@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SingleJob from '@/Components/AllJobs/SingleJob';
-import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
-import Link from 'next/link'
+import JobCardSkeleton from "@/Skeletons/JobCardSkeleton"; 
 import ShowMoreButton from '@/Components/Buttons/ShowMoreJobs';
-const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
+const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob  , className  , jobClassName}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -18,9 +17,9 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
   }, []);
 
   return (
-    <div>
-      <h4 className='featured-jobs-header'>Featured Jobs:</h4>
-      <div className='featured-jobs-items all-jobs-container'>
+    <div className={className}>
+      <h4 className='text-center text-darker-secondary-color text-2xl'>Featured Jobs:</h4>
+      <div   className={jobClassName}>
         {isLoading ? (
           // Show skeleton loaders while loading
           <>
@@ -47,7 +46,7 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
               handleClickedJob={handleClickedFeaturedJob}
               />
               
-             {index===9 && <ShowMoreButton link={'/findjobs'} /> }
+             {index===9  }
             </>
 
           ))
@@ -56,6 +55,11 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob }) => {
           </>
         }
 
+      </div>
+
+      <div className='text-center'>
+
+      <ShowMoreButton link={'/findjobs'} />
       </div>
     </div>
   );

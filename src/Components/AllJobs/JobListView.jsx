@@ -22,7 +22,7 @@ const JobListView = ({ props }) => {
   }, [filteredJobs]);
 
   return (
-    <div className="all-jobs-container">
+    <div className="w-[450px] flex flex-col gap-4">
       {isLoading ? (
         // Display multiple skeleton loaders while loading
         <>
