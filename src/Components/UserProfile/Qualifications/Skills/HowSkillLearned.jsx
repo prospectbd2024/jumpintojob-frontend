@@ -23,8 +23,8 @@ function HowSkillLearned({ props }) {
 
   return (
     <>
-      <legend className="text-lg font-bold mb-2">
-        How did you learn the skill?<span className="text-red-500">*</span>
+      <legend className="text-lg font-bold mb-2 mt-4">
+        How did you learn the skill?<span className="text-red-500"></span>
       </legend>
       <div className="flex flex-col space-y-2">
         {options.map(({ value, label }) => (

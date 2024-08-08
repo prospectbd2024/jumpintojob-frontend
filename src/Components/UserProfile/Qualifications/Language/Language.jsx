@@ -19,7 +19,7 @@ function Language({ props }) {
       setLanguages((prev) => prev.filter((lang, index) => index !== id));
     },
     [setLanguages]
-  );
+  );         
 
   const showModal = useCallback((title) => {
     setModal((prev) => ({ title: title, display: "block" }));
@@ -48,8 +48,8 @@ function Language({ props }) {
       {languages && languages.length > 0 ? (
         <div className="space-y-2">
           {languages.map((lang, index) => (
-            <div className="grid grid-cols-3 gap-2 items-center mb-2" key={index}>
-              <div className="bg-gray-200 border border-secondary rounded-xl p-2 text-lg font-bold">
+            <div className="grid grid-cols-3 gap-10 items-center mb-2" key={index}>
+              <div className="bg-gray-200 border border-secondary-color rounded-xl p-2 text-lg font-bold">
                 {lang.language}
               </div>
               <div className="text-gray-700">{lang.proficiency}</div>

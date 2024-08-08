@@ -20,11 +20,11 @@ function LanguageProperties({ props }) {
           Select Proficiency Level <span className="text-red-500">*</span>
         </label>
       </div>
-      <div>
+      <div className="border border-secondary-color rounded-md">
         <select
           id="proficiency"
           value={selectedLanguage.proficiency || 'Beginner'}
-          className="w-full p-2 mt-1 border border-secondary rounded outline-none"
+          className="w-full p-2 mt-1 mb-1 border border-secondary rounded outline-none"
           onChange={handleProficiencyChange}
         >
           <option value="Beginner">Beginner</option>

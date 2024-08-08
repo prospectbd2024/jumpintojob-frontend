@@ -41,7 +41,7 @@ const ResumeTemplates = ({ }) => {
                 </div>
                 
                 <div className="flex gap-2.5 items-center">
-                    <button className='bg-[var(--primary-color)] text-white rounded-sm mt-3.75 w-[140px] h-[45px] leading-[45px] font-bold border-none text-base cursor-pointer' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
+                    <button className='bg-[var(--primary-color)] text-white rounded-sm mt-3.75 w-[140px] h-[45px] leading-[45px] font-bold border-none text-base cursor-pointer mt-4' onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
                 </div>
             </div>
         </div>

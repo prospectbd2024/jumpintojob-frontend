@@ -3,18 +3,20 @@ import React from 'react';
 
 function InputField({ id, label, value, onChange, type = "text" }) {
   return (
-    <div className="relative">
+    <div className="w-full relative">
       <input
         type={type}
         id={id}
         value={value}
         onChange={onChange}
-        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 peer"
+        className={`peer w-full p-4 pt-4 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed
+        pl-4 border-neutral-300 focus:border-black`}
         placeholder=" "
       />
       <label
         htmlFor={id}
-        className="absolute left-2 top-2 text-gray-500 transition-all duration-300 transform -translate-y-4 scale-75 opacity-0 peer-placeholder-shown:opacity-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:opacity-100 peer-focus:-translate-y-4 peer-focus:scale-75"
+        className={`absolute text-md duration-500 transform top-4 z-10 origin-[0] 
+        left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:top-4 ${value ? 'scale-75 -translate-y-4 top-2' : ''} text-zinc-400`}
       >
         {label}
       </label>

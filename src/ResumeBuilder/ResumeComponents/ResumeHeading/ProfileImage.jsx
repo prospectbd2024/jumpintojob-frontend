@@ -71,25 +71,23 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
       <input type="file" id="profileImage" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
 
       {!showCropper && (
-        <>
-          {(imagePreview || personalInformation.cv_profile_image) ? (
-            <img src={personalInformation.cv_profile_image ?? imagePreview} alt="Profile Preview" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300" />
-          ) : (
-            <div className="w-40 h-40 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-              No Image
-            </div>
-          )}
-          <label htmlFor="profileImage" className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 transition duration-300">
-            Select Image
-          </label>
-        </>
+       <>
+       {(imagePreview || personalInformation.cv_profile_image) ? (
+         <img src={personalInformation.cv_profile_image ?? imagePreview} alt="Profile Preview" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
+       ) : (
+         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="No Image" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
+       )}
+       <label htmlFor="profileImage" className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 transition duration-300">
+         Select Image
+       </label>
+     </>
       )}
 
       {showCropper && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white p-4 rounded-lg w-full max-w-md">
-            <div className="aspect-w-1 aspect-h-1 mb-4" style={{ height: '300px' }}>
-              {/* <Cropper
+            <div className="relative aspect-w-1 aspect-h-1 mb-4" style={{ height: '400px' }}>
+              <Cropper
                 image={imagePreview}
                 crop={crop}
                 zoom={zoom}
@@ -97,7 +95,7 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
-              /> */}
+              />
             </div>
             <div className="mt-4">
               <label htmlFor="zoomRange" className="block text-sm font-medium text-gray-700 mb-1">
