@@ -40,22 +40,32 @@ function PersonalInfo({ personalInformation, handleChange }) {
         />
         <InputField
           id="dob"
-          label="Date of Birth"
+          // label="Date of Birth"
           type="date"
           value={personalInformation.dateOfBirth}
           onChange={(e) => handleChange('dateOfBirth', e.target.value)}
         />
-        <select
-          id="gender"
-          value={personalInformation.gender}
-          onChange={(e) => handleChange('gender', e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="" disabled>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="others">Others</option>
-        </select>
+       <div className="relative border-2 rounded-md ">
+          <select
+            id="gender"
+            value={personalInformation.gender}
+            onChange={(e) => handleChange('gender', e.target.value)}
+            className="w-full p-4 pt-5 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed pl-4"
+          >
+            <option value="" disabled></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="others">Others</option>
+          </select>
+          <label
+            htmlFor="gender"
+            className={`absolute text-md duration-500 transform top-4 z-10 origin-[0] left-4
+            ${personalInformation.gender ? 'scale-75 -translate-y-4 top-2' : 'scale-100 translate-y-0'}
+            text-zinc-400`}
+          >
+            Gender
+          </label>
+        </div>
         <InputField
           id="nationality"
           label="Nationality"

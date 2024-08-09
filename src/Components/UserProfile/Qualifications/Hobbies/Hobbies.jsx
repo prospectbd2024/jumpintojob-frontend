@@ -90,11 +90,11 @@ const Hobbies = ({ props }) => {
         <div>
           {hobbies.map((hobby, index) => (
             <div className="flex justify-between items-center mb-3" key={index}>
-              <div className="border border-gray-300 rounded-lg p-3 font-bold text-lg">
+              <div className="w-[325px] bg-gray-200 border border-secondary-color rounded-xl p-2.5 font-bold text-lg">
                 <p>{hobby.name}</p>
               </div>
               <FaTrashAlt
-                className="text-red-500 cursor-pointer"
+                className="text-red-500 text-[20px] cursor-pointer"
                 onClick={() => removeHobby(index)}
               />
             </div>

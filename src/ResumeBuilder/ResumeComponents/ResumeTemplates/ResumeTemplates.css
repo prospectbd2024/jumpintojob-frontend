@@ -8,32 +8,65 @@
 .resume-form-header h3 span{
     color: var(--primary-color);
 }
- 
-.resume-templates .templates .template{
+
+.resume-templates .templates .template {
     text-align: center;
     cursor: pointer;
     border: none;
     outline: none;
-    
 }
+
 /* .resume-templates .templates .template:hover{
-    
+
 } */
 
 .resume-templates .templates .template img {
     width: 300px;
     height: 400px;
+    max-width: 300px;
+    max-height: 400px;
     margin-bottom: 15px;
     border: 3px solid rgb(230, 230, 230);
-    transition: .1 ease-in-out;
+    transition: .1s ease-in-out;
 }
-.resume-templates .templates .template img:hover{
+
+@media (max-width: 1200px) {
+    .resume-templates .templates .template img {
+        max-width: 250px;
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .resume-templates .templates .template img {
+        max-width: 200px; 
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .resume-templates .templates .template img {
+        max-width: 150px;
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .resume-templates .templates .template img {
+        max-width: 100px;
+        max-height: 200px;
+    }
+}
+
+.resume-templates .templates .template img:hover {
     border: 3px solid var(--primary-color);
 }
-.resume-templates .templates .template .selected-template{
+
+.resume-templates .templates .template .selected-template {
     border: 3px solid var(--primary-color);
 }
-.resume-templates .templates .template p{
+
+.resume-templates .templates .template p {
     color: var(--darker-secondary-color);
 }
 
@@ -42,6 +75,7 @@
     gap: 10px;
     align-items: center;
 }
+
 .resume-prev-next-buttons button {
     width: 140px;
     height: 45px;
@@ -51,33 +85,38 @@
     font-size: 15px;
     cursor: pointer;
 }
-.resume-prev-next-buttons .prev-button{
+
+.resume-prev-next-buttons .prev-button {
     border: 1px solid #111;
     background: transparent;
     color: #111;
     border-radius: 3px;
     margin-top: 15px;
 }
+
 .resume-prev-next-buttons .next-button {
     background: var(--primary-color);
     color: #fff;
     border-radius: 3px;
     margin-top: 15px;
 }
+
 .slick-prev:before, .slick-next:before {
     font-size: 27px!important;
     color: #919191!important;
-
 }
+
 .slick-next {
     right: 10px!important;
 }
+
 .slick-prev {
     left: 10px!important;
     z-index: 1!important;
 }
-.navigation-buttons{
+
+.navigation-buttons {
     display: flex;
-    justify-content: space-between ;
-    margin-top : 40px; 
+    justify-content: space-between;
+    margin-top: 40px;
 }

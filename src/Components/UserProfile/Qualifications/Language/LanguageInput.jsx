@@ -64,14 +64,14 @@ function LanguageInput({ props }) {
       <input
         type="text"
         id="language"
-        className="w-full p-2 mt-1 border border-secondary rounded box-border outline-none"
+        className="w-full p-2 mt-1 border border-secondary-color rounded-md box-border outline-none"
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
         value={searchKey}
         onChange={handleChange}
       />
       {showSearchSuggestion && suggestedLanguages.length > 0 && (
-        <div className="absolute top-full left-0 w-full min-h-10 bg-white border border-secondary border-t-0 rounded-b overflow-hidden z-10">
+        <div className="absolute top-full left-0 w-full min-h-10 bg-white border border-secondary-color border-t-0 rounded-b overflow-hidden z-10">
           <ul className="list-none p-0 m-0">
             {suggestedLanguages.map((language, index) => (
               <li

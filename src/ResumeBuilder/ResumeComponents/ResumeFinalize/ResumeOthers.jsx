@@ -54,14 +54,14 @@ function ResumeOthers() {
     };
 
     return (
-        <div className="p-6">
-            <h3 className="text-xl font-bold mb-6">Others</h3>
+        <div className="p-1">
+            
             <div className="space-y-4">
                 {more.map((el, index) => (
                     <div className="border p-4 rounded-md shadow-sm space-y-2" key={index}>
                         <div className="flex justify-end">
                             <FaTrashAlt
-                                className="text-red-500 cursor-pointer hover:text-red-700"
+                                className="text-red-500 cursor-pointer text-[20px]"
                                 onClick={() => removeItem(index)}
                             />
                         </div>

@@ -22,21 +22,21 @@ function MediaLinks({ mediaLinks, SetPersonalInformation }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">Media Links</h3>
+      <h3 className="text-lg font-semibold">Social Media Links</h3>
       {mediaLinks?.map((link, index) => (
         <div key={index} className="flex items-center space-x-4">
           <InputField
             value={link.name}
-            placeholder='LinkedIn'
+            label='Name'
             onChange={(e) => handleMediaLinkChange(index, "name", e.target.value)}
           />
           <InputField
             value={link.url}
-            placeholder="linkedin.com/me"
+            label="link.com/me"
             onChange={(e) => handleMediaLinkChange(index, "url", e.target.value)}
           />
           <FaTrashAlt
-            className="text-red-500 cursor-pointer hover:text-red-700"
+            className="text-red-500 cursor-pointer hover:text-red-700 text-[40px]"
             onClick={() => handleDeleteMediaLink(index)}
           />
         </div>
