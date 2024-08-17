@@ -30,7 +30,7 @@ const FeaturedJobs = () => {
   return (
     <div className="py-24">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6 text-xl font-medium text-gray-700">
+        <div className="text-center text-darker-secondary-color text-2xl mb-10">
           <h2>Featured jobs at Jump Into Job</h2>
         </div>
         {isLoading ? (
