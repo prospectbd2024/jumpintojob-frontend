@@ -18,6 +18,7 @@ function JobContext({children}) {
     const [jobPage, setJobPage] = useState({currentPage: 1, type: 'fetch' , totalPages: 10 , status : 'new'});
     const [shouldShowButton , setShowButton] = useState(true);
     const [query,setQuery] = useState("")
+    const [bookMarkedJobs, setBookMarkedJobs] = useState([])
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
@@ -132,7 +133,8 @@ function JobContext({children}) {
         clickedJob, setClickedJob,
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
-        query,setQuery
+        query,setQuery,
+        bookMarkedJobs,setBookMarkedJobs
         }}>
         {children}
     </jobContext.Provider>

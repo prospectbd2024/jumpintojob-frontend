@@ -1,5 +1,6 @@
 "use client";
 import { useThrottle } from "@uidotdev/usehooks";
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -14,7 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const [userData, setUserData] = useState(initialUserData);
   const [clickedFeaturedJob, setClickedFeaturedJob] = useState(null);
-
+  const router = useRouter();
   const [bearerToken, setBearerToken] = useState(null);
 
   useEffect(() => {
