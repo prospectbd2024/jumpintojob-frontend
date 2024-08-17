@@ -18,7 +18,7 @@ const SingleJob = ({ job, clickedJob, handleClickedJob }) => {
       <div className="flex items-center justify-between">
         <h2 className="text-lg text-gray-900 mb-1">{job.job_title}</h2>
         <HiOutlineBookmark
-        onClick={ ()=>{guestProtection(()=> bookMarkJob(job) )}}
+        onClick={ (e)=>{  e.stopPropagation() ;   guestProtection(()=> bookMarkJob(job) )}}
           className="text-gray-900 cursor-pointer w-[1.5rem] h-[1.5rem] bg-green-300 p-1 rounded-full transition duration-300 ease-in-out hover:text-white hover:bg-green-600"
         />
       </div>
