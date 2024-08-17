@@ -6,14 +6,15 @@ import { useJobContext } from "@/Contexts/JobContext";
 import SingleJob from "@/Components/AllJobs/SingleJob";
 import ShowMoreJobsSkeleton from "@/Skeletons/ShowMoreJobsSkeleton";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
+import { useRouter } from "next/navigation";
 
 const FeaturedJobs = () => {
   const { setClickedFeaturedJob } = useUserContext();
   const { allJobs } = useJobContext();
   const [isLoading, setIsLoading] = useState(true);
-
+  const router = useRouter();
   const handleClickedFeaturedJob = (e) => {
-    setClickedFeaturedJob(e);
+     router.push( `/findjobs/jobdetails/${e}`);
   };
 
   useEffect(() => {

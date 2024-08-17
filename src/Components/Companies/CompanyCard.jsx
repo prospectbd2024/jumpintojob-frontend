@@ -9,25 +9,12 @@ function CompanyCard({ props }) {
   const { index, company } = props;
   const router = useRouter();
   const { userData } = useUserContext();
+  const {guestProtection} = useUserContext();
 
   const handleClick = (link) => {
-    if (userData) {
-      router.push(link)
-    } else {
-      Swal.fire({
-        title: "You must login first!",
-        text: "Do you want to login?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/signin");
-        }
-      });
-    }
+
+    guestProtection(()=>{router.push(link)})
+ 
   };
 
   return (

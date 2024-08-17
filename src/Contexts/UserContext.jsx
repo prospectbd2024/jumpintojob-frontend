@@ -1,6 +1,7 @@
 "use client";
 import { useThrottle } from "@uidotdev/usehooks";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export const UserContext = createContext();
 
@@ -92,6 +93,26 @@ export const UserProvider = ({ children }) => {
         });
     }
   }, [userData]);
+  const guestProtection = (callback) => {
+    if (userData) {
+      callback()
+    } else {
+      Swal.fire({
+        title: "You must login first!",
+        text: "Do you want to login?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          router.push("/signin");
+        }
+      });
+    }
+  };
 
   const handleSubmitResume = () => {
     useEffect(() => {
@@ -114,6 +135,7 @@ export const UserProvider = ({ children }) => {
         bearerToken,
         profile,
         setProfile,
+        guestProtection
         
       }}>
       {children}
