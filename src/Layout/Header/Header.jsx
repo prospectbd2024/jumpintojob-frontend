@@ -126,7 +126,7 @@ const Header = () => {
                         <div className={`lg:flex items-center gap-10 ${!mobileMenuClicked ? 'hidden' : 'block'}`}>
                             <ul className="flex gap-6">
                                 <li><Link href="/" className={`${location === '/' ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/'), setMobileMenuClicked(false))}>Home</Link></li>
-                                <li><Link href="/findjobs" className={`${location.search('/findjobs') !== -1 ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/findjobs'), setMobileMenuClicked(false))}>Jobs</Link></li>
+                                <li><Link href="/jobs" className={`${location.search('/jobs') !== -1 ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/jobs'), setMobileMenuClicked(false))}>Jobs</Link></li>
                                 <li><Link href="/companies" className={`${location.search('/companies') !== -1 ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/companies'), setMobileMenuClicked(false))}>Companies</Link></li>
                                 {/* <li><Link href="/blogs" className={`${location.search('/blogs') !== -1 ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/blogs'), setMobileMenuClicked(false))}>Blogs</Link></li>
                                 <li><Link href="/about" className={`${location.search('/about') !== -1 ? 'text-blue-500' : 'text-gray-800'}`} onClick={() => (handleActiveMenu('/about'), setMobileMenuClicked(false))}>About</Link></li>

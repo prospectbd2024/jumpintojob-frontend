@@ -21,7 +21,7 @@ const ResumeFooter = () => {
                     </ul>
                     <ul className="flex gap-5">
                         <li className="list-none">
-                            <Link href="/findjobs" className="text-blue-500 text-sm transition duration-100 hover:text-black">
+                            <Link href="/jobs" className="text-blue-500 text-sm transition duration-100 hover:text-black">
                                 Browse jobs
                             </Link>
                         </li>

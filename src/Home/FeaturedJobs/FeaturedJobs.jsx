@@ -14,7 +14,7 @@ const FeaturedJobs = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const handleClickedFeaturedJob = (e) => {
-     router.push( `/findjobs/jobdetails/${e}`);
+     router.push( `/jobs/jobdetails/${e}`);
   };
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const FeaturedJobs = () => {
               ))}
             </div>
             <div className="text-center mt-10">
-              <Link href="/findjobs">
+              <Link href="/jobs">
                 <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">
                   Show More Jobs
                 </button>

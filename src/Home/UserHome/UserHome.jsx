@@ -22,7 +22,7 @@ const UserHome = () => {
 
   const handleClickedFeaturedJob = (jobId) => {
     setClickedFeaturedJob(jobId);
-    router.push("/findjobs/jobdetails/" + jobId);
+    router.push("/jobs/jobdetails/" + jobId);
   };
 
   return (

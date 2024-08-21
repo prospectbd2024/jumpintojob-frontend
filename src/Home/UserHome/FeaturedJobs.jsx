@@ -59,7 +59,7 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob  , className  , jo
 
       <div className='text-center'>
 
-      <ShowMoreButton link={'/findjobs'} />
+      <ShowMoreButton link={'/jobs'} />
       </div>
     </div>
   );

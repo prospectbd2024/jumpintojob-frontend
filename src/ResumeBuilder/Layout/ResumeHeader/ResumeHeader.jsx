@@ -12,7 +12,7 @@ const ResumeHeader = () => {
                         <span className="text-lg font-bold text-[var(--primary-color)] ml-4">Resume Builder</span>
                     </div>
                     <div>
-                        <Link href="/findjobs">
+                        <Link href="/jobs">
                             <button className="w-32 h-11 font-bold rounded bg-[var(--primary-color)] text-white border-none text-base cursor-pointer transition duration-200 hover:bg-[#2f89c5]">
                                 Job Board
                             </button>
