@@ -27,16 +27,26 @@ const ResumeContainer = () => {
           {currentStep === 6 && <ResumeFinalize />}
           {currentStep === 7 && <ResumePreview />}
 
-          <div className="navigation-buttons">
-            <PrevNextButton props={{ setCurrentStep, currentStep }} />
-            {currentStep === 7 && (
-              <button
-                type="button"
-                className="bg-[var(--primary-color)] px-3 text-white w-30 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition-all duration-300 ease"
-                onClick={saveCV}
-              >
-                Save
-              </button>
+          <div className="navigation-buttons flex gap-2 items-center justify-between md:justify-start mt-4">
+            {currentStep === 7 ? (
+              <>
+                <button
+                  type="button"
+                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base border border-black bg-transparent text-black rounded-md mt-4 cursor-pointer"
+                  onClick={() => setCurrentStep(currentStep => currentStep - 1)}
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base bg-[var(--primary-color)] text-white rounded-md cursor-pointer transition-all duration-300 ease"
+                  onClick={saveCV}
+                >
+                  Save
+                </button>
+              </>
+            ) : (
+              <PrevNextButton props={{ setCurrentStep, currentStep }} />
             )}
           </div>
         </div>

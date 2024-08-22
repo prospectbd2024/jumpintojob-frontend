@@ -4,7 +4,7 @@ import React from "react";
 function Summary({ summary, handleChange }) {
   return (
     <div className="space-y-2">
-      <h4 className="text-lg font-semibold">SUMMARY</h4>
+      <h4 className="text-base font-semibold sm:text-lg md:text-xl">SUMMARY</h4>
       <textarea
         name="summary"
         id="summary"

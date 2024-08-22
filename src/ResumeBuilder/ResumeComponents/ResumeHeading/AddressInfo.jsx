@@ -6,7 +6,7 @@ function AddressInfo({ personalInformation, handleAddressChange }) {
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Current Address</h3>
+        <h3 className="text-base font-semibold sm:text-lg md:text-xl">Current Address</h3>
         <InputField
           id="current-city"
           label="City"
@@ -27,7 +27,7 @@ function AddressInfo({ personalInformation, handleAddressChange }) {
         />
       </div>
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Permanent Address</h3>
+        <h3 className="text-base font-semibold sm:text-lg md:text-xl">Permanent Address</h3>
         <InputField
           id="permanent-city"
           label="City"
