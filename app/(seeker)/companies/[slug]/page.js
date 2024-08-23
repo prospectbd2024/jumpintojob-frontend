@@ -24,7 +24,7 @@ function Page() {
         })
     },[allJobs]);
     useEffect(()=>{
-        bearerToken = UserContext.userData.data.access_token;
+        bearerToken = UserContext?.userData?.data?.access_token;
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/show/${slug}`, {
             method: "GET",
             headers: {
