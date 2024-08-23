@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FaTrashAlt } from "react-icons/fa";
 import React, { useState, useCallback, useEffect } from "react";
 import AddAreaOfExpertise from "./AddAreaOfExpertise";
@@ -22,9 +22,9 @@ function AddExperience({ props }) {
   }, [experience]);
 
   return (
-    <div className='max-w-[1000px] w-[700px] h-[500px] overflow-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent'>
-      <div className="grid grid-cols-2 gap-5 max-w-[600px]">
-        <div className="flex flex-col gap-2 mb-5">
+    <div className="max-w-[1000px] w-full h-[500px] overflow-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="job_title" className="text-sm font-medium">JOB TITLE</label>
           <input
             type="text"
@@ -39,7 +39,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="company_name" className="text-sm font-medium">COMPANY NAME</label>
           <input
             type="text"
@@ -54,7 +54,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="company_business" className="text-sm font-medium">COMPANY BUSINESS</label>
           <input
             type="text"
@@ -69,7 +69,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="designation" className="text-sm font-medium">DESIGNATION</label>
           <input
             type="text"
@@ -84,7 +84,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="department" className="text-sm font-medium">DEPARTMENT</label>
           <input
             type="text"
@@ -99,7 +99,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="start_date" className="text-sm font-medium">FROM DATE (MM/DD/YYYY)</label>
           <input
             type="date"
@@ -113,7 +113,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="to_date" className="text-sm font-medium">TO DATE (MM/DD/YYYY)</label>
           <input
             type="date"
@@ -128,7 +128,7 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <div className="flex items-center mb-5">
+        <div className="flex items-center">
           <label htmlFor="currently_working" className="mr-2 text-sm font-medium">CURRENTLY WORKING</label>
           <input
             type="checkbox"
@@ -139,7 +139,7 @@ function AddExperience({ props }) {
           />
         </div>
 
-        <div className="col-span-2 flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2 sm:col-span-2">
           <label htmlFor="responsibilities" className="text-sm font-medium">RESPONSIBILITIES</label>
           <textarea
             id="responsibilities"
@@ -153,9 +153,9 @@ function AddExperience({ props }) {
           )}
         </div>
 
-        <AddAreaOfExpertise props={{experience, setExperience, experienceErrors}} />
+        <AddAreaOfExpertise props={{ experience, setExperience, experienceErrors }} />
 
-        <div className="col-span-2 flex flex-col gap-2 mb-5">
+        <div className="flex flex-col gap-2 sm:col-span-2">
           <label htmlFor="company_location" className="text-sm font-medium">COMPANY LOCATION</label>
           <input
             type="text"

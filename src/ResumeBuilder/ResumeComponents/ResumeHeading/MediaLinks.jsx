@@ -22,7 +22,7 @@ function MediaLinks({ mediaLinks, SetPersonalInformation }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">Social Media Links</h3>
+      <h3 className="text-base font-semibold sm:text-lg md:text-xl">Social Media Links</h3>
       {mediaLinks?.map((link, index) => (
         <div key={index} className="flex items-center space-x-4">
           <InputField

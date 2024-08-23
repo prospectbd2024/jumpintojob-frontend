@@ -11,7 +11,7 @@ function PersonalInfo({ personalInformation, handleChange }) {
           label="Title"
           value={personalInformation.title}
           onChange={(e) => handleChange('title', e.target.value)}
-        />
+          />
         <InputField
           id="firstname"
           label="First Name"
