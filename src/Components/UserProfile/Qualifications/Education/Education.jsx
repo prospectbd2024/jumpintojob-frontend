@@ -100,13 +100,13 @@ const Education = ({ props }) => {
           </div>
           {educations.map((education, index) => (
             <div className="relative flex flex-col gap-2.5 p-4 border border-secondary rounded-md mb-2.5">
-              <div className="flex justify-end gap-2.5 mb-2.5">
+              <div className="flex justify-between gap-2.5 mb-2.5">
                 <Visibility
                   visibility={education.visible_on_cv}
                   handleVisibility={() => manageVisibility(index)}
                 />
                 <FaTrashAlt
-                  className="text-red-600 cursor-pointer"
+                  className="text-red-600 cursor-pointer text-[20px]"
                   onClick={() => removeEducation(index)}
                 />
               </div>
