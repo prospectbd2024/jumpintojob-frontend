@@ -4,7 +4,7 @@ import React from 'react';
 
 function SearchSection({ handleFilteredJobs }) {
   return (
-    <div className="mb-8 container">
+    <div className="container">
       <div className="text-center mx-auto w-3/5">
         <form onSubmit={handleFilteredJobs} className="flex items-center gap-6">
           <div className="flex items-center gap-5 border border-gray-300 p-2 rounded relative">

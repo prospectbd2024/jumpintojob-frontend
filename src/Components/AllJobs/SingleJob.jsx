@@ -24,28 +24,35 @@ const SingleJob = ({ job, clickedJob, handleClickedJob }) => {
     
   }
 
-  return (
+return (
     <div
-      className={`relative rounded-lg p-4 shadow-md border-b-4 border-transparent transition duration-300 ease-in-out cursor-pointer ${
-        clickedJob === job.id ? 'border-gray-600 shadow-md' : 'hover:border-gray-300 hover:shadow-lg'
+      className={`relative rounded-lg p-6 shadow-lg border-b-4 border-transparent transition duration-300 ease-in-out cursor-pointer ${
+        clickedJob === job.id ? 'border-gray-800 shadow-2xl' : 'hover:border-gray-300 hover:shadow-xl'
       }`}
       onClick={() => handleClickedJob(job.id)}
     >
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg text-gray-900 mb-1">{job.job_title}</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 truncate">{job.job_title}</h2>
         <HiOutlineBookmark
-        onClick={ (e)=>{ toggleBookMarks(e,job) }}
-          className={`text-gray-900 cursor-pointer w-[1.5rem] h-[1.5rem] p-1 rounded-full transition duration-300 ease-in-out hover:text-white ${bookMarkedJobs.includes(job.id)?"bg-gray-300 hover:bg-gray-600":"bg-green-300 hover:bg-green-600"}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleBookMarks(e, job);
+          }}
+          className={`text-lg cursor-pointer w-6 h-6 p-1 rounded-full transition duration-300 ease-in-out ${
+            bookMarkedJobs.includes(job.id)
+              ? 'bg-gray-300 hover:bg-gray-500 text-gray-900 hover:text-white'
+              : 'bg-green-300 hover:bg-green-500 text-gray-900 hover:text-white'
+          }`}
         />
       </div>
-      <h3 className="text-sm text-gray-600">{job.company_name}</h3>
-      <p className="text-gray-700 mt-2 leading-relaxed">{job.address}</p>
-      <p className="text-gray-700 mt-2 leading-relaxed">{job.description.slice(0, 100)}...</p>
+      <h3 className="text-md font-medium text-gray-700 mb-2">{job.company_name}</h3>
+      <p className="text-gray-600 mt-1 leading-relaxed truncate">{job.address}</p>
+      <p className="text-gray-700 mt-2 leading-relaxed truncate">{job.description}</p>
       <div className="flex items-center justify-between mt-4">
-        <p className="font-bold bg-blue-100 py-1 px-3 rounded">
-          {job.salary} <span className="font-medium">(Estimated)</span>
+        <p className="font-semibold bg-blue-100 py-1 px-3 rounded-lg text-blue-800">
+          {job.salary} <span className="font-normal">(Estimated)</span>
         </p>
-        <p className="text-gray-600">22d</p>
+        <p className="text-gray-500 text-sm">22d</p>
       </div>
     </div>
   );
