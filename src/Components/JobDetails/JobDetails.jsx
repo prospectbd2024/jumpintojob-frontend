@@ -34,12 +34,10 @@ const JobDetails = ({props}) => {
 
     if (loading) {
         return (
-            <JobCardSkeleton/>
-        );
-    } else if (!job) {
-        return (
-            <div className="p-4 border border-gray-300 rounded-lg shadow-md bg-white">
-                <p className="text-center text-gray-600">No job details available.</p>
+            <div className="sticky top-14">
+                <div className="w-full max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                    <JobCardSkeleton/>
+                </div>
             </div>
         );
     } else {
@@ -150,17 +148,8 @@ const JobDetails = ({props}) => {
                     </div>
                 </div>
             </div>
-
-
         );
     }
 };
-
-const DetailSection = ({label, value}) => (
-    <div className="text-lg">
-        <h3 className="font-semibold text-gray-800 mb-1">{label}</h3>
-        <p className="text-gray-600">{value}</p>
-    </div>
-);
 
 export default JobDetails;
