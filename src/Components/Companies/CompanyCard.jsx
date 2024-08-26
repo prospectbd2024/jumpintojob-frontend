@@ -9,31 +9,18 @@ function CompanyCard({ props }) {
   const { index, company } = props;
   const router = useRouter();
   const { userData } = useUserContext();
+  const {guestProtection} = useUserContext();
 
   const handleClick = (link) => {
-    if (userData) {
-      router.push(link)
-    } else {
-      Swal.fire({
-        title: "You must login first!",
-        text: "Do you want to login?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/signin");
-        }
-      });
-    }
+
+    guestProtection(()=>{router.push(link)})
+ 
   };
 
   return (
-    <div key={company.name} className="border border-gray-300 p-4 rounded-lg mb-4 h-fit w-80">
-      <div className="relative">
-        <div className="overflow-hidden rounded-lg">
+    <div key={company.name} className="border border-gray-300 p-4 rounded-lg mb-4 h-[30rem] w-80 flex flex-col">
+      <div className="relative  flex-grow">
+        <div className="overflow-hidden rounded-lg h-48">
           <CompanyCoverImage company={company} />
         </div>
         <div className="relative -top-8 left-2 max-w-[98%]">
@@ -48,10 +35,10 @@ function CompanyCard({ props }) {
           </div>
           <div className="flex gap-5 mb-4 items-end">
             <p className="text-gray-600">{company.category}</p>
-            {company.size && <p className="text-gray-600">Company Size: {company.size}</p>}
+            {company.size ? <p className="text-gray-600">Company Size: {company.size}</p> : <></>}
           </div>
           <div className="flex gap-5 mb-4">
-            <p className="text-gray-800">{company.description ? company.description.slice(0, 140) + "..." : ""}</p>
+            <p className="text-gray-800">{company.description ? company.description.slice(0, 130) + "..." : ""}</p>
           </div>
           <div className="flex gap-4">
             <button 

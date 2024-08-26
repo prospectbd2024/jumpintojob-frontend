@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Install dependencies (Optional)
         run: |
-          git pull origin main
+          git pull origin
           docker compose down
-          docker compose up --build -d
-          docker compose exec backend composer install
-          docker compose exec backend php artisan optimize:clear
-          docker compose exec backend php artisan migrate:fresh --seed --force
+          docker compose up -d --build --remove-orphans

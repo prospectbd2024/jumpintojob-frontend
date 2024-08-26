@@ -16,8 +16,8 @@ function FeaturedCompanies({ isLoggedIn , className }) {
 
   return (
     <div className={`mt-5 ${isLoggedIn ? 'logged-in' : ''} ` }>
-      <h4 className={"text-center text-darker-secondary-color text-2xl "}>
-        Featured Companies:
+      <h4 className={"text-center text-darker-secondary-color text-2xl mb-10"}>
+        Featured Companies
       </h4>
       <div
         className={`grid container mx-auto ${isLoggedIn ? " grid-cols-4 gap-x-3 gap-y-24 " : "grid-cols-4 "} `}

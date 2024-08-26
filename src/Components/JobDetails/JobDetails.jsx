@@ -13,7 +13,7 @@ const JobDetails = ({ props }) => {
   const { job } = props;
   const { isApplied } = useApplicationContext();
   const [loading, setLoading] = useState(true);
-
+  const {guestProtection} = useUserContext();
   useEffect(() => {
     if (job && Object.keys(job).length > 0) {
       setLoading(false);
@@ -25,23 +25,10 @@ const JobDetails = ({ props }) => {
   }, [job]);
 
   const handleApplyJob = () => {
-    if (userData) {
+    guestProtection(()=>{
       window.open(`/applyjob/${job.id}`, '_blank');
-    } else {
-      Swal.fire({
-        title: 'User must login before applying!',
-        text: 'Do you want to login?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          loginNavigate.push('/signin');
-        }
-      });
-    }
+    })
+ 
   };
 
   if (loading) {
@@ -86,24 +73,24 @@ const JobDetails = ({ props }) => {
         </div>
     
         <div className="px-1 flex flex-col gap-y-4">
-          <p className="text-lg mb-4 text-gray-500">
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Job Type</h3> {job.availability}
-          </p>
-          <p className="text-lg mb-4 text-gray-500">
+          </div>
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Salary</h3> {job.salary}
-          </p>
-          <p className="text-lg mb-4 text-gray-500">
+          </div>
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Educational Requirements</h3> {job.educational_requirements}
-          </p>
-          <p className="text-lg mb-4 text-gray-500">
+          </div>
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Required Experiences</h3> {job.experience}
-          </p>
-          <p className="text-lg mb-4 text-gray-500">
+          </div>
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Job Description</h3> {job.description}
-          </p>
-          <p className="text-lg mb-4 text-gray-500">
+          </div>
+          <div className="text-lg mb-4 text-gray-500">
             <h3 className="font-bold text-darker-secondary-color">Job Responsibilities</h3> {job.responsibilities}
-          </p>
+          </div>
         </div>
        
 
