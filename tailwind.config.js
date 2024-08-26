@@ -18,6 +18,15 @@ module.exports = {
                 'screen-xl': '450px', // Custom value for max-w-screen-xl
                 'screen-2xl': '780px', // Custom value for max-w-screen-2xl
             },
+            borderWidth: {
+                '3': '3px', // Make sure to include this if it's not present
+            },
+            borderColor: {
+                'custom-gray': 'rgb(183 183 183 / 81%)' // Custom gray border color
+            },
+            boxShadow: {
+                'custom-shadow': '0 4px 10px -1px rgba(183, 183, 183, 0.5), 0 1px 10px rgba(183, 183, 183, 0.5)' // Custom shadow color
+            }
         },
     },
     plugins: [],
