@@ -99,15 +99,21 @@ const JobDetails = ({props}) => {
                     </span>
                                     </div>
                                 </div>
-
-                                {/* Apply Button */}
-                                <div className="flex items-center">
-                                    <button
-                                        className={`w-full sm:w-auto h-8 sm:h-10 text-xs sm:text-base font-bold rounded-lg flex items-center justify-center gap-2 transition-colors duration-300 ${!isApplied(job.id) ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-500 text-white cursor-not-allowed'}`}
-                                        disabled={isApplied(job.id)}>
-                                        {isApplied(job.id) ? 'Applied' : 'Apply Now'} <FaUpRightFromSquare/>
-                                    </button>
-                                </div>
+                            </div>
+                            {/* Apply Button */}
+                            <div className="flex items-center">
+                                <button
+                                    className={`w-full sm:w-auto h-10 px-4 py-2 text-xs sm:text-base font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${
+                                        !isApplied(job.id)
+                                            ? 'bg-green-500 text-white hover:bg-green-600 active:bg-green-700'
+                                            : 'bg-gray-500 text-white cursor-not-allowed'
+                                    }`}
+                                    disabled={isApplied(job.id)}
+                                >
+                                    {isApplied(job.id) ? 'Applied' : 'Apply Now'}
+                                    <FaUpRightFromSquare
+                                        className={`w-4 h-4 ${!isApplied(job.id) ? 'text-white' : 'text-gray-300'}`}/>
+                                </button>
                             </div>
                         </div>
                     </div>
