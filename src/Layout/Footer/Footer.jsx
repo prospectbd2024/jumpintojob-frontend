@@ -11,7 +11,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white py-16">
+    <footer className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white py-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-6 text-center sm:text-left">
@@ -86,18 +86,18 @@ const Footer = () => {
               career tips.
             </p>
             <form className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-gray-800 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow"
-              />
-              <button
-                type="submit"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6 py-2 rounded-md transition-all duration-300 transform hover:scale-105"
-              >
-                Subscribe
-              </button>
-            </form>
+  <input
+    type="email"
+    placeholder="Enter your email"
+    className="bg-gray-800 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow sm:w-auto" // Added sm:w-auto to limit width on small screens
+  />
+  <button
+    type="submit"
+    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105 sm:w-auto" // Added sm:w-auto to limit width on small screens
+  >
+    Subscribe
+  </button>
+</form>
           </div>
         </div>
       </div>

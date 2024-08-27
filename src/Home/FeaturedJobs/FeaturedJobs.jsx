@@ -1,8 +1,7 @@
-"use client";
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useUserContext } from "../../Contexts/UserContext";
-import { useJobContext } from "@/Contexts/JobContext"; 
+import { useJobContext } from "@/Contexts/JobContext";
 import SingleJob from "@/Components/AllJobs/SingleJob";
 import ShowMoreJobsSkeleton from "@/Skeletons/ShowMoreJobsSkeleton";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
@@ -13,8 +12,9 @@ const FeaturedJobs = () => {
   const { allJobs } = useJobContext();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
   const handleClickedFeaturedJob = (e) => {
-     router.push( `/findjobs/jobdetails/${e}`);
+    router.push(`/findjobs/jobdetails/${e}`);
   };
 
   useEffect(() => {
@@ -28,45 +28,38 @@ const FeaturedJobs = () => {
   }, [allJobs]);
 
   return (
-    <div className="py-24">
+    <section className="featured-jobs py-24">
       <div className="container mx-auto px-4">
-        <div className="text-center text-darker-secondary-color text-2xl mb-10">
-          <h2>Featured jobs at Jump Into Job</h2>
-        </div>
+        <h2 className="text-center text-3xl font-bold mb-8">Featured Jobs</h2>
         {isLoading ? (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[...Array(6)].map((_, i) => (
               <JobCardSkeleton key={i} />
             ))}
             <ShowMoreJobsSkeleton />
           </div>
         ) : allJobs.length > 0 ? (
-          <div>
-            <div className="grid grid-cols-2 gap-6">
-              {allJobs.slice(0, 6).map((job) => (
-                <SingleJob
-                  key={job.id}
-                  job={job}
-                  clickedJob={handleClickedFeaturedJob}
-                  handleClickedJob={handleClickedFeaturedJob}
-                />
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <Link href="/findjobs">
-                <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">
-                  Show More Jobs
-                </button>
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {allJobs.slice(0, 6).map((job) => (
+              <SingleJob
+                key={job.id}
+                job={job}
+                clickedJob={handleClickedFeaturedJob}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center">
-            <h4>No Jobs Available</h4>
+            <p className="text-lg font-semibold">No Jobs Available</p>
           </div>
         )}
+        <div className="text-center mt-10">
+          <Link href="/findjobs">
+            <button className="btn btn-primary">Show More Jobs</button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

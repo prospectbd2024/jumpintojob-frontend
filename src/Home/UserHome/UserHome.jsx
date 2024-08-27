@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useUserContext } from '../../Contexts/UserContext';
-import FeaturedJobs from './FeaturedJobs';
-import UserProfile from './UserProfile';
-import { useJobContext } from '@/Contexts/JobContext';
-import { useCompanyContext } from '@/Contexts/CompanyContext';
-import { useRouter } from 'next/navigation';
-import FeaturedCompanies from './FeaturedCompanies';
+import React, { useEffect } from "react";
+import { useUserContext } from "../../Contexts/UserContext";
+import FeaturedJobsList from "./FeaturedJobs";// Updated import path
+import UserProfile from "./UserProfile";
+import { useJobContext } from "@/Contexts/JobContext";
+import { useCompanyContext } from "@/Contexts/CompanyContext";
+import { useRouter } from "next/navigation";
+import FeaturedCompanies from "./FeaturedCompanies";
 
 const UserHome = () => {
   const { setClickedFeaturedJob, profile } = useUserContext();
@@ -26,15 +26,15 @@ const UserHome = () => {
   };
 
   return (
-    <div className='mt-5 mb-12'>
-      <div className="container mx-auto">
-        <FeaturedJobs
-        className={"flex-grow"}
-        jobClassName={'grid grid-cols-3 gap-4'}
-        allJobs={allJobs}
-        handleClickedFeaturedJob={handleClickedFeaturedJob}
+    <div className="mt-5 mb-12">
+      <div className="container mx-auto px-4">
+        <FeaturedJobsList
+          className="flex-grow"
+          jobClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" // Responsive grid layout
+          allJobs={allJobs}
+          handleClickedFeaturedJob={handleClickedFeaturedJob}
         />
-        <FeaturedCompanies isLoggedIn={true} className={''}  />
+        <FeaturedCompanies isLoggedIn={true} className="" />
         {/* <UserProfile profile={profile} /> */}
       </div>
     </div>
