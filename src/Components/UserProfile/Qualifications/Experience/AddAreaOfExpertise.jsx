@@ -36,31 +36,31 @@ function AddAreaOfExpertise({ props }) {
   };
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2 w-full"> {/* Ensure full width */}
       <label className="text-sm font-semibold">
         Area of Expertise
         <abbr title="Required" className="text-red-500 ml-1">*</abbr>
       </label>
-      <div className="space-y-2">
+      <div className="space-y-2 w-full"> {/* Ensure full width */}
         {experience?.expertises?.map((element, index) => (
-          <div key={index} className="flex items-center space-x-4">
+          <div key={index} className="flex items-center space-x-4 w-full"> {/* Ensure full width */}
             <input
               type="text"
               value={element.name}
               onChange={(e) => handleChange(index, "name", e.target.value)}
-              className="flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md w-full" 
               placeholder="Expertise"
             />
             <input
               type="number"
               value={element.months}
               onChange={(e) => handleChange(index, "months", e.target.value)}
-              className="w-20 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-20 p-2 border border-gray-400 outline-none bg-transparent text-gray-700 font-sans rounded-md"
               placeholder="Months"
               min="0"
             />
             <FaTrashAlt
-              className="text-red-500 cursor-pointer hover:text-red-700"
+              className="text-red-500 cursor-pointer hover:text-red-700 text-[35px]"
               onClick={() => handleDelete(index)}
             />
           </div>

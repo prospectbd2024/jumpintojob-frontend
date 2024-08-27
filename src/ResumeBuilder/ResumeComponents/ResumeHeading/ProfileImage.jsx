@@ -129,6 +129,7 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
           </div>
         </div>
       )}
+      <h3 className="text-base font-semibold sm:text-lg md:text-xl">personal details</h3>
     </div>
   );
 }

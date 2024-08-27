@@ -28,8 +28,11 @@ function SkillProperties({ props }) {
 
   return (
     <div className="mt-5 p-5 border border-gray-300 rounded-lg bg-white shadow-sm">
-      <SkillRating props={{ rating, setRating, mode: 'rw' }} onChange={() => {}} />
       <HowSkillLearned props={{ learnedFrom, setLearnedFrom }} />
+      <div className='mt-4'>
+
+      <SkillRating props={{ rating, setRating, mode: 'rw' }} onChange={() => {}} />
+      </div>
     </div>
   );
 }
