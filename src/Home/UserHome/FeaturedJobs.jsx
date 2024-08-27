@@ -43,8 +43,9 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob, className, jobCla
           </>
         )}
       </div>
-      <div className="text-center mt-4 mb-10">
-        <ShowMoreButton link="/findjobs" />
+      <div className='text-center mt-4 mb-10'>
+
+      <ShowMoreButton link={'/jobs'} />
       </div>
     </section>
   );

@@ -74,13 +74,13 @@ const Header = () => {
     }
     try {
       const userLogoutResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`,
+        ${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout,
         {
           method: "GET",
           headers: {
             "content-type": "application/json",
             accept: "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: Bearer ${token},
           },
         }
       );
@@ -192,7 +192,7 @@ const Header = () => {
 const NavLinks = ({ activeMenu, handleActiveMenu, mobile }) => {
   const links = [
     { href: "/", label: "Home" },
-    { href: "/findjobs", label: "Jobs" },
+    { href: "/jobs", label: "Jobs" },
     { href: "/companies", label: "Companies" },
   ];
 
@@ -401,4 +401,4 @@ const UserProfileLink = ({ href, icon, label }) => (
 );
 
 
-export default Header;
+export default Header;

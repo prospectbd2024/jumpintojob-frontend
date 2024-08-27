@@ -115,14 +115,14 @@ const MyJobsDashboard = () => {
                                         {isMobileScreen ?
                                             <Link onClick={() => handleClickedJob(job.id)} href={`/jobdetailsres/${job.id}`}>View Details</Link>
                                             :
-                                            <Link onClick={() => handleClickedJob(job.id)} href={`/findjobs/jobdetails/${job.id}`}>View Details</Link>
+                                            <Link onClick={() => handleClickedJob(job.id)} href={`/jobs/jobdetails/${job.id}`}>View Details</Link>
                                         }
                                     </div>
                                 )
                             }
                         </div>
                         <div className="dashboard-viewmorejobs-btn">
-                        <Link href="/findjobs"><button>View More</button></Link>
+                        <Link href="/jobs"><button>View More</button></Link>
                         </div>
                     </div>
                     <div className="dashboard-social-resume">

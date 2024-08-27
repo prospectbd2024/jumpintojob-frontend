@@ -14,7 +14,7 @@ function verifYsuccess() {
       <p className="info">
         Now you can enjoy all the features and benefits of our platform. Start exploring!
       </p>
-      <Link href={'/findjobs'} className="primary-button">Explore Jobs</Link>
+      <Link href={'/jobs'} className="primary-button">Explore Jobs</Link>
     </div>
   );
 }

@@ -70,8 +70,8 @@ function JobContext({children}) {
         setClickedJob(e)
         selectJob(e);
 
-        if(pathname.search('/findjobs/jobdetails')==-1){
-            router.push("/findjobs/jobdetails/"+e)
+        if(pathname.search('/jobs/jobdetails')==-1){
+            router.push("/jobs/jobdetails/"+e)
         }
         else{
             const updatedUrl = pathname.replace(/\/\d+$/, `/${e}`);
