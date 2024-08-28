@@ -74,13 +74,13 @@ const Header = () => {
     }
     try {
       const userLogoutResponse = await fetch(
-        ${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/logout`,
         {
           method: "GET",
           headers: {
             "content-type": "application/json",
             accept: "application/json",
-            Authorization: Bearer ${token},
+            Authorization: `Bearer ${token}`,
           },
         }
       );
