@@ -34,8 +34,8 @@ const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
               Sign in   
             </Link>
             <Link
-              href="/signup"
-              className={ `${location =="/signup"  ?"text-blue-500" : "text-gray-800"} 
+              href="/register"
+              className={ `${location =="/register"  ?"text-blue-500" : "text-gray-800"} 
               block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
             >
               Register
@@ -52,5 +52,6 @@ const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
       </div>
     );
   };
+
 
   export default MobileUserActions;
