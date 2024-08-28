@@ -5,6 +5,8 @@ import {
   HiOutlineUser,
   HiOutlineUserAdd,
 } from "react-icons/hi";
+
+import { usePathname, useRouter } from "next/navigation";
 import { TbBell,TbSend } from "react-icons/tb"; 
 const UserActions = ({
     userData,
@@ -15,6 +17,8 @@ const UserActions = ({
     handleLogout,
     handleSignoutAlert,
   }) => {
+    
+  const location = usePathname();  
     return (
       <div className="flex items-center space-x-4">
         {userData ? (
@@ -45,7 +49,7 @@ const UserActions = ({
             <Link href="/signin"  className={ `${location =="/signin"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
               <HiOutlineUser /> Sign in
             </Link>
-            <Link href="/signup" className={ `${location =="/signup"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
+            <Link href="/register" className={ `${location =="/register"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
               <HiOutlineUserAdd /> Register
             </Link>
           </>
