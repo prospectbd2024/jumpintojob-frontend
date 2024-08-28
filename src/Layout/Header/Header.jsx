@@ -21,7 +21,8 @@ import Logo from "@/assets/Logo";
 const Header = () => {
   const forEmployerNavigate = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = usePathname();
+  const location = usePathname(); 
+  
   const [activeMenu, setActiveMenu] = useState(location);
   const { userData, setUserData } = useContext(UserContext);
 
@@ -254,15 +255,15 @@ const UserActions = ({
         </>
       ) : (
         <>
-          <Link href="/signin" className="flex items-center gap-2">
+          <Link href="/signin"  className={ `${location =="/signin"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
             <HiOutlineUser /> Sign in
           </Link>
-          <Link href="/signup" className="flex items-center gap-2">
+          <Link href="/signup" className={ `${location =="/signup"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
             <HiOutlineUserAdd /> Register
           </Link>
         </>
       )}
-      <Link href="/foremployers" className="flex items-center gap-2">
+      <Link href="/foremployers" className={ `${location =="/foremployers"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
         <HiBriefcase /> For Employers
       </Link>
     </div>
@@ -296,14 +297,16 @@ const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
       ) : (
         <>
           <Link
-            href="/signin"
-            className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+            href="/signin" 
+            className={ `${location =="/signin"  ?"text-blue-500" : "text-gray-800"} 
+            block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
           >
             Sign in
           </Link>
           <Link
             href="/signup"
-            className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+            className={ `${location =="/signup"  ?"text-blue-500" : "text-gray-800"} 
+            block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
           >
             Register
           </Link>
@@ -311,7 +314,8 @@ const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
       )}
       <Link
         href="/foremployers"
-        className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+        className={ `${location =="/foremployers"  ?"text-blue-500" : "text-gray-800"} 
+            block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
       >
         For Employers
       </Link>
