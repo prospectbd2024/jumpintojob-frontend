@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; 
+import React, { useEffect } from "react";
 
 function LanguageProperties({ props }) {
   const { selectedLanguage, setLanguage } = props;
@@ -14,9 +14,9 @@ function LanguageProperties({ props }) {
   }, [selectedLanguage, setLanguage]);
 
   return (
-    <div className="mt-5 grid grid-cols-2 gap-4">
+    <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
-        <label htmlFor="proficiency" className="font-bold text-lg">
+        <label htmlFor="proficiency" className="block font-bold text-base sm:text-lg">
           Select Proficiency Level <span className="text-red-500">*</span>
         </label>
       </div>
@@ -24,7 +24,7 @@ function LanguageProperties({ props }) {
         <select
           id="proficiency"
           value={selectedLanguage.proficiency || 'Beginner'}
-          className="w-full p-2 mt-1 mb-1 border border-secondary rounded outline-none"
+          className="w-full p-2 mt-1 mb-1 border border-secondary rounded outline-none text-base sm:text-lg"
           onChange={handleProficiencyChange}
         >
           <option value="Beginner">Beginner</option>

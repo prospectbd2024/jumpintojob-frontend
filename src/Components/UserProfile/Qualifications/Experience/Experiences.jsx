@@ -82,7 +82,7 @@ const Experiences = ({ props }) => {
           </div>
           {experiences.map((exp, index) => (
             <div key={index} className="relative p-4 border border-secondary rounded-md mb-3 flex flex-col gap-3">
-              <div className="flex justify-end gap-2.5 mb-3">
+              <div className="flex justify-between gap-2.5 mb-3">
                 <Visibility
                   visibility={exp.visible_on_cv}
                   handleVisibility={() => manageVisibility(index)}
