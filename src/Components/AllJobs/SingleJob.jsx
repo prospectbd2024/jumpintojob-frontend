@@ -34,7 +34,7 @@ const SingleJob = ({job, clickedJob, handleClickedJob}) => {
             onClick={() => handleClickedJob(job.id)}
         >
             <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-gray-900 truncate">{job.job_title}</h2>
+                <h2 className="text-lg font-semibold text-gray-900 truncate">{job.id}  {job.job_title}</h2>
                 <HiOutlineBookmark
                     onClick={(e) => {
                         e.stopPropagation();
