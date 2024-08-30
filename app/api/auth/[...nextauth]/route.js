@@ -47,7 +47,8 @@ export const authOptions = {
       // console.log(userInfo);
       if (userInfo) {
         const {data} = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/social-signin`, {
-          userInfo: userInfo
+          userInfo: userInfo,
+          nextSecret : process.env.NEXTAUTH_SECRET
         }, {
           headers: {
             'Content-Type': 'application/json',
