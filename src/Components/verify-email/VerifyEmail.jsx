@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/Contexts/UserContext';
 
-const VerifyEmail = ({redirect}) => {
+const VerifyEmail = ({ redirect }) => {
   const router = useRouter();
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
@@ -16,7 +16,7 @@ const VerifyEmail = ({redirect}) => {
 
     if (resendDisabled) {
       timerInterval = setInterval(() => {
-        setResendTimer(prevTimer => {
+        setResendTimer((prevTimer) => {
           if (prevTimer === 1) {
             clearInterval(timerInterval);
             setResendDisabled(false);
@@ -41,7 +41,7 @@ const VerifyEmail = ({redirect}) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${bearerToken}`,
         },
-        body: JSON.stringify({ verify_by:'email' , email_or_phone: userData.data.user.email }),
+        body: JSON.stringify({ verify_by: 'email', email_or_phone: userData.data.user.email }),
       });
 
       const data = await response.json();
@@ -76,45 +76,32 @@ const VerifyEmail = ({redirect}) => {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px', marginBottom: '100px' }}>
-      <h1 style={{ color: '#333', marginBlockEnd: '20px' }}>Verify Email</h1>
-      <p style={{ color: '#555', margin: '20px' }}>Enter the verification code sent to your email:</p>
+    <div className="text-center mt-12 mb-24 h-[40vh] flex flex-col items-center">
+      <h1 className="text-2xl text-gray-800 mb-5">Verify Email</h1>
+      <p className="text-gray-600 mb-5">Enter the verification code sent to your email </p>
+      <div>
       <input
         type="text"
         value={verificationCode}
         onChange={(e) => setVerificationCode(e.target.value)}
-        style={{ padding: '8px', marginRight: '8px' }}
+        className="p-2 border border-gray-300 rounded mr-2"
       />
       <button
         onClick={handleVerification}
-        style={{
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          padding: '8px 16px',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          marginRight: '4px'
-        }}
+        className="bg-green-500 text-white py-2 px-4 rounded mr-1"
       >
         Verify
       </button>
       <button
         onClick={resandVerificationCode}
-        style={{
-          backgroundColor: resendDisabled ? 'var(--secondary-color)' : '#3199d8',
-          color: 'white',
-          padding: '8px 16px',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: resendDisabled ? 'not-allowed' : 'pointer',
-        }}
+        className={`py-2 px-4 rounded text-white ${resendDisabled ? 'bg-secondary cursor-not-allowed' : 'bg-blue-500 cursor-pointer'}`}
         disabled={resendDisabled}
       >
         Resend {resendTimer !== 0 && `(${resendTimer}s)`}
       </button>
+      </div>
       {message && (
-        <p style={{ color: 'red', marginTop: '10px', fontStyle: 'italic' }}>{message}</p>
+        <p className="text-red-500 mt-3 italic">{message}</p>
       )}
     </div>
   );
