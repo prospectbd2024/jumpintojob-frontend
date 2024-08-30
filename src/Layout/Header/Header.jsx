@@ -53,8 +53,7 @@ const Header = () => {
     setMobileMenuOpen(false);
   };
 
-  const handleLogout = async () => {
-    forEmployerNavigate.push("/signin");
+  const handleLogout = async () => { 
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -81,9 +80,7 @@ const Header = () => {
         }
       );
       localStorage.removeItem("userData");
-      await signOut();
-      const userLogoutData = await userLogoutResponse.json();
-      setUserData(null);
+      await signOut(); 
     } catch (error) {
       console.error("Logout failed:", error);
       alert(error);

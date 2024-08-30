@@ -6,6 +6,7 @@ import {
   HiQuestionMarkCircle, 
 } from "react-icons/hi";
 import {   TbLogout, TbUserCircle } from "react-icons/tb"; 
+import UserProfileLink from "./UserProfileLink";
 const UserProfileDropdown = ({
     userData,
     toggleUserProfile,
