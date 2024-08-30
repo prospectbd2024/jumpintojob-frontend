@@ -89,7 +89,7 @@ const Login = () => {
         </span>
       </div>
 
-      <div className="bg-white w-full max-w-md p-8 md:p-12 rounded-lg border border-blue-100 shadow-md">
+      <div className="bg-primary  w-full max-w-md p-8 md:p-12 rounded-lg border border-blue-100 shadow-md">
         <MessageBox message={message} />
         <form onSubmit={handleLogin} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">

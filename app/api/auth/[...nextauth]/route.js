@@ -1,33 +1,30 @@
 import NextAuth from 'next-auth';
-import { Google,Facebook } from 'lib/CustomAuthProviders';
-import GoogleProvider from 'next-auth/providers/google'
-import FacebookProvider from "next-auth/providers/facebook";
+import { Google,Facebook } from 'lib/CustomAuthProviders'; 
 import axios from 'axios';
+const googleSettings={
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+}
+const facebookSettings ={
+  clientId: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+}
 export const authOptions = {
  providers: [
   Google('google_job_seeker',{
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    ...googleSettings,
     userType: 'job_seeker'
   }),
   Google('google_employer',{
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    ...googleSettings,
     userType: 'employer'
-  }),
-  // Facebook('facebook_job_seeker',{
-  //   clientId: process.env.FACEBOOK_CLIENT_ID,
-  //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  //   userType: 'job_seeker'
-  // }),
+  }), 
   Facebook("facebook_job_seeker",{
-    clientId: process.env.FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    ...facebookSettings,
     userType: 'job_seeker'
   }),
   Facebook("facebook_employer",{
-    clientId: process.env.FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    ...facebookSettings,
     userType: 'employer'
   }),
  ],
