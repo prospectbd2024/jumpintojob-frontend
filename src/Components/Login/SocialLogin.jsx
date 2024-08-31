@@ -1,9 +1,7 @@
 import React from "react";
 
 import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc"; 
-
-import axios from "axios";
+import { FcGoogle } from "react-icons/fc";  
 function SocialLogin({className}) {
   return (
     <div className={className}>
