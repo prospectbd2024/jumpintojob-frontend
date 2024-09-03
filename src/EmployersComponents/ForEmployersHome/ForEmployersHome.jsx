@@ -11,8 +11,8 @@ const ForEmployersHome = () => {
             <ForEmployersBanner/>
             {/* <ForEmployersLiveData></ForEmployersLiveData> */}
             {/* <ForEmployersProcess></ForEmployersProcess> */}
-            <ForEmployersWhyUs></ForEmployersWhyUs>
-            <ForEmployersJobBanner></ForEmployersJobBanner>
+            <ForEmployersWhyUs/>
+            <ForEmployersJobBanner/>
         </div>
     );
 };
