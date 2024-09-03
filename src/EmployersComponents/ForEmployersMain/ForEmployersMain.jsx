@@ -2,6 +2,7 @@ import React from 'react';
 import ForEmployersHeader from '../ForEmployersLayout/ForEmployersHeader/ForEmployersHeader';
 import ForEmployersFooter from '../ForEmployersLayout/ForEmployersFooter/ForEmployersFooter';
 import ForEmployersHome from '../ForEmployersHome/ForEmployersHome';
+import Footer from '@/Layout/Footer/Footer';
 
 
 const ForEmployersMain = ({children}) => {
@@ -9,7 +10,7 @@ const ForEmployersMain = ({children}) => {
         <div>
             <ForEmployersHeader/>
             <>{children}</>
-            <ForEmployersFooter/>
+            <Footer/>
             
         </div>
     );
