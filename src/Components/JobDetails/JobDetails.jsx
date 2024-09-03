@@ -36,7 +36,10 @@ const JobDetails = ({props}) => {
         return (
             <div className="sticky top-14">
                 <div
-                    className="w-full max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                    className="
+  w-full max-w-screen-md sm:max-w-screen-lg md:hidden lg:max-w-screen-2xl lg:ml-[150px]
+  lg:block hidden mx-auto bg-white shadow-lg rounded-lg border border-gray-200
+">
 
                     {/* Header Section */}
                     <div className="relative bg-white shadow-md border-b border-gray-200 overflow-hidden">
@@ -97,7 +100,7 @@ const JobDetails = ({props}) => {
                                 <button type="button"
                                         onClick={handleApplyJob}
                                         class="text-white hover:cursor-crosshair bg-[#2557D6] hover:bg-[#2557D6]/90 gap-2 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
-                                      {isApplied(job.id) ? 'Applied' : 'Apply Now'}
+                                    {isApplied(job.id) ? 'Applied' : 'Apply Now'}
                                     <FaUpRightFromSquare
                                         className={`w-4 h-4 ${!isApplied(job.id) ? 'text-white' : 'text-gray-300'}`}/>
                                 </button>
