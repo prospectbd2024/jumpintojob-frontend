@@ -1,47 +1,43 @@
-import React from 'react';
-import { useState } from 'react';
-import { FaCheckCircle, FaHistory, FaRegCheckCircle } from 'react-icons/fa';
-import { HiOutlineBriefcase, HiOutlineCheckCircle, HiOutlineHome, HiOutlinePhoneIncoming } from 'react-icons/hi';
-import  Link  from 'next/link';
+import React, { useState } from 'react';
+import { HiOutlineHome, HiOutlineBriefcase, HiOutlinePhoneIncoming } from 'react-icons/hi';
+import { FaRegCheckCircle } from 'react-icons/fa';
+import Link from 'next/link';
 
 const ManageJobs = () => {
     const [sidebarItemClick, setSidebarItemClick] = useState('/managejobs/dashboard');
-    const [activeSidebarItem, setActiveSideItem] = useState('Dashboard')
+    const [activeSidebarItem, setActiveSideItem] = useState('Dashboard');
+
     return (
-        <div className='user-profile'>
-            <div className="user-profile-content">
-                <div className="user-profile-sidebar-menu">
-                    <div className="userprofile-sidebar-sticky">
-                        <h2>Manage Jobs</h2>
-                        <ul>
-                            <li onClick={() => setActiveSideItem('Dashboard')} className={`${activeSidebarItem == 'Dashboard' ? 'active-sidebar-item' : ''}`}>
-                            <HiOutlineHome></HiOutlineHome>
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick('../managejobs/dashboard')} >Dashboard</Link>
+        <div className="min-h-screen flex">
+            {/* Sidebar */}
+            <div className="flex-none bg-white shadow-md sticky top-20 w-full md:w-64">
+                <div className="p-5">
+                    <h2 className="text-2xl font-semibold text-[#061421] border-b border-gray-300 pb-3">Manage Jobs</h2>
+                    <ul className="mt-4 space-y-2">
+                        {['Dashboard', 'Active Jobs', 'Job History', 'Shortlisted', 'Interview'].map((item) => (
+                            <li
+                                key={item}
+                                onClick={() => setActiveSideItem(item)}
+                                className={`flex items-center gap-3 p-3 rounded-md transition duration-200 ease-in-out cursor-pointer ${
+                                    activeSidebarItem === item ? 'bg-[#F08200] text-white' : 'text-[#061421]'
+                                }`}
+                            >
+                                {item === 'Dashboard' && <HiOutlineHome className="text-2xl" />}
+                                {item === 'Active Jobs' && <HiOutlineBriefcase className="text-2xl" />}
+                                {item === 'Job History' && <HiOutlineBriefcase className="text-2xl" />}
+                                {item === 'Shortlisted' && <FaRegCheckCircle className="text-2xl" />}
+                                {item === 'Interview' && <HiOutlinePhoneIncoming className="text-2xl" />}
+                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick(`/managejobs/${item.toLowerCase().replace(' ', '')}`)}>
+                                    {item}
+                                </Link>
                             </li>
-                            <li onClick={() => setActiveSideItem('Active Jobs')} className={`${activeSidebarItem == 'Active Jobs' ? 'active-sidebar-item' : ''}`}>
-                            <HiOutlineBriefcase></HiOutlineBriefcase>
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick('../managejobs/activejobs')}>Active Jobs</Link>
-                            </li>
-                            <li onClick={() => setActiveSideItem('Jobs History')} className={`${activeSidebarItem == 'Jobs History' ? 'active-sidebar-item' : ''}`}>
-                            {/* <FaHistory /> */}
-                            <HiOutlineBriefcase></HiOutlineBriefcase>
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick('../managejobs/jobshistory')}>Job History</Link>
-                            </li>
-                            <li onClick={() => setActiveSideItem('Shortlisted')} className={`${activeSidebarItem == 'Shortlisted' ? 'active-sidebar-item' : ''}`}>
-                            <FaRegCheckCircle />
-                            {/* <HiOutlineCheckCircle /> */}
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick('../managejobs/shortlisted')}>Shortlisted</Link>
-                            </li>
-                            <li onClick={() => setActiveSideItem('Interview')} className={`${activeSidebarItem == 'Interview' ? 'active-sidebar-item' : ''}`}>
-                            <HiOutlinePhoneIncoming></HiOutlinePhoneIncoming>
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick('../managejobs/interview')}>Interview</Link>
-                            </li>
-                        </ul>
-                    </div>
+                        ))}
+                    </ul>
                 </div>
-                <div className="user-profile-details">
-                    <Outlet />
-                </div>
+            </div>
+            {/* Content */}
+            <div className="flex-1 p-4 md:p-8">
+                <Outlet />
             </div>
         </div>
     );
