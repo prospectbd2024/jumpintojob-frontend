@@ -1,6 +1,5 @@
 import React from "react";
 import "./globals.css";
-import "./responsive.css";       
 import "@/EmployersComponents/ForEmployersHome/ForEmployersLiveData/ForEmployersLiveData.css";
 import "@/EmployersComponents/ForEmployersPostJob/ForEmployersPostJob.css"; 
 import { UserProvider } from "@/Contexts/UserContext";
