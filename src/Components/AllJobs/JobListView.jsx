@@ -1,46 +1,35 @@
-import React, { useState, useEffect } from "react"; 
-import SingleJob from "./SingleJob"; 
+import React from "react";
+import SingleJob from "./SingleJob";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
- 
+import {useJobContext} from "@/Contexts/JobContext";
 
-const JobListView = ({ props }) => {
-  const { filteredJobs, clickedJob, handleClickedJob } = props;
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading
+const JobListView = ({props}) => {
+    const {filteredJobs, clickedJob, handleClickedJob} = props;
+    const {Loading} = useJobContext();
 
-  // Simulate data fetching
-  useEffect(() => {
-    // Assuming filteredJobs is initially empty and gets updated later
-
-    if(filteredJobs && filteredJobs.length>0){
-      setIsLoading(false)
-    }
-    else{
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    }
-  }, [filteredJobs]);
-
-  return (
-    <div className="w-[450px] flex flex-col gap-4">
-      {isLoading ? (
-        // Display multiple skeleton loaders while loading
-        <>
-          <JobCardSkeleton />
-          <JobCardSkeleton />
-          <JobCardSkeleton />
-        </>
-      ) : filteredJobs && filteredJobs.length > 0 ? (
-        // Render the list of jobs if filteredJobs has items
-        filteredJobs.map((job, index) => (
-          <SingleJob key={index} job={job} clickedJob={clickedJob} handleClickedJob={handleClickedJob} />
-        ))
-      ) : (
-        // Render a message when filteredJobs is empty
-        <p>No jobs available</p>
-      )}
-    </div>
-  );
+    return (
+        <div className="w-full md:w-[400px] flex flex-col gap-4">
+            {Loading ? (
+                // Display multiple skeleton loaders while loading
+                <>
+                    <JobCardSkeleton/>
+                    <JobCardSkeleton/>
+                    <JobCardSkeleton/>
+                    <JobCardSkeleton/>
+                    <JobCardSkeleton/>
+                    <JobCardSkeleton/>
+                </>
+            ) : filteredJobs && filteredJobs.length > 0 ? (
+                // Render the list of jobs if filteredJobs has items
+                filteredJobs.map((job, index) => (
+                    <SingleJob key={index} job={job} clickedJob={clickedJob} handleClickedJob={handleClickedJob}/>
+                ))
+            ) : (
+                // Render a message when filteredJobs is empty
+                <p>No jobs available</p>
+            )}
+        </div>
+    );
 };
 
 export default JobListView;
