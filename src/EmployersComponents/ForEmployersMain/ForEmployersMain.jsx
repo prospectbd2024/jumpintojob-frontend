@@ -10,7 +10,7 @@ const ForEmployersMain = ({children}) => {
         <div>
             <ForEmployersHeader/>
             <>{children}</>
-            <Footer/>
+            <ForEmployersFooter/>
             
         </div>
     );

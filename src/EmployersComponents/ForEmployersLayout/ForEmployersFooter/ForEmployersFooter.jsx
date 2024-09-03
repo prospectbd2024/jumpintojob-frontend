@@ -1,19 +1,19 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube, FaArrowRight } from 'react-icons/fa';
 
-const ForEmployersFooter = () => {
+const ForRecruitersFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white py-10">
+    <footer className="bg-gradient-to-br from-blue-600  to-blue-800 text-white py-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           <div className="space-y-6 col-span-1 sm:col-span-2">
-            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              Jump Into Job
+            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r text-white">
+              Jump Into Job Recruiters
             </h2>
             <p className="text-gray-300 text-sm">
-              With Jump Into Job you can browse for jobs, view local and national salary information, discover companies, and learn about the job market in a specific city.
+              With Jump Into Job Recruiters, you can post jobs, manage applicants, discover top talent, and gain insights into the latest hiring trends.
             </p>
             <div className="flex space-x-4">
               {[FaFacebook, FaInstagram, FaTwitter, FaYoutube].map((Icon, index) => (
@@ -30,16 +30,16 @@ const ForEmployersFooter = () => {
 
           {[
             {
-              title: 'Resume',
-              items: ['Create a Resume', 'Resume Examples', 'Resume Templates'],
+              title: 'Recruiting Resources',
+              items: ['Post a Job', 'Recruiting Tips', 'Employer Branding'],
             },
             {
-              title: 'Cover Letter',
-              items: ['Create a Cover Letter', 'Cover Letter Examples', 'Cover Letter Templates'],
+              title: 'Hiring Solutions',
+              items: ['Applicant Tracking', 'Interview Scheduling', 'Talent Search'],
             },
             {
-              title: 'Career Blogs',
-              items: ['Job Interview', 'Interview Tips', 'Job Search', 'Career Plan'],
+              title: 'Industry Insights',
+              items: ['Hiring Trends', 'Salary Surveys', 'Workplace Culture'],
             },
             {
               title: 'Support',
@@ -71,7 +71,7 @@ const ForEmployersFooter = () => {
       <div className="mt-8 pt-8 border-t border-gray-700">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; Copyright {currentYear} - Jump Into Job. All rights reserved.
+            &copy; Copyright {currentYear} - Jump Into Job Recruiters. All rights reserved.
           </p>
         </div>
       </div>
@@ -79,4 +79,4 @@ const ForEmployersFooter = () => {
   );
 };
 
-export default ForEmployersFooter;
+export default ForRecruitersFooter;
