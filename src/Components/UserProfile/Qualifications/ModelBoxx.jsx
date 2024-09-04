@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { HiX } from "react-icons/hi"; 
 
-function ModalBox({ children, props }) {
+function ModalBoxx({ children, props }) {
   const { title, display, onSave, onClose } = props;
 
   const handleSave = () => {
@@ -23,23 +23,8 @@ function ModalBox({ children, props }) {
         />
       </div>
       <div>{children}</div>
-      <div className="flex items-center justify-end gap-5 pt-6 mt-5 border-t border-gray-300">
-        <button 
-          className="text-white border-none bg-primary-color w-[90px] h-[40px] text-base leading-[40px] rounded-lg font-bold cursor-pointer transition-colors duration-300" 
-          onClick={handleSave} 
-        >
-          Save
-        </button>
-
-        <button 
-          className="bg-transparent text-red-600 border border-red-600 w-[90px] h-[40px] text-base font-bold rounded-lg cursor-pointer transition-colors duration-300 hover:bg-red-100" 
-          onClick={onClose}
-        >
-          Close
-        </button>
-      </div>
     </div>
   );
 }
 
-export default ModalBox;
+export default ModalBoxx;

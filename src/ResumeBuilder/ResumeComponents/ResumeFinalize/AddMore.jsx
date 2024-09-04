@@ -52,7 +52,7 @@ function AddMore({ props }) {
   };
 
   const renderProjectForm = () => (
-    <div className="w-100 max-w-sm">
+    <div className="w-full max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -99,14 +99,14 @@ function AddMore({ props }) {
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
-          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y overflow-auto h-24 md:h-32"
         />
       </div>
     </div>
   );
 
   const renderCertificateForm = () => (
-    <div className="w-100 max-w-sm">
+    <div className="w-full max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -133,14 +133,14 @@ function AddMore({ props }) {
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
-          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y overflow-auto h-24 md:h-32"
         />
       </div>
     </div>
   );
 
   const renderPublicationForm = () => (
-    <div className="w-100 max-w-sm">
+    <div className="w-full max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -177,14 +177,14 @@ function AddMore({ props }) {
           name="abstract"
           value={formData.abstract || ''}
           onChange={handleChange}
-          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y overflow-auto h-24 md:h-32"
         />
       </div>
     </div>
   );
 
   const renderDefaultForm = () => (
-    <div className="w-100 max-w-sm">
+    <div className="w-full max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -201,7 +201,7 @@ function AddMore({ props }) {
           name="description"
           value={formData.description || ''}
           onChange={handleChange}
-          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y h-24"
+          className="border border-gray-300 rounded-md px-3 py-2 text-base w-full resize-y overflow-auto h-24 md:h-32"
         />
       </div>
     </div>
@@ -224,3 +224,4 @@ function AddMore({ props }) {
 }
 
 export default AddMore;
+

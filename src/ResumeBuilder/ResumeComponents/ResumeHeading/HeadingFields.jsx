@@ -1,14 +1,19 @@
-import { useResumeContext } from "@/Contexts/ResumeContext";
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import ProfileImage from "./ProfileImage";
 import PersonalInfo from "./PersonalInfo";
 import AddressInfo from "./AddressInfo";
 import Summary from "./Summary";
 import MediaLinks from "./MediaLinks";
+import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 
 function HeadingFields({ props }) {
-  const { personalInformation, SetPersonalInformation } = props;
-  const { selectedImage, setSelectedImage, imagePreview, setImagePreview } = useResumeContext();
+  const { 
+    personalInformation, 
+    SetPersonalInformation, 
+    setCurrentStep, 
+    isFormValid, 
+    handleNext 
+  } = props;
 
   const handleChange = (field, value) => {
     SetPersonalInformation((prevData) => ({
@@ -27,28 +32,22 @@ function HeadingFields({ props }) {
     }));
   };
 
-  useEffect(() => {
-    if (selectedImage) {
-      SetPersonalInformation(prev => ({ ...prev, cv_profile_image: selectedImage }))
-    }
-  }, [selectedImage])
-
   return (
-    <div className="border border-gray-300 p-5 rounded-lg bg-white mb-5">
+    <div className="border border-gray-300 p-8 rounded-lg bg-gradient-to-br from-blue-50 to-primary-color mb-5">
       <div className="space-y-6">
-        <ProfileImage
-          personalInformation={personalInformation}
-          imagePreview={imagePreview}
-          setImagePreview={setImagePreview}
-          setSelectedImage={setSelectedImage}
-        />
+      <ProfileImage
+  personalInformation={personalInformation}
+  SetPersonalInformation={SetPersonalInformation}
+/>
         <PersonalInfo
           personalInformation={personalInformation}
           handleChange={handleChange}
+          isFormValid={isFormValid}
         />
         <AddressInfo
           personalInformation={personalInformation}
           handleAddressChange={handleAddressChange}
+          isFormValid={isFormValid}
         />
         <Summary
           summary={personalInformation.summary}

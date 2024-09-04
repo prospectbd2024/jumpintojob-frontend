@@ -6,7 +6,7 @@ const Visibility = ({ handleVisibility, visibility }) => {
     <div className="relative flex flex-col items-center">
       {visibility ? (
         <FaEye
-          className="text-blue-500 text-2xl cursor-pointer"
+          className="text-white text-2xl cursor-pointer"
           onClick={handleVisibility}
         />
       ) : (

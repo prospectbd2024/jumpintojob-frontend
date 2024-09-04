@@ -11,11 +11,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white py-10">
+    <footer className="bg-gradient-to-br from-primary-color via-primary- via-indigo-600 to-purple-700 text-white py-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12 items-center">
           <div className="space-y-6 text-center sm:text-left">
-            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-900 via-indigo-700 to-purple-900">
               Jump Into Job
             </h2>
             <p className="text-gray-300 text-sm">
@@ -28,7 +28,7 @@ const Footer = () => {
                   <a
                     key={index}
                     href="#"
-                    className="text-gray-300 hover:text-white transition-all duration-300 transform hover:scale-110"
+                    className="text-gray-300 hover:text-white transition-colors duration-300 transform hover:scale-110"
                   >
                     <Icon size={24} />
                   </a>
@@ -86,18 +86,18 @@ const Footer = () => {
               career tips.
             </p>
             <form className="flex flex-col sm:flex-row gap-2">
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="bg-gray-800 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow sm:w-auto" // Added sm:w-auto to limit width on small screens
-  />
-  <button
-    type="submit"
-    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105 sm:w-auto" // Added sm:w-auto to limit width on small screens
-  >
-    Subscribe
-  </button>
-</form>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-gray-800 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow sm:w-auto md:max-w-xs"
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-primary-color to-purple-900 hover:from-blue-600 hover:to-purple-800 px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105 w-full sm:w-auto md:w-auto md:max-w-xs lg:max-w-sm"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -111,4 +111,5 @@ const Footer = () => {
     </footer>
   );
 };
+
 export default Footer;

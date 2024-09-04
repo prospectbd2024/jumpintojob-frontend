@@ -44,12 +44,12 @@ function CustomSVG({ className, style, pathClassName, pathStyle }) {
         <path
           style={{
             stroke: 'rgb(0,0,0)',
-            strokeWidth: '10', // Adjust the width of the outline as needed
+            strokeWidth: '5', // Adjust the width of the outline as needed
             strokeDasharray: 'none',
             strokeLinecap: 'butt',
             strokeDashoffset: '0',
             strokeLinejoin: 'miter',
-            strokeMiterlimit: '4', 
+            strokeMiterlimit: '3', 
             opacity: '1',
             ...pathStyle,
           }}

@@ -1,4 +1,3 @@
-'use client';
 import AddButton from '@/Components/Buttons/AddButton';
 import ModalBox from '@/Components/UserProfile/Qualifications/ModalBox';
 import React, { useState, useCallback } from 'react';
@@ -17,12 +16,11 @@ function ResumeOthers() {
     };
 
     const showModal = useCallback(
-        (title, state, index) => {
+        (title, state) => {
             manageModal({
                 title: title,
                 display: 'block',
                 state: state,
-                index: index,
             });
         },
         []
@@ -54,73 +52,60 @@ function ResumeOthers() {
     };
 
     return (
-        <div className="p-1">
-            
+        <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-xl">
+            <h2 className='font-bold text-lg text-center m-5'>Other Details</h2>
+            <style>
+                {`
+                .scrollbar-hidden::-webkit-scrollbar {
+                    display: none; /* Hide scrollbar for WebKit browsers */
+                }
+
+                .scrollbar-hidden {
+                    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+                    scrollbar-width: none;     /* Hide scrollbar for Firefox */
+                }
+                `}
+            </style>
             <div className="space-y-4">
                 {more.map((el, index) => (
-                    <div className="border p-4 rounded-md shadow-sm space-y-2" key={index}>
+                    <div className="space-y-2 bg-gradient-to-br from-blue-200 to-primary-color p-3 rounded-md shadow-sm" key={index}>
                         <div className="flex justify-end">
                             <FaTrashAlt
-                                className="text-red-500 cursor-pointer text-[20px]"
+                                className="text-red-500 cursor-pointer text-lg"
                                 onClick={() => removeItem(index)}
                             />
                         </div>
-                        <p className="font-semibold">{el.type} Title: {el.title}</p>
-                        {el.startDate && <p><span className="font-medium">Start Year:</span> {el.startDate}</p>}
-                        {(el.endDate || el.present) && <p><span className="font-medium">End Year:</span> {el.endDate}</p>}
-                        {el.date && <p><span className="font-medium">Date:</span> {el.date}</p>}
-                        {el.journal && <p><span className="font-medium">Journal:</span> {el.journal}</p>}
-                        {el.description && <p><span className="font-medium">Description:</span> {el.description}</p>}
-                        {el.abstract && <p><span className="font-medium">Abstract:</span> {el.abstract}</p>}
+                        <p className="font-bold text-gray-800 truncate">{el.type} Title: {el.title}</p>
+                        {el.startDate && <p><span className="font-bold">Start Year:</span> {el.startDate}</p>}
+                        {(el.endDate || el.present) && <p><span className="font-bold">End Year:</span> {el.endDate}</p>}
+                        {el.date && <p><span className="font-bold">Date:</span> {el.date}</p>}
+                        {el.journal && <p><span className="font-bold">Journal:</span> {el.journal}</p>}
+
+                        <div className="flex items-center overflow-auto scrollbar-hidden">
+                            {el.description && <p><span className="font-bold">Description:</span>{el.description}</p>}
+                            {el.abstract && <p><span className="font-bold">Abstract:</span>{el.abstract}</p>}
+                        </div>
+                        {/* <div className="flex items-center overflow-auto scrollbar-hidden">
+                        {el.abstract && <p><span className="font-bold">Abstract:</span> {el.abstract}</p>}
+                        </div> */}
                     </div>
                 ))}
             </div>
             <ul className="mt-6 space-y-3">
-                <li className="flex items-center gap-2">
-                    <input
-                        type="radio"
-                        id="projects"
-                        value="Project"
-                        name="add"
-                        checked={inputType === 'Project'}
-                        onChange={handleChange}
-                        className="text-blue-600"
-                    />
-                    <label htmlFor="projects">Add projects</label>
-                </li>
-                <li className="flex items-center gap-2">
-                    <input
-                        type="radio"
-                        id="certificates"
-                        value="Certificate"
-                        name="add"
-                        onChange={handleChange}
-                        className="text-blue-600"
-                    />
-                    <label htmlFor="certificates">Add certificates</label>
-                </li>
-                <li className="flex items-center gap-2">
-                    <input
-                        type="radio"
-                        id="publications"
-                        value="Publication"
-                        name="add"
-                        onChange={handleChange}
-                        className="text-blue-600"
-                    />
-                    <label htmlFor="publications">Add publications</label>
-                </li>
-                <li className="flex items-center gap-2">
-                    <input
-                        type="radio"
-                        id="more"
-                        value="Other"
-                        name="add"
-                        onChange={handleChange}
-                        className="text-blue-600"
-                    />
-                    <label htmlFor="more">Other</label>
-                </li>
+                {['Project', 'Certificate', 'Publication', 'Other'].map((type) => (
+                    <li className="flex items-center gap-2" key={type}>
+                        <input
+                            type="radio"
+                            id={type.toLowerCase()}
+                            value={type}
+                            name="add"
+                            checked={inputType === type}
+                            onChange={handleChange}
+                            className="text-blue-600"
+                        />
+                        <label htmlFor={type.toLowerCase()} className="text-gray-700">{`Add ${type}s`}</label>
+                    </li>
+                ))}
             </ul>
             <ModalBox props={{ ...modal, onSave, onClose: closeModal }}>
                 <AddMore props={{ inputType, formData, setFormData }} />
@@ -136,3 +121,13 @@ function ResumeOthers() {
 }
 
 export default ResumeOthers;
+
+
+/*
+<div className="flex items-center justify-start">
+                <label htmlFor="title" className="text-base sm:text-lg md:text-xl font-bold">Current Address: </label>
+                <p className="text-xs sm:text-sm md:text-base">
+                {personalInfo.currentAddress?.city}, {personalInfo.currentAddress?.state}, {personalInfo.currentAddress?.country}
+              </p>
+              </div>
+*/

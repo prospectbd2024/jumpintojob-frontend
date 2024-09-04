@@ -5,7 +5,6 @@ import { RiMedalFill } from "react-icons/ri";
 import ModalBox from "../ModalBox";
 import AddSkill from "./AddSkill";
 import Rating from "./Rating";
-import AddButton from "@/Components/Buttons/AddButton";
 
 function Skill({ props }) {
   const { skills, addSkill, removeSkill, selectedSkills } = props;
@@ -80,16 +79,11 @@ function Skill({ props }) {
     }
   }, [skill, skills, saveChanges, closeModal, validation]);
 
-  const isChecked = (list, item) => {
-    return list && list.includes(item);
-  };
-
   const handleChange = (e) => {
     setSkill((prev) => ({ ...prev, name: e.target.value }));
     if (e.target.value === "") {
       setSearchResults([]);
     } else {
-      // Mock search function, replace with actual search logic
       const results = skills.filter((s) =>
         s.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
@@ -103,54 +97,66 @@ function Skill({ props }) {
   };
 
   return (
-    <div className="mt-5 border border-gray-300 p-5 rounded-lg bg-white mb-5">
-      <div className="flex items-center mb-2">
-        <RiMedalFill className="text-2xl text-yellow-500" />
-        <h3 className="ml-2 text-xl font-semibold">Skills</h3>
+    <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center sm:justify-start mb-6">
+        <RiMedalFill className="text-2xl sm:text-3xl text-primary-color" />
+        <h2 className="ml-3 text-xl sm:text-2xl font-bold text-gray-800">Skills</h2>
       </div>
-      {skills && (
-        <div className="space-y-2">
+      {skills && skills.length > 0 ? (
+        <div className="space-y-4">
           {skills.map((skill, index) => (
             <div
-              className="grid grid-cols-2 md:grid-cols-4 gap-2 items-center mb-2 border border-gray-300 p-2 rounded-lg"
               key={index}
+              className="bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl p-3 sm:p-4"
             >
-              <div className="bg-gray-200 border border-secondary rounded-xl p-1 pl-2 pr-3 sm:p-2 text-[12px] sm:text-lg font-bold text-center">
-                {skill.name}
-              </div>
-
-              <div>
-                <Rating
-                  props={{
-                    rating: skill.rating,
-                    setRating: () => {},
-                    mode: "r",
-                  }}
-                  onChange={() => {}}
-                />
-              </div>
-              <div className="font-bold text-[12px] sm:text-[15px] flex justify-between text-center">
-                {skill?.learnedFrom?.map((el, idx) => (
-                  <span className="p-1 mr-1 ml-1" key={idx}>
-                    {el.label}
-                  </span>
-                ))}
-              </div>
-              <div className="flex justify-end items-center">
-                <FaTrashAlt
-                  className="text-sm sm:text-lg md:text-xl text-red-500 cursor-pointer"
-                  onClick={() => removeSkill(index)}
-                />
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col items-center sm:items-start sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
+                  <div className="bg-indigo-100 text-primary-color font-semibold px-3 py-1 rounded-full text-sm text-center sm:text-left break-words max-w-[200px]">
+                    {skill.name}
+                  </div>
+                  <div className="flex-shrink-0">
+                    <Rating
+                      props={{
+                        rating: skill.rating,
+                        setRating: () => {},
+                        mode: "r",
+                      }}
+                      onChange={() => {}}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center sm:flex-row sm:items-center mt-3 sm:mt-0">
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-1 mb-2 sm:mb-0 sm:mr-2">
+                    {skill?.learnedFrom?.map((el, idx) => (
+                      <span key={idx} className="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs text-center">
+                        {el.label}
+                      </span>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => removeSkill(index)}
+                    className="text-red-500 hover:text-red-700 transition-colors duration-200 p-1 mt-2 sm:mt-0"
+                  >
+                    <FaTrashAlt className="text-lg" />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
+      ) : (
+        <div className="text-center py-8">
+          <p className="text-lg text-gray-600">You haven't added any skills yet.</p>
+          <p className="text-sm text-gray-500 mt-2">Click the button below to get started!</p>
+        </div>
       )}
-      {skills.length === 0 && (
-        <div className="p-2 text-lg font-bold">Please Add Skills</div>
-      )}
-      <div>
-        <AddButton onClick={() => showModal("Add Skill", "add")} />
+      <div className="mt-6 text-center sm:text-left">
+        <button
+          onClick={() => showModal("Add Skill", "add")}
+          className="bg-primary-color text-white px-4 sm:px-6 py-2 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg"
+        >
+          Add New Skill
+        </button>
       </div>
       <ModalBox props={{ ...modal, onSave: saveSkill, onClose: closeModal }}>
         <AddSkill
@@ -163,11 +169,11 @@ function Skill({ props }) {
         />
       </ModalBox>
       {searchResults.length > 0 && (
-        <ul className="absolute top-full left-0 w-full bg-white border border-secondary rounded-b-md shadow-lg mt-2 z-10">
+        <ul className="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-2 z-10 max-h-60 overflow-y-auto">
           {searchResults.map((result, index) => (
             <li
               key={index}
-              className="p-2 cursor-pointer hover:bg-gray-100"
+              className="p-3 cursor-pointer hover:bg-indigo-50 transition-colors duration-200 text-sm text-center sm:text-left"
               onClick={() => handleSelect(result)}
             >
               {result.name}

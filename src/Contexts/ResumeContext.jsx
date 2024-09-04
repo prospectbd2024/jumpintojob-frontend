@@ -38,7 +38,7 @@ function ResumeContext({ children }) {
     speed: 1,
     autoplay: false,
     autoplaySpeed: 2000,
-    slidesToShow: 3.5,
+    slidesToShow: 2.5,
     slidesToScroll: 2
   };
 
