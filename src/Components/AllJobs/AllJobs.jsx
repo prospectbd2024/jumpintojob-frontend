@@ -1,10 +1,10 @@
 "use client";
-import React, { useCallback, useEffect, useState } from 'react';
-import { useJobContext } from '@/Contexts/JobContext';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useJobContext} from '@/Contexts/JobContext';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';
 
-const AllJobs = ({ children }) => {
+const AllJobs = ({children}) => {
     const {
         allJobs, clickedJob,
         setAllJobs, handleClickedJob,
@@ -43,7 +43,7 @@ const AllJobs = ({ children }) => {
         event.preventDefault();
         const searchKey = event.target.jobTitle.value.toLowerCase();
         const location = event.target.jobLocation.value.toLowerCase();
-        setQuery(createQueryString({ searchKey, location }));
+        setQuery(createQueryString({searchKey, location}));
     }, [setQuery]);
 
     const createQueryString = (paramsObj) => {
@@ -60,25 +60,32 @@ const AllJobs = ({ children }) => {
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8 py-8">
             {/* Search Section with Spacing */}
             <div className="shadow-md py-2.5 lg:py-4 border-b border-gray-300">
-                <SearchSection handleFilteredJobs={handleFilteredJobs} />
+                <SearchSection handleFilteredJobs={handleFilteredJobs}/>
             </div>
 
             {/* Main Content Section */}
             <div className="border-t border-gray-300 pt-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
                     {/* Job List View */}
-                    <div className="md:col-span-1 space-y-4">
-                        <JobListView props={{ filteredJobs, clickedJob, handleClickedJob }} />
-                        {loadingMore && <p>Loading more jobs...</p>}
+                    <div className="md:col-span-1 flex justify-center">
+                        <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
+                        {loadingMore}
+
                     </div>
 
                     {/* Children Content */}
                     <div className="md:col-span-2">
-                        {children}
+                        <div class="sticky top-14">
+                            <div
+                                class="w-full max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                                {children}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     );
 };
 

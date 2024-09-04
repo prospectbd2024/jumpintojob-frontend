@@ -15,8 +15,8 @@ module.exports = {
                 // Custom max-width values
                 'screen-md': '720px',  // Custom value for max-w-screen-md
                 'screen-lg': '960px',  // Custom value for max-w-screen-lg
-                'screen-xl': '450px', // Custom value for max-w-screen-xl
-                'screen-2xl': '500px', // Custom value for max-w-screen-2xl
+                'screen-xl': '850px', // Custom value for max-w-screen-xl
+                'screen-2xl': '800px', // Custom value for max-w-screen-2xl
             },
             borderWidth: {
                 '3': '3px', // Make sure to include this if it's not present
