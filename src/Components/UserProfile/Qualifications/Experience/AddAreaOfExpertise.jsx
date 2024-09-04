@@ -60,7 +60,7 @@ function AddAreaOfExpertise({ props }) {
               min="0"
             />
             <FaTrashAlt
-              className="text-red-500 cursor-pointer hover:text-red-700 text-[35px]"
+              className="text-red-500 cursor-pointer hover:text-red-700 text-[25px]"
               onClick={() => handleDelete(index)}
             />
           </div>

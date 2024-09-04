@@ -74,64 +74,69 @@ const Experiences = ({ props }) => {
   };
 
   return (
-    <div className="border border-gray-300 p-5 rounded-lg bg-white mb-5">
+    <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-lg">
       {experiences && experiences.length > 0 ? (
         <>
-          <div className="flex items-center text-lg font-bold mt-5 mb-4">
-            <HiBriefcase className="mr-2" /> Experiences
+          <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
+            <HiBriefcase className="mr-2 text-xl sm:text-2xl md:text-3xl" /> Experiences
           </div>
           {experiences.map((exp, index) => (
-            <div key={index} className="relative p-4 border border-secondary rounded-md mb-3 flex flex-col gap-3">
-              <div className="flex justify-between gap-2.5 mb-3">
-                <Visibility
-                  visibility={exp.visible_on_cv}
-                  handleVisibility={() => manageVisibility(index)}
-                />
-                <FaTrashAlt
-                  className="text-red-600 cursor-pointer"
-                  onClick={() => removeExperience(index)}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-lg font-bold">{exp.job_title}</p>
-                <p className="font-medium">{exp.company_name}</p>
-                <p>
-                  <span className="font-bold">Designation:</span> {exp.designation}
-                </p>
-                <p>
-                  <span className="font-bold">Start Date:</span> {exp.start_date}
-                </p>
-                {exp.to_date && (
-                  <p>
-                    <span className="font-bold">End Date:</span> {exp.to_date}
+            <div key={index} className="relative p-3 pb-7 sm:p-4 md:p-5 border border-secondary rounded-md mb-3 flex flex-col gap-2 sm:gap-3">
+              <div className="flex flex-col sm:flex-row justify-between">
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <p className="text-base sm:text-lg md:text-xl font-bold">{exp.job_title}</p>
+                  <p className="text-sm sm:text-base md:text-lg font-medium">{exp.company_name}</p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Designation:</span> {exp.designation}
                   </p>
-                )}
-                <p>
-                  <span className="font-bold">Company Business:</span> {exp.company_business}
-                </p>
-                <p>
-                  <span className="font-bold">Department:</span> {exp.department}
-                </p>
-                {exp.expertises && (
-                  <div>
-                    <p className="font-bold">Areas of Expertise:</p>
-                    <ul className="list-disc pl-5">
-                      {exp.expertises.map((expertise, idx) => (
-                        <li key={idx}>{expertise.name} - {expertise.months} months</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Start Date:</span> {exp.start_date}
+                  </p>
+                  {exp.to_date && (
+                    <p className="text-xs sm:text-sm md:text-base">
+                      <span className="font-bold">End Date:</span> {exp.to_date}
+                    </p>
+                  )}
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Company Business:</span> {exp.company_business}
+                  </p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Department:</span> {exp.department}
+                  </p>
+                  {exp.expertises && (
+                    <div className="mt-1 sm:mt-2">
+                      <p className="text-xs sm:text-sm md:text-base font-bold">Areas of Expertise:</p>
+                      <ul className="list-disc pl-4 sm:pl-5">
+                        {exp.expertises.map((expertise, idx) => (
+                          <li key={idx} className="text-xs sm:text-sm md:text-base">{expertise.name} - {expertise.months} months</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                <div className="flex justify-between gap-2 sm:gap-3 mt-2 sm:mt-0 mb-4">
+                  <Visibility
+                    visibility={exp.visible_on_cv}
+                    handleVisibility={() => manageVisibility(index)}
+                  />
+                  <FaTrashAlt
+                    className="text-red-600 cursor-pointer text-base sm:text-lg md:text-xl"
+                    onClick={() => removeExperience(index)}
+                  />
+                </div>
               </div>
               <FaPencilAlt
-                className="absolute bottom-2 right-2 text-blue-600 cursor-pointer"
+                className="absolute bottom-2 right-2 text-white cursor-pointer text-base sm:text-lg md:text-xl mr-2 mb-3"
                 onClick={() => showModal("Edit Experience", "update", index)}
               />
             </div>
           ))}
         </>
       ) : (
-        <div className="text-lg font-bold text-center my-10">Please add experiences</div>
+        <div className="text-center py-8">
+          <p className="text-lg text-gray-600">You haven't added experience yet.</p>
+          <p className="text-sm text-gray-500 mt-2">Click the button below to get started!</p>
+        </div>
       )}
       <AddButton onClick={() => showModal('Add Experience', 'add')} />
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
@@ -140,5 +145,7 @@ const Experiences = ({ props }) => {
     </div>
   );
 };
+
+
 
 export default Experiences;

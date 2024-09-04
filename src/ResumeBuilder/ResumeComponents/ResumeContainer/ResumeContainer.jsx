@@ -27,12 +27,12 @@ const ResumeContainer = () => {
           {currentStep === 6 && <ResumeFinalize />}
           {currentStep === 7 && <ResumePreview />}
 
-          <div className="navigation-buttons flex gap-2 items-center justify-between md:justify-start mt-4">
+          <div className="navigation-buttons flex flex-col sm:flex-row gap-2 items-center justify-between sm:justify-start mt-4">
             {currentStep === 7 ? (
               <>
                 <button
                   type="button"
-                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base border border-black bg-transparent text-black rounded-md mt-4 cursor-pointer"
+                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base border border-black bg-transparent text-black rounded-md cursor-pointer"
                   onClick={() => setCurrentStep(currentStep => currentStep - 1)}
                 >
                   Previous

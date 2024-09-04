@@ -8,7 +8,7 @@ const ResumeExperiences = () => {
 
 
   return (
-    <div className="resume-experiences resume-border">
+    <div className="">
       <div className="resume-experiences-container container">
       <Experiences props={{experiences, setExperiences}} />
       </div>

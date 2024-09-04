@@ -17,9 +17,8 @@ const Education = ({ props }) => {
   };
   const { educations, setEducations } = props;
   const [education, setEducation] = useState(educationInterface);
-  const [modal, manageModal] = useState({ display: "none", title: "Loading", state: "new" });
+  const [modal, setModal] = useState({ display: "none", title: "Loading", state: "new" });
   const [educationErrors, setEducationErrors] = useState({});
-  const [visibility, setVisibility] = useState(false);
 
   const removeEducation = useCallback(
     (id) => {
@@ -33,16 +32,16 @@ const Education = ({ props }) => {
       if (state === "update") {
         setEducation(educations[index]);
       }
-      manageModal({ title, display: "block", state, index });
+      setModal({ title, display: "block", state, index });
     },
-    [educations, setEducation]
+    [educations]
   );
 
   const closeModal = useCallback(() => {
     setEducation(educationInterface);
     setEducationErrors({});
-    manageModal({ display: "none" });
-  }, [setEducation]);
+    setModal({ display: "none" });
+  }, []);
 
   const saveChanges = useCallback(() => {
     if (validation()) {
@@ -52,10 +51,8 @@ const Education = ({ props }) => {
         setEducations((prev) => [...prev, education]);
       }
       closeModal();
-    } else {
-      console.log(educationErrors);
     }
-  }, [education, educationErrors, modal, setEducations]);
+  }, [education, modal, setEducations, closeModal]);
 
   const updateEducation = useCallback(
     (index, updatedEducation) => {
@@ -73,10 +70,10 @@ const Education = ({ props }) => {
 
     required.forEach((field) => {
       if (!education[field]) {
-        setEducationErrors((prev) => ({ ...prev, [field]: 1 }));
+        setEducationErrors((prev) => ({ ...prev, [field]: true }));
         isValid = false;
       } else {
-        setEducationErrors((prev) => ({ ...prev, [field]: 0 }));
+        setEducationErrors((prev) => ({ ...prev, [field]: false }));
       }
     });
 
@@ -92,66 +89,73 @@ const Education = ({ props }) => {
   };
 
   return (
-    <>
+    <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-lg">
       {educations && educations.length > 0 ? (
         <>
-          <div className="flex items-center text-lg font-bold mb-5">
-            <HiAcademicCap className="mr-2" /> Educations
+          <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
+            <HiAcademicCap className="mr-2 text-xl sm:text-2xl md:text-3xl" /> Educations
           </div>
-          {educations.map((education, index) => (
-            <div className="relative flex flex-col gap-2.5 p-4 border border-secondary rounded-md mb-2.5">
-              <div className="flex justify-between gap-2.5 mb-2.5">
-                <Visibility
-                  visibility={education.visible_on_cv}
-                  handleVisibility={() => manageVisibility(index)}
-                />
-                <FaTrashAlt
-                  className="text-red-600 cursor-pointer text-[20px]"
-                  onClick={() => removeEducation(index)}
-                />
+          {educations.map((edu, index) => (
+            <div key={index} className="relative p-3 pb-7 sm:p-4 md:p-5 border border-secondary rounded-md mb-3 flex flex-col gap-2 sm:gap-3">
+              <div className="flex flex-col sm:flex-row justify-between">
+                <div className="flex flex-col gap-1 sm:gap-2">
+                  <p className="text-base sm:text-lg md:text-xl font-bold">{edu.institution_name}</p>
+                  <p className="text-sm sm:text-base md:text-lg font-medium">{edu.institution_location}</p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Degree:</span> {edu.degree}
+                  </p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Field of Study:</span> {edu.field_study}
+                  </p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Start Year:</span> {edu.education_starting_year}
+                  </p>
+                  {edu.education_graduation_year && (
+                    <p className="text-xs sm:text-sm md:text-base">
+                      <span className="font-bold">Graduation Year:</span> {edu.education_graduation_year}
+                    </p>
+                  )}
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">CGPA/GPA:</span> {edu.cgpa}
+                  </p>
+                  <p className="text-xs sm:text-sm md:text-base">
+                    <span className="font-bold">Grades:</span> {edu.grades}
+                  </p>
+                  {edu.education_achievements && (
+                    <p className="text-xs sm:text-sm md:text-base">
+                      <span className="font-bold">Achievements:</span> {edu.education_achievements}
+                    </p>
+                  )}
+                </div>
+                <div className="flex justify-between gap-2 sm:gap-3 mt-2 sm:mt-0 mb-4">
+                  <Visibility
+                    visibility={edu.visible_on_cv}
+                    handleVisibility={() => manageVisibility(index)}
+                  />
+                  <FaTrashAlt
+                    className="text-red-600 cursor-pointer text-base sm:text-lg md:text-xl"
+                    onClick={() => removeEducation(index)}
+                  />
+                </div>
               </div>
-              <p className="text-lg font-bold">{education.institution_name}</p>
-              <p>{education.institution_location}</p>
-              <p>
-                <span className="font-bold">Degree:</span> {education.degree}
-              </p>
-              <p>
-                <span className="font-bold">Field of Study:</span> {education.field_study}
-              </p>
-              <p>
-                <span className="font-bold">Start Year:</span> {education.education_starting_year}
-              </p>
-              {education.education_graduation_year && (
-                <p>
-                  <span className="font-bold">Graduation Year:</span> {education.education_graduation_year}
-                </p>
-              )}
-              <p>
-                <span className="font-bold">CGPA/GPA:</span> {education.cgpa}
-              </p>
-              <p>
-                <span className="font-bold">Grades:</span> {education.grades}
-              </p>
-              <p>
-                <span className="font-bold">Achievements:</span> {education.education_achievements}
-              </p>
               <FaPencilAlt
-                className="absolute bottom-2 right-2 text-blue-600 cursor-pointer"
+                className="absolute bottom-2 right-2 text-white cursor-pointer text-base sm:text-lg md:text-xl mr-2 mb-3"
                 onClick={() => showModal("Edit Education", "update", index)}
               />
             </div>
           ))}
         </>
       ) : (
-        <div className="text-lg font-bold my-10 text-center">Please add education</div>
+        <div className="text-center py-8">
+          <p className="text-lg text-gray-600">You haven't added education yet.</p>
+          <p className="text-sm text-gray-500 mt-2">Click the button below to get started!</p>
+        </div>
       )}
-      <div>
-        <AddButton onClick={() => showModal("Add Education", "add")} />
-      </div>
+      <AddButton onClick={() => showModal('Add Education', 'add')} />
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
         <AddEducation props={{ education, setEducation, saveChanges, educationErrors }} />
       </ModalBox>
-    </>
+    </div>
   );
 };
 

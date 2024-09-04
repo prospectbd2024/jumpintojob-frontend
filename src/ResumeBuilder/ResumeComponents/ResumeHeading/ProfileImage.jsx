@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useRef } from "react";
 import Cropper from 'react-easy-crop';
 
-function ProfileImage({ personalInformation, imagePreview, setImagePreview, setSelectedImage }) {
+function ProfileImage({ personalInformation, SetPersonalInformation }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleImageChange = useCallback((event) => {
@@ -18,7 +19,7 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
       };
       reader.readAsDataURL(file);
     }
-  }, [setImagePreview]);
+  }, []);
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -61,26 +62,26 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
   const handleCropSave = useCallback(async () => {
     if (croppedAreaPixels) {
       const croppedImage = await getCroppedImg(imagePreview, croppedAreaPixels);
-      setSelectedImage(croppedImage);
+      SetPersonalInformation(prev => ({ ...prev, cv_profile_image: croppedImage }));
       setShowCropper(false);
     }
-  }, [croppedAreaPixels, imagePreview, setSelectedImage]);
+  }, [croppedAreaPixels, imagePreview, SetPersonalInformation]);
 
   return (
-    <div className="flex flex-col items-center space-y-4 relative">
+    <div className="flex flex-col items-center space-y-4 relative mb-5">
       <input type="file" id="profileImage" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
 
       {!showCropper && (
-       <>
-       {(imagePreview || personalInformation.cv_profile_image) ? (
-         <img src={personalInformation.cv_profile_image ?? imagePreview} alt="Profile Preview" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
-       ) : (
-         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="No Image" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
-       )}
-       <label htmlFor="profileImage" className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 transition duration-300">
-         Select Image
-       </label>
-     </>
+        <>
+          {(personalInformation.cv_profile_image) ? (
+            <img src={personalInformation.cv_profile_image} alt="Profile Preview" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
+          ) : (
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="No Image" className="w-40 h-40 rounded-full object-cover border-2 border-gray-300 p-1" />
+          )}
+          <label htmlFor="profileImage" className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 transition duration-300">
+            Select Image
+          </label>
+        </>
       )}
 
       {showCropper && (
@@ -129,7 +130,7 @@ function ProfileImage({ personalInformation, imagePreview, setImagePreview, setS
           </div>
         </div>
       )}
-      <h3 className="text-base font-semibold sm:text-lg md:text-xl">personal details</h3>
+      <h3 className="text-[14px] font-semibold sm:text-lg md:text-xl">personal details</h3>
     </div>
   );
 }

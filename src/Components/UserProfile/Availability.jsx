@@ -10,27 +10,27 @@ function Availability() {
   };
 
   return (
-    <div className="mb-5 mt-2 flex items-center">
+    <div className="mb-5 mt-2 flex flex-col sm:flex-row items-center">
       <label
         htmlFor="availability"
-        className="w-52 mr-3 font-bold"
+        className="w-full sm:w-52 mr-0 sm:mr-3 font-bold text-base sm:text-lg"
       >
         Employment status:
       </label>
       
-      <div className='border border-secondary-color rounded-md'>
-      <select
-        id="availability"
-        value={availability}
-        onChange={handleAvailabilityChange}
-        className="h-8 px-3 border border-gray-300 rounded-md w-52 text-md"
+      <div className='border border-secondary-color rounded-md w-full sm:w-auto'>
+        <select
+          id="availability"
+          value={availability}
+          onChange={handleAvailabilityChange}
+          className="h-8 px-3 border border-gray-300 rounded-md w-full sm:w-52 text-md"
         >
-        <option value="readyToJoin">Ready To Join</option>
-        <option value="currentlyInJob">Currently In A Job</option>
-        <option value="lookingForJob">Looking For Better Job</option>
-        {/* Add more options as needed */}
-      </select>
-        </div>
+          <option value="readyToJoin">Ready To Join</option>
+          <option value="currentlyInJob">Currently In A Job</option>
+          <option value="lookingForJob">Looking For Better Job</option>
+          {/* Add more options as needed */}
+        </select>
+      </div>
     </div>
   )
 }

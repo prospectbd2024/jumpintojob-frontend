@@ -19,16 +19,16 @@ function Language({ props }) {
       setLanguages((prev) => prev.filter((lang, index) => index !== id));
     },
     [setLanguages]
-  );         
+  );
 
   const showModal = useCallback((title) => {
     setModal((prev) => ({ title: title, display: "block" }));
-    setLanguage({}); // Reset language when opening modal
+    setLanguage({});
   }, []);
 
   const closeModal = useCallback(() => {
     setModal({ display: "none" });
-    setLanguage({}); // Reset language when closing modal
+    setLanguage({});
   }, []);
 
   const saveLanguage = useCallback(() => {
@@ -39,37 +39,33 @@ function Language({ props }) {
   }, [language, setLanguages, closeModal]);
 
   return (
-    <div className="mt-5">
-      <div className="flex items-center mb-2">
+    <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-xl">
+      <div className="flex items-center mb-4">
         <RiMedalFill className="text-2xl text-yellow-500" />
-        <h3 className="ml-2 text-xl font-semibold">Languages</h3>
+        <h3 className="ml-2 text-xl font-semibold text-gray-700">Languages</h3>
       </div>
-      
       {languages && languages.length > 0 ? (
         <div className="space-y-2">
           {languages.map((lang, index) => (
-            <div className="grid grid-cols-3 gap-10 items-center mb-2" key={index}>
-              <div className="bg-gray-200 border border-secondary-color rounded-xl p-2 text-lg font-bold">
-                {lang.language}
-              </div>
-              <div className="text-gray-700">{lang.proficiency}</div>
-              <div className="flex justify-end">
-                <FaTrashAlt
-                  className="text-red-500 cursor-pointer text-xl ml-2"
-                  onClick={() => removeLanguage(index)}
-                />
-              </div>
+            <div className="flex items-center justify-between bg-gradient-to-br from-blue-200 to-primary-color p-3 rounded-md shadow-sm" key={index}>
+              <div className="font-semibold">{lang.language}</div>
+              <div className="text-gray-600">{lang.proficiency}</div>
+              <FaTrashAlt
+                className="text-red-500 cursor-pointer text-lg"
+                onClick={() => removeLanguage(index)}
+              />
             </div>
           ))}
         </div>
       ) : (
-        <div className="p-2 text-lg font-bold">Please Add Languages</div>
+        <div className="text-center py-5">
+          <p className="text-lg text-gray-600">You haven't added languages yet.</p>
+          <p className="text-sm text-gray-500 mt-2">Click the button below to get started!</p>
+        </div>
       )}
-      
-      <div>
+      <div className="mt-4">
         <AddButton onClick={() => showModal('Add Language')} />
       </div>
-      
       <ModalBox props={{ ...modal, onClose: closeModal, onSave: saveLanguage }}>
         <AddLanguage props={{ selectedLanguage: language, setLanguage, selectedLanguages: languages }} />
       </ModalBox>

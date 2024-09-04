@@ -75,33 +75,32 @@ const Hobbies = ({ props }) => {
         setHobbies((prev) => [...prev, hobby]);
       }
       closeModal();
-    } else {
-      console.log(hobbyErrors);
     }
   }, [hobby, hobbyErrors, modal, closeModal, updateHobby, setHobbies, validation]);
 
   return (
-    <div className="mt-10 mb-12">
-      <div className="flex items-center mb-4 text-2xl font-bold">
-        <HiHeart className="mr-2 text-red-500" />
+    <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-xl">
+      <div className="flex items-center mb-4 text-xl font-semibold text-gray-700">
+        <HiHeart className="text-red-500 mr-2 text-2xl" />
         <h3>Hobbies</h3>
       </div>
       {hobbies && hobbies.length > 0 ? (
-        <div>
+        <div className="space-y-2">
           {hobbies.map((hobby, index) => (
-            <div className="flex justify-between items-center mb-3" key={index}>
-              <div className="w-[325px] bg-gray-200 border border-secondary-color rounded-xl p-2.5 font-bold text-lg">
-                <p>{hobby.name}</p>
-              </div>
+            <div className="flex items-center justify-between bg-gradient-to-br from-blue-200 to-primary-color p-3 rounded-md shadow-sm" key={index}>
+              <div className="font-semibold text-gray-800">{hobby.name}</div>
               <FaTrashAlt
-                className="text-red-500 text-[20px] cursor-pointer"
+                className="text-red-500 cursor-pointer text-lg"
                 onClick={() => removeHobby(index)}
               />
             </div>
           ))}
         </div>
       ) : (
-        <div className="py-3 text-lg font-bold">Please add hobbies</div>
+        <div className="text-center py-5">
+          <p className="text-lg text-gray-600">You haven't added hobbies yet.</p>
+          <p className="text-sm text-gray-500 mt-2">Click the button below to get started!</p>
+        </div>
       )}
       <AddButton onClick={() => showModal('Add Hobby', 'add')} />
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
