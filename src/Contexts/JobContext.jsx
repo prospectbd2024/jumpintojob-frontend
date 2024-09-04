@@ -19,12 +19,14 @@ function JobContext({children}) {
     const [shouldShowButton , setShowButton] = useState(true);
     const [query,setQuery] = useState("")
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
+    const [Loading, setLoading] = useState(true);
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
                 setJobPage({type: 'get', ...data.pagination })
+                setLoading(false)
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -44,6 +46,18 @@ function JobContext({children}) {
             // Handle errors appropriately (e.g., show an error message to the user)
         });
     }
+    const getNewJobsAndReplace = (page) => {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`)
+            .then(res => res.json())
+            .then(data => {
+                setAllJobs(allJobs => [...allJobs, ...data.data]); // Append new jobs to the existing list
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors appropriately (e.g., show an error message to the user)
+            });
+    };
+
 
     const getJob = useCallback((id)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/show/${id}`)
@@ -65,7 +79,7 @@ function JobContext({children}) {
         })
     },[selectedJob,allJobs])
 
-    
+
     const handleClickedJob = (e) => {
         setClickedJob(e)
         selectJob(e);
@@ -78,8 +92,8 @@ function JobContext({children}) {
             window.history.pushState({}, '', updatedUrl);
         }
     }
-    
-   
+
+
 
     useEffect(()=>{
         if(jobPage.type=='get' && jobPage.status=='process'){
@@ -116,7 +130,7 @@ function JobContext({children}) {
                 console.error('Error fetching data:', error);
                 // Handle errors appropriately (e.g., show an error message to the user)
             });
-    
+
         }
         catch(e){
             console.log(e);
@@ -134,7 +148,7 @@ function JobContext({children}) {
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
         query,setQuery,
-        bookMarkedJobs,setBookMarkedJobs
+        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading
         }}>
         {children}
     </jobContext.Provider>

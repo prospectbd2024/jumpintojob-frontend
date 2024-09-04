@@ -3,21 +3,41 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useJobContext} from '@/Contexts/JobContext';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';
-import Pagination from './Pagination';
 
 const AllJobs = ({children}) => {
     const {
         allJobs, clickedJob,
         setAllJobs, handleClickedJob,
         jobPage, setJobPage,
-        query, setQuery
+        query, setQuery,
+        getNewJobsAndReplace
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
+    const [loadingMore, setLoadingMore] = useState(false); // To track loading state
 
     useEffect(() => {
         setFilteredJobs(allJobs);
     }, [allJobs]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !loadingMore) {
+                setLoadingMore(true);
+                getNewJobsAndReplace(jobPage.currentPage + 1); // Load next page of jobs
+                console.log('Loading more jobs...');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [loadingMore, jobPage.currentPage, getNewJobsAndReplace]);
+
+    useEffect(() => {
+        if (jobPage.status === 'done') {
+            setLoadingMore(false);
+        }
+    }, [jobPage.status]);
 
     const handleFilteredJobs = useCallback((event) => {
         event.preventDefault();
@@ -45,18 +65,22 @@ const AllJobs = ({children}) => {
 
             {/* Main Content Section */}
             <div className="border-t border-gray-300 pt-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
                     {/* Job List View */}
-                    <div className="md:col-span-1 space-y-4">
+                    <div className="md:col-span-1 flex justify-center">
                         <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
-                        {jobPage.currentPage === 1 && allJobs.length < 10 ? null : (
-                            <Pagination jobPage={jobPage} setJobPage={setJobPage}/>
-                        )}
+                        {loadingMore}
+
                     </div>
 
                     {/* Children Content */}
                     <div className="md:col-span-2">
-                        {children}
+                        <div class="sticky top-14">
+                            <div
+                                class="w-full max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                                {children}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,3 +90,5 @@ const AllJobs = ({children}) => {
 };
 
 export default AllJobs;
+
+
