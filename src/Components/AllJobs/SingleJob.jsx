@@ -24,15 +24,15 @@ const SingleJob = ({job, clickedJob, handleClickedJob}) => {
 
     }
 
-    return (
+    return ( 
         <div
- className={`relative rounded-lg p-4 transition-transform duration-300 ease-in-out cursor-pointer ${
+  className={`relative mx-2 sm:mx-3 md:mx-3 md:mr-10 md:ml-10 lg:mx-5 xl:mx-0 rounded-lg p-4 transition-transform duration-300 ease-in-out cursor-pointer ${
     clickedJob === job.id
       ? 'border-b-4 border-r-3 border-gray-300 shadow-lg bg-gradient-to-br from-blue-100 via-blue-80 to-blue-70 transform scale-102'
       : 'border-b-4 border-r-3 border-transparent shadow-md hover:border-gray-300 hover:shadow-lg'
   }`}
-            onClick={() => handleClickedJob(job.id)}
-        >
+  onClick={() => handleClickedJob(job.id)}
+>
             <div className="flex items-center justify-between mb-3">
                 <h2 className="text-lg font-semibold text-gray-900 truncate">{job.id}  {job.job_title}</h2>
                 <HiOutlineBookmark

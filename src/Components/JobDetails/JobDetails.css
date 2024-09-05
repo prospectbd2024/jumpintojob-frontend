@@ -1,18 +1,21 @@
-/* Custom Scrollbar */
+
+/* 
+Custom Scrollbar
 ::-webkit-scrollbar {
-    width: 8px; /* Adjust width as needed */
+    width: 8px; 
 }
 
 ::-webkit-scrollbar-track {
-    background: #f0f0f0; /* Track color */
+    background: #f0f0f0; 
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; /* Handle color */
+    background: #888; 
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Handle color on hover */
+    background: #555; 
 }
+*/
