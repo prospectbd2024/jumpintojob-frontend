@@ -2,15 +2,15 @@ import { useResumeContext } from '@/Contexts/ResumeContext';
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import React,{useEffect,useState,useRef} from 'react'
 function RenderTemplate({ userProfileData,currentStep, className , style ={}}) {
-const {  htmlTemplate,setHtmlTemplate } = useResumeContext();
+const {  TemplateImg,setTemplateImg } = useResumeContext();
 const {template} = useUserProfileContext();
   const iframeRef = useRef(null);
 
   console.log(className , style);
-  const  generateTemplateHtml = async ()=>{
+  const  generateTemplateImg = async ()=>{
     try {
  
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/html`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/img`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,7 +18,13 @@ const {template} = useUserProfileContext();
         },
         body: JSON.stringify({
           template_id: template.id,
-          resume_data : userProfileData
+          resume_data : userProfileData,
+          //optional payload
+          settings : {
+            'width' : '1024px',
+            'height' : '768px',
+             'dpi' : '240dpi'
+          }
         }),
       });
       if (!response.ok) {
@@ -31,7 +37,7 @@ const {template} = useUserProfileContext();
       }
       const data = await response.json();
       // console.log(data);
-      setHtmlTemplate(data.data.template)
+      setTemplateImg(data.data.template_img)
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
     }
@@ -42,37 +48,16 @@ const {template} = useUserProfileContext();
     if(currentStep==7){
       var resumeSize = Object.keys(userProfileData).length;
       if(resumeSize>0){
-        generateTemplateHtml()
+        generateTemplateImg()
       }
 
       }
   },[currentStep,userProfileData])
 
 
-  const updateTemplateView =(htmlContent)=>{
-    const iframeDocument = iframeRef.current.contentDocument;
-    iframeDocument.open();
-    iframeDocument.write(htmlContent);
-    iframeDocument.close();
-    iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 'px';
-  }
-
-
-useEffect(()=>{
- 
-  updateTemplateView(htmlTemplate)
-},[htmlTemplate])
-
   return (
-        <iframe
-        ref={iframeRef}
-        width="100%"
-        height="1000"
-        className ={className}
-        style={{ border: 'none' ,...style}}
-        title="Embedded Document"
-      ></iframe>
-
+        <img  src={TemplateImg} alt='show loding screen or something' />
+ 
   )
 }
 

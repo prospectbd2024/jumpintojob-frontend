@@ -24,7 +24,7 @@ function ResumeContext({ children }) {
     userProfileData, setUserProfileData ,
     availability, setAvailability
   } = useUserProfileContext();
-  const [htmlTemplate,setHtmlTemplate] = useState("")
+  const [TemplateImg,setTemplateImg] = useState(null)
   const [currentStep, setCurrentStep] = useState(1);
   const [resumeTemplates, setResumeTemplates] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -112,7 +112,7 @@ function ResumeContext({ children }) {
       more, manageMore, templateSettings,
       resumeTemplates,
       fetchResumeTemplates,
-      htmlTemplate,setHtmlTemplate,
+      TemplateImg,setTemplateImg,
       saveCV,
       selectedImage, setSelectedImage,
       imagePreview, setImagePreview
