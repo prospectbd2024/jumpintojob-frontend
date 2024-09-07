@@ -1,12 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { FaUpRightFromSquare } from 'react-icons/fa6';
+import React, {useRef, useState, useEffect} from 'react';
+import {FaUpRightFromSquare} from 'react-icons/fa6';
 import Link from 'next/link';
-import { useApplicationContext } from "@/Contexts/ApplicationContext";
-import { useUserContext } from "@/Contexts/UserContext";
+import {useApplicationContext} from "@/Contexts/ApplicationContext";
+import {useUserContext} from "@/Contexts/UserContext";
 
-const MobileJobDetailsModal = ({ job, toggleModal }) => {
-    const { isApplied } = useApplicationContext();
-    const { guestProtection } = useUserContext();
+const MobileJobDetailsModal = ({job, toggleModal}) => {
+    const {isApplied} = useApplicationContext();
+    const {guestProtection} = useUserContext();
     const [startY, setStartY] = useState(0);
     const [translateY, setTranslateY] = useState(0);
     const modalRef = useRef(null);
@@ -48,18 +48,22 @@ const MobileJobDetailsModal = ({ job, toggleModal }) => {
     return (
         <div
             className="fixed inset-0 flex items-end bg-black bg-opacity-50 z-50 lg:hidden"
-            onClick={(e) => e.target === modalRef.current && toggleModal()}
+            onClick={(e) => {
+                if (e.target === modalRef.current) {
+                    toggleModal();
+                }
+            }}
         >
             <div
                 ref={modalRef}
-                className="w-full bg-white rounded-t-lg shadow-lg transition-transform transform duration-300 ease-in-out translate-y-full"
-                style={{ transform: `translateY(${Math.min(translateY, 0)}px)` }}
+                className="w-full h-[90vh] mb-5 bg-white rounded-t-lg shadow-lg transition-transform transform duration-300 ease-in-out translate-y-full"
+                style={{transform: `translateY(${Math.min(translateY, 0)}px)`}}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
                 {/* Close Button */}
-                <div className="flex justify-between items-center p-4">
+                <div className="flex justify-between items-center p-4 border-b border-gray-200">
                     <h3 className="text-lg font-bold text-gray-800">{job.job_title}</h3>
                     <button className="text-gray-700 text-xl font-semibold" onClick={toggleModal}>
                         &times;
@@ -67,24 +71,26 @@ const MobileJobDetailsModal = ({ job, toggleModal }) => {
                 </div>
 
                 {/* Modal Content */}
-                <div className="relative pb-1 py-2 pt-2 sm:p-4 md:p-6 lg:pt-8">
+                <div className="flex flex-col h-full">
                     {/* Cover Image */}
                     {job.cover_image && (
-                        <div className="relative w-full h-40 mb-4 overflow-hidden">
+                        <div className="relative w-full max-h-24 mb-4 overflow-hidden">
                             <img
                                 src={job.cover_image}
                                 alt="Cover Image"
                                 className="w-full h-full object-cover"
-                                style={{ clipPath: 'polygon(45% 0px, 100% 0px, 100% 100%, 57% 100%)' }}
+                                // style={{clipPath: 'polygon(45% 0px, 100% 0px, 100% 100%, 57% 100%)'}}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-60"></div>
+                            <div
+                                className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-60"></div>
                         </div>
                     )}
 
                     {/* Header Info */}
                     <div className="flex items-center gap-4 mb-2 px-4">
-                        <div className="w-16 h-16 flex items-center justify-center rounded-lg overflow-hidden bg-transparent">
-                            <img src={job.image} alt={job.company_name} className="object-contain w-full h-full" />
+                        <div
+                            className="w-16 h-16 flex items-center justify-center rounded-lg overflow-hidden bg-transparent">
+                            <img src={job.image} alt={job.company_name} className="object-contain w-full h-full"/>
                         </div>
                         <div className="flex flex-col">
                             <Link href="#" className="text-sm font-semibold text-blue-600 hover:underline">
@@ -96,8 +102,7 @@ const MobileJobDetailsModal = ({ job, toggleModal }) => {
                     </div>
 
                     {/* Job Details */}
-                    <div className="text-sm text-gray-600 mb-4 px-4 overflow-y-auto"
-                         style={{ maxHeight: 'calc(100vh - 20rem)' }}>
+                    <div className="flex-1 px-4 py-2 overflow-y-auto" style={{maxHeight: 'calc(90vh - 10rem)'}}>
                         <div className="text-sm md:text-base">
                             <div className="mb-4">
                                 <h3 className="font-medium text-gray-800 mb-1">Job Type</h3>
@@ -127,11 +132,11 @@ const MobileJobDetailsModal = ({ job, toggleModal }) => {
                     </div>
 
                     {/* Apply Button */}
-                    <div className="flex items-center mb-4 px-4">
+                    <div className="px-4 mb-10 py-3 bg-white border-t border-gray-200">
                         <button
                             type="button"
                             onClick={handleApplyJob}
-                            className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 inline-flex items-center"
+                            className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 inline-flex items-center w-full"
                         >
                             {isApplied(job.id) ? 'Applied' : 'Apply Now'}
                             <FaUpRightFromSquare
