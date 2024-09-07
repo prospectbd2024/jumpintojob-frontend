@@ -10,11 +10,11 @@ const AllJobs = ({children}) => {
         setAllJobs, handleClickedJob,
         jobPage, setJobPage,
         query, setQuery,
-        getNewJobsAndReplace
+        getNewJobsAndReplace, NewJobLoadingFlag
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [loadingMore, setLoadingMore] = useState(false); // To track loading state
+    // const [loadingMore, setLoadingMore] = useState(false); // To track loading state
 
     useEffect(() => {
         setFilteredJobs(allJobs);
@@ -22,22 +22,20 @@ const AllJobs = ({children}) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !loadingMore) {
-                setLoadingMore(true);
-                getNewJobsAndReplace(jobPage.currentPage + 1); // Load next page of jobs
+            if (
+                window.innerHeight + document.documentElement.scrollTop
+                >= document.documentElement.offsetHeight - 500
+                && !NewJobLoadingFlag
+            ) {
+                getNewJobsAndReplace(jobPage.currentPage + 1);
                 console.log('Loading more jobs...');
             }
         };
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [loadingMore, jobPage.currentPage, getNewJobsAndReplace]);
+    }, [jobPage.currentPage, getNewJobsAndReplace]);
 
-    useEffect(() => {
-        if (jobPage.status === 'done') {
-            setLoadingMore(false);
-        }
-    }, [jobPage.status]);
 
     const handleFilteredJobs = useCallback((event) => {
         event.preventDefault();
@@ -58,7 +56,6 @@ const AllJobs = ({children}) => {
 
     return (
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8 py-8">
-            {/* Search Section with Spacing */}
             <div className="shadow-md py-2.5 lg:py-4 border-b border-gray-300">
                 <SearchSection handleFilteredJobs={handleFilteredJobs}/>
             </div>
@@ -69,12 +66,10 @@ const AllJobs = ({children}) => {
                     {/* Job List View */}
                     <div className="md:col-span-1 flex justify-center">
                         <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
-                        {loadingMore}
-
                     </div>
 
                     {/* Children Content */}
-                    <div className="md:col-span-2">
+                    <div className="hidden md:block md:col-span-2">
                         <div class="sticky top-14">
                             <div
                                 class="w-full max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">

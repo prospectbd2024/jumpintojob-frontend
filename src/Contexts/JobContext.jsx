@@ -20,6 +20,7 @@ function JobContext({children}) {
     const [query,setQuery] = useState("")
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
     const [Loading, setLoading] = useState(true);
+    const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
@@ -46,16 +47,18 @@ function JobContext({children}) {
             // Handle errors appropriately (e.g., show an error message to the user)
         });
     }
-    const getNewJobsAndReplace = (page) => {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`)
-            .then(res => res.json())
-            .then(data => {
-                setAllJobs(allJobs => [...allJobs, ...data.data]); // Append new jobs to the existing list
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                // Handle errors appropriately (e.g., show an error message to the user)
-            });
+    const getNewJobsAndReplace = async (page) => {
+
+        setNewJobLoadingFlag(true);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`);
+            const newData = await response.json();
+            setAllJobs(allJobs => [...allJobs, ...newData.data]);
+        } catch (error) {
+            console.error('Failed to fetch data', error);
+        } finally {
+            setNewJobLoadingFlag(false);
+        }
     };
 
 
@@ -148,7 +151,7 @@ function JobContext({children}) {
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
         query,setQuery,
-        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading
+        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag
         }}>
         {children}
     </jobContext.Provider>
