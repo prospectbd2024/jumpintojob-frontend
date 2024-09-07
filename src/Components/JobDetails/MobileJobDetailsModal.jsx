@@ -1,3 +1,4 @@
+'use client';
 import React, {useRef, useState, useEffect} from 'react';
 import {FaUpRightFromSquare} from 'react-icons/fa6';
 import Link from 'next/link';

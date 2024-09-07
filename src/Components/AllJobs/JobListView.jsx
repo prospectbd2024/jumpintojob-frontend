@@ -10,7 +10,7 @@ const JobListView = ({props}) => {
     let i = 0;
 
     return (
-        <div className="w-full md:w-[400px] flex flex-col gap-4">
+        <div className="w-full md:w-[356px] md:ml-[40px] flex flex-col gap-4">
             {/* Skeleton Loaders with fade-in and fade-out transitions */}
             <div className={`transition-opacity duration-300 ${Loading ? 'opacity-100' : 'opacity-0'}`}>
                 {Loading && (
