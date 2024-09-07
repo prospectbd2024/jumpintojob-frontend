@@ -70,9 +70,10 @@ const AllJobs = ({children}) => {
 
                     {/* Children Content */}
                     <div className="hidden md:block md:col-span-2">
-                        <div className="sticky top-14">
+                        <div className="sticky top-14 md:top-20">
                             <div
-                                className="w-full max-w-screen-md sm:max-w-screen-lg md:w-[460px] md:ml-[30px] lg:max-w-screen-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                                className="w-full sm:max-w-screen-lg md:w-[460px] md:ml-[30px] lg:w-[1200px] lg:max-w-screen-2xl lg:ml-0 mx-auto bg-white shadow-lg rounded-lg border border-gray-200"
+>
                                 {children}
                             </div>
                         </div>
