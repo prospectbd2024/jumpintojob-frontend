@@ -5,9 +5,9 @@ import Link from 'next/link';
 import {FaUpRightFromSquare} from 'react-icons/fa6';
 import {useRouter} from 'next/navigation';
 import Swal from 'sweetalert2';
-import JobCardSkeleton from '@/Skeletons/JobCardSkeleton';
 import {FaBriefcase, FaCalendarAlt, FaDollarSign} from "react-icons/fa";
 import {useJobContext} from "@/Contexts/JobContext";
+import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton";
 
 const JobDetails = ({props}) => {
     const {userData} = useUserContext();
@@ -26,7 +26,7 @@ const JobDetails = ({props}) => {
     if (Loading) {
         return (
             <div className="sticky top-14">
-                <JobCardSkeleton/>
+                <JobDetailsSkeleton/>
             </div>
         );
     } else {
