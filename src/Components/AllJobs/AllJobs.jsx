@@ -58,7 +58,6 @@ const AllJobs = ({children}) => {
 
     return (
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8 py-8">
-            {/* Search Section with Spacing */}
             <div className="shadow-md py-2.5 lg:py-4 border-b border-gray-300">
                 <SearchSection handleFilteredJobs={handleFilteredJobs}/>
             </div>
