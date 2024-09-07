@@ -41,7 +41,7 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
             >
                 <div className="flex items-center justify-between mb-3">
                     <h2 className="text-lg font-semibold text-gray-900 truncate">
-                        {index} {job.job_title}
+                        {job.job_title}
                     </h2>
                     <HiOutlineBookmark
                         onClick={(e) => {
