@@ -10,11 +10,11 @@ const AllJobs = ({children}) => {
         setAllJobs, handleClickedJob,
         jobPage, setJobPage,
         query, setQuery,
-        getNewJobsAndReplace
+        getNewJobsAndReplace, NewJobLoadingFlag
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
-    const [loadingMore, setLoadingMore] = useState(false); // To track loading state
+    // const [loadingMore, setLoadingMore] = useState(false); // To track loading state
 
     useEffect(() => {
         setFilteredJobs(allJobs);
@@ -22,22 +22,20 @@ const AllJobs = ({children}) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !loadingMore) {
-                setLoadingMore(true);
-                getNewJobsAndReplace(jobPage.currentPage + 1); // Load next page of jobs
+            if (
+                window.innerHeight + document.documentElement.scrollTop
+                >= document.documentElement.offsetHeight - 500
+                && !NewJobLoadingFlag
+            ) {
+                getNewJobsAndReplace(jobPage.currentPage + 1);
                 console.log('Loading more jobs...');
             }
         };
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [loadingMore, jobPage.currentPage, getNewJobsAndReplace]);
+    }, [jobPage.currentPage, getNewJobsAndReplace]);
 
-    useEffect(() => {
-        if (jobPage.status === 'done') {
-            setLoadingMore(false);
-        }
-    }, [jobPage.status]);
 
     const handleFilteredJobs = useCallback((event) => {
         event.preventDefault();
@@ -68,8 +66,6 @@ const AllJobs = ({children}) => {
                     {/* Job List View */}
                     <div className="md:col-span-1 flex justify-center">
                         <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
-                        {loadingMore}
-
                     </div>
 
                     {/* Children Content */}
