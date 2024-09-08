@@ -1,3 +1,4 @@
+'use client';
 import React, {useState} from 'react';
 import {useJobContext} from '@/Contexts/JobContext';
 import {useUserContext} from '@/Contexts/UserContext';
