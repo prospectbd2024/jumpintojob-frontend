@@ -59,7 +59,8 @@ function ResumeContext({ children }) {
     fetchResumeTemplates();
   }, []); // Empty dependency array means this effect runs once after the initial render
   const saveCV = async () => {
-    saveProfile()
+    saveProfile() 
+    
     try {
       let bearerToken = userData.data.access_token;
       const response = await fetch(

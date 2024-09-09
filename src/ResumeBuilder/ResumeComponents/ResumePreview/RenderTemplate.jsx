@@ -6,11 +6,21 @@ const {  TemplateImg,setTemplateImg } = useResumeContext();
 const {template} = useUserProfileContext();
   const iframeRef = useRef(null);
 
-  console.log(className , style);
+  // console.log({
+  //   template_id: template.id,
+  //   resume_data : userProfileData,
+  //   output_type : 'png',
+  //   //optional payload
+  //   options : {
+  //     'width' : '1024px',
+  //     'height' : '768px',
+  //      'dpi' : '240dpi'
+  //   }
+  // });
   const  generateTemplateImg = async ()=>{
     try {
  
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/img`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generator`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,8 +29,9 @@ const {template} = useUserProfileContext();
         body: JSON.stringify({
           template_id: template.id,
           resume_data : userProfileData,
+          output_type : 'png',
           //optional payload
-          settings : {
+          options : {
             'width' : '1024px',
             'height' : '768px',
              'dpi' : '240dpi'
@@ -28,16 +39,14 @@ const {template} = useUserProfileContext();
         }),
       });
       if (!response.ok) {
-        console.log("Request", {
-          template_id: template.id,
-          resume_data : userProfileData
-        });
+       
         console.log(response);
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
       // console.log(data);
-      setTemplateImg(data.data.template_img)
+      setTemplateImg(data.data.template) 
+      
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
     }
