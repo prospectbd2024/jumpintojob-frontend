@@ -2,54 +2,15 @@ import { useResumeContext } from '@/Contexts/ResumeContext';
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
 import React,{useEffect,useState,useRef} from 'react'
 function RenderTemplate({ userProfileData,currentStep, className , style ={}}) {
-const {  TemplateImg,setTemplateImg } = useResumeContext();
+const {  TemplateImg,setTemplateImg,generateTemplate } = useResumeContext();
 const {template} = useUserProfileContext();
   const iframeRef = useRef(null);
 
-  // console.log({
-  //   template_id: template.id,
-  //   resume_data : userProfileData,
-  //   output_type : 'png',
-  //   //optional payload
-  //   options : {
-  //     'width' : '1024px',
-  //     'height' : '768px',
-  //      'dpi' : '240dpi'
-  //   }
-  // });
-  const  generateTemplateImg = async ()=>{
-    try {
  
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generator`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          template_id: template.id,
-          resume_data : userProfileData,
-          output_type : 'png', 
-          options : {
-            'width' : 1024 ,
-            "args": { "fullPage": true },
-            // "format" : "A4"  //for pdf
-          }
-        }),
-      });
-      if (!response.ok) {
-       
-        console.log(response);
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      // console.log(data);
-      setTemplateImg(data.data.template) 
-      
-    } catch (error) {
-      console.error('There has been a problem with your fetch operation:', error);
-    }
-    
+  const  generateTemplateImg = async ()=>{
+    const data = await  generateTemplate(template,'png',{})
+    setTemplateImg(data.template)
+ 
   }
   useEffect(()=>{
 
