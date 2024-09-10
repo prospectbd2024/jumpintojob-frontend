@@ -10,6 +10,7 @@ import ResumeSkills from "../ResumeSkills/ResumeSkills";
 import ResumeFinalize from "../ResumeFinalize/ResumeFinalize";
 import PrevNextButton from "@/ResumeBuilder/Layout/Button/PrevNextButton";
 import { useResumeContext } from "@/Contexts/ResumeContext";
+import DownloadAsButton from "../ResumeDownload/DownloadAsButton";
 
 const ResumeContainer = () => {
   const { currentStep, setCurrentStep, saveCV } = useResumeContext();
@@ -30,6 +31,9 @@ const ResumeContainer = () => {
           <div className="navigation-buttons flex flex-col sm:flex-row gap-2 items-center justify-between sm:justify-start mt-4">
             {currentStep === 7 ? (
               <>
+               <div className="flex flex-row gap-x-2 sm:mr-auto">
+
+              
                 <button
                   type="button"
                   className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base border border-black bg-transparent text-black rounded-md cursor-pointer"
@@ -39,11 +43,14 @@ const ResumeContainer = () => {
                 </button>
                 <button
                   type="button"
-                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base bg-[var(--primary-color)] text-white rounded-md cursor-pointer transition-all duration-300 ease"
+                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base bg-[var(--primary-color)] text-white rounded-md cursor-pointer transition-all duration-300 ease sm:mr-auto flex-grow sm:flex-grow-0"
                   onClick={saveCV}
                 >
                   Save
                 </button>
+              
+                </div>
+              <DownloadAsButton />
               </>
             ) : (
               <PrevNextButton props={{ setCurrentStep, currentStep }} />

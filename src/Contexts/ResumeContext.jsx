@@ -59,7 +59,8 @@ function ResumeContext({ children }) {
     fetchResumeTemplates();
   }, []); // Empty dependency array means this effect runs once after the initial render
   const saveCV = async () => {
-    saveProfile()
+    saveProfile() 
+    
     try {
       let bearerToken = userData.data.access_token;
       const response = await fetch(
@@ -98,6 +99,43 @@ function ResumeContext({ children }) {
     }
   };
 
+  const generateTemplate =  async (template,output_type,options={})=>{
+    try {
+      console.log("getting tempalates");
+      
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generator`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          template_id: template.id,
+          resume_data : userProfileData,
+          output_type : output_type, 
+          options : {
+            'width' : 1024 ,
+            "args": { "fullPage": true },
+            // "format" : "A4"  //for pdf
+            ...options
+          }
+        }),
+      });
+      if (!response.ok) {
+       
+        console.log(response);
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+     
+      return data.data;
+      
+      
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  }
+
   return (
     <resumeContext.Provider value={{
       currentStep,
@@ -116,6 +154,7 @@ function ResumeContext({ children }) {
       saveCV,
       selectedImage, setSelectedImage,
       imagePreview, setImagePreview
+      ,generateTemplate
     }} >
       {children}
     </resumeContext.Provider>
