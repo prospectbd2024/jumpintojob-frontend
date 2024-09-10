@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 const ApplyButton = ({ CV, handleClick, userData }) => (
   <div className="flex justify-end">
     <button
-      className={` ${!CV ? "bg-gray-600 text-white border-gray-600 hover:bg-transparent hover:text-gray-600 hover:border-gray-600" : "bg-primary text-white border-none hover:bg-transparent hover:text-primary hover:border-primary"} px-4 py-2 font-bold rounded-md transition-all duration-300`}
+      className={` ${!CV ? "bg-gray-600 text-white border-gray-600 hover:bg-transparent hover:text-gray-600 hover:border-gray-600" : "bg-primary-color text-white border-none hover:bg-transparent hover:text-primary-color hover:border-primary-color"} px-4 py-2 font-bold rounded-md transition-all duration-300`}
       type="button"
       onClick={() => {
         if (userData) {

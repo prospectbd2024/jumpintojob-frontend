@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback, useState } from "react";
-import { HiAcademicCap } from "react-icons/hi";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import { RiGraduationCapFill } from "react-icons/ri";
 import AddEducation from "@/ResumeBuilder/ResumeComponents/ResumeEducation/AddEducation";
 import ModalBox from "../ModalBox";
 import AddButton from "@/Components/Buttons/AddButton";
@@ -90,11 +90,15 @@ const Education = ({ props }) => {
 
   return (
     <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center sm:justify-start mb-6">
+        <RiGraduationCapFill className="text-2xl sm:text-3xl text-primary-color" />
+        <h2 className="ml-3 text-xl sm:text-2xl font-bold text-gray-800">Education</h2>
+      </div>
       {educations && educations.length > 0 ? (
         <>
-          <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
+          {/* <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
             <HiAcademicCap className="mr-2 text-xl sm:text-2xl md:text-3xl" /> Educations
-          </div>
+          </div> */}
           {educations.map((edu, index) => (
             <div key={index} className="relative p-3 pb-7 sm:p-4 md:p-5 border border-secondary rounded-md mb-3 flex flex-col gap-2 sm:gap-3">
               <div className="flex flex-col sm:flex-row justify-between">
@@ -158,5 +162,31 @@ const Education = ({ props }) => {
     </div>
   );
 };
+
+// const renderField = (label, value) => {
+//   if (!value) return null;
+//   return (
+//     <div className="flex items-center justify-start">
+//       <label className="text-base sm:text-lg md:text-xl font-bold mr-2">{label}:</label>
+//       <p className="text-xs sm:text-sm md:text-base">{value}</p>
+//     </div>
+//   );
+// };
+
+// const renderMediaLinks = (links) => {
+//   if (!links || links.length === 0) return null;
+//   return (
+//     <div className="flex items-start">
+//       <label className="text-base sm:text-lg md:text-xl font-bold mr-2">Media Links:</label>
+//       <div className="text-xs sm:text-sm md:text-base">
+//         {links.map((link, index) => (
+//           <p key={index}>
+//             {link.name}: {link.url}
+//           </p>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 export default Education;

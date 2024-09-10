@@ -32,9 +32,9 @@ const ResumeHeading = () => {
     return (
         <div className='resume-heading'>
             <div className="container">
-                <div className="resume-form-header">
+                {/* <div className="resume-form-header">
                     <h3>Let's start with <span>header</span></h3>
-                </div>
+                </div> */}
                 <PersonalInformation 
                     props={{
                         personalInfo: personalInformation, 
