@@ -29,12 +29,11 @@ const {template} = useUserProfileContext();
         body: JSON.stringify({
           template_id: template.id,
           resume_data : userProfileData,
-          output_type : 'png',
-          //optional payload
+          output_type : 'png', 
           options : {
-            'width' : '1024px',
-            'height' : '768px',
-             'dpi' : '240dpi'
+            'width' : 1024 ,
+            "args": { "fullPage": true },
+            // "format" : "A4"  //for pdf
           }
         }),
       });
