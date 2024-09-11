@@ -22,6 +22,7 @@ const Register = () => {
   const router = useRouter();
   const [message, setMessage] = useState(undefined);
   const [warning, setWarning] = useState({ warning: false, message: "" });
+  const [errors, setErrors] = useState( null);
 
   useEffect(() => {
     setMessage(params.get("msg"));
@@ -67,9 +68,7 @@ const Register = () => {
           createQueryString("msg", "Registration Successful! Please Verify Your Email")
       );
     } else {
-      if (data.message == "The email has already been taken.") {
-        setWarning({ warning: "email", message: data.message });
-      }
+      setErrors(data.errors)
     }
   };
 
@@ -165,8 +164,8 @@ const Register = () => {
                 className="w-full border-none outline-none text-gray-900"
               />
             </div>
-            {warning.warning === "email" && (
-              <div className="text-red-500 text-sm">{warning.message}</div>
+            {errors  && (
+              <div className="text-red-500 text-sm">{errors.email}</div>
             )}
           </div>
 
@@ -195,7 +194,11 @@ const Register = () => {
                   <HiOutlineEyeOff className="text-blue-600" />
                 )}
               </div>
+              
             </div>
+            {errors  && (
+              <div className="text-red-500 text-sm">{errors.password}</div>
+            )}
           </div>
 
           <div className="flex flex-col gap-2">
