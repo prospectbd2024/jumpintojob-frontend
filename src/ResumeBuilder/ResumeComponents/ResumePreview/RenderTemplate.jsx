@@ -1,33 +1,41 @@
 import { useResumeContext } from '@/Contexts/ResumeContext';
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
-import React,{useEffect,useState,useRef} from 'react'
-function RenderTemplate({ userProfileData,currentStep, className , style ={}}) {
-const {  TemplateImg,setTemplateImg,generateTemplate } = useResumeContext();
-const {template} = useUserProfileContext();
+import React, { useEffect, useState, useRef } from 'react';
+
+function RenderTemplate({ userProfileData, currentStep, className, style = {} }) {
+  const { TemplateImg, setTemplateImg, generateTemplate } = useResumeContext();
+  const { template } = useUserProfileContext();
   const iframeRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
- 
-  const  generateTemplateImg = async ()=>{
-    const data = await  generateTemplate(template,'png',{})
-    setTemplateImg(data.template)
- 
-  }
-  useEffect(()=>{
+  const generateTemplateImg = async () => {
+    setIsLoading(true);
+    const data = await generateTemplate(template, 'png', {});
+    setTemplateImg(data.template);
+    setIsLoading(false);
+  };
 
-    if(currentStep==7){
+  useEffect(() => {
+    if (currentStep === 7) {
       var resumeSize = Object.keys(userProfileData).length;
-      if(resumeSize>0){
-        generateTemplateImg()
+      if (resumeSize > 0) {
+        generateTemplateImg();
       }
-
-      }
-  },[currentStep,userProfileData])
-
+    }
+  }, [currentStep, userProfileData]);
 
   return (
-        <img  src={TemplateImg} alt='show loding screen or something' />
- 
-  )
+    <>
+      {isLoading || !TemplateImg ? (
+        <div className="flex items-center justify-center h-[100vh]  ">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+          <p className="ml-4  ">Loading...</p>
+        </div>
+      ) : (
+        <img className="w-full h-auto object-cover" src={TemplateImg} alt="Generated template" />
+      )}
+    </>
+  );
 }
 
-export default RenderTemplate
+export default RenderTemplate;
