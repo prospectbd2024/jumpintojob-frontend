@@ -110,47 +110,6 @@ function AddEducation({ props }) {
                     }
                 </div>
                 <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
-                    <label htmlFor="grades" className="text-xs">GRADES</label>
-                    <input
-                        type="text"
-                        placeholder="A+"
-                        id="grades"
-                        value={education?.grades || ""}
-                        onChange={(e) => handleChange("grades", e.target.value)}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
-                    />
-                    <hr className="absolute bottom-0 left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
-                    {educationErrors?.grades &&
-                        <div className="text-red-500 text-xs mt-1">
-                            Grades are required
-                        </div>
-                    }
-                </div>
-                <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
-                    <label htmlFor="cgpa" className="text-xs">CGPA/GPA</label>
-                    <input
-                        type="text"
-                        step="0.1"
-                        min="1"
-                        max="5"
-                        placeholder="4.0"
-                        id="cgpa"
-                        value={education?.cgpa || ""}
-                        onChange={handleCGPAChange}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
-                    />
-                    <hr className="absolute bottom-0 left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
-                    {educationErrors?.cgpa &&
-                        <div className="text-red-500 text-xs mt-1">
-                            CGPA/GPA is required and should be between 1 to 5
-                        </div>
-                    }
-                </div>
-                <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
                     <label htmlFor="starting" className="text-xs">STARTING YEAR</label>
                     <input
                         type="date"
@@ -165,32 +124,80 @@ function AddEducation({ props }) {
                     <hr className="absolute bottom-[31px] left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
                 </div>
                 <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
-                    <label htmlFor="end" className="text-xs">YEAR OF GRADUATION</label>
+                <label htmlFor="end" className="text-xs">YEAR OF GRADUATION</label>
+                <input
+                    type="date"
+                    placeholder="2022-01-01"
+                    id="end"
+                    value={education?.education_graduation_year || ""}
+                    onChange={(e) => handleChange("education_graduation_year", e.target.value)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    disabled={isCurrentlyStudying}
+                    className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
+                />
+                <hr className="absolute bottom-[31px] left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
+                <div className="flex flex-row gap-x-2 mt-2">
                     <input
-                        type="date"
-                        placeholder="2022-01-01"
-                        id="end"
-                        value={education?.education_graduation_year || ""}
-                        onChange={(e) => handleChange("education_graduation_year", e.target.value)}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        disabled={isCurrentlyStudying}
-                        className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
+                        type="checkbox"
+                        id="currently_here"
+                        checked={isCurrentlyStudying}
+                        onChange={(e) => {
+                            setIsCurrentlyStudying(e.target.checked);
+                            handleChange("education_graduation_year", e.target.checked ? 'present' : '');
+                            if (e.target.checked) {
+                                handleChange("cgpa", ''); // Clear CGPA when checkbox is checked
+                            }
+                        }}
+                        className="w-[15px]"
                     />
-                    <hr className="absolute bottom-[31px] left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
-                    <div className="flex flex-row gap-x-2 mt-2">
-                        <input
-                            type="checkbox"
-                            id="currently_here"
-                            onChange={(e) => {
-                                setIsCurrentlyStudying(e.target.checked);
-                                handleChange("education_graduation_year", e.target.checked ? 'present' : '');
-                            }}
-                            className="w-[15px]"
-                        />
-                        <label htmlFor="currently_here" className="text-sm">I currently study here</label>
-                    </div>
+                    <label htmlFor="currently_here" className="text-sm">I currently study here</label>
                 </div>
+            </div>
+            <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
+                <label htmlFor="grades" className="text-xs">GRADES</label>
+                <input
+                    type="text"
+                    placeholder="A+"
+                    id="grades"
+                    value={education?.grades || ""}
+                    onChange={(e) => handleChange("grades", e.target.value)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
+                />
+                <hr className="absolute bottom-0 left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
+                {educationErrors?.grades &&
+                    <div className="text-red-500 text-xs mt-1">
+                        Grades are required
+                    </div>
+                }
+            </div>
+            <div className="flex flex-col gap-y-2 mb-5 flex-[1_1_48%] relative">
+                <label htmlFor="cgpa" className="text-xs">CGPA/GPA</label>
+                <input
+                    type="text"
+                    step="0.1"
+                    min="1"
+                    max="5"
+                    placeholder="4.0"
+                    id="cgpa"
+                    value={education?.cgpa || ""}
+                    onChange={handleCGPAChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    disabled={isCurrentlyStudying}
+                    className={`border border-gray-400 p-2 outline-none text-gray-700 font-sans rounded-md ${
+                        isCurrentlyStudying ? 'bg-gray-200' : 'bg-transparent'
+                    }`}
+                />
+                <hr className="absolute bottom-0 left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
+                {educationErrors?.cgpa &&
+                    <div className="text-red-500 text-xs mt-1">
+                        CGPA/GPA is required and should be between 1 to 5
+                    </div>
+                }
+            </div>
             </div>
             <div className="flex flex-col gap-y-2 mt-5">
                 <label htmlFor="achivements" className="text-xs">NOTABLE ACHIEVEMENTS</label>

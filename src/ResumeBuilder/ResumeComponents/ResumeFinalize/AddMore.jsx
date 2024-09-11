@@ -52,7 +52,7 @@ function AddMore({ props }) {
   };
 
   const renderProjectForm = () => (
-    <div className="w-full max-w-md mx-auto">
+    <div className="bg-white p-5 w-full sm:w-[400px] max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -106,7 +106,7 @@ function AddMore({ props }) {
   );
 
   const renderCertificateForm = () => (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full sm:w-[400px] max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -140,7 +140,7 @@ function AddMore({ props }) {
   );
 
   const renderPublicationForm = () => (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full sm:w-[400px] max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input
@@ -184,7 +184,7 @@ function AddMore({ props }) {
   );
 
   const renderDefaultForm = () => (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full sm:w-[400px] max-w-md mx-auto">
       <div className="flex flex-col mb-4">
         <label className="text-base font-semibold mb-2">Title:</label>
         <input

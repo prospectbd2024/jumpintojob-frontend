@@ -1,10 +1,10 @@
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import React, { useState, useCallback } from "react";
-import { HiBriefcase } from "react-icons/hi";
 import ModalBox from "../ModalBox";
 import AddExperience from "./AddExperience";
 import AddButton from "@/Components/Buttons/AddButton";
 import Visibility from "@/Components/Buttons/Visibility";
+import { RiBriefcaseFill } from "react-icons/ri";
 
 const Experiences = ({ props }) => {
   const { experiences, setExperiences } = props;
@@ -75,11 +75,15 @@ const Experiences = ({ props }) => {
 
   return (
     <div className="mt-8 bg-gradient-to-br from-blue-50 to-primary-color p-4 sm:p-6 rounded-xl shadow-lg">
+      <div className="flex items-center justify-center sm:justify-start mb-6">
+        <RiBriefcaseFill className="text-2xl sm:text-3xl text-primary-color" />
+        <h2 className="ml-3 text-xl sm:text-2xl font-bold text-gray-800">Experiences</h2>
+      </div>
       {experiences && experiences.length > 0 ? (
         <>
-          <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
+          {/* <div className="flex items-center text-lg sm:text-xl md:text-2xl font-bold mt-3 sm:mt-4 md:mt-5 mb-3 sm:mb-4 md:mb-5">
             <HiBriefcase className="mr-2 text-xl sm:text-2xl md:text-3xl" /> Experiences
-          </div>
+          </div> */}
           {experiences.map((exp, index) => (
             <div key={index} className="relative p-3 pb-7 sm:p-4 md:p-5 border border-secondary rounded-md mb-3 flex flex-col gap-2 sm:gap-3">
               <div className="flex flex-col sm:flex-row justify-between">

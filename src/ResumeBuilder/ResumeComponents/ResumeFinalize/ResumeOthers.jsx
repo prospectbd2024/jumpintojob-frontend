@@ -68,13 +68,9 @@ function ResumeOthers() {
             </style>
             <div className="space-y-4">
                 {more.map((el, index) => (
-                    <div className="space-y-2 bg-gradient-to-br from-blue-200 to-primary-color p-3 rounded-md shadow-sm" key={index}>
-                        <div className="flex justify-end">
-                            <FaTrashAlt
-                                className="text-red-500 cursor-pointer text-lg"
-                                onClick={() => removeItem(index)}
-                            />
-                        </div>
+                    <div className="space-y-1 bg-gradient-to-br from-blue-200 to-primary-color p-5 rounded-md shadow-sm flex justify-between" key={index}>
+                        <div>
+
                         <p className="font-bold text-gray-800 truncate">{el.type} Title: {el.title}</p>
                         {el.startDate && <p><span className="font-bold">Start Year:</span> {el.startDate}</p>}
                         {(el.endDate || el.present) && <p><span className="font-bold">End Year:</span> {el.endDate}</p>}
@@ -84,6 +80,13 @@ function ResumeOthers() {
                         <div className="flex items-center overflow-auto scrollbar-hidden">
                             {el.description && <p><span className="font-bold">Description:</span>{el.description}</p>}
                             {el.abstract && <p><span className="font-bold">Abstract:</span>{el.abstract}</p>}
+                        </div>
+                        </div>
+                        <div className="">
+                            <FaTrashAlt
+                                className="text-red-500 cursor-pointer text-lg"
+                                onClick={() => removeItem(index)}
+                            />
                         </div>
                         {/* <div className="flex items-center overflow-auto scrollbar-hidden">
                         {el.abstract && <p><span className="font-bold">Abstract:</span> {el.abstract}</p>}
