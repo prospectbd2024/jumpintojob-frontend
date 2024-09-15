@@ -127,14 +127,13 @@ function AddEducation({ props }) {
                 <label htmlFor="end" className="text-xs">YEAR OF GRADUATION</label>
                 <input
                     type="date"
-                    placeholder="2022-01-01"
                     id="end"
-                    value={education?.education_graduation_year || ""}
+                    value={education?.education_graduation_year === 'present' ? '' : education?.education_graduation_year || ""}
                     onChange={(e) => handleChange("education_graduation_year", e.target.value)}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
                     disabled={isCurrentlyStudying}
-                    className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
+                    className={`border border-gray-400 p-2 outline-none text-gray-700 font-sans rounded-md ${
+                        isCurrentlyStudying ? 'bg-gray-200' : 'bg-transparent'
+                    }`}
                 />
                 <hr className="absolute bottom-[31px] left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
                 <div className="flex flex-row gap-x-2 mt-2">
@@ -158,16 +157,17 @@ function AddEducation({ props }) {
                 <label htmlFor="grades" className="text-xs">GRADES</label>
                 <input
                     type="text"
+                    required
                     placeholder="A+"
                     id="grades"
                     value={education?.grades || ""}
                     onChange={(e) => handleChange("grades", e.target.value)}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    className="border border-gray-400 p-2 outline-none bg-transparent text-gray-700 font-sans rounded-md"
+                    disabled={isCurrentlyStudying}
+                    className={`border border-gray-400 p-2 outline-none text-gray-700 font-sans rounded-md ${
+                        isCurrentlyStudying ? 'bg-gray-200' : 'bg-transparent'
+                    }`}
                 />
-                <hr className="absolute bottom-0 left-0 w-full h-px bg-[var(--primary-color)] opacity-0 transform transition-opacity duration-300" />
-                {educationErrors?.grades &&
+                {educationErrors?.grades && !isCurrentlyStudying &&
                     <div className="text-red-500 text-xs mt-1">
                         Grades are required
                     </div>

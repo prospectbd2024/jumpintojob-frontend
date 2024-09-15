@@ -55,7 +55,21 @@ const FeaturedJobs = () => {
         )}
         <div className="text-center mt-10">
           <Link href="/findjobs">
-            <button className="btn btn-primary">Show More Jobs</button>
+            <button className="
+            bg-green-500 
+        text-white 
+        px-4 
+        py-2 
+        text-lg 
+        rounded-md 
+        cursor-pointer 
+        inline-block 
+        mt-2 
+        transition 
+        duration-300 
+        ease-in-out 
+        hover:bg-green-600
+            ">Show More Jobs</button>
           </Link>
         </div>
       </div>

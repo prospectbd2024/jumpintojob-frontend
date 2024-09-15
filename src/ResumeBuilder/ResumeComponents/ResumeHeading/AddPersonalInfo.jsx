@@ -259,9 +259,10 @@ function AddPersonalInfo({ props }) {
                     </div>
                 </div>
             </div>
+            <hr className='mt-5'/>
             <div className="flex justify-end gap-2 mt-4 pb-6">
-                <button onClick={handleSave} className="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
-                <button onClick={onClose} className="px-4 py-2 bg-gray-200 rounded">Cancel</button>
+                <button onClick={handleSave} className="text-white border-none bg-primary-color w-[90px] h-[40px] text-base leading-[40px] rounded-lg font-bold cursor-pointer transition-colors duration-300 mr-5">Save</button>
+                <button onClick={onClose} className="bg-transparent text-red-600 border border-red-600 w-[90px] h-[40px] text-base font-bold rounded-lg cursor-pointer transition-colors duration-300 hover:bg-red-100">Close</button>
             </div>
         </div>
     );

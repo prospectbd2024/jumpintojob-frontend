@@ -28,10 +28,14 @@ function CompanyListView({ props }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-100 p-4 rounded-lg shadow-lg overflow-hidden">
+      <div className="space-y-2 max-h-[calc(100vh-205px)] overflow-y-auto pr-2 custom-scrollbar">
+      <h3 className="text-lg font-semibold mb-4 text-gray-800 text-center">Companies</h3>
       {companies.map((company, index) => (
         <CompanyCard key={index} props={{ company }} />
       ))}
+
+      </div>
     </div>
   );
 }
