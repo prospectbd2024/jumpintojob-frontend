@@ -25,7 +25,6 @@ const Banner = () => {
                         {bannerData.map(data => (
                             <div key={data.id} className="flex items-center gap-2 w-full">
                                 <div className="flex-shrink-0">
-                                    {/* Add explicit width, height, and max-width to ensure visibility */}
                                     <img 
                                         src={data.logo} 
                                         alt="" 

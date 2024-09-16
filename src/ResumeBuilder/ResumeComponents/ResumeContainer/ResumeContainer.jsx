@@ -37,13 +37,6 @@ const ResumeContainer = () => {
                 >
                   Previous
                 </button>
-                {/* <button
-                  type="button"
-                  className="w-24 h-9 font-bold text-xs sm:w-28 sm:h-10 sm:text-sm md:w-36 md:h-11 md:text-base bg-[var(--primary-color)] text-white rounded-md cursor-pointer transition-all duration-300 ease"
-                  onClick={saveCV}
-                >
-                  Save
-                </button> */}
               </>
             ) : (
               <PrevNextButton props={{ setCurrentStep, currentStep }} />
