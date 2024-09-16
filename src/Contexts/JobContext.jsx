@@ -19,12 +19,15 @@ function JobContext({children}) {
     const [shouldShowButton , setShowButton] = useState(true);
     const [query,setQuery] = useState("")
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
+    const [Loading, setLoading] = useState(true);
+    const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
                 setJobPage({type: 'get', ...data.pagination })
+                setLoading(false)
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -44,6 +47,20 @@ function JobContext({children}) {
             // Handle errors appropriately (e.g., show an error message to the user)
         });
     }
+    const getNewJobsAndReplace = async (page) => {
+
+        setNewJobLoadingFlag(true);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`);
+            const newData = await response.json();
+            setAllJobs(allJobs => [...allJobs, ...newData.data]);
+        } catch (error) {
+            console.error('Failed to fetch data', error);
+        } finally {
+            setNewJobLoadingFlag(false);
+        }
+    };
+
 
     const getJob = useCallback((id)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/show/${id}`)
@@ -65,21 +82,21 @@ function JobContext({children}) {
         })
     },[selectedJob,allJobs])
 
-    
+
     const handleClickedJob = (e) => {
         setClickedJob(e)
         selectJob(e);
 
-        if(pathname.search('/findjobs/jobdetails')==-1){
-            router.push("/findjobs/jobdetails/"+e)
+        if(pathname.search('/jobs/jobdetails')==-1){
+            router.push("/jobs/jobdetails/"+e)
         }
         else{
             const updatedUrl = pathname.replace(/\/\d+$/, `/${e}`);
             window.history.pushState({}, '', updatedUrl);
         }
     }
-    
-   
+
+
 
     useEffect(()=>{
         if(jobPage.type=='get' && jobPage.status=='process'){
@@ -116,7 +133,7 @@ function JobContext({children}) {
                 console.error('Error fetching data:', error);
                 // Handle errors appropriately (e.g., show an error message to the user)
             });
-    
+
         }
         catch(e){
             console.log(e);
@@ -134,7 +151,7 @@ function JobContext({children}) {
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
         query,setQuery,
-        bookMarkedJobs,setBookMarkedJobs
+        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag
         }}>
         {children}
     </jobContext.Provider>

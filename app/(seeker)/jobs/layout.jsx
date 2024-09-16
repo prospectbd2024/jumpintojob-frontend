@@ -2,7 +2,7 @@ import React from 'react';
 import AllJobs from '@/Components/AllJobs/AllJobs';
 
 export const metadata = {
-  title: 'This is findjobs',
+  title: 'This is jobs',
   description: '...',
 }
 

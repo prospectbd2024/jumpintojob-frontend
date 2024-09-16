@@ -12,7 +12,7 @@ function MessageBox({ message, type }) {
     <>
       {message && (
         <div
-          className={`text-white bg-primary-600 opacity-70 h-12 w-full text-lg text-center pt-5 rounded-md mb-5 border border-secondary-400 ${typeClasses[type] || ''}`}
+          className={`bg-primary-color text-white text-sm opacity-70  w-full  text-center pt-5 pb-3 rounded-md mb-5 border border-secondary-400 ${typeClasses[type] || ''}`}
         >
           {message}
         </div>

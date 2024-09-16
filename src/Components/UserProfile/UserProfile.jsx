@@ -1,44 +1,40 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
-import  Link  from 'next/link';
-import './UserProfile.css';
+import Link from 'next/link';
 import { usePathname } from "next/navigation";
-import { FaHouseUser } from 'react-icons/fa';
-import { HiBriefcase, HiOutlineAcademicCap, HiOutlineCode, HiOutlineCog, HiOutlineUser, HiOutlineUserCircle } from 'react-icons/hi';
+import { HiOutlineUser, HiOutlineAcademicCap, HiBriefcase, HiOutlineCog } from 'react-icons/hi';
 
-const UserProfile = ({children}) => {
+const UserProfile = ({ children }) => {
     const [sidebarItemClick, setSidebarItemClick] = useState('/userprofile/aboutme');
-    const [activeSidebarItem, setActiveSideItem] = useState('About Me');
     const pathname = usePathname();
+
     return (
-        <div className='user-profile'>
-            <div className="user-profile-content">
-                <div className="user-profile-sidebar-menu">
-                    <div className="userprofile-sidebar-sticky">
-                        <h2>My Information</h2>
-                        <ul>
-                            <li  className={`${pathname == '/userprofile/aboutme' ? 'active-sidebar-item' : ''}`}>
-                                <HiOutlineUser/>
-                                <Link href='/userprofile/aboutme'  >About Me</Link>
+        <div className="min-h-screen flex">
+            <div className="flex-none bg-white shadow-md sticky top-20 w-full md:w-80">
+                <div className="p-5">
+                    <h2 className="text-2xl font-semibold text-[#061421] border-b border-gray-300 pb-3">My Information</h2>
+                    <ul className="mt-4 space-y-2">
+                        {['About Me', 'Qualifications', 'Job Preferences', 'Account Setting'].map((item) => (
+                            <li
+                                key={item}
+                                className={`flex items-center gap-3 p-3 rounded-md transition duration-200 ease-in-out cursor-pointer ${
+                                    pathname === `/userprofile/${item.toLowerCase().replace(' ', '')}` ? 'bg-[#F08200] text-white' : 'text-[#061421]'
+                                }`}
+                            >
+                                {item === 'About Me' && <HiOutlineUser className="text-2xl" />}
+                                {item === 'Qualifications' && <HiOutlineAcademicCap className="text-2xl" />}
+                                {item === 'Job Preferences' && <HiBriefcase className="text-2xl" />}
+                                {item === 'Account Setting' && <HiOutlineCog className="text-2xl" />}
+                                <Link href={`/userprofile/${item.toLowerCase().replace(' ', '')}`}>
+                                    {item}
+                                </Link>
                             </li>
-                            <li  className={`${pathname == '/userprofile/qualifications' ? 'active-sidebar-item' : ''}`}>
-                                <HiOutlineAcademicCap/>
-                                <Link href='/userprofile/qualifications' >Qualifications</Link>
-                            </li>
-                            <li  className={`${pathname == '/userprofile/jobpreferences' ? 'active-sidebar-item' : ''}`}>
-                                <HiBriefcase/>
-                                <Link href='/userprofile/jobpreferences'  >Job Preferences</Link>
-                            </li>
-                            <li   className={`${pathname == '/userprofile/accountsetting' ? 'active-sidebar-item' : ''}`}>
-                                <HiOutlineCog/>
-                                <Link href='/userprofile/accountsetting' >Account Setting</Link>
-                            </li>
-                        </ul>
-                    </div>
+                        ))}
+                    </ul>
                 </div>
-                <div className="user-profile-details">
-                    <>{children}</>
-                </div>
+            </div>
+            <div className="flex-1 p-4 md:p-8">
+                {children}
             </div>
         </div>
     );

@@ -1,79 +1,41 @@
 import { useResumeContext } from '@/Contexts/ResumeContext';
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
-import React,{useEffect,useState,useRef} from 'react'
-function RenderTemplate({ userProfileData,currentStep, className , style ={}}) {
-const {  htmlTemplate,setHtmlTemplate } = useResumeContext();
-const {template} = useUserProfileContext();
+import React, { useEffect, useState, useRef } from 'react';
+
+function RenderTemplate({ userProfileData, currentStep, className, style = {} }) {
+  const { TemplateImg, setTemplateImg, generateTemplate } = useResumeContext();
+  const { template } = useUserProfileContext();
   const iframeRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(className , style);
-  const  generateTemplateHtml = async ()=>{
-    try {
- 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generate/html`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          template_id: template.id,
-          resume_data : userProfileData
-        }),
-      });
-      if (!response.ok) {
-        console.log("Request", {
-          template_id: template.id,
-          resume_data : userProfileData
-        });
-        console.log(response);
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      // console.log(data);
-      setHtmlTemplate(data.data.template)
-    } catch (error) {
-      console.error('There has been a problem with your fetch operation:', error);
-    }
-    
-  }
-  useEffect(()=>{
+  const generateTemplateImg = async () => {
+    setIsLoading(true);
+    const data = await generateTemplate(template, 'png', {});
+    setTemplateImg(data.template);
+    setIsLoading(false);
+  };
 
-    if(currentStep==7){
+  useEffect(() => {
+    if (currentStep === 7) {
       var resumeSize = Object.keys(userProfileData).length;
-      if(resumeSize>0){
-        generateTemplateHtml()
+      if (resumeSize > 0) {
+        generateTemplateImg();
       }
-
-      }
-  },[currentStep,userProfileData])
-
-
-  const updateTemplateView =(htmlContent)=>{
-    const iframeDocument = iframeRef.current.contentDocument;
-    iframeDocument.open();
-    iframeDocument.write(htmlContent);
-    iframeDocument.close();
-    iframeRef.current.style.height = iframeRef.current.contentWindow.document.documentElement.scrollHeight + 'px';
-  }
-
-
-useEffect(()=>{
- 
-  updateTemplateView(htmlTemplate)
-},[htmlTemplate])
+    }
+  }, [currentStep, userProfileData]);
 
   return (
-        <iframe
-        ref={iframeRef}
-        width="100%"
-        height="1000"
-        className ={className}
-        style={{ border: 'none' ,...style}}
-        title="Embedded Document"
-      ></iframe>
-
-  )
+    <>
+      {isLoading || !TemplateImg ? (
+        <div className="flex items-center justify-center h-[100vh]  ">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+          <p className="ml-4  ">Loading...</p>
+        </div>
+      ) : (
+        <img className="w-full h-auto object-cover" src={TemplateImg} alt="Generated template" />
+      )}
+    </>
+  );
 }
 
-export default RenderTemplate
+export default RenderTemplate;

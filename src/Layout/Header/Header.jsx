@@ -1,27 +1,23 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
-import Link from "next/link";
-import { FaFileAlt, FaUserTie } from "react-icons/fa";
-import {
-  HiBriefcase,
-  HiCog,
-  HiMenu,
-  HiOutlineUser,
-  HiOutlineUserAdd,
-  HiQuestionMarkCircle,
+import Link from "next/link"; 
+import { 
+  HiMenu, 
   HiX,
-} from "react-icons/hi";
-import { TbBell, TbLogout, TbSend, TbUserCircle } from "react-icons/tb";
+} from "react-icons/hi"; 
 import Swal from "sweetalert2";
 import { usePathname, useRouter } from "next/navigation";
 import { UserContext } from "@/Contexts/UserContext";
 import { signOut } from "next-auth/react";
 import Logo from "@/assets/Logo";
+import NavLinks from "./NavLinks";
+import MobileUserActions from "./MobileUserActions";
+import UserActions from "./UserActions";
 
 const Header = () => {
   const forEmployerNavigate = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = usePathname();
+  const location = usePathname();   
   const [activeMenu, setActiveMenu] = useState(location);
   const { userData, setUserData } = useContext(UserContext);
 
@@ -57,8 +53,7 @@ const Header = () => {
     setMobileMenuOpen(false);
   };
 
-  const handleLogout = async () => {
-    forEmployerNavigate.push("/signin");
+  const handleLogout = async () => { 
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -85,9 +80,7 @@ const Header = () => {
         }
       );
       localStorage.removeItem("userData");
-      await signOut();
-      const userLogoutData = await userLogoutResponse.json();
-      setUserData(null);
+      await signOut(); 
     } catch (error) {
       console.error("Logout failed:", error);
       alert(error);
@@ -189,216 +182,7 @@ const Header = () => {
   );
 };
 
-const NavLinks = ({ activeMenu, handleActiveMenu, mobile }) => {
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/findjobs", label: "Jobs" },
-    { href: "/companies", label: "Companies" },
-  ];
-
-  return (
-    <>
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={`${
-            activeMenu === link.href ? "text-blue-500" : "text-gray-800"
-          } ${
-            mobile
-              ? "block px-4 py-3 text-2xl font-semibold hover:bg-blue-100 rounded-lg transition-colors duration-200"
-              : ""
-          }`}
-          onClick={() => handleActiveMenu(link.href)}
-        >
-          {link.label}
-        </Link>
-      ))}
-    </>
-  );
-};
-
-const UserActions = ({
-  userData,
-  selectedOption,
-  toggleOption,
-  toggleUserProfile,
-  userProfileClicked,
-  handleLogout,
-  handleSignoutAlert,
-}) => {
-  return (
-    <div className="flex items-center space-x-4">
-      {userData ? (
-        <>
-          <GlobalLocalToggle selectedOption={selectedOption} toggleOption={toggleOption} />
-          <TbBell className="text-2xl text-gray-600 hover:shadow-lg cursor-pointer" />
-          <UserProfileDropdown
-            userData={userData}
-            toggleUserProfile={toggleUserProfile}
-            userProfileClicked={userProfileClicked}
-            handleLogout={handleLogout}
-          />
-          <Link
-            href="/dashboard/appliedjobs"
-            className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
-          >
-            <HiOutlineUser /> Dashboard
-          </Link>
-          <button
-            className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
-            onClick={handleSignoutAlert}
-          >
-            <TbSend /> Post a Job
-          </button>
-        </>
-      ) : (
-        <>
-          <Link href="/signin" className="flex items-center gap-2">
-            <HiOutlineUser /> Sign in
-          </Link>
-          <Link href="/signup" className="flex items-center gap-2">
-            <HiOutlineUserAdd /> Register
-          </Link>
-        </>
-      )}
-      <Link href="/foremployers" className="flex items-center gap-2">
-        <HiBriefcase /> For Employers
-      </Link>
-    </div>
-  );
-};
-
-const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
-  return (
-    <div className="mt-6 space-y-4">
-      {userData ? (
-        <>
-          <Link
-            href="/dashboard/appliedjobs"
-            className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-          >
-            Dashboard
-          </Link>
-          <button
-            className="block w-full text-center px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-            onClick={handleSignoutAlert}
-          >
-            Post a Job
-          </button>
-          <button
-            className="block w-full text-center px-4 py-3 text-2xl font-semibold text-red-600 hover:bg-red-100 rounded-lg transition-colors duration-200"
-            onClick={handleLogout}
-          >
-            Sign Out
-          </button>
-        </>
-      ) : (
-        <>
-          <Link
-            href="/signin"
-            className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/signup"
-            className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-          >
-            Register
-          </Link>
-        </>
-      )}
-      <Link
-        href="/foremployers"
-        className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-      >
-        For Employers
-      </Link>
-    </div>
-  );
-};
-
-const GlobalLocalToggle = ({ selectedOption, toggleOption }) => {
-  return (
-    <label className="relative inline-block w-14 h-7">
-      <input
-        type="checkbox"
-        className="opacity-0 w-0 h-0"
-        onClick={toggleOption}
-      />
-      <span
-        className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-cover bg-center rounded-full transition-transform duration-300"
-        style={{
-          backgroundImage: `url('${
-            selectedOption === "Global"
-              ? "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/world-map-in-blue-michael-tompsett.jpg"
-              : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmB-yQ2zFUyD9BgDpBCSWKFDEDe4pYk2pOSoPQ8PEG&s"
-          }')`,
-        }}
-      ></span>
-      <span
-        className="absolute left-1 top-1 w-5 h-5 bg-gray-400 rounded-full transition-transform duration-300 transform"
-        style={{
-          transform:
-            selectedOption === "Global"
-              ? "translateX(0)"
-              : "translateX(26px)",
-        }}
-      ></span>
-    </label>
-  );
-};
-
-const UserProfileDropdown = ({
-  userData,
-  toggleUserProfile,
-  userProfileClicked,
-  handleLogout,
-}) => {
-  return (
-    <div className="relative">
-      <TbUserCircle
-        className={`text-2xl text-gray-600 cursor-pointer ${
-          userProfileClicked ? "shadow-lg" : ""
-        }`}
-        onClick={toggleUserProfile}
-      />
-      {userProfileClicked && (
-        <div className="absolute top-10 right-0 w-72 bg-white shadow-lg rounded-lg p-5">
-          <div className="mb-4">
-            <h4 className="text-lg font-bold text-gray-800">
-              Welcome {userData?.data?.user.first_name}!
-            </h4>
-            <p className="text-sm text-gray-800">{userData?.data?.user.email}</p>
-          </div>
-          <div className="flex flex-col gap-2 mb-4">
-            <UserProfileLink href="/userprofile/aboutme" icon={<FaUserTie />} label="Profile" />
-            <UserProfileLink href="#" icon={<FaFileAlt />} label="Resume Build" />
-            <UserProfileLink href="#" icon={<HiBriefcase />} label="My Jobs" />
-            <UserProfileLink href="#" icon={<HiCog />} label="Settings" />
-            <UserProfileLink href="#" icon={<HiQuestionMarkCircle />} label="Help Center" />
-          </div>
-          <button
-            className="w-full text-red-700 border-t border-gray-300 py-2 text-center font-bold flex items-center justify-between"
-            onClick={handleLogout}
-          >
-            Sign Out <TbLogout className="text-xl" />
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const UserProfileLink = ({ href, icon, label }) => (
-  <Link
-    href={href}
-    className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
-  >
-    {icon} {label}
-  </Link>
-);
+ 
 
 
 export default Header;

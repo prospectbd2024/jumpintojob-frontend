@@ -29,7 +29,7 @@ const ResumeHeader = () => {
                         </div>
                     </nav>
                     <div className="flex items-center space-x-4">
-                        <Link href="/findjobs">
+                        <Link href="/jobs">
                             <button className="px-6 py-2 font-semibold rounded-full bg-[var(--primary-color)] text-white border-none text-sm cursor-pointer transition duration-300 hover:bg-[#2f89c5] hover:shadow-lg flex items-center">
                                 <FaBriefcase className="mr-2" />
                                 Job Board

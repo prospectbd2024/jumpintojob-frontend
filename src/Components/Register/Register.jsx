@@ -1,20 +1,18 @@
 "use client";
-import React, { useCallback, useState ,useEffect} from "react";
-import "./Register.css";
+import React, { useState, useEffect } from "react";
 import {
   HiOutlineEye,
   HiOutlineEyeOff,
   HiOutlineMail,
   HiOutlineUserCircle,
 } from "react-icons/hi";
-
 import Link from "next/link";
-import { useRouter ,useSearchParams} from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import SocialLogin from "../Login/SocialLogin";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const params = useSearchParams();
-  // Register User:
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,18 +20,17 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userType, setUserType] = useState("Job Seeker");
   const router = useRouter();
-
-  const [message,setMessage] = useState(undefined)
+  const [message, setMessage] = useState(undefined);
   const [warning, setWarning] = useState({ warning: false, message: "" });
+  const [errors, setErrors] = useState( null);
+
   useEffect(() => {
-
-    setMessage( params.get('msg'))
-    if(params.get('error')){
-      setWarning({warning: 'error', message : params.get('error')})
-
+    setMessage(params.get("msg"));
+    if (params.get("error")) {
+      setWarning({ warning: "error", message: params.get("error") });
     }
-   
-  }, [])
+  }, []);
+
   const handleRegistration = async (e) => {
     e.target.reset();
     e.preventDefault();
@@ -45,13 +42,12 @@ const Register = () => {
       password_confirmation: confirmPassword,
       user_type: userType,
     };
-    const createQueryString =(name, value) => {
+    const createQueryString = (name, value) => {
       const params = new URLSearchParams();
       params.set(name, value);
-
       return params.toString();
     };
-    // console.log(userData);
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/job-seeker/signup`,
       {
@@ -66,47 +62,40 @@ const Register = () => {
 
     const data = await response.json();
     if (response.ok) {
-      // Handle successful registration, e.g., show a success message
-      //   alert("Registration Successfull! Please Verify Your Email");
-      router.push("/signin" + "?" + createQueryString("msg", "Registration Successfull ! Please Verify Your Email"));
+      router.push(
+        "/signin" +
+          "?" +
+          createQueryString("msg", "Registration Successful! Please Verify Your Email")
+      );
     } else {
-      // Handle registration error, e.g., display an error message
-      console.log("Something is wrong!", data);
-      // alert(data.message)
-
-      if (data.message == "The email has already been taken.")
-        setWarning({ warning: "email", message: data.message });
+      setErrors(data.errors)
     }
   };
 
   return (
-    <div className="register-user">
-      <div className="register-user-header">
-        <h2>Register Account</h2>
-        <span>.</span>
+    <div className="flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-10 relative">
+        <h2 className="text-2xl md:text-3xl font-medium text-gray-900">
+          Register Account
+        </h2>
+        <span className="text-gray-400 text-7xl absolute inset-0 flex justify-center top-10 md:top-8 -z-10">
+          .
+        </span>
       </div>
-      <div className="account-form account-form-register">
-      {warning.warning=='error'&&
-          <div
-            style={{
-              color: "white",
-              backgroundColor: "red",
-              height: "27px",
-              width: "459px",
-              paddingTop: "6px",
-              marginInline: "auto",
-              borderRadius: "4px",
-              marginBlockEnd : '20px'
-            }}
-          >
+
+      <div className="bg-white w-full max-w-3xl p-8 md:p-12 rounded-lg border border-blue-100 shadow-md">
+        {warning.warning === "error" && (
+          <div className="bg-red-500 text-white p-2 rounded mb-4 text-center">
             {warning.message}
           </div>
-        }
-        <form action="" onSubmit={handleRegistration}>
-          <div className="account-info account-info-register">
-            <label htmlFor="first_name">First Name</label>
-            <div className="account-input  account-input-register">
-              <HiOutlineUserCircle/>
+        )}
+        <form onSubmit={handleRegistration} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="first_name" className="text-gray-900">
+              First Name
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded">
+              <HiOutlineUserCircle className="text-blue-600" />
               <input
                 type="text"
                 placeholder="David"
@@ -115,158 +104,180 @@ const Register = () => {
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                className="w-full border-none outline-none text-gray-900"
               />
             </div>
           </div>
-          {
-            <div className="account-info account-info-register">
-              <label htmlFor="last_name">Last Name</label>
-              <div className="account-input account-input-register">
-                <HiOutlineUserCircle/>
-                <input
-                  type="text"
-                  placeholder="Warner"
-                  name="lastName"
-                  id="last_name"
-                  required
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="last_name" className="text-gray-900">
+              Last Name
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded">
+              <HiOutlineUserCircle className="text-blue-600" />
+              <input
+                type="text"
+                placeholder="Warner"
+                name="lastName"
+                id="last_name"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full border-none outline-none text-gray-900"
+              />
             </div>
-          }
-          {
-            <div className="account-info account-info-register">
-              <label htmlFor="user_name">User Type</label>
-              <div className="account-input account-input-register">
-                <HiOutlineUserCircle/>
-                <input
-                  type="text"
-                  placeholder="davidwarner"
-                  name="user_name"
-                  id="user_name"
-                  required
-                  value={userType}
-                  readOnly
-                />
-              </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="user_type" className="text-gray-900">
+              User Type
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded">
+              <HiOutlineUserCircle className="text-blue-600" />
+              <input
+                type="text"
+                placeholder="Job Seeker"
+                name="userType"
+                id="user_type"
+                required
+                value={userType}
+                readOnly
+                className="w-full border-none outline-none text-gray-900"
+              />
             </div>
-          }
-          <div className="account-info account-info-register">
-            <label htmlFor="email">Email</label>
-            <div className="account-input account-input-register">
-              <HiOutlineMail/>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-gray-900">
+              Email
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded">
+              <HiOutlineMail className="text-blue-600" />
               <input
                 type="text"
                 placeholder="warner22@info.com"
-                name="email_or_phone"
+                name="email"
                 id="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-full border-none outline-none text-gray-900"
               />
             </div>
-            {warning.warning == "email" && (
-              <div
-                style={{
-                  color: "red",
-                  marginInlineStart: "9px",
-                  fontSize: "13px",
-                }}
-              >
-                {warning.message}
-              </div>
+            {errors  && (
+              <div className="text-red-500 text-sm">{errors.email}</div>
             )}
           </div>
-          <div className="account-info account-info-register">
-            <label htmlFor="password">Password</label>
-            <div className="account-input account-input-register account-password">
-              {showPassword ? (
-                <input
-                  type="text"
-                  placeholder="Password"
-                  name="password"
-                  id="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              ) : (
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              )}
-              <div onClick={() => setShowPassword(!showPassword)}>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="password" className="text-gray-900">
+              Password
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                id="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border-none outline-none text-gray-900"
+              />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className="cursor-pointer"
+              >
                 {showPassword ? (
-                  <HiOutlineEye/>
+                  <HiOutlineEye className="text-blue-600" />
                 ) : (
-                  <HiOutlineEyeOff/>
+                  <HiOutlineEyeOff className="text-blue-600" />
+                )}
+              </div>
+              
+            </div>
+            {errors  && (
+              <div className="text-red-500 text-sm">{errors.password}</div>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="confirm_password" className="text-gray-900">
+              Confirm Password
+            </label>
+            <div className="flex items-center gap-2 border border-blue-100 p-2 rounded relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                name="confirm_password"
+                id="confirm_password"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full border-none outline-none text-gray-900"
+              />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className="cursor-pointer"
+              >
+                {showPassword ? (
+                  <HiOutlineEye className="text-blue-600" />
+                ) : (
+                  <HiOutlineEyeOff className="text-blue-600" />
                 )}
               </div>
             </div>
           </div>
-          {
-            <div className="account-info account-info-register">
-              <label htmlFor="confirm_password">Confirm Password</label>
-              <div className="account-input account-input-register account-password">
-                {showPassword ? (
-                  <input
-                    type="text"
-                    placeholder="Confirm Password"
-                    name="confirm_password"
-                    id="confirm_password"
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                ) : (
-                  <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="confirm_password"
-                    id="confirm_password"
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                )}
-                <div onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? (
-                    <HiOutlineEye/>
-                  ) : (
-                    <HiOutlineEyeOff/>
-                  )}
-                </div>
-              </div>
-            </div>
-          }
-          <div className="terms-conditions">
+
+          <div className="md:col-span-2 text-gray-900 text-sm mt-4">
             <p>
               By creating an account or logging in, you understand and agree to
-              Job Portal's <Link href="/terms">Terms</Link>. You also
-              acknowledge our <Link href="/cookie">Cookie</Link> and{" "}
-              <Link href="/privacy">Privacy</Link> policies.
+              Job Portal's{" "}
+              <Link href="/terms" className="text-blue-600">
+                Terms
+              </Link>
+              . You also acknowledge our{" "}
+              <Link href="/cookie" className="text-blue-600">
+                Cookie
+              </Link>{" "}
+              and{" "}
+              <Link href="/privacy" className="text-blue-600">
+                Privacy
+              </Link>{" "}
+              policies.
             </p>
-            <div>
-              <input type="checkbox" id="termscheck" required />
+            <div className="mt-4 flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="termscheck"
+                required
+                className="form-checkbox"
+              />
               <label htmlFor="termscheck">
-                I will agree company terms & conditions.
+                I will agree to the company's terms & conditions.
               </label>
             </div>
           </div>
-          <div className="register-button">
-            {/* <button onClick={handleRegistration}><Link>Sign Up</Link></button> */}
-            <input type="submit" value="Sign Up" />
+
+          <div className="md:col-span-2 mt-6">
+            <input
+              type="submit"
+              value="Sign Up"
+              className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all cursor-pointer"
+            />
           </div>
-
-
         </form>
+        <div className="text-center mt-4">
+          <p className="text-gray-900">
+            Do have an account?{" "}
+            <Link href="/signin" className="text-blue-600">
+              Sing In
+            </Link>
+          </p>
+          <span className="block my-4 text-gray-900">OR</span>
+        </div>
+
+       <SocialLogin  className={"flex flex-col md:flex-row gap-4 mt-4"}/>
       </div>
     </div>
   );
