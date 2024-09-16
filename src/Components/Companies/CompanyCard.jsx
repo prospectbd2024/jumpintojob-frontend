@@ -14,16 +14,14 @@ function CompanyCard({ props }) {
   };
 
   return (
-    <div className="company-card border border-gray-300 p-4 rounded-lg mb-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="w-full sm:w-1/3 lg:w-1/4">
-          <div className="rounded-lg overflow-hidden h-48 sm:h-36">
-            <CompanyCoverImage company={company} />
-          </div>
+    <div className="company-card rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg bg-white">
+      <div className="grid sm:grid-cols-12">
+        <div className="sm:col-span-4 flex items-center justify-center p-2 pt-4 pb-4">
+          <CompanyCoverImage company={company} className="w-full h-full object-cover" />
         </div>
-        <div className="w-full sm:w-2/3 lg:w-3/4">
-          <div className="flex items-center mb-2">
-            <img src={company.logo} alt={company.name} className="w-12 h-12 mr-3 bg-white rounded-lg shadow-sm" />
+        <div className="sm:col-span-8 px-4 py-6 flex flex-col gap-4">
+          <div className="flex items-center">
+            <img src={company.logo} alt={company.name} className="w-12 h-12 mr-3 rounded-lg" />
             <div>
               <Link href={""}>
                 <h3 className="text-lg font-semibold text-gray-800">{company.name}</h3>
@@ -35,7 +33,7 @@ function CompanyCard({ props }) {
             <span className="text-sm font-medium text-gray-600 mr-3">{company.category}</span>
             {company.size && <span className="text-sm text-gray-600">Size: {company.size}</span>}
           </div> */}
-          <p className="text-sm text-gray-700 mb-3">{company.description ? `${company.description.slice(0, 100)}...` : ""}</p>
+          <p className="text-sm text-gray-700 line-clamp-3">{company.description}</p>
           <div className="flex flex-wrap gap-2">
             <button 
               onClick={() => handleClick(`/companies/${company.links.show}`)}
@@ -45,7 +43,7 @@ function CompanyCard({ props }) {
             </button>
             <button 
               onClick={() => handleClick(`/companies/${company.links.show}#company-jobs`)}
-              className="px-4 py-2 bg-transparent border border-gray-300 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors"
+              className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors"
             >
               View Jobs
             </button>

@@ -59,7 +59,7 @@ function CategoryList({ props }) {
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-lg overflow-hidden">
-      <h3 className="text-lg font-semibold mb-4 text-gray-800">Categories</h3>
+      <h3 className="text-lg font-semibold mb-4 text-gray-800 text-center">Categories</h3>
       <div className="space-y-2 max-h-[calc(100vh-250px)] overflow-y-auto pr-2 custom-scrollbar">
         {categoryItem(null, true)}
         {categories.map((cat) => categoryItem(cat))}

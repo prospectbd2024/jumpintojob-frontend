@@ -39,7 +39,7 @@ const ResumePreview = () => {
             <div ref={resumeRef}>
                 <RenderTemplate template={template} userProfileData={userProfileData} currentStep={currentStep} />
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            {/* <div className="mt-4 flex flex-wrap gap-2">
                 <button onClick={downloadAsPDF} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Download as PDF
                 </button>
@@ -49,7 +49,7 @@ const ResumePreview = () => {
                 <button onClick={() => downloadAsImage('jpeg')} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                     Download as JPEG
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };

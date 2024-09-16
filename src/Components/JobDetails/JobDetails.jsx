@@ -1,39 +1,48 @@
 'use client';
-import {useState, useEffect} from 'react';
-import {useApplicationContext} from '@/Contexts/ApplicationContext';
-import {useUserContext} from '@/Contexts/UserContext';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useApplicationContext } from '@/Contexts/ApplicationContext';
+import { useUserContext } from '@/Contexts/UserContext';
 import Link from 'next/link';
-import {FaUpRightFromSquare} from 'react-icons/fa6';
-import {useRouter} from 'next/navigation';
+import { FaUpRightFromSquare } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
-import {FaBriefcase, FaCalendarAlt, FaDollarSign} from "react-icons/fa";
-import {useJobContext} from "@/Contexts/JobContext";
+import { FaBriefcase, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
+import { useJobContext } from "@/Contexts/JobContext";
 import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton";
+import dynamic from 'next/dynamic';
 
-const JobDetails = ({props}) => {
-    const {userData} = useUserContext();
-    const loginNavigate = useRouter();
-    const {job} = props;
-    const {isApplied} = useApplicationContext();
-    const {guestProtection} = useUserContext();
-    const {Loading} = useJobContext();
+const ApplyJob = dynamic(() => import('../ApplyJob/ApplyJob'), { 
+    loading: () => <p>Loading application form...</p>,
+    ssr: false
+  });
+  
+
+const JobDetails = ({ props }) => {
+    const { userData } = useUserContext();
+    const router = useRouter();
+    const { job } = props;
+    const { isApplied } = useApplicationContext();
+    const { guestProtection } = useUserContext();
+    const { Loading } = useJobContext();
+    const [showApplyJob, setShowApplyJob] = useState(false);
 
     const handleApplyJob = () => {
         guestProtection(() => {
-            window.open(`/applyjob/${job.id}`, '_blank');
+            setShowApplyJob(true);
         });
     };
 
     if (Loading) {
         return (
             <div className="sticky top-14">
-                <JobDetailsSkeleton/>
+                <JobDetailsSkeleton />
             </div>
         );
+    } else if (showApplyJob) {
+        return <ApplyJob job={job} />;
     } else {
         return (
-            <div
-                className="relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0">
+            <div className="relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0">
                 {/* Header Content */}
                 <div className="relative pb-1 py-2 pt-2 sm:p-4 md:p-6 lg:pt-8">
                     {/* Cover Image */}
@@ -45,8 +54,7 @@ const JobDetails = ({props}) => {
                                 className="absolute top-0 right-0 w-full h-full object-cover"
                                 style={{clipPath: 'polygon(45% 0px, 100% 0px, 100% 100%, 57% 100%)'}}
                             />
-                            <div
-                                className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-60"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-60"></div>
                         </div>
                     )}
 
@@ -55,15 +63,12 @@ const JobDetails = ({props}) => {
                         {/* Logo and Job Info */}
                         <div className="flex flex-col flex-grow">
                             <div className="flex items-center gap-4 mb-2">
-                                <div
-                                    className="w-16 h-16 flex items-center justify-center rounded-lg overflow-hidden bg-transparent">
-                                    <img src={job.image} alt={job.company_name}
-                                         className="object-contain w-full h-full"/>
+                                <div className="w-16 h-16 flex items-center justify-center rounded-lg overflow-hidden bg-transparent">
+                                    <img src={job.image} alt={job.company_name} className="object-contain w-full h-full"/>
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <Link href="#"
-                                          className="text-sm font-semibold text-blue-600 hover:underline">{job.company_name}</Link>
+                                    <Link href="#" className="text-sm font-semibold text-blue-600 hover:underline">{job.company_name}</Link>
                                     <h2 className="text-lg font-bold text-gray-800 mb-1">{job.job_title}</h2>
                                     <p className="text-sm text-gray-600">{job.address}</p>
                                 </div>
@@ -94,15 +99,13 @@ const JobDetails = ({props}) => {
                             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 inline-flex items-center"
                         >
                             {isApplied(job.id) ? 'Applied' : 'Apply Now'}
-                            <FaUpRightFromSquare
-                                className={`w-4 h-4 ml-2 ${!isApplied(job.id) ? 'text-white' : 'text-gray-300'}`}/>
+                            <FaUpRightFromSquare className={`w-4 h-4 ml-2 ${!isApplied(job.id) ? 'text-white' : 'text-gray-300'}`}/>
                         </button>
                     </div>
                 </div>
 
                 {/* Job Details Section */}
-                <div className="p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 overflow-y-auto"
-                     style={{maxHeight: 'calc(100vh - 18rem)'}}>
+                <div className="p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 overflow-y-auto" style={{maxHeight: 'calc(100vh - 18rem)'}}>
                     <div className="text-sm md:text-base">
                         <div className="mb-4">
                             <h3 className="font-medium text-gray-800 mb-1">Job Type</h3>

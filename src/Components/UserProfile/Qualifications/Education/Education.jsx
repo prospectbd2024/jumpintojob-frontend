@@ -1,4 +1,3 @@
-"use client";
 import React, { useCallback, useState } from "react";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { RiGraduationCapFill } from "react-icons/ri";
@@ -13,7 +12,13 @@ const Education = ({ props }) => {
     visible_on_cv: true,
     education_graduation_year: "",
     grades: "",
-    cgpa: "4.00",
+    cgpa: "",
+    institution_name: "",
+    institution_location: "",
+    degree: "",
+    field_study: "",
+    education_starting_year: "",
+    education_achievements: "",
   };
   const { educations, setEducations } = props;
   const [education, setEducation] = useState(educationInterface);
@@ -31,7 +36,10 @@ const Education = ({ props }) => {
     (title, state, index) => {
       if (state === "update") {
         setEducation(educations[index]);
+      } else {
+        setEducation(educationInterface);
       }
+      setEducationErrors({});
       setModal({ title, display: "block", state, index });
     },
     [educations]
@@ -43,16 +51,48 @@ const Education = ({ props }) => {
     setModal({ display: "none" });
   }, []);
 
+  const validation = useCallback(() => {
+    const errors = {};
+    let isValid = true;
+
+    if (!education.institution_name) {
+      errors.institution_name = true;
+      isValid = false;
+    }
+    if (!education.degree) {
+      errors.degree = true;
+      isValid = false;
+    }
+    if (!education.field_study) {
+      errors.field_study = true;
+      isValid = false;
+    }
+
+    if (education.education_graduation_year !== 'present') {
+      if (!education.grades) {
+        errors.grades = true;
+        isValid = false;
+      }
+      if (!education.cgpa || parseFloat(education.cgpa) < 1 || parseFloat(education.cgpa) > 5) {
+        errors.cgpa = true;
+        isValid = false;
+      }
+    }
+
+    setEducationErrors(errors);
+    return isValid;
+  }, [education]);
+
   const saveChanges = useCallback(() => {
     if (validation()) {
       if (modal.state === "update") {
         updateEducation(modal.index, education);
       } else {
-        setEducations((prev) => [...prev, education]);
+        setEducations((prev) => [...prev, { ...education, id: prev.length }]);
       }
       closeModal();
     }
-  }, [education, modal, setEducations, closeModal]);
+  }, [education, modal, setEducations, closeModal, validation]);
 
   const updateEducation = useCallback(
     (index, updatedEducation) => {
@@ -63,22 +103,6 @@ const Education = ({ props }) => {
     },
     [educations, setEducations]
   );
-
-  const validation = useCallback(() => {
-    const required = ["institution_name", "degree", "field_study"];
-    let isValid = true;
-
-    required.forEach((field) => {
-      if (!education[field]) {
-        setEducationErrors((prev) => ({ ...prev, [field]: true }));
-        isValid = false;
-      } else {
-        setEducationErrors((prev) => ({ ...prev, [field]: false }));
-      }
-    });
-
-    return isValid;
-  }, [education]);
 
   const manageVisibility = (id) => {
     setEducations((prev) =>
@@ -157,7 +181,7 @@ const Education = ({ props }) => {
       )}
       <AddButton onClick={() => showModal('Add Education', 'add')} />
       <ModalBox props={{ ...modal, onSave: saveChanges, onClose: closeModal }}>
-        <AddEducation props={{ education, setEducation, saveChanges, educationErrors }} />
+        <AddEducation props={{ education, setEducation, educationErrors, setEducationErrors }} />
       </ModalBox>
     </div>
   );

@@ -14,7 +14,7 @@ const FeaturedJobs = () => {
   const router = useRouter();
 
   const handleClickedFeaturedJob = (e) => {
-     router.push( `/jobs/jobdetails/${e}`);
+    router.push(`/findjobs/jobdetails/${e}`);
   };
 
   useEffect(() => {
@@ -39,24 +39,14 @@ const FeaturedJobs = () => {
             <ShowMoreJobsSkeleton />
           </div>
         ) : allJobs.length > 0 ? (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {allJobs.slice(0, 6).map((job) => (
-                <SingleJob
-                  key={job.id}
-                  job={job}
-                  clickedJob={handleClickedFeaturedJob}
-                  handleClickedJob={handleClickedFeaturedJob}
-                />
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <Link href="/jobs">
-                <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">
-                  Show More Jobs
-                </button>
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {allJobs.slice(0, 6).map((job) => (
+              <SingleJob
+                key={job.id}
+                job={job}
+                clickedJob={handleClickedFeaturedJob}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center">
@@ -65,7 +55,21 @@ const FeaturedJobs = () => {
         )}
         <div className="text-center mt-10">
           <Link href="/findjobs">
-            <button className="btn btn-primary">Show More Jobs</button>
+            <button className="
+            bg-green-500 
+        text-white 
+        px-4 
+        py-2 
+        text-lg 
+        rounded-md 
+        cursor-pointer 
+        inline-block 
+        mt-2 
+        transition 
+        duration-300 
+        ease-in-out 
+        hover:bg-green-600
+            ">Show More Jobs</button>
           </Link>
         </div>
       </div>
