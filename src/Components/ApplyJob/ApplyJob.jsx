@@ -287,17 +287,17 @@ const ApplyJob = ({ job }) => {
         </div>
 
         <div className="flex justify-end">
-        <button
-          onClick={handleClick}
-          disabled={!CV || !job}
-          className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
-            !CV || !job ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          type="button"
-        >
-          Apply Now
-        </button>
-      </div>
+          <button
+            onClick={handleClick}
+            disabled={!CV || !job}
+            className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
+              !CV || !job ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            type="button"
+          >
+            Apply Now
+          </button>
+        </div>
       </form>
     </div>
   );
