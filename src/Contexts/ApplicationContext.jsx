@@ -89,7 +89,10 @@ function ApplicationContext({ children }) {
   };
  
   useEffect(()=>{
-    getAppliedJobs();
+    if( userData){
+
+      getAppliedJobs();
+    }
   },[])
   const isApplied =(job_id)=>{
     let flag = false;

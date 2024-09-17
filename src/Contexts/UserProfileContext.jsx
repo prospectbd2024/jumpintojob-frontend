@@ -69,7 +69,7 @@ function UserProfileContext({ children }) {
             setAvailability(response.data.data.payload.availability)
             setTemplate(response.data.data.payload.template)
           }catch(e){
-            console.log(e);
+            // console.log(e);
           }
          
       };
@@ -164,7 +164,10 @@ function UserProfileContext({ children }) {
 
     useEffect(()=>{
           // Call the function to get and print user profile
-          getUserProfile(userData);
+          if(userData){
+
+            getUserProfile(userData);
+          }
 
     },[userData])
 
