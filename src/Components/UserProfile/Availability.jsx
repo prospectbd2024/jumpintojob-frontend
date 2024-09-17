@@ -5,7 +5,7 @@ function Availability() {
   const { availability, setAvailability } = useUserProfileContext();
 
   const handleAvailabilityChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setAvailability(e.target.value);
   };
 

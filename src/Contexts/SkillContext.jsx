@@ -6,7 +6,7 @@ export const SkillContext = createContext();
 
 function SkillContextProvider({ children }) {
   const log = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   const { userProfileData, setUserProfileData } = useUserContext();
@@ -24,14 +24,14 @@ function SkillContextProvider({ children }) {
   });
   const saveCurrentSkill = useCallback((skill) => {
     setSkillList([...skillList, skill]);
-    console.log([...skillList, skill]);
+    // console.log([...skillList, skill]);
   },[skillList]);
 
   const handleRemoveSkill = useCallback((index) => {
     const updatedSkillList = [...skillList];
     updatedSkillList.splice(index, 1);
     setSkillList(updatedSkillList)
-    console.log(updatedSkillList)
+    // console.log(updatedSkillList)
   },[skillList]);
 
   useEffect(() => {

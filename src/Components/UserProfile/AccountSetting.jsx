@@ -15,10 +15,10 @@ const AccountSetting = () => {
     }
     
     // Add logic here to handle changing password
-    console.log('Changing password...');
-    console.log('Old Password:', oldPassword);
-    console.log('New Password:', newPassword);
-    console.log('Confirm Password:', confirmPassword);
+    // console.log('Changing password...');
+    // console.log('Old Password:', oldPassword);
+    // console.log('New Password:', newPassword);
+    // console.log('Confirm Password:', confirmPassword);
   };
 
   return (
