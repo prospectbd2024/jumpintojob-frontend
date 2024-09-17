@@ -106,6 +106,7 @@ const Login = () => {
                 required
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
+                autoComplete="username"
                 className="w-full border-none outline-none text-gray-900"
               />
             </div>
@@ -126,6 +127,7 @@ const Login = () => {
                 id="password"
                 required
                 value={userPassword}
+                autoComplete="current-password"
                 onChange={(e) => setUserPassword(e.target.value)}
                 className="w-full border-none outline-none text-gray-900"
               />

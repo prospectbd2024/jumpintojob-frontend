@@ -47,7 +47,7 @@ function Page() {
                 let jobs = data.data;
                 setAllJobs(jobs);
                 setJob(jobs.length>0?jobs[0]:null)
-                console.log(jobs.length>0?jobs[0]:null);
+                // console.log(jobs.length>0?jobs[0]:null);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

@@ -86,7 +86,7 @@ function ResumeContext({ children }) {
   
       // You can also handle the response data here if needed
       const data = await response.json();
-      console.log('Success:', data);
+      // console.log('Success:', data);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -101,7 +101,7 @@ function ResumeContext({ children }) {
 
   const generateTemplate =  async (template,output_type,options={})=>{
     try {
-      console.log("getting tempalates");
+      // console.log("getting tempalates");
       
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/templates/generator`, {
         method: 'POST',

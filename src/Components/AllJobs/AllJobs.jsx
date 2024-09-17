@@ -28,7 +28,7 @@ const AllJobs = ({children}) => {
                 && !NewJobLoadingFlag
             ) {
                 getNewJobsAndReplace(jobPage.currentPage + 1);
-                console.log('Loading more jobs...');
+                // console.log('Loading more jobs...');
             }
         };
 

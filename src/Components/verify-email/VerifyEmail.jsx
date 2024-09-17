@@ -30,7 +30,7 @@ const VerifyEmail = ({ redirect }) => {
   }, [resendDisabled]);
 
   const resandVerificationCode = async () => {
-    console.log("resending")
+    // console.log("resending")
     setResendDisabled(true); // Disable the resend button
     setResendTimer(60); // Reset timer to initial value
 

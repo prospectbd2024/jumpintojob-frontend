@@ -9,7 +9,7 @@ const PostJobReview = ({ setShowReview, jobData }) => {
     console.log(jobData)
     const data = localStorage.getItem('userData');
     const token = JSON.parse(data)
-    console.log(token.data.access_token)
+    // console.log(token.data.access_token)
     const handlePostJob = async () => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/store`, {
@@ -25,7 +25,7 @@ const PostJobReview = ({ setShowReview, jobData }) => {
             const data = await response.json();
     
             if (response.ok) {
-                console.log("Job post successful:", data);
+                // console.log("Job post successful:", data);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -34,15 +34,15 @@ const PostJobReview = ({ setShowReview, jobData }) => {
                     timer: 1500
                 });
             } else {
-                console.log("Job post failed:", data);
+                // console.log("Job post failed:", data);
     
                 // Additional error handling based on specific conditions or status codes
                 if (response.status === 422) {
                     // Handle validation errors
-                    console.log("Validation errors:", data.errors);
+                    // console.log("Validation errors:", data.errors);
                 } else {
                     // Handle other errors
-                    console.log("Something is wrong:", data.message);
+                    // console.log("Something is wrong:", data.message);
                 }
             }
         } catch (error) {
