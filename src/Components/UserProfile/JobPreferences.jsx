@@ -1,114 +1,122 @@
 "use client"
 import { useUserProfileContext } from '@/Contexts/UserProfileContext';
-import React, { useState } from 'react';
+import React from 'react';
 import SaveProfileButton from '../Buttons/SaveProfileButton';
 import Availability from './Availability';
 
 const JobPreferences = () => {
-
     const { jobType, setJobType, otherPreferences,
         setOtherPreferences, salaryExpectation,
         setSalaryExpectation, currency,
-        setCurrency, preferredIndustry,
-        setPreferredIndustry, availability, setAvailability } = useUserProfileContext();
+        setCurrency } = useUserProfileContext();
 
-    const handleJobTypeChange = (e) => {
-        setJobType(e.target.value);
+    const containerStyle = {
+        maxWidth: '600px',
+        margin: '0 auto',
+        padding: '20px',
+        borderRadius: '8px',
     };
 
-    const handleOtherPreferencesChange = (e) => {
-        setOtherPreferences(e.target.value);
+    const headerStyle = {
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '20px',
+        color: '#333',
     };
 
-    const handleSalaryExpectationChange = (e) => {
-        setSalaryExpectation(e.target.value);
+    const formGroupStyle = {
+        marginBottom: '20px',
     };
 
-    const handleCurrencyChange = (e) => {
-        setCurrency(e.target.value);
+    const labelStyle = {
+        display: 'block',
+        marginBottom: '5px',
+        fontWeight: 'bold',
+        color: '#555',
     };
 
-    const handlePreferredIndustryChange = (e) => {
-        setPreferredIndustry(e.target.value);
+    const inputStyle = {
+        width: '100%',
+        padding: '8px 12px',
+        fontSize: '16px',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
+        boxSizing: 'border-box',
     };
 
+    const selectStyle = {
+        ...inputStyle,
+        appearance: 'none',
+        backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' fill=\'%23333\' viewBox=\'0 0 16 16\'%3E%3Cpath d=\'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\'/%3E%3C/svg%3E")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'right 12px center',
+    };
 
     return (
-        <div style={{ marginBottom: '30px' }}>
-            <h2 style={{ fontSize: '20px', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 2fr' }}>Job Preferences</h2>
-            <div style={{ marginTop: '60px' }}>
+        <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+            <div style={containerStyle} className=''>
+            <h2 style={headerStyle}>Job Preferences</h2>
+            
+            <div style={formGroupStyle}>
+                <label htmlFor="jobType" style={labelStyle}>Type of Job Preferred:</label>
+                <select
+                    id="jobType"
+                    value={jobType}
+                    onChange={(e) => setJobType(e.target.value)}
+                    style={selectStyle}
+                >
+                    <option value="">Select Job Type</option>
+                    <option value="remote">Remote</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="in-site">In-site</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
 
-                <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                    <label htmlFor="jobType" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Type of Job Preferred:</label>
-                    <select
-                        id="jobType"
-                        value={jobType}
-                        onChange={handleJobTypeChange}
-                        style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', maxWidth: '200px' }}
-                    >
-                        <option value="">Select Job Type</option>
-                        <option value="remote">Remote</option>
-                        <option value="hybrid">Hybrid</option>
-                        <option value="in-site">In-site</option>
-                        <option value="others">Others</option>
-                    </select>
-                </div>
-                {jobType === 'others' && (
-                    <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                        <label htmlFor="otherPreferences" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Other Preferences:</label>
-                        <input
-                            type="text"
-                            id="otherPreferences"
-                            value={otherPreferences}
-                            onChange={handleOtherPreferencesChange}
-                            placeholder="Enter other preferences"
-                            style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
-                        />
-                    </div>
-                )}
-                <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                    <label htmlFor="salaryExpectation" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Salary Expectation:</label>
-                    <div style={{ display: 'flex', gap: '0px 20px' }}>
-
-
-                        <input
-                            type="text"
-                            id="salaryExpectation"
-                            value={salaryExpectation}
-                            onChange={handleSalaryExpectationChange}
-                            placeholder="Enter salary expectation"
-                            style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
-                        />
-                        {/* Currency Selector */}
-                        <select
-                            value={currency}
-                            onChange={handleCurrencyChange}
-                            style={{ height: '30px', marginLeft: '10px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px' }}
-                        >
-                            <option value="BDT">BDT</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                            <option value="GBP">GBP</option>
-                            {/* Add more currencies as needed */}
-                        </select>
-                    </div>
-                </div>
-                {/* <div  style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                    <label htmlFor="preferredIndustry" style={{ width: '200px', marginRight: '10px', fontWeight: 'bold' }}>Preferred Industry:</label>
+            {jobType === 'others' && (
+                <div style={formGroupStyle}>
+                    <label htmlFor="otherPreferences" style={labelStyle}>Other Preferences:</label>
                     <input
                         type="text"
-                        id="preferredIndustry"
-                        value={preferredIndustry}
-                        onChange={handlePreferredIndustryChange}
-                        placeholder="Enter preferred industry"
-                        style={{ height: '30px', padding: '0 10px', fontSize: '16px', border: '1px solid #80808057', borderRadius: '5px', width: '180px' }}
+                        id="otherPreferences"
+                        value={otherPreferences}
+                        onChange={(e) => setOtherPreferences(e.target.value)}
+                        placeholder="Enter other preferences"
+                        style={inputStyle}
                     />
-                </div> */}
-                 <Availability />
-            <div style={{display: 'flex',justifyContent: 'flex-end',marginTop: '20px'}}>
-            <SaveProfileButton/>
+                </div>
+            )}
+
+            <div style={formGroupStyle}>
+                <label htmlFor="salaryExpectation" style={labelStyle}>Salary Expectation:</label>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <input
+                        type="text"
+                        id="salaryExpectation"
+                        value={salaryExpectation}
+                        onChange={(e) => setSalaryExpectation(e.target.value)}
+                        placeholder="Enter salary expectation"
+                        style={{ ...inputStyle, flexGrow: 1 }}
+                    />
+                    <select
+                        value={currency}
+                        onChange={(e) => setCurrency(e.target.value)}
+                        style={{ ...selectStyle, width: 'auto' }}
+                    >
+                        <option value="BDT">BDT</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                    </select>
+                </div>
             </div>
+
+            <Availability />
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+                <SaveProfileButton />
             </div>
+        </div>
         </div>
     );
 };

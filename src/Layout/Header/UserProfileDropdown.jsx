@@ -1,8 +1,10 @@
 "use client"; 
+import Link from "next/link";
 import { FaFileAlt, FaUserTie } from "react-icons/fa";
 import {
   HiBriefcase,
   HiCog, 
+  HiOutlineViewGrid,
   HiQuestionMarkCircle, 
 } from "react-icons/hi";
 import {   TbLogout, TbUserCircle } from "react-icons/tb"; 
@@ -28,6 +30,14 @@ const UserProfileDropdown = ({
                 Welcome {userData?.data?.user.first_name}!
               </h4>
               <p className="text-sm text-gray-800">{userData?.data?.user.email}</p>
+            </div>
+            <div>
+            <Link
+              href="/dashboard/appliedjobs"
+              className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
+            >
+              <HiOutlineViewGrid /> Dashboard
+            </Link>
             </div>
             <div className="flex flex-col gap-2 mb-4">
               <UserProfileLink href="/userprofile/aboutme" icon={<FaUserTie />} label="Profile" />
