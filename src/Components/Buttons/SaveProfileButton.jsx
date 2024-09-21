@@ -6,7 +6,7 @@ function SaveProfileButton() {
   return (
     <button
       onClick={saveProfile}
-      className="bg-primary text-white w-32 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition duration-300 ease-in-out hover:bg-primary-dark
+      className="bg-primary-color text-white w-32 h-10 rounded-md border-none text-lg font-bold cursor-pointer transition duration-300 ease-in-out hover:bg-primary-dark
       "
     >
       Save
