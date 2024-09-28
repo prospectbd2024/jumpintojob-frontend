@@ -101,7 +101,7 @@ const JobPreferences = () => {
                     <select
                         value={currency}
                         onChange={(e) => setCurrency(e.target.value)}
-                        style={{ ...selectStyle, width: 'auto' }}
+                        style={{ ...selectStyle, width: '100px' }}
                     >
                         <option value="BDT">BDT</option>
                         <option value="USD">USD</option>

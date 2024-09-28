@@ -39,7 +39,7 @@ const Banner = () => {
                         ))}
                     </div>
                     <div className="flex mt-10 justify-center sm:flex-row gap-3 sm:gap-5">
-                        <Link href="/findjobs">
+                        <Link href="/jobs">
                             <button className='banner-btn text-white py-2 px-4 sm:py-2.5 sm:px-5 rounded flex items-center justify-center gap-2 hover:bg-blue-700 transition bg-primary-color'>
                                 Find Jobs <TbBriefcase />
                             </button>

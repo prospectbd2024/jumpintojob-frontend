@@ -9,21 +9,34 @@ function Availability() {
     setAvailability(e.target.value);
   };
 
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '5px',
+    fontWeight: 'bold',
+    color: '#555',
+  };
+
+  const selectStyle = {
+    width: '100%',
+    padding: '8px 12px',
+    fontSize: '16px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    appearance: 'none',
+    backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' fill=\'%23333\' viewBox=\'0 0 16 16\'%3E%3Cpath d=\'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\'/%3E%3C/svg%3E")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 12px center',
+  };
+
   return (
-    <div className="mb-5 mt-2 flex flex-col sm:flex-row items-center">
-      <label
-        htmlFor="availability"
-        className="w-full sm:w-52 mr-0 sm:mr-3 font-bold text-base sm:text-lg"
-      >
-        Employment status:
-      </label>
-      
-      <div className='border border-secondary-color rounded-md w-full sm:w-auto'>
+    <div style={{ marginBottom: '20px' }}>
+      <label htmlFor="availability" style={labelStyle}>Employment Status:</label>
+      <div style={{ position: 'relative' }}>
         <select
           id="availability"
           value={availability}
           onChange={handleAvailabilityChange}
-          className="h-8 px-3 border border-gray-300 rounded-md w-full sm:w-52 text-md"
+          style={selectStyle}
         >
           <option value="readyToJoin">Ready To Join</option>
           <option value="currentlyInJob">Currently In A Job</option>
@@ -35,4 +48,4 @@ function Availability() {
   )
 }
 
-export default Availability
+export default Availability;

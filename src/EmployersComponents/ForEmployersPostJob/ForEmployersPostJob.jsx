@@ -1,34 +1,37 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { useUserContext } from '@/Contexts/UserContext';
-import { HiOutlineUserCircle } from 'react-icons/hi';
-import RichEditor from './RichEditor';
-import Link from 'next/link';
-import PostJobReview from './PostJobReview';
-import { useCategoryContext } from '@/Contexts/CategoryContext';
+"use client";
+import React, { useEffect, useState } from "react";
+import { useUserContext } from "@/Contexts/UserContext";
+import { HiOutlineUserCircle } from "react-icons/hi";
+import RichEditor from "./RichEditor";
+import Link from "next/link";
+import PostJobReview from "./PostJobReview";
+import { useCategoryContext } from "@/Contexts/CategoryContext";
 
 const ForEmployersPostJob = () => {
     const [showReview, setShowReview] = useState(false);
     const { userData } = useUserContext();
     const [jobData, setJobData] = useState({});
     const { jobCategories } = useCategoryContext();
+    const [isTermsChecked, setIsTermsChecked] = useState(false); // State to track checkbox
 
     const handlePosting = () => {
-        setShowReview(true);
-        setJobData({ ...jobData, 'email': userData.data.user.email });
+        if (isTermsChecked) {
+            setShowReview(true);
+            setJobData({ ...jobData, email: userData.data.user.email });
+        }
     };
 
     return (
         <div className="py-12">
-            <div className="container mx-auto p-8 bg-white shadow-md">
+            <div className="container mx-auto p-8 bg-white shadow-xl">
                 {showReview ? (
                     <PostJobReview setShowReview={setShowReview} jobData={jobData} />
                 ) : (
                     <form>
-                        <h3 className="text-xl font-medium mb-6">ADD JOB INFORMATION</h3>
-                        <div className="flex flex-wrap gap-x-12 gap-y-8">
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="job_title" className="text-sm mb-2">Job Title</label>
+                        <h3 className="text-2xl font-medium mb-6 text-primary-color text-center">ADD JOB INFORMATION</h3>
+                        <div className="flex flex-wrap justify-between gap-x-12 gap-y-8">
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="job_title" className="text-md mb-2">Job Title</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
@@ -36,15 +39,15 @@ const ForEmployersPostJob = () => {
                                         placeholder="Civil Engineer"
                                         id="job_title"
                                         name="job_title"
-                                        onChange={(e) => setJobData({ ...jobData, 'title': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, title: e.target.value })}
                                         value={jobData.title}
                                         required
                                         className="w-full border-none outline-none"
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="vacancies" className="text-sm mb-2">Vacancies</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="vacancies" className="text-md mb-2">Vacancies</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
@@ -52,15 +55,15 @@ const ForEmployersPostJob = () => {
                                         placeholder="1"
                                         id="vacancies"
                                         name="vacancies"
-                                        onChange={(e) => setJobData({ ...jobData, 'vacancies': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, vacancies: e.target.value })}
                                         value={jobData.vacancies}
                                         required
                                         className="w-full border-none outline-none"
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="salary" className="text-sm mb-2">Estimated Salary</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="salary" className="text-md mb-2">Estimated Salary</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
@@ -68,21 +71,21 @@ const ForEmployersPostJob = () => {
                                         placeholder="$120000"
                                         id="salary"
                                         name="salary"
-                                        onChange={(e) => setJobData({ ...jobData, 'salary': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, salary: e.target.value })}
                                         value={jobData.salary}
                                         required
                                         className="w-full border-none outline-none"
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="job_type" className="text-sm mb-2">Job Type</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="job_type" className="text-md mb-2">Job Type</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <select
                                         name="job_type"
                                         id="job_type"
-                                        onChange={(e) => setJobData({ ...jobData, 'employment_type': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, employment_type: e.target.value })}
                                         value={jobData.employment_type}
                                         required
                                         className="w-full border-none outline-none"
@@ -94,14 +97,14 @@ const ForEmployersPostJob = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="location_type" className="text-sm mb-2">Location Type</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="location_type" className="text-md mb-2">Location Type</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <select
                                         name="location_type"
                                         id="location_type"
-                                        onChange={(e) => setJobData({ ...jobData, 'location_type': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, location_type: e.target.value })}
                                         value={jobData.location_type}
                                         required
                                         className="w-full border-none outline-none"
@@ -113,40 +116,40 @@ const ForEmployersPostJob = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="job_location" className="text-sm mb-2">Location street address</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="job_location" className="text-md mb-2">Location street address</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
                                         type="text"
                                         placeholder="Address for this job"
-                                        onChange={(e) => setJobData({ ...jobData, 'location': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, location: e.target.value })}
                                         value={jobData.location}
                                         className="w-full border-none outline-none"
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="availability" className="text-sm mb-2">Availability</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="availability" className="text-md mb-2">Availability</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
                                         type="text"
                                         placeholder="Availability for this job"
-                                        onChange={(e) => setJobData({ ...jobData, 'availability': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, availability: e.target.value })}
                                         value={jobData.availability}
                                         className="w-full border-none outline-none"
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="category_id" className="text-sm mb-2">Job Category</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="category_id" className="text-md mb-2">Job Category</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <select
                                         name="category_id"
                                         id="category_id"
-                                        onChange={(e) => setJobData({ ...jobData, 'category_id': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, category_id: e.target.value })}
                                         value={jobData.category_id}
                                         className="w-full border-none outline-none"
                                     >
@@ -159,15 +162,15 @@ const ForEmployersPostJob = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full md:w-[400px]">
-                                <label htmlFor="deadline" className="text-sm mb-2">Deadline</label>
+                            <div className="flex flex-col w-full md:w-[300px]">
+                                <label htmlFor="deadline" className="text-md mb-2">Deadline</label>
                                 <div className="flex items-center border border-gray-300 p-2 rounded-md">
                                     <HiOutlineUserCircle className="mr-2" />
                                     <input
                                         type="date"
                                         id="deadline"
                                         name="deadline"
-                                        onChange={(e) => setJobData({ ...jobData, 'deadline': e.target.value })}
+                                        onChange={(e) => setJobData({ ...jobData, deadline: e.target.value })}
                                         value={jobData.deadline}
                                         className="w-full border-none outline-none"
                                     />
@@ -183,17 +186,28 @@ const ForEmployersPostJob = () => {
                                 You also acknowledge our <Link href="/cookie" className="text-blue-500">Cookie</Link> and <Link href="/privacy" className="text-blue-500">Privacy</Link> policies.
                             </p>
                             <div className="mt-4 flex items-center">
-                                <input type="checkbox" id="termscheck" required className="mr-2"/>
-                                <label htmlFor="termscheck" className="text-sm">I agree to the company terms & conditions.</label>
+                                <input 
+                                    type="checkbox" 
+                                    id="termscheck" 
+                                    checked={isTermsChecked}
+                                    onChange={() => setIsTermsChecked(!isTermsChecked)} 
+                                    className="mr-2"
+                                />
+                                <label htmlFor="termscheck" className="text-sm">I agree to the terms and policies.</label>
                             </div>
                         </div>
-                        <button 
-                            type="button" 
-                            onClick={handlePosting} 
-                            className="mt-8 px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700"
-                        >
-                            Continue
-                        </button>
+                        <div className="mt-8">
+                            <button
+                                type="button"
+                                disabled={!isTermsChecked} // Disable button if terms are not checked
+                                onClick={handlePosting}
+                                className={`px-6 py-3 bg-primary-color text-white rounded-full ${
+                                    !isTermsChecked ? "opacity-50 cursor-not-allowed" : "hover:bg-primary-dark"
+                                }`}
+                            >
+                                Continue
+                            </button>
+                        </div>
                     </form>
                 )}
             </div>
