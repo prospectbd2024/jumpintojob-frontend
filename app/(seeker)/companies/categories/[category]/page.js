@@ -13,12 +13,12 @@ function Page() {
           category: category
         };
         const queryString = new URLSearchParams(queryParams).toString();
-        console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
+        // console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`);
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies?${queryString}`)
           .then((res) => res.json())
           .then((data) => {
             setCompanies(data.data);
-            console.log(data.data??[]);
+            // console.log(data.data??[]);
           });
       },[])
 

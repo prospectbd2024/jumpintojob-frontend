@@ -37,7 +37,7 @@ function CompanyDetails({ company }) {
           </div>
           <div className="mt-3">
             <p className="text-gray-600 text-lg">{company.category || ""}</p>
-            {company.size && <p className="text-gray-500 text-sm">Company Size: {company.size}</p>}
+            {company.size?<p className="text-gray-500 text-sm">Company Size: {company.size}</p>:<></>}
           </div>
         </div>
         <div className="p-5 bg-gray-100 border-t border-gray-200">

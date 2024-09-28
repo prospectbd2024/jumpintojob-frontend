@@ -7,7 +7,7 @@ function AddSkillButton() {
 
     const showSkillModal = useCallback(()=>{
         handleShowModal(true)
-        console.log('yes')
+        // console.log('yes')
 
     },[]);
   return (

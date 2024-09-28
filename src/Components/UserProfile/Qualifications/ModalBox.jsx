@@ -6,7 +6,7 @@ function ModalBox({ children, props }) {
   const { title, display, onSave, onClose } = props;
 
   const handleSave = () => {
-    console.log("Save button clicked"); 
+    // console.log("Save button clicked"); 
     onSave(); 
   };
 
