@@ -16,7 +16,7 @@ function CompanyCard({ props }) {
   return (
     <div className="company-card rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg bg-white">
       <div className="grid sm:grid-cols-12">
-        <div className="sm:col-span-4 flex items-center justify-center p-2 pt-4 pb-4">
+        <div className="sm:col-span-4 flex items-center justify-center p-4">
           <CompanyCoverImage company={company} className="w-full h-full object-cover" />
         </div>
         <div className="sm:col-span-8 px-4 py-6 flex flex-col gap-4">
