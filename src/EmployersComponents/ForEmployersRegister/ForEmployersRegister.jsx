@@ -12,14 +12,15 @@ const ForEmployersRegister = () => {
     const [companyName, setCompanyName] = useState('');
     const [companyType, setCompanyType] = useState('');
     const { jobCategories } = useCategoryContext(); 
-    const [companyProfile,setCompanyProfile ] = useState({}); 
-    
+    const [companyProfile, setCompanyProfile] = useState({}); 
     const [warning, setWarning] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userType, setUserType] = useState('Employer');
     const router = useRouter();
+    const [backgroundImage, setBackgroundImage] = useState(''); // State for background image
+    const [companyImage, setCompanyImage] = useState(null); // State for company image
 
     const createQueryString = (name, value) => {
         const params = new URLSearchParams();
@@ -29,22 +30,24 @@ const ForEmployersRegister = () => {
 
     const handleRegistration = async (e) => {
         e.preventDefault();
-        const userData = {
-            name: companyName,
-            company_type: companyType,
-            email: email,
-            password: password,
-            password_confirmation: confirmPassword,
-            user_type: userType
-        };
+        const userData = new FormData(); // Use FormData to include images
 
+        userData.append('name', companyName);
+        userData.append('company_type', companyType);
+        userData.append('email', email);
+        userData.append('password', password);
+        userData.append('password_confirmation', confirmPassword);
+        userData.append('user_type', userType); 
+        if (companyImage) {
+            userData.append('logo', companyImage); // Send company profile image if available
+        }
+        if (companyImage) {
+            userData.append('cover_image', backgroundImage); // Add company image to FormData
+        } 
+        
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/employer/signup`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify(userData),
+            body: userData,
         });
 
         const data = await response.json();
@@ -55,18 +58,44 @@ const ForEmployersRegister = () => {
         }
     };
 
+    const handleCompanyImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setCompanyImage(reader.result); // Set the background image for preview
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleBackgroundImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setBackgroundImage(reader.result); // Set the background image for preview
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
-        <div className="bg-gradient-to-br from-blue-50 to-primary-color p-0 sm:p-6 rounded-xl shadow-lg flex items-center flex-col">
+        <div 
+            className="bg-gradient-to-br from-blue-50 to-primary-color p-0 sm:p-6 rounded-xl shadow-lg flex items-center flex-col"
+             
+        >
             <div className="flex items-center text-xl font-bold m-4 p-4">
                 <HiOutlineUserCircle className="mr-2 text-2xl" /> Employer Registration
             </div>
 
             <div className="bg-white w-full max-w-3xl p-8 md:p-12 rounded-lg border border-secondary-color shadow-md">
                 {warning && <div className="bg-red-500 text-white p-2 rounded mb-4 text-center">{warning}</div>}
-                <form onSubmit={handleRegistration} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className='col-start-1 col-end-2'>
-                    <ProfileImage personalInformation={companyProfile} SetPersonalInformation={setCompanyProfile} backgroundImage ={true}   />
-                    </div>
+                
+                <form onSubmit={handleRegistration} className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div className='col-span-full'></div>
+
+                    {/* Company Name Field */}
                     <div className="flex flex-col">
                         <label htmlFor="company_name" className="text-base font-bold mb-2">Company Name</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -84,6 +113,7 @@ const ForEmployersRegister = () => {
                         </div>
                     </div>
 
+                    {/* Company Type Field */}
                     <div className="flex flex-col">
                         <label htmlFor="company_type" className="text-base font-bold mb-2">Company Type</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -97,17 +127,14 @@ const ForEmployersRegister = () => {
                                 className="w-full border-none outline-none text-gray-900"
                             >
                                 <option value="">Select Type</option>
-                                {   
-                                jobCategories.map(category =>{
-                                    return <option value={category.id} key={category.id}> {category.category_name} </option>;
-                                })
-
-                                }
-                                
+                                {jobCategories.map(category => (
+                                    <option value={category.id} key={category.id}>{category.category_name}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
 
+                    {/* User Type Field */}
                     <div className="flex flex-col">
                         <label htmlFor="user_type" className="text-base font-bold mb-2">User Type</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -124,6 +151,7 @@ const ForEmployersRegister = () => {
                         </div>
                     </div>
 
+                    {/* Email Field */}
                     <div className="flex flex-col">
                         <label htmlFor="email" className="text-base font-bold mb-2">Email</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -141,6 +169,7 @@ const ForEmployersRegister = () => {
                         </div>
                     </div>
 
+                    {/* Password Field */}
                     <div className="flex flex-col">
                         <label htmlFor="password" className="text-base font-bold mb-2">Password</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -160,6 +189,7 @@ const ForEmployersRegister = () => {
                         </div>
                     </div>
 
+                    {/* Confirm Password Field */}
                     <div className="flex flex-col">
                         <label htmlFor="confirm_password" className="text-base font-bold mb-2">Confirm Password</label>
                         <div className="flex items-center border p-2 rounded-md">
@@ -179,33 +209,45 @@ const ForEmployersRegister = () => {
                         </div>
                     </div>
 
-                    <div className="md:col-span-2 text-sm mt-4">
-                        <p className="text-gray-900">
-                            By creating an account or logging in, you agree to the Job Portal's
-                            <Link href="/terms" className="text-blue-600"> Terms</Link>, and acknowledge our 
-                            <Link href="/cookie" className="text-blue-600"> Cookie</Link> and
-                            <Link href="/privacy" className="text-blue-600"> Privacy</Link> policies.
-                        </p>
-                        <div className="mt-4 flex items-center gap-2">
-                            <input type="checkbox" id="termscheck" required className="form-checkbox" />
-                            <label htmlFor="termscheck">I agree to the terms and conditions.</label>
-                        </div>
-                    </div>
-
-                    <div className="md:col-span-2 mt-6">
+                    {/* Company Image Upload */}
+                    <div className="flex flex-col">
+                        <label htmlFor="company_image" className="text-base font-bold mb-2">Upload Company Image</label>
                         <input
-                            type="submit"
-                            value="Sign Up"
-                            className="w-full py-3 bg-primary-color text-white rounded-md hover:bg-primary-dark transition-all cursor-pointer"
+                            type="file"
+                            name="company_image"
+                            id="company_image"
+                            accept="image/*"
+                            onChange={handleCompanyImageChange}
+                            className="p-2 rounded-md border border-gray-300"
                         />
                     </div>
-                </form>
 
-                <div className="text-center mt-4">
-                    <p className="text-gray-900">
-                        Already have an account? <Link href="/signin" className="text-blue-600">Login</Link>
-                    </p>
-                </div>
+                    {/* Background Image Upload */}
+                    <div className="flex flex-col">
+                        <label htmlFor="background_image" className="text-base font-bold mb-2">Upload Background Image</label>
+                        <input
+                            type="file"
+                            name="background_image"
+                            id="background_image"
+                            accept="image/*"
+                            onChange={handleBackgroundImageChange}
+                            className="p-2 rounded-md border border-gray-300"
+                        />
+                    </div>
+
+                    <div className="col-span-full">
+                        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                            Register
+                        </button>
+                    </div>
+
+                    <div className="flex justify-between mt-6">
+                        <Link href="/foremployers/signin" className="text-blue-600 hover:underline">Already have an account? Sign In</Link>
+                        <button type="button" className="flex items-center text-blue-600 hover:underline">
+                            <FcGoogle className="mr-2" /> Continue with Google
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );
