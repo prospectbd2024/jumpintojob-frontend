@@ -40,11 +40,17 @@ const ForEmployersLogin = () => {
     );
     const loginUserData = await loginData.json();
     if (loginData.ok) {
+      if (loginUserData.data.user_type!=="employer"){
+        setWarning("Please login as Employer!") 
+        setUserData(null)
+         return;
+      }
       console.log("Login Successful", loginUserData);
       setUserData(loginUserData);
       if (loginUserData.data.user.is_verified == false) {
         router.push("/foremployers/verify-email");
-      } else {
+      } 
+       else {
         router.push("/foremployers");
       }
     } else {
@@ -54,8 +60,7 @@ const ForEmployersLogin = () => {
 
   useEffect(() => {
     if (params.get("msg")) {
-      setMessage(params.get("msg"));
-      console.log(router.push(pathname));
+      setMessage(params.get("msg")); 
     }
   }, []);
 
@@ -70,9 +75,10 @@ const ForEmployersLogin = () => {
         </span>
       </div>
 
-      <MessageBox message={message} />
+     
 
       <div className="bg-white shadow-md border border-gray-200 rounded-lg p-8 md:p-12 max-w-md w-full">
+      <MessageBox message={message}  />
         <form onSubmit={handleLogin} className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-gray-700">
