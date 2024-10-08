@@ -134,6 +134,7 @@ const PersonalInformation = ({ props }) => {
         <HiUser className="mr-2 text-2xl" /> Personal Information
       </div>
       <ProfileImage personalInformation={personalInfo} SetPersonalInformation={setPersonalInfo} />
+      <h3 className="text-[14px] font-semibold sm:text-lg md:text-xl">personal details</h3>
       {renderContent()}
       <AddButton onClick={showModal} />
       {isModalOpen && (
