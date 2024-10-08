@@ -10,7 +10,7 @@ const JobListView = ({props}) => {
     let i = 0;
 
     return (
-        <div className="w-full md:w-[356px] md:ml-[40px] flex flex-col gap-4">
+        <div className="w-full md:w-[800px] md:ml-16 lg:w-[356px] lg:ml-[40px] flex flex-col gap-4">
             {/* Skeleton Loaders with fade-in and fade-out transitions */}
             <div className={`transition-opacity duration-300 ${Loading ? 'opacity-100' : 'opacity-0'}`}>
                 {Loading && (
@@ -24,11 +24,16 @@ const JobListView = ({props}) => {
             <div className={`transition-opacity duration-300 ${!Loading ? 'opacity-100' : 'opacity-0'}`}>
                 {filteredJobs && filteredJobs.length > 0 ? (
                     filteredJobs.map((job, index) => (
-                        <SingleJob index={++i} job={job} clickedJob={clickedJob} handleClickedJob={handleClickedJob}
-                                   key={job.id}/>
+                        <SingleJob 
+                            index={++i} 
+                            job={job} 
+                            clickedJob={clickedJob} 
+                            handleClickedJob={handleClickedJob}
+                            key={job.id}
+                        />
                     ))
                 ) : (
-                    <p>No jobs available</p>
+                    <p className="text-center py-4">No jobs available</p>
                 )}
             </div>
 

@@ -1,47 +1,92 @@
 "use client";
-import {HiOutlineBriefcase, HiOutlineLocationMarker} from 'react-icons/hi';
-import React from 'react';
 
-function SearchSection({handleFilteredJobs}) {
-    return (
-        <div className="container mx-auto px-4"> {/* Added responsive padding and centering */}
-            <div className="text-center mx-auto w-full md:w-4/5 lg:w-3/5"> {/* Adjust width for different screens */}
-                <form onSubmit={handleFilteredJobs}
-                      className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6"> {/* Column on small screens, row on larger */}
-                    {/* Job title input */}
-                    <div
-                        className="flex items-center gap-3 lg:gap-5 border border-gray-300 p-2 rounded w-full lg:w-auto"> {/* Full width on small screens */}
-                        <HiOutlineBriefcase className="text-primary"/>
-                        <input
-                            type="text"
-                            name="jobTitle"
-                            placeholder="Job title or keywords"
-                            className="w-full lg:w-72 h-10 border-none outline-none text-sm"
-                        />
-                    </div>
+import React, { useState, useEffect, useRef } from 'react';
+import { HiOutlineBriefcase, HiOutlineLocationMarker, HiSearch } from 'react-icons/hi';
 
-                    {/* Location input */}
-                    <div
-                        className="flex items-center gap-3 lg:gap-5 border border-gray-300 p-2 rounded w-full lg:w-auto"> {/* Full width on small screens */}
-                        <HiOutlineLocationMarker className="text-primary"/>
-                        <input
-                            type="text"
-                            name="jobLocation"
-                            placeholder="Location"
-                            className="w-full lg:w-72 h-10 border-none outline-none text-sm"
-                        />
-                    </div>
+const SearchSection = ({ handleFilteredJobs }) => {
+  const [isCompact, setIsCompact] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const searchRef = useRef(null);
 
-                    {/* Submit button */}
-                    <input
-                        type="submit"
-                        value="Search"
-                        className="w-full lg:w-28 h-10 border-none bg-primary-color px-4 text-white text-sm font-bold rounded cursor-pointer transition-transform transform hover:scale-105"
-                    />
-                </form>
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsCompact(scrollPosition > 50);
+    };
+
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsExpanded(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleFocus = () => {
+    setIsExpanded(true);
+  };
+
+  const isLarge = !isCompact || isExpanded;
+
+  return (
+    <div 
+      ref={searchRef}
+      className={`fixed left-0 right-0 bg-white shadow-md transition-all duration-300 ease-in-out ${
+        isLarge ? 'py-4' : 'py-2'
+      }`}
+      style={{
+        top: isCompact ? '0' : 'var(--header-height, 64px)',
+        zIndex: 1000,
+      }}
+    >
+      <div className={`container mx-auto px-4 ${isLarge ? 'max-w-5xl' : 'max-w-3xl'}`}>
+        <form onSubmit={handleFilteredJobs} className={`flex items-center bg-white border border-gray-300 rounded-full overflow-hidden transition-all duration-300 ${isLarge ? 'h-16' : 'h-12'}`}>
+          <div className="flex-grow flex items-center space-x-4 px-6">
+            <div className={`flex items-center space-x-2 ${isLarge ? 'text-base' : 'text-sm'}`}>
+              <HiOutlineBriefcase className="text-primary" />
+              <input
+                type="text"
+                name="jobTitle"
+                placeholder="Job title or keywords"
+                className="w-full bg-transparent focus:outline-none"
+                onFocus={handleFocus}
+              />
             </div>
-        </div>
-    );
-}
+            <div className="h-6 w-px bg-gray-300"></div>
+            <div className={`flex items-center space-x-2 ${isLarge ? 'text-base' : 'text-sm'}`}>
+              <HiOutlineLocationMarker className="text-primary" />
+              <input
+                type="text"
+                name="jobLocation"
+                placeholder="Location"
+                className="w-full bg-transparent focus:outline-none"
+                onFocus={handleFocus}
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className={`flex items-center justify-center bg-primary-color text-white rounded-full transition-all duration-300 hover:scale-105 ${
+              isLarge ? 'w-28 h-12 mr-2' : 'w-10 h-10 mr-1'
+            }`}
+          >
+            {isLarge ? (
+              <span className="font-bold">Search</span>
+            ) : (
+              <HiSearch className="text-lg" />
+            )}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default SearchSection;
