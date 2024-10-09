@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import Cropper from 'react-easy-crop';
 
-function ProfileImage({ personalInformation, SetPersonalInformation }) {
+function ProfileImage({ personalInformation, SetPersonalInformation ,backgroundImage }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -130,7 +130,7 @@ function ProfileImage({ personalInformation, SetPersonalInformation }) {
           </div>
         </div>
       )}
-      <h3 className="text-[14px] font-semibold sm:text-lg md:text-xl">personal details</h3>
+      
     </div>
   );
 }

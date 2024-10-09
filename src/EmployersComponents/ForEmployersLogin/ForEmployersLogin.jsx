@@ -157,7 +157,7 @@ const ForEmployersLogin = () => {
           <div className="text-center mt-4">
             <p className="text-gray-700">
               Don't have an account?{" "}
-              <Link href="/register" className="text-blue-600">
+              <Link href="/foremployers/register" className="text-blue-600">
                 Register
               </Link>
             </p>
