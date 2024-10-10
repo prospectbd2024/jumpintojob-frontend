@@ -11,8 +11,31 @@ function ApplicationContext({ children }) {
   const [forwardingLetter, setForwardingLetter] = useState({ type: 'text', value: null });
   const [appliedJobs, setAppliedJobs] = useState([]);
   const {availability} = useUserProfileContext();
-
+  const [resume,setResume] = useState(null)
   const { userData } = useUserContext();
+
+  // Function to fetch CV from backend
+  const getResume = async () => {
+    try {
+      const bearerToken = userData.data.access_token;
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/cv`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch CV");
+      }
+
+      const data = await response.json();
+      setResume(data.data); // Assuming CV data is stored in 'data.data'
+    } catch (error) {
+      console.error("There was a problem fetching the CV:", error);
+    }
+  };
   const apply = async (job, cv) => {
     try {
       const formData = new FormData();
@@ -87,13 +110,18 @@ function ApplicationContext({ children }) {
       console.error("There has been a problem with your fetch operation:", error);
     }
   };
+  const handleApplyJob = (job) => {
+    guestProtection(() => {
+        window.open(`/applyjob/${job.id}`, '_blank');
+    });
+};
  
-  useEffect(()=>{
-    if( userData){
-
+  useEffect(() => {
+    if (userData) {
       getAppliedJobs();
+      getResume(); // Fetch CV when userData is available
     }
-  },[])
+  }, [userData]);
   const isApplied =(job_id)=>{
     let flag = false;
     appliedJobs.map(el=>{
@@ -106,7 +134,7 @@ function ApplicationContext({ children }) {
 
   return (
     <applicationContext.Provider
-      value={{ apply, message, setMessage, forwardingLetter, setForwardingLetter,appliedJobs,isApplied }}>
+      value={{ apply, message, setMessage, forwardingLetter, setForwardingLetter,appliedJobs,isApplied,resume,setResume,handleApplyJob}}>
       {children}
     </applicationContext.Provider>
   );

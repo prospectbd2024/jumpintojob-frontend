@@ -11,7 +11,7 @@ export const useResumeContext = () => useContext(resumeContext);
 
 function ResumeContext({ children }) {
 
-
+  const { template } = useUserProfileContext();
 
   const { 
     personalInformation, SetPersonalInformation, 
@@ -60,7 +60,17 @@ function ResumeContext({ children }) {
   }, []); // Empty dependency array means this effect runs once after the initial render
   const saveCV = async () => {
     saveProfile() 
+    let html =await generateTemplate(template,'html',{})
     
+    console.log(
+      JSON.stringify({
+        cv_html: html.template,
+        profile_data : userProfileData,
+        applicant_status : availability
+      })
+    );
+    
+
     try {
       let bearerToken = userData.data.access_token;
       const response = await fetch(
@@ -73,7 +83,7 @@ function ResumeContext({ children }) {
             "Authorization": `Bearer ${bearerToken}`,
           },
           body: JSON.stringify({
-            cv_html: htmlTemplate,
+            cv_html: html,
             profile_data : userProfileData,
             applicant_status : availability
           }),

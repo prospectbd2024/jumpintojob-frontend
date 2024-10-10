@@ -19,7 +19,7 @@ const ApplyJob = ({ job }) => {
   const { personalInformation } = useUserProfileContext();
   const [CV, setCV] = useState(false);
   const { userData } = useUserContext();
-  const { apply, message, forwardingLetter, setForwardingLetter } =
+  const { apply, message, forwardingLetter, setForwardingLetter,resume,setResume } =
     useApplicationContext();
   const [phone, setPhone] = useState("");
   const [isClient, setIsClient] = useState(false);
@@ -35,7 +35,9 @@ const ApplyJob = ({ job }) => {
 
   const handleClick = () => {
     if (userData) {
-      CV && job && apply(job, CV);
+      // CV && job && apply(job, CV);
+      console.log(CV,job);
+      
     } else {
       Swal.fire({
         title: "Login Required",
@@ -207,7 +209,7 @@ const ApplyJob = ({ job }) => {
           <h3 className="text-xl font-semibold mb-4">Resume</h3>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Upload or create your resume
+              Upload or {resume?"update":"create"} your resume
             </label>
             <div className="mt-2 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
               <input
@@ -222,7 +224,7 @@ const ApplyJob = ({ job }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <h3 className="text-sm">Create Resume</h3>
+                <h3 className="text-sm">{resume?"Update":"Create"} Resume</h3>
               </Link>
             </div>
           </div>
@@ -289,7 +291,7 @@ const ApplyJob = ({ job }) => {
         <div className="flex justify-end">
           <button
             onClick={handleClick}
-            disabled={!CV || !job}
+            disabled={(!CV && !resume) || !job }
             className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
               !CV || !job ? "opacity-50 cursor-not-allowed" : ""
             }`}
