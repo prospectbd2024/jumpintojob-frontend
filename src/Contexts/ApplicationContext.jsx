@@ -12,8 +12,8 @@ function ApplicationContext({ children }) {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const {availability} = useUserProfileContext();
   const [resume,setResume] = useState(null)
-  const { userData } = useUserContext();
-
+  const { userData,guestProtection } = useUserContext();
+  
   // Function to fetch CV from backend
   const getResume = async () => {
     try {
