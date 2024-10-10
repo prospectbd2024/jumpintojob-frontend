@@ -17,9 +17,8 @@ import Link from "next/link";
 
 const ApplyJob = ({ job }) => {
   const { personalInformation } = useUserProfileContext();
-  const [CV, setCV] = useState(false);
   const { userData } = useUserContext();
-  const { apply, message, forwardingLetter, setForwardingLetter,resume,setResume } =
+  const { apply, message, forwardingLetter, setForwardingLetter,resume ,CV, setCV} =
     useApplicationContext();
   const [phone, setPhone] = useState("");
   const [isClient, setIsClient] = useState(false);
@@ -35,8 +34,7 @@ const ApplyJob = ({ job }) => {
 
   const handleClick = () => {
     if (userData) {
-      // CV && job && apply(job, CV);
-      console.log(CV,job);
+      apply(job, CV,resume); 
       
     } else {
       Swal.fire({
@@ -209,7 +207,7 @@ const ApplyJob = ({ job }) => {
           <h3 className="text-xl font-semibold mb-4">Resume</h3>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Upload or {resume?"update":"create"} your resume
+              Upload or {resume?"update":"create"} your resume {resume && "(Optional)"}
             </label>
             <div className="mt-2 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
               <input
@@ -293,7 +291,7 @@ const ApplyJob = ({ job }) => {
             onClick={handleClick}
             disabled={(!CV && !resume) || !job }
             className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 ${
-              !CV || !job ? "opacity-50 cursor-not-allowed" : ""
+              (!CV && !resume)  || !job ? "opacity-50 cursor-not-allowed" : ""
             }`}
             type="button"
           >

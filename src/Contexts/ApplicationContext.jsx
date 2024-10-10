@@ -8,17 +8,22 @@ export const useApplicationContext = () => useContext(applicationContext);
 
 function ApplicationContext({ children }) {
   const [message, setMessage] = useState(false);
-  const [forwardingLetter, setForwardingLetter] = useState({ type: 'text', value: null });
+  const [forwardingLetter, setForwardingLetter] = useState({ type: "text", value: null });
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const {availability} = useUserProfileContext();
-  const [resume,setResume] = useState(null)
-  const { userData,guestProtection } = useUserContext();
-  
+  const { availability } = useUserProfileContext();
+  const [resume, setResume] = useState(null);
+
+  const [CV, setCV] = useState(false);
+  const { userData, guestProtection } = useUserContext();
+
   // Function to fetch CV from backend
   const getResume = async () => {
     try {
       const bearerToken = userData.data.access_token;
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/cv`, {
+      console.log(userData);
+
+      const userId = userData.data.user.user_id;
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/cv/${userId}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -36,14 +41,23 @@ function ApplicationContext({ children }) {
       console.error("There was a problem fetching the CV:", error);
     }
   };
-  const apply = async (job, cv) => {
+  const apply = async (job, cv, resume) => { 
+
     try {
       const formData = new FormData();
-      formData.append('job_id', job.id);
-      formData.append('cv_id', cv.cv_id);
-      formData.append('forwarding_letter_type', forwardingLetter.type);
-      formData.append('forwarding_letter', forwardingLetter.value);
-      formData.append('applicant_status', availability);
+      formData.append("job_id", job.id);
+      if (cv) {
+        formData.append("cv_file", cv);
+      }
+      if (resume) {
+        console.log(resume);
+        
+        formData.append("cv_id", resume.cv_id);
+      }
+
+      formData.append("forwarding_letter_type", forwardingLetter.type);
+      formData.append("forwarding_letter", forwardingLetter.value);
+      formData.append("applicant_status", availability);
 
       const bearerToken = userData.data.access_token;
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/applications/apply-for-job`, {
@@ -64,7 +78,7 @@ function ApplicationContext({ children }) {
         type: "success",
         message: "Applied successfully!",
       });
-      getAppliedJobs()
+      getAppliedJobs();
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -88,9 +102,8 @@ function ApplicationContext({ children }) {
     }
   };
 
-  const getAppliedJobs = async( )=>{
+  const getAppliedJobs = async () => {
     try {
- 
       const bearerToken = userData?.data?.access_token;
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/applications/${userData?.data?.user.user_id}`, {
         method: "GET",
@@ -112,29 +125,42 @@ function ApplicationContext({ children }) {
   };
   const handleApplyJob = (job) => {
     guestProtection(() => {
-        window.open(`/applyjob/${job.id}`, '_blank');
+      window.open(`/applyjob/${job.id}`, "_blank");
     });
-};
- 
+  };
+
   useEffect(() => {
     if (userData) {
       getAppliedJobs();
       getResume(); // Fetch CV when userData is available
     }
   }, [userData]);
-  const isApplied =(job_id)=>{
+  const isApplied = (job_id) => {
     let flag = false;
-    appliedJobs.map(el=>{
-      if(el.job_id==job_id){
-        flag = true
+    appliedJobs.map((el) => {
+      if (el.job_id == job_id) {
+        flag = true;
       }
-    })
-    return flag
-  }
+    });
+    return flag;
+  };
 
   return (
     <applicationContext.Provider
-      value={{ apply, message, setMessage, forwardingLetter, setForwardingLetter,appliedJobs,isApplied,resume,setResume,handleApplyJob}}>
+      value={{
+        apply,
+        message,
+        setMessage,
+        forwardingLetter,
+        setForwardingLetter,
+        appliedJobs,
+        isApplied,
+        resume,
+        setResume,
+        handleApplyJob,
+        CV,
+        setCV,
+      }}>
       {children}
     </applicationContext.Provider>
   );

@@ -61,15 +61,7 @@ function ResumeContext({ children }) {
   const saveCV = async () => {
     saveProfile() 
     let html =await generateTemplate(template,'html',{})
-    
-    console.log(
-      JSON.stringify({
-        cv_html: html.template,
-        profile_data : userProfileData,
-        applicant_status : availability
-      })
-    );
-    
+ 
 
     try {
       let bearerToken = userData.data.access_token;
@@ -83,7 +75,7 @@ function ResumeContext({ children }) {
             "Authorization": `Bearer ${bearerToken}`,
           },
           body: JSON.stringify({
-            cv_html: html,
+            cv_html: html.template,
             profile_data : userProfileData,
             applicant_status : availability
           }),
