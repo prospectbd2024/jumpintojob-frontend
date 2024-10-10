@@ -6,7 +6,7 @@ import {useApplicationContext} from "@/Contexts/ApplicationContext";
 import {useUserContext} from "@/Contexts/UserContext";
 
 const MobileJobDetailsModal = ({job, toggleModal}) => {
-    const {isApplied} = useApplicationContext();
+    const {isApplied,handleApplyJob} = useApplicationContext();
     const {guestProtection} = useUserContext();
     const [startY, setStartY] = useState(0);
     const [translateY, setTranslateY] = useState(0);
@@ -40,11 +40,7 @@ const MobileJobDetailsModal = ({job, toggleModal}) => {
         setTranslateY(0);
     };
 
-    const handleApplyJob = () => {
-        guestProtection(() => {
-            window.open(`/applyjob/${job.id}`, '_blank');
-        });
-    };
+    
 
     return (
         <div

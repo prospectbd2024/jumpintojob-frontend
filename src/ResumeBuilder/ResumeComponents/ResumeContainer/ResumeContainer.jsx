@@ -41,6 +41,7 @@ const ResumeContainer = () => {
                 </button>
                 </div>
               <DownloadAsButton />
+              <div className="px-6 py-2 border rounded-md border-blue-500 text-blue-500 cursor-pointer" onClick={saveCV}>Save</div> 
               </>
             ) : (
               <PrevNextButton props={{ setCurrentStep, currentStep }} />
