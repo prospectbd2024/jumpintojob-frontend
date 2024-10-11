@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import Cropper from 'react-easy-crop';
 
-function ProfileImage({ personalInformation, SetPersonalInformation ,backgroundImage }) {
+function ProfileImage({ personalInformation, SetPersonalInformation  }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);

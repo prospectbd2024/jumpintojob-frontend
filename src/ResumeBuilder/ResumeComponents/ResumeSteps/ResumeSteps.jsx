@@ -2,10 +2,7 @@ import React from 'react';
 import { useResumeContext } from '@/Contexts/ResumeContext';
 
 const ResumeSteps = () => {
-    const changeStep = (step) => {
-        setCurrentStep(step);
-    };
-
+ 
     const { currentStep, setCurrentStep } = useResumeContext();
     return (
         <div className='mt-16'>
@@ -14,9 +11,7 @@ const ResumeSteps = () => {
                     {["TEMPLATE", "HEADER", "EDUCATION", "EXPERIENCE", "SKILLS", "FINALIZE", "Preview"].map((stepName, index) => (
                         <div
                             key={index}
-                            className={`relative ${currentStep >= index + 1 ? 'active-step' : ''}`}
-                            onClick={() => changeStep(index + 1)}
-                        >
+                            className={`relative ${currentStep >= index + 1 ? 'active-step' : ''}`} >
                             <div className='flex flex-col items-center'>
                                 <h5 className={`cursor-pointer text-xs w-6 h-6 rounded-full flex items-center justify-center mb-2 ${currentStep >= index + 1 ? 'bg-primary-color text-white' : 'border border-primary-color text-primary-color bg-white'}`}>
                                     {index + 1}
