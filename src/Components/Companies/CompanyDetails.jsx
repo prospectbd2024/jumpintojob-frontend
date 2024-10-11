@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, MapPinIcon, GlobeAltIcon, UsersIcon, BriefcaseIcon, TrendingUpIcon } from 'lucide-react';
 import CompanyCoverImage from "./CompanyCoverImage";
