@@ -68,14 +68,12 @@ function Page() {
                 "Authorization": `Bearer ${bearerToken}`
             }
         })
-        .then((resp) => {
-            if (!resp.ok) {
-                throw new Error(`HTTP error! status: ${resp.status}`);
-            }
-            return resp.json();
-        })
+        .then((resp) => resp.json())
         .then((data) => {
             console.log("Fetched company data:", data);
+            if (data.success === false) {
+                throw new Error(data.message || 'Failed to fetch company data');
+            }
             setCompany(data.data);
             setIsLoading(false);
         })
@@ -88,14 +86,12 @@ function Page() {
 
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies/${slug}/circulars`)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 console.log("Fetched jobs data:", data);
+                if (data.success === false) {
+                    throw new Error(data.message || 'Failed to fetch jobs data');
+                }
                 let jobs = data.data;
                 setAllJobs(jobs);
                 setJob(jobs.length > 0 ? jobs[0] : null);
