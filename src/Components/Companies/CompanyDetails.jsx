@@ -1,4 +1,3 @@
-'use client'
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, MapPinIcon, GlobeAltIcon, UsersIcon, BriefcaseIcon, TrendingUpIcon } from 'lucide-react';
 import CompanyCoverImage from "./CompanyCoverImage";
@@ -15,30 +14,30 @@ const CompanyDetails = ({ company }) => {
 
   if (isLoading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-100 mb-5">
+      <div className="w-full h-64 flex items-center justify-center bg-gray-100 mb-5">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="w-full bg-gray-50 min-h-screen mb-5">
-      <div className="relative w-full h-[60vh] bg-gradient-to-r from-blue-600 to-purple-600">
+    <div className="w-full bg-gray-50 mb-5">
+      <div className="relative w-full h-[40vh] bg-gradient-to-r from-blue-600 to-purple-600">
         <CompanyCoverImage company={company} className="w-full h-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
       </div>
       
-      <div className="max-w-5xl mx-auto -mt-32 relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto -mt-24 relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">
           <div className="p-8 sm:p-12">
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-6 sm:space-y-0 sm:space-x-8 mb-8">
               <img
                 src={company.logo || "/api/placeholder/180/180"}
                 alt={`${company.name} logo`}
-                className="w-40 h-40 rounded-2xl border-4 border-white shadow-lg object-cover"
+                className="w-32 h-32 rounded-2xl border-4 border-white shadow-lg object-cover"
               />
               <div className="text-center sm:text-left">
-                <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">{company.name}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{company.name}</h1>
                 <p className="text-emerald-600 font-semibold flex items-center justify-center sm:justify-start">
                   <TrendingUpIcon className="w-5 h-5 mr-2" />
                   Verified Profile

@@ -66,7 +66,11 @@ function Page() {
         .then((resp) => resp.json())
         .then((data) => {
             let company = data.data;
+            console.log("Fetched company data:", company); // Add this log
             setCompany(company);
+        })
+        .catch(error => {
+            console.error("Error fetching company data:", error); // Add error logging
         });
     }, [slug, userData]);
 
