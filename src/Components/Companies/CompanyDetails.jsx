@@ -5,17 +5,40 @@ import CompanyCoverImage from "./CompanyCoverImage";
 const CompanyDetails = ({ company }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [showMore, setShowMore] = useState(false);
+  const [debug, setDebug] = useState('');
 
   useEffect(() => {
+    console.log("CompanyDetails received company:", company);
+    setDebug(JSON.stringify(company, null, 2));
+
     if (company && Object.keys(company).length > 0) {
       setIsLoading(false);
+    } else {
+      setIsLoading(true);
     }
   }, [company]);
 
   if (isLoading) {
     return (
-      <div className="w-full h-64 flex items-center justify-center bg-gray-100 mb-5">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+      <div className="w-full h-64 flex flex-col items-center justify-center bg-gray-100 mb-5">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 mb-4"></div>
+        <p>Loading company details...</p>
+        <details className="mt-4 text-sm text-gray-600">
+          <summary>Debug Info</summary>
+          <pre className="mt-2 p-2 bg-gray-200 rounded">{debug}</pre>
+        </details>
+      </div>
+    );
+  }
+
+  if (!company || Object.keys(company).length === 0) {
+    return (
+      <div className="w-full h-64 flex flex-col items-center justify-center bg-gray-100 mb-5">
+        <p className="text-red-500">Error: Company data is missing or empty</p>
+        <details className="mt-4 text-sm text-gray-600">
+          <summary>Debug Info</summary>
+          <pre className="mt-2 p-2 bg-gray-200 rounded">{debug}</pre>
+        </details>
       </div>
     );
   }

@@ -10,7 +10,9 @@ import { useApplicationContext } from "@/Contexts/ApplicationContext";
 
 function Page() {
     const { slug } = useParams();
-    const [company, setCompany] = useState({});
+    const [company, setCompany] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { userData, guestProtection } = useUserContext();
     const { isApplied } = useApplicationContext();
     const [allJobs, setAllJobs] = useState([]);
@@ -19,7 +21,8 @@ function Page() {
     const [isMediumScreen, setIsMediumScreen] = useState(false);
     const [showMobileModal, setShowMobileModal] = useState(false);
 
-    let bearerToken = '';
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+    console.log("Slug:", slug);
 
     const handleClickedJob = useCallback((id) => {
         setClickedJob(id);
@@ -54,7 +57,9 @@ function Page() {
     }, []);
 
     useEffect(() => {
-        bearerToken = userData?.data?.access_token;
+        setIsLoading(true);
+        setError(null);
+        const bearerToken = userData?.data?.access_token;
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/show/${slug}`, {
             method: "GET",
             headers: {
@@ -63,29 +68,50 @@ function Page() {
                 "Authorization": `Bearer ${bearerToken}`
             }
         })
-        .then((resp) => resp.json())
+        .then((resp) => {
+            if (!resp.ok) {
+                throw new Error(`HTTP error! status: ${resp.status}`);
+            }
+            return resp.json();
+        })
         .then((data) => {
-            let company = data.data;
-            console.log("Fetched company data:", company); // Add this log
-            setCompany(company);
+            console.log("Fetched company data:", data);
+            setCompany(data.data);
+            setIsLoading(false);
         })
         .catch(error => {
-            console.error("Error fetching company data:", error); // Add error logging
+            console.error("Error fetching company data:", error);
+            setError(error.message);
+            setIsLoading(false);
         });
     }, [slug, userData]);
 
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies/${slug}/circulars`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
+                console.log("Fetched jobs data:", data);
                 let jobs = data.data;
                 setAllJobs(jobs);
                 setJob(jobs.length > 0 ? jobs[0] : null);
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching jobs data:', error);
             });
     }, [slug]);
+
+    if (isLoading) {
+        return <div className="w-full h-screen flex items-center justify-center">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="w-full h-screen flex items-center justify-center text-red-500">Error: {error}</div>;
+    }
 
     return (
         <div>
