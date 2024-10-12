@@ -4,7 +4,6 @@ import {useJobContext} from '@/Contexts/JobContext';
 import {useUserContext} from '@/Contexts/UserContext';
 import {HiOutlineBookmark} from 'react-icons/hi';
 import MobileJobDetailsModal from "@/Components/JobDetails/MobileJobDetailsModal";
-import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 
 const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
     const {guestProtection} = useUserContext();
@@ -69,10 +68,13 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
 
             {/* Conditionally render the MobileModal */}
             {showModal && (
+                <div className=' mt-10'>
+
                 <MobileJobDetailsModal
                     job={job}
                     toggleModal={toggleModal}
-                />
+                    />
+                    </div>
             )}
         </>
     );

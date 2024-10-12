@@ -38,15 +38,25 @@ const SearchSection = ({ handleFilteredJobs }) => {
   return (
     <div 
       ref={searchRef}
-      className={`fixed left-0 right-0 bg-white shadow-md transition-all duration-300 ease-in-out ${
-        isLarge ? 'py-4' : 'py-2'
+      className={`fixed left-0 right-0 bg-white shadow-md transition-all duration-500 ease-in-out ${
+        isLarge ? 'py-4' : 'py-3'
       }`}
       style={{
-        top: isCompact ? '0' : 'var(--header-height, 64px)',
+        top: 'var(--header-height, 50px)',
         zIndex: 1000,
       }}
     >
-      <div className={`container mx-auto px-4 ${isLarge ? 'max-w-5xl' : 'max-w-3xl'}`}>
+      <style jsx>{`
+        @media (max-width: 1200px) {
+          div {
+            top: 0 !important;
+          }
+          :global(header) {
+            display: none;
+          }
+        }
+      `}</style>
+      <div className={`container mx-auto px-5 ${isLarge ? 'max-w-6xl duration-1000' : 'max-w-2xl duration-1000'}`}>
         <form onSubmit={handleFilteredJobs} className={`flex items-center bg-white border border-gray-300 rounded-full overflow-hidden transition-all duration-300 ${isLarge ? 'h-16' : 'h-12'}`}>
           <div className="flex-grow flex items-center space-x-4 px-6">
             <div className={`flex items-center space-x-2 ${isLarge ? 'text-base' : 'text-sm'}`}>

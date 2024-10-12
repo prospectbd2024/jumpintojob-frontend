@@ -117,7 +117,7 @@ const Header = () => {
   return (
     <>
       {isClient && (
-        <div className="bg-white border-b border-gray-400 sticky top-0 left-0 z-50">
+        <div className="bg-white shadow-sm sticky top-0 left-0 z-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center cursor-pointer">

@@ -57,7 +57,7 @@ const MobileJobDetailsModal = ({job, toggleModal}) => {
         >
             <div
                 ref={modalRef}
-                className="w-full h-[90vh] mb-5 bg-white rounded-t-lg shadow-lg transition-transform transform duration-300 ease-in-out translate-y-full"
+                className="w-full h-[80vh] mb-5 bg-white rounded-t-lg shadow-lg transition-transform transform duration-300 ease-in-out translate-y-full"
                 style={{transform: `translateY(${Math.min(translateY, 0)}px)`}}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}

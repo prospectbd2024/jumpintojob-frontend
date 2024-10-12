@@ -1,10 +1,10 @@
 "use client";
-import React, {useCallback, useEffect, useState} from 'react';
-import {useJobContext} from '@/Contexts/JobContext';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useJobContext } from '@/Contexts/JobContext';
 import SearchSection from './SearchSection';
 import JobListView from './JobListView';
 
-const AllJobs = ({children}) => {
+const AllJobs = ({ children }) => {
     const {
         allJobs, clickedJob,
         setAllJobs, handleClickedJob,
@@ -14,7 +14,6 @@ const AllJobs = ({children}) => {
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
-    // const [loadingMore, setLoadingMore] = useState(false); // To track loading state
 
     useEffect(() => {
         setFilteredJobs(allJobs);
@@ -28,14 +27,12 @@ const AllJobs = ({children}) => {
                 && !NewJobLoadingFlag
             ) {
                 getNewJobsAndReplace(jobPage.currentPage + 1);
-                // console.log('Loading more jobs...');
             }
         };
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [jobPage.currentPage, getNewJobsAndReplace]);
-
 
     const handleFilteredJobs = useCallback((event) => {
         event.preventDefault();
@@ -56,35 +53,25 @@ const AllJobs = ({children}) => {
 
     return (
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8 py-8">
-            <div className="shadow-md py-2.5 lg:py-4 border-b border-gray-300">
+            <div className="mb-20">
                 <SearchSection handleFilteredJobs={handleFilteredJobs}/>
             </div>
 
             {/* Main Content Section */}
-            <div className="border-t border-gray-300 pt-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
-                    {/* Job List View */}
-                    <div className="md:col-span-1 flex justify-center">
-                        <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
-                    </div>
-
-                    {/* Children Content */}
-                    <div className="hidden md:block md:col-span-2">
-                        <div className="sticky top-14 md:top-20">
-                            <div
-                                className="w-full sm:max-w-screen-lg md:w-[460px] md:ml-[30px] lg:w-[1200px] lg:max-w-screen-2xl lg:ml-0 mx-auto bg-white shadow-lg rounded-lg border border-gray-200"
->
-                                {children}
-                            </div>
+            <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-1/2 xl:w-1/3 mb-6 lg:mb-0 mt-4">
+                    <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
+                </div>
+                <div className="hidden lg:block lg:w-1/2 xl:w-2/3">
+                    <div className="sticky">
+                        <div className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 mt-4">
+                            {children}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 
 export default AllJobs;
-
-
