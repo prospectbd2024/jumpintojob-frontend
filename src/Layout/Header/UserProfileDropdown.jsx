@@ -41,7 +41,7 @@ const UserProfileDropdown = ({
             </div>
             <div className="flex flex-col gap-2 mb-4">
               <UserProfileLink href="/userprofile/aboutme" icon={<FaUserTie />} label="Profile" />
-              <UserProfileLink href="#" icon={<FaFileAlt />} label="Resume Build" />
+              <UserProfileLink href="/resumebuilder" icon={<FaFileAlt />} label="Resume Build" />
               <UserProfileLink href="#" icon={<HiBriefcase />} label="My Jobs" />
               <UserProfileLink href="#" icon={<HiCog />} label="Settings" />
               <UserProfileLink href="#" icon={<HiQuestionMarkCircle />} label="Help Center" />

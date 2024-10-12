@@ -97,6 +97,7 @@ const PersonalInformation = ({ props }) => {
 
   const renderContent = () => {
     const fields = [
+
       renderField("First Name", personalInfo.firstName),
       renderField("Last Name", personalInfo.lastName),
       renderField("Email", personalInfo.email),
@@ -108,7 +109,7 @@ const PersonalInformation = ({ props }) => {
       !personalInfo.permanentAddressSameAsCurrent && renderAddress("permanentAddress"),
       renderField("Career Summary", personalInfo.careerSummary),
       renderSocialMedia()
-    ].filter(Boolean);
+    ] ;
 
     if (fields.length === 0) {
       return (
