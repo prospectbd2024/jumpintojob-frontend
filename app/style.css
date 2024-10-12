@@ -1,0 +1,17 @@
+/* Target the input field inside PhoneInput */
+ .PhoneInputInput {
+  /* Add your custom styles here */
+  padding: 10px;
+  border: 2px solid #4A90E2; /* Example: blue border */
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Optional: Add focus state styles */
+.PhoneInputInput:focus {
+  outline: none;
+  border-color: #0066cc; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 102, 204, 0.5); /* Add a shadow */
+}

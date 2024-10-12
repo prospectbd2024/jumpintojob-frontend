@@ -179,7 +179,7 @@ const ApplyJob = ({ job }) => {
                 defaultCountry="BD"
                 value={phone}
                 onChange={setPhone}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-md focus:outline-none"
               />
             </div>
             <div>

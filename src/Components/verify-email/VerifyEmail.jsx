@@ -51,8 +51,7 @@ const VerifyEmail = ({ redirect }) => {
     }
   }
 
-  const handleVerification = async () => {
-    console.log(userData);
+  const handleVerification = async () => { 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/confirm_code`, {
         method: 'POST',

@@ -19,8 +19,7 @@ function ApplicationContext({ children }) {
   // Function to fetch CV from backend
   const getResume = async () => {
     try {
-      const bearerToken = userData.data.access_token;
-      console.log(userData);
+      const bearerToken = userData.data.access_token; 
 
       const userId = userData.data.user.user_id;
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/cv/${userId}`, {
@@ -49,11 +48,7 @@ function ApplicationContext({ children }) {
       if (cv) {
         formData.append("cv_file", cv);
       }
-      if (resume) {
-        console.log(resume);
-        
-        formData.append("cv_id", resume.cv_id);
-      }
+       
 
       formData.append("forwarding_letter_type", forwardingLetter.type);
       formData.append("forwarding_letter", forwardingLetter.value);
