@@ -21,8 +21,7 @@ function Page() {
     const [isMediumScreen, setIsMediumScreen] = useState(false);
     const [showMobileModal, setShowMobileModal] = useState(false);
 
-    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-    console.log("Slug:", slug);
+     
 
     const handleClickedJob = useCallback((id) => {
         setClickedJob(id);
@@ -69,8 +68,7 @@ function Page() {
             }
         })
         .then((resp) => resp.json())
-        .then((data) => {
-            console.log("Fetched company data:", data);
+        .then((data) => { 
             if (data.success === false) {
                 throw new Error(data.message || 'Failed to fetch company data');
             }
@@ -87,8 +85,7 @@ function Page() {
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies/${slug}/circulars`)
             .then(res => res.json())
-            .then(data => {
-                console.log("Fetched jobs data:", data);
+            .then(data => { 
                 if (data.success === false) {
                     throw new Error(data.message || 'Failed to fetch jobs data');
                 }

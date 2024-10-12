@@ -4,6 +4,7 @@ import "@/EmployersComponents/ForEmployersHome/ForEmployersLiveData/ForEmployers
 import "@/EmployersComponents/ForEmployersPostJob/ForEmployersPostJob.css"; 
 import { UserProvider } from "@/Contexts/UserContext";
 import "./variables.css";
+import "./style.css";
 import JobContext from "@/Contexts/JobContext";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
