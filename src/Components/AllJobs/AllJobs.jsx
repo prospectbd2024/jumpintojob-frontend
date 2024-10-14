@@ -62,9 +62,9 @@ const AllJobs = ({ children }) => {
                 <div className="w-full lg:w-1/2 xl:w-1/3 mb-6 lg:mb-0 mt-4">
                     <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
                 </div>
-                <div className="hidden lg:block lg:w-1/2 xl:w-2/3">
-                    <div className="sticky">
-                        <div className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 mt-4">
+                <div className="hidden lg:block lg:w-1/2 xl:w-2/3 relative">
+                    <div className="sticky top-4" style={{ height: 'calc(100vh - 2rem)' }}>
+                        <div className="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 mt-4 overflow-y-auto" style={{ maxHeight: '100%' }}>
                             {children}
                         </div>
                     </div>
