@@ -40,6 +40,7 @@ const Login = () => {
       email: userEmail,
       password: userPassword,
       remember_me: rememberUser,
+      userType : "job_seeker"
     };
 
     const loginData = await fetch(
