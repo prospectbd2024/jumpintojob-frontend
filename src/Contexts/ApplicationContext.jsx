@@ -8,7 +8,7 @@ export const useApplicationContext = () => useContext(applicationContext);
 
 function ApplicationContext({ children }) {
   const [message, setMessage] = useState(false);
-  const [forwardingLetter, setForwardingLetter] = useState({ type: "text", value: null });
+  const [forwardingLetter, setForwardingLetter] = useState({ type: null, value: null });
   const [appliedJobs, setAppliedJobs] = useState([]);
   const { availability } = useUserProfileContext();
   const [resume, setResume] = useState(null);
