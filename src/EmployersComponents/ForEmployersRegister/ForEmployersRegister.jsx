@@ -243,9 +243,6 @@ const ForEmployersRegister = () => {
 
                     <div className="flex justify-between mt-6">
                         <Link href="/foremployers/signin" className="text-blue-600 hover:underline">Already have an account? Sign In</Link>
-                        <button type="button" className="flex items-center text-blue-600 hover:underline">
-                            <FcGoogle className="mr-2" /> Continue with Google
-                        </button>
                     </div>
                 </form>
             </div>

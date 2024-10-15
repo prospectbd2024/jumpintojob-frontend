@@ -25,6 +25,7 @@ const ForEmployersLogin = () => {
       email: userEmail,
       password: userPassword,
       remember_me: rememberUser,
+      userType : "employer"
     };
 
     const loginData = await fetch(
