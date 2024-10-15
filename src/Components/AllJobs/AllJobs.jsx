@@ -21,11 +21,19 @@ const AllJobs = ({ children }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (
-                window.innerHeight + document.documentElement.scrollTop
-                >= document.documentElement.offsetHeight - 500
-                && !NewJobLoadingFlag
-            ) {
+            if ( window.innerHeight + document.documentElement.scrollTop
+                >= document.documentElement.offsetHeight - 400
+                && NewJobLoadingFlag ) {
+                // Disable scrolling
+                 console.log("should be disabled");
+                 
+              }
+            else{
+                document.body.style.overflow = 'overflow';
+            }
+            if (shouldGetNewJobs()) {  
+                console.log("loading...");
+                
                 getNewJobsAndReplace(jobPage.currentPage + 1);
             }
         };
@@ -40,7 +48,11 @@ const AllJobs = ({ children }) => {
         const location = event.target.jobLocation.value.toLowerCase();
         setQuery(createQueryString({searchKey, location}));
     }, [setQuery]);
-
+    const shouldGetNewJobs = ()=>{
+        return window.innerHeight + document.documentElement.scrollTop
+        >= document.documentElement.offsetHeight - 500
+        && !NewJobLoadingFlag && jobPage.currentPage != jobPage.totalPages;
+    }
     const createQueryString = (paramsObj) => {
         const params = new URLSearchParams();
         for (const [key, value] of Object.entries(paramsObj)) {
