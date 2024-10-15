@@ -69,18 +69,18 @@ const CompanyDetails = ({ company }) => {
             </div>
             
             <div className="flex flex-wrap gap-3 mb-8">
-              {company.category && (
+              {company.category ? (
                 <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold flex items-center">
                   <BriefcaseIcon className="w-4 h-4 mr-2" />
                   {company.category}
                 </span>
-              )}
-              {company.size && (
+              ):<></>}
+              {company.size ? (
                 <span className="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold flex items-center">
                   <UsersIcon className="w-4 h-4 mr-2" />
                   {company.size} Employees
                 </span>
-              )}
+              ):<></>}
             </div>
 
             <div className="space-y-4 text-gray-600 mb-8">
