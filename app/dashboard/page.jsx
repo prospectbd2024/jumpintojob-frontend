@@ -9,7 +9,8 @@ import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
 
 
 export default function Dashboard() {
-    const { user } = useUserContext()
+    // const { user } = useUserContext()
+    const user = { role: 'employer' }
     const [activeTab, setActiveTab] = useState('all')
 
     return (
