@@ -16,6 +16,7 @@ let menuItems = [];
 
 
 export default function DashboardLayout({children}) {
+    const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -23,28 +24,8 @@ export default function DashboardLayout({children}) {
     const router = useRouter()
     const {isDarkMode, toggleDarkMode} = useDashboardContext()
     const {userData, handleSignOut} = useUserContext()
-    const user = userData.data.user
+    const user = userData?.data.user
     // console.log(user)
-
-    // Conditional menu items based on user type
-    if (user.user_type === 'job_seeker') {
-        menuItems = [
-            { icon: BriefcaseIcon, label: 'Applied Jobs', href: '/dashboard/applied-jobs' },
-            { icon: CalendarIcon, label: 'Interviews', href: '/dashboard/interviews' },
-            { icon: BarChart2Icon, label: 'Profile', href: '/dashboard/profile' },
-            { icon: PlusIcon, label: 'Apply Now', href: '/dashboard/apply' },
-        ];
-    } else if (user.user_type === 'employer') {
-        menuItems = [
-            { icon: BriefcaseIcon, label: 'Jobs', href: '/dashboard/jobs' },
-            { icon: UsersIcon, label: 'Candidates', href: '/dashboard/candidates' },
-            { icon: CalendarIcon, label: 'Interviews', href: '/dashboard/interviews' },
-            { icon: BarChart2Icon, label: 'Analytics', href: '/dashboard/analytics' },
-            { icon: PlusIcon, label: 'Tools', href: '/dashboard/tools' },
-        ];
-    }
-
-    const userName = user?.company?.name || 'JumpIntoJob'
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -58,6 +39,32 @@ export default function DashboardLayout({children}) {
             document.removeEventListener("mousedown", handleClickOutside)
         }
     }, [userMenuRef])
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+    if (!isMounted) return null;
+
+    // Conditional menu items based on user type
+    if (user?.user_type === 'job_seeker') {
+        menuItems = [
+            { icon: BriefcaseIcon, label: 'Applied Jobs', href: '/dashboard/applied-jobs' },
+            { icon: CalendarIcon, label: 'Interviews', href: '/dashboard/interviews' },
+            { icon: BarChart2Icon, label: 'Profile', href: '/dashboard/profile' },
+            { icon: PlusIcon, label: 'Apply Now', href: '/dashboard/apply' },
+        ];
+    } else if (user?.user_type === 'employer') {
+        menuItems = [
+            { icon: BriefcaseIcon, label: 'Jobs', href: '/dashboard/jobs' },
+            { icon: UsersIcon, label: 'Candidates', href: '/dashboard/candidates' },
+            { icon: CalendarIcon, label: 'Interviews', href: '/dashboard/interviews' },
+            { icon: BarChart2Icon, label: 'Analytics', href: '/dashboard/analytics' },
+            { icon: PlusIcon, label: 'Tools', href: '/dashboard/tools' },
+        ];
+    }
+
+    const userName = user?.company?.name || 'JumpIntoJob'
+
 
     return (
         <div className={`flex h-screen ${isDarkMode ? 'dark' : ''}`}>
@@ -73,7 +80,7 @@ export default function DashboardLayout({children}) {
                     </button>
                 </div>
                 <div className="px-4 py-2">
-                    {user.user_type === 'employer' && (
+                    {user?.user_type === 'employer' && (
                         <button
                             className="w-full flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200">
                             <PlusIcon size={20} />
@@ -133,13 +140,13 @@ export default function DashboardLayout({children}) {
                                         className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none"
                                     >
                                         <Image
-                                            src={user.avatar || 'https://i.pravatar.cc/300'}
+                                            src={user?.avatar || 'https://i.pravatar.cc/300'}
                                             alt="User avatar"
                                             width={32}
                                             height={32}
                                             className="rounded-full"
                                         />
-                                        <span>{user.email}</span>
+                                        <span>{user?.email}</span>
                                         <ChevronDownIcon size={20} className="text-gray-500 dark:text-gray-400"/>
                                     </button>
                                     {isUserMenuOpen && (

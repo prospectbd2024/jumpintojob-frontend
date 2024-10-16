@@ -12,7 +12,7 @@ import {useDashboardContext} from "@/Contexts/DashboardContext";
 export default function Dashboard() {
     const { userData } = useUserContext()
     const { jobs, loading } = useDashboardContext();
-    const user = userData.data.user
+    const user = userData?.data.user
     const [activeTab, setActiveTab] = useState('all')
 
     return (
@@ -92,13 +92,13 @@ export default function Dashboard() {
                         ))
                     ) : (
                         <div className="text-center py-16">
-                            <Image
-                                src="/placeholder.svg?height=200&width=200"
-                                alt="No jobs found"
-                                width={200}
-                                height={200}
-                                className="mx-auto mb-4"
-                            />
+                            {/*<Image*/}
+                            {/*    src="https://i.pravatar.cc/200"*/}
+                            {/*    alt="No jobs found"*/}
+                            {/*    width={200}*/}
+                            {/*    height={200}*/}
+                            {/*    className="mx-auto mb-4"*/}
+                            {/*/>*/}
                             <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                                 {user?.user_type === 'employer' ? 'No jobs posted yet' : 'No jobs found'}
                             </h2>
