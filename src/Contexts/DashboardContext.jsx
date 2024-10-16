@@ -8,7 +8,7 @@ export const useDashboardContext = () => useContext(dashboardContext);
 
 // Rename the provider function for clarity
 function DashboardContext({children}) {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -55,6 +55,7 @@ function DashboardContext({children}) {
 
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
+        localStorage.setItem('darkMode', !isDarkMode);
         console.log('Dark mode toggled');
     };
 
