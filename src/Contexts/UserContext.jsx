@@ -115,6 +115,11 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem('userData');
+    router.push('/signin');
+  };
+
   const handleSubmitResume = () => {
     useEffect(() => {
       localStorage.setItem("userResume", JSON.stringify(userProfileData));
@@ -136,7 +141,8 @@ export const UserProvider = ({ children }) => {
         bearerToken,
         profile,
         setProfile,
-        guestProtection
+        guestProtection,
+        handleSignOut
         
       }}>
       {children}

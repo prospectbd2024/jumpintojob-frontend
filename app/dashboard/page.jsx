@@ -9,15 +9,15 @@ import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
 
 
 export default function Dashboard() {
-    // const { user } = useUserContext()
-    const user = { role: 'employer' }
+    const { userData } = useUserContext()
+    const user = userData.data.user
     const [activeTab, setActiveTab] = useState('all')
 
     return (
         <DashboardLayout>
             <div className="mb-6">
                 <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                    {user?.role === 'employer' ? 'Jobs' : 'Job Search'}
+                    {user?.user_type === 'employer' ? 'Jobs' : 'Job Search'}
                 </h1>
             </div>
 
@@ -25,33 +25,27 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex space-x-4">
                         <button
-                            className={`px-4 py-2 rounded-full ${
-                                activeTab === 'all' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                            }`}
+                            className={`px-4 py-2 rounded-full ${activeTab === 'all' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                             onClick={() => setActiveTab('all')}
                         >
                             All Jobs
                         </button>
                         <button
-                            className={`px-4 py-2 rounded-full ${
-                                activeTab === 'open' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                            }`}
+                            className={`px-4 py-2 rounded-full ${activeTab === 'open' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                             onClick={() => setActiveTab('open')}
                         >
-                            {user?.role === 'employer' ? 'Open and paused' : 'Saved Jobs'}
+                            {user?.user_type === 'employer' ? 'Open and Paused' : 'Saved Jobs'}
                         </button>
                         <button
-                            className={`px-4 py-2 rounded-full ${
-                                activeTab === 'closed' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                            }`}
+                            className={`px-4 py-2 rounded-full ${activeTab === 'closed' ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                             onClick={() => setActiveTab('closed')}
                         >
-                            {user?.role === 'employer' ? 'Closed' : 'Applied Jobs'}
+                            {user?.user_type === 'employer' ? 'Closed Jobs' : 'Applied Jobs'}
                         </button>
                     </div>
-                    {user?.role === 'employer' && (
+                    {user?.user_type === 'employer' && (
                         <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                            Post a job
+                            Post a Job
                         </button>
                     )}
                 </div>
@@ -72,7 +66,7 @@ export default function Dashboard() {
                         </button>
                     </div>
 
-                    {/* Job listings or search results would go here */}
+                    {/* Job listings or search results */}
                     <div className="text-center py-16">
                         <Image
                             src="/placeholder.svg?height=200&width=200"
@@ -82,14 +76,14 @@ export default function Dashboard() {
                             className="mx-auto mb-4"
                         />
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                            {user?.role === 'employer' ? 'No jobs posted yet' : 'No jobs found'}
+                            {user?.user_type === 'employer' ? 'No jobs posted yet' : 'No jobs found'}
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            {user?.role === 'employer'
+                            {user?.user_type === 'employer'
                                 ? 'Get started by posting your first job'
                                 : 'Try adjusting your search criteria'}
                         </p>
-                        {user?.role === 'employer' && (
+                        {user?.user_type === 'employer' && (
                             <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
                                 Post a job
                             </button>
