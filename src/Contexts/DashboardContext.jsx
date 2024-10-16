@@ -14,7 +14,7 @@ function DashboardContext({children}) {
     const [currentPage, setCurrentPage] = useState(1);
     const [jobsPerPage] = useState(10); // Adjust as needed
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const { bearerToken } = useUserContext();
+    const { bearerToken, userData } = useUserContext();
 
     useEffect(() => {
         if (isDarkMode) {
@@ -27,6 +27,10 @@ function DashboardContext({children}) {
     // Fetch employer's jobs from API
     useEffect(() => {
         async function fetchJobs() {
+            if (userData?.data.user?.user_type !== 'employer') {
+                setLoading(false);
+                return; // Exit early if the user is not an employer
+            }
             try {
                 const response = await fetch(`${API_URL}/api/v1/employer/jobs`, {
                     method: 'GET',
@@ -53,6 +57,8 @@ function DashboardContext({children}) {
         fetchJobs();
     }, [API_URL, bearerToken]);
 
+    const clearJobs = () => setJobs([]);
+
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
         localStorage.setItem('darkMode', !isDarkMode);
@@ -69,7 +75,7 @@ function DashboardContext({children}) {
 
     return (
         <dashboardContext.Provider
-            value={{isDarkMode, toggleDarkMode, jobs: currentJobs, loading, paginate, currentPage, totalPages}}>
+            value={{isDarkMode, toggleDarkMode, jobs: currentJobs, loading, paginate, clearJobs, currentPage, totalPages}}>
             {children}
         </dashboardContext.Provider>
     );

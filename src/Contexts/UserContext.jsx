@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
+
 export const UserContext = createContext();
 
 export const useUserContext = () => useContext(UserContext);
+
 
 export const UserProvider = ({ children }) => {
   const isClient = typeof window !== "undefined";
@@ -108,7 +110,7 @@ export const UserProvider = ({ children }) => {
         confirmButtonText: "Yes",
       }).then((result) => {
         if (result.isConfirmed) {
-          
+
           router.push("/signin");
         }
       });
@@ -117,6 +119,7 @@ export const UserProvider = ({ children }) => {
 
   const handleSignOut = () => {
     localStorage.removeItem('userData');
+    setUserData(null);
     router.push('/signin');
   };
 
@@ -143,7 +146,7 @@ export const UserProvider = ({ children }) => {
         setProfile,
         guestProtection,
         handleSignOut
-        
+
       }}>
       {children}
     </UserContext.Provider>
