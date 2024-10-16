@@ -6,10 +6,12 @@ import { StarIcon, FilterIcon, ChevronDownIcon } from 'lucide-react'
 import Image from 'next/image'
 import {useUserContext} from "@/Contexts/UserContext";
 import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
+import {useDashboardContext} from "@/Contexts/DashboardContext";
 
 
 export default function Dashboard() {
     const { userData } = useUserContext()
+    const { jobs, loading } = useDashboardContext();
     const user = userData.data.user
     const [activeTab, setActiveTab] = useState('all')
 
@@ -66,29 +68,52 @@ export default function Dashboard() {
                         </button>
                     </div>
 
-                    {/* Job listings or search results */}
-                    <div className="text-center py-16">
-                        <Image
-                            src="/placeholder.svg?height=200&width=200"
-                            alt="No jobs found"
-                            width={200}
-                            height={200}
-                            className="mx-auto mb-4"
-                        />
-                        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                            {user?.user_type === 'employer' ? 'No jobs posted yet' : 'No jobs found'}
-                        </h2>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            {user?.user_type === 'employer'
-                                ? 'Get started by posting your first job'
-                                : 'Try adjusting your search criteria'}
-                        </p>
-                        {user?.user_type === 'employer' && (
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                                Post a job
-                            </button>
-                        )}
-                    </div>
+                    {loading ? (
+                        <div className="text-center py-16">
+                            <p className="text-gray-600 dark:text-gray-400">Loading jobs...</p>
+                        </div>
+                    ) : jobs.length > 0 ? (
+                        jobs.map((job) => (
+                            <div key={job.id} className="border-b border-gray-200 dark:border-gray-700 py-4 flex justify-between items-center">
+                                <div>
+                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{job.job_title}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400">{job.job_category}</p>
+                                    <p className="text-gray-600 dark:text-gray-400">{job.location_type}</p>
+                                </div>
+                                <div className="flex space-x-2">
+                                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
+                                        Pause
+                                    </button>
+                                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                                        Applicants
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center py-16">
+                            <Image
+                                src="/placeholder.svg?height=200&width=200"
+                                alt="No jobs found"
+                                width={200}
+                                height={200}
+                                className="mx-auto mb-4"
+                            />
+                            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                                {user?.user_type === 'employer' ? 'No jobs posted yet' : 'No jobs found'}
+                            </h2>
+                            <p className="text-gray-600 dark:text-gray-400 mb-4">
+                                {user?.user_type === 'employer'
+                                    ? 'Get started by posting your first job'
+                                    : 'Try adjusting your search criteria'}
+                            </p>
+                            {user?.user_type === 'employer' && (
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                                    Post a job
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </DashboardLayout>
