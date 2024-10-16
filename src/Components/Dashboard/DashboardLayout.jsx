@@ -51,7 +51,7 @@ export default function DashboardLayout({children}) {
             { icon: BriefcaseIcon, label: 'Applied Jobs', href: '/dashboard/applied-jobs' },
             { icon: CalendarIcon, label: 'Interviews', href: '/dashboard/interviews' },
             { icon: BarChart2Icon, label: 'Profile', href: '/dashboard/profile' },
-            { icon: PlusIcon, label: 'Apply Now', href: '/dashboard/apply' },
+            { icon: PlusIcon, label: 'Apply Now', href: '/jobs' },
         ];
     } else if (user?.user_type === 'employer') {
         menuItems = [

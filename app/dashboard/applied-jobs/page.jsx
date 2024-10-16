@@ -1,25 +1,22 @@
 'use client'
 
-import React, { useState } from 'react'
-
-import { Search, Filter, ChevronDown, Briefcase, MapPin, Calendar, Clock } from 'lucide-react'
-import Image from 'next/image'
+import React, {useState} from 'react'
+import {Search, Filter, ChevronDown, MapPin, Calendar} from 'lucide-react';
+import Image from 'next/image';
+import {useDashboardContext} from "@/Contexts/DashboardContext";
 import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
 
-const appliedJobs = [
-    { id: 1, title: 'Frontend Developer', company: 'TechCorp', logo: 'https://logo.clearbit.com/techcorp.com', location: 'Remote', appliedDate: '2023-05-15', status: 'Under Review' },
-    { id: 2, title: 'UX Designer', company: 'DesignHub', logo: 'https://logo.clearbit.com/designhub.com', location: 'New York, NY', appliedDate: '2023-05-10', status: 'Interview Scheduled' },
-    { id: 3, title: 'Data Scientist', company: 'DataWorks', logo: 'https://logo.clearbit.com/dataworks.com', location: 'San Francisco, CA', appliedDate: '2023-05-05', status: 'Application Received' },
-    { id: 4, title: 'Product Manager', company: 'InnovateCo', logo: 'https://logo.clearbit.com/innovateco.com', location: 'Chicago, IL', appliedDate: '2023-05-01', status: 'Under Review' },
-]
-
 export default function AppliedJobsPage() {
-    const [searchTerm, setSearchTerm] = useState('')
+    const { appliedJobs, loadingApplyJob, error } = useDashboardContext();
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    // Filter jobs based on search term
     const filteredJobs = appliedJobs.filter(job =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+        job?.job?.job_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job?.job?.company_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
 
     return (
         <DashboardLayout>
@@ -53,15 +50,24 @@ export default function AppliedJobsPage() {
             </div>
 
             <div className="space-y-6">
-                {filteredJobs.map((job) => (
+                {loadingApplyJob &&
+                    <div className="flex justify-center items-center h-48">
+                        <div
+                            className="w-10 h-10 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+                    </div>
+                }
+                {error && <p className="text-red-600">{error}</p>}
+                {!loadingApplyJob && !error && filteredJobs.length === 0 &&
+                    <p className="text-gray-600 dark:text-gray-300">No applied jobs found.</p>}
+                {!loadingApplyJob && !error && filteredJobs.map((job) => (
                     <div key={job.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center space-x-4">
-                                    <Image src={job.logo} alt={job.company} width={48} height={48} className="rounded-full" />
+                                    <Image src={job.job.image} alt={job.job.company_name} width={48} height={48} className="rounded-full" />
                                     <div>
-                                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{job.title}</h2>
-                                        <p className="text-sm text-gray-600 dark:text-gray-300">{job.company}</p>
+                                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{job.job.job_title}</h2>
+                                        <p className="text-sm text-gray-600 dark:text-gray-300">{job.job.company_name}</p>
                                     </div>
                                 </div>
                                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -69,31 +75,27 @@ export default function AppliedJobsPage() {
                                         job.status === 'Under Review' ? 'bg-yellow-100 text-yellow-800' :
                                             'bg-blue-100 text-blue-800'
                                 }`}>
-                  {job.status}
-                </span>
+                                    {job.status}
+                                </span>
                             </div>
                             <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-300">
                                 <div className="flex items-center mr-4 mb-2">
                                     <MapPin size={16} className="mr-1" />
-                                    {job.location}
+                                    {job.job.address}
                                 </div>
                                 <div className="flex items-center mr-4 mb-2">
                                     <Calendar size={16} className="mr-1" />
-                                    Applied on {job.appliedDate}
+                                    Applied on {new Date(job.created_at).toLocaleDateString()}
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-between items-center">
-                            <button className="text-blue-500 hover:text-blue-600 font-medium">
-                                View Application
-                            </button>
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out">
-                                Follow Up
-                            </button>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 flex justify-between">
+                            <button className="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400">View Details</button>
+                            <button className="text-red-600 hover:text-red-800 dark:hover:text-red-400">Withdraw Application</button>
                         </div>
                     </div>
                 ))}
             </div>
         </DashboardLayout>
-    )
+    );
 }

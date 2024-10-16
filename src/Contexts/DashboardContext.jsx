@@ -6,15 +6,21 @@ import {useUserContext} from "@/Contexts/UserContext";
 export const dashboardContext = createContext();
 export const useDashboardContext = () => useContext(dashboardContext);
 
+
 // Rename the provider function for clarity
 function DashboardContext({children}) {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [jobsPerPage] = useState(10); // Adjust as needed
+    const [jobsPerPage] = useState(10);
+
+    const [appliedJobs, setAppliedJobs] = useState([]);
+    const [loadingApplyJob, setLoadingApplyJob] = useState(true); // State for loading
+    const [error, setError] = useState(null);
+
+    const {bearerToken, userData} = useUserContext();
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const { bearerToken, userData } = useUserContext();
 
     useEffect(() => {
         // Check if localStorage is available
@@ -65,6 +71,38 @@ function DashboardContext({children}) {
         fetchJobs();
     }, [API_URL, bearerToken]);
 
+    // Fetch applied jobs for the job seeker
+    useEffect(() => {
+        async function fetchAppliedJobs() {
+            setLoadingApplyJob(true);
+            setError(null);
+            if (userData?.data.user?.user_type !== 'job_seeker') {
+                return; // Exit early if the user is not a job seeker
+            }
+            try {
+                const response = await fetch(`${API_URL}/api/v1/applications`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${bearerToken}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setAppliedJobs(data.data); // Assuming the response contains a `data` array
+                setLoadingApplyJob(false);
+            } catch (err) {
+                // setError(err.message); // Set error if fetch fails
+            }
+        }
+
+        fetchAppliedJobs();
+    }, [API_URL, bearerToken, userData]);
+
     const clearJobs = () => setJobs([]);
 
     const toggleDarkMode = () => {
@@ -83,7 +121,19 @@ function DashboardContext({children}) {
 
     return (
         <dashboardContext.Provider
-            value={{isDarkMode, toggleDarkMode, jobs: currentJobs, loading, paginate, clearJobs, currentPage, totalPages}}>
+            value={{
+                isDarkMode,
+                toggleDarkMode,
+                jobs: currentJobs,
+                loading,
+                paginate,
+                clearJobs,
+                currentPage,
+                totalPages,
+                appliedJobs,
+                loadingApplyJob,
+                error,
+            }}>
             {children}
         </dashboardContext.Provider>
     );
