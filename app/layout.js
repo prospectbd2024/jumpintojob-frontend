@@ -21,19 +21,19 @@ async function layout({children}) {
         <html lang="en">
         <body className="fou">
         <UserProvider>
-            <JobContext>
-                <CompanyContext>
-                    <CategoryContext>
-                        <UserProfileContext>
-                            <DashboardContext>
+            <DashboardContext>
+                <JobContext>
+                    <CompanyContext>
+                        <CategoryContext>
+                            <UserProfileContext>
                                 <ApplicationContext>
                                     <Provider session={session}>{children}</Provider>
                                 </ApplicationContext>
-                            </DashboardContext>
-                        </UserProfileContext>
-                    </CategoryContext>
-                </CompanyContext>
-            </JobContext>
+                            </UserProfileContext>
+                        </CategoryContext>
+                    </CompanyContext>
+                </JobContext>
+            </DashboardContext>
         </UserProvider>
         </body>
         </html>
