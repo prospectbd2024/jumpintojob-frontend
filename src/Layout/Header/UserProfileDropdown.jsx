@@ -33,7 +33,7 @@ const UserProfileDropdown = ({
             </div>
             <div>
             <Link
-              href="/dashboard/appliedjobs"
+              href="/dashboard"
               className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
             >
               <HiOutlineViewGrid /> Dashboard

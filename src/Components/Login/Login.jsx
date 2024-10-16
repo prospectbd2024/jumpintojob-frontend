@@ -70,7 +70,7 @@ const Login = () => {
       if (loginUserData.data.user.is_verified == false) {
         navigate.push("/verify-email");
       } else {
-        navigate.push("/");
+        navigate.push("/dashboard");
       }
     } else {
       setWarning((prev) => {
