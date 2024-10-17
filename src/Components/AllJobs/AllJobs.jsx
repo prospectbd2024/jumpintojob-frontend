@@ -14,6 +14,7 @@ const AllJobs = ({ children }) => {
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
+    const [searchPerformed, setSearchPerformed] = useState(false);
 
     useEffect(() => {
         setFilteredJobs(allJobs);
@@ -39,7 +40,15 @@ const AllJobs = ({ children }) => {
         const searchKey = event.target.jobTitle.value.toLowerCase();
         const location = event.target.jobLocation.value.toLowerCase();
         setQuery(createQueryString({searchKey, location}));
-    }, [setQuery]);
+        
+        const filtered = allJobs.filter(job => 
+            job.job_title.toLowerCase().includes(searchKey) &&
+            job.address.toLowerCase().includes(location)
+        );
+        
+        setFilteredJobs(filtered);
+        setSearchPerformed(true);
+    }, [allJobs, setQuery]);
 
     const createQueryString = (paramsObj) => {
         const params = new URLSearchParams();
@@ -60,7 +69,14 @@ const AllJobs = ({ children }) => {
             {/* Main Content Section */}
             <div className="flex flex-col lg:flex-row">
                 <div className="w-full lg:w-1/2 xl:w-1/3 mb-6 lg:mb-0 mt-4">
-                    <JobListView props={{filteredJobs, clickedJob, handleClickedJob}}/>
+                    <JobListView 
+                        props={{
+                            filteredJobs, 
+                            clickedJob, 
+                            handleClickedJob, 
+                            searchPerformed
+                        }}
+                    />
                 </div>
                 <div className="hidden lg:block lg:w-1/2 xl:w-2/3 relative">
                     <div className="sticky top-4" style={{ height: 'calc(100vh - 2rem)' }}>
