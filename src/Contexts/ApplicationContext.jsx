@@ -100,7 +100,7 @@ function ApplicationContext({ children }) {
   const getAppliedJobs = async () => {
     try {
       const bearerToken = userData?.data?.access_token;
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/applications/${userData?.data?.user.user_id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/applications`, {
         method: "GET",
         headers: {
           Accept: "application/json",

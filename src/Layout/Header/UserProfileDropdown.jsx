@@ -36,6 +36,31 @@ const UserProfileDropdown = ({
           className="text-3xl text-blue-500 cursor-pointer"
           onClick={toggleUserProfile}
         />
+
+        {userProfileClicked && (
+          <div className="absolute top-10 right-0 w-72 bg-white shadow-lg rounded-lg p-5">
+            <div className="mb-4">
+              <h4 className="text-lg font-bold text-gray-800">
+                Welcome {userData?.data?.user.first_name}!
+              </h4>
+              <p className="text-sm text-gray-800">{userData?.data?.user.email}</p>
+            </div>
+            <div>
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
+            >
+              <HiOutlineViewGrid /> Dashboard
+            </Link>
+            </div>
+            <div className="flex flex-col gap-2 mb-4">
+              <UserProfileLink href="/userprofile/aboutme" icon={<FaUserTie />} label="Profile" />
+              <UserProfileLink href="/resumebuilder" icon={<FaFileAlt />} label="Resume Build" />
+              <UserProfileLink href="#" icon={<HiBriefcase />} label="My Jobs" />
+              <UserProfileLink href="#" icon={<HiCog />} label="Settings" />
+              <UserProfileLink href="#" icon={<HiQuestionMarkCircle />} label="Help Center" />
+            </div>
+
       </motion.div>
       {userProfileClicked && (
         <motion.div
@@ -59,6 +84,7 @@ const UserProfileDropdown = ({
             <UserProfileLink href="/help" icon={<HiQuestionMarkCircle />} label="Help Center" />
           </div>
           <div className="px-4 pb-4">
+
             <button
               className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-red-600 transition-colors duration-200"
               onClick={handleLogout}
