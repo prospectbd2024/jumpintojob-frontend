@@ -5,7 +5,7 @@ import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 import {useJobContext} from "@/Contexts/JobContext";
 
 const JobListView = ({props}) => {
-    const {filteredJobs, clickedJob, handleClickedJob} = props;
+    const {filteredJobs, clickedJob, handleClickedJob, searchPerformed} = props;
     const {Loading, NewJobLoadingFlag} = useJobContext();
     let i = 0;
 
@@ -33,7 +33,11 @@ const JobListView = ({props}) => {
                         />
                     ))
                 ) : (
-                    <p className="text-center py-4">No jobs available</p>
+                    searchPerformed ? (
+                        <p className="text-center py-4 text-gray-600 font-semibold">No jobs available for the given search criteria</p>
+                    ) : (
+                        <p className="text-center py-4 text-gray-600">Enter search criteria to find jobs</p>
+                    )
                 )}
             </div>
 

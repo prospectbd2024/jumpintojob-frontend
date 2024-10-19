@@ -1,57 +1,94 @@
-"use client"; 
-import Link from "next/link"; 
-const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout }) => {
-    return (
-      <div className="mt-6 space-y-4">
-        {userData ? (
-          <>
-            <Link
-              href="/dashboard/appliedjobs"
-              className="block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-            >
-              Dashboard
-            </Link>
-            <button
-              className="block w-full text-center px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200"
-              onClick={handleSignoutAlert}
-            >
-              Post a Job
-            </button>
-            <button
-              className="block w-full text-center px-4 py-3 text-2xl font-semibold text-red-600 hover:bg-red-100 rounded-lg transition-colors duration-200"
-              onClick={handleLogout}
-            >
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <>
-            <Link
-              href="/signin" 
-              className={ `${location =="/signin"  ?"text-blue-500" : "text-gray-800"} 
-              block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
-            >
-              Sign in   
-            </Link>
-            <Link
-              href="/register"
-              className={ `${location =="/register"  ?"text-blue-500" : "text-gray-800"} 
-              block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
-            >
-              Register
-            </Link>
-          </>
-        )}
-        <Link
-          href="/foremployers"
-          className={ `${location =="/foremployers"  ?"text-blue-500" : "text-gray-800"} 
-              block px-4 py-3 text-2xl font-semibold text-gray-800 hover:bg-blue-100 rounded-lg transition-colors duration-200`}
-        >
-          For Employers
-        </Link>
-      </div>
-    );
-  };
+import React from 'react';
+import Link from "next/link";
+import { motion } from 'framer-motion';
+import { HiOutlineViewGrid, HiBriefcase, HiLogout, HiLogin, HiUserAdd, HiOfficeBuilding } from "react-icons/hi";
+import { TbSend } from "react-icons/tb";
 
+const ActionLink = ({ href, label, icon, onClick, color = "blue" }) => (
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.97 }}
+  >
+    <Link
+      href={href}
+      className={`
+        flex items-center gap-3 w-full px-4 py-3 text-lg font-semibold
+        ${color === "blue" ? "text-gray-700 hover:bg-blue-50 hover:text-blue-600" : "text-red-600 hover:bg-red-50"}
+        rounded-lg transition-colors duration-200
+      `}
+      onClick={onClick}
+    >
+      {icon}
+      <span>{label}</span>
+    </Link>
+  </motion.div>
+);
 
-  export default MobileUserActions;
+const ActionButton = ({ label, icon, onClick, color = "blue" }) => (
+  <motion.button
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.97 }}
+    className={`
+      flex items-center gap-3 w-full px-4 py-3 text-lg font-semibold
+      ${color === "blue" ? "text-gray-700 hover:bg-blue-50 hover:text-blue-600" : "text-red-600 hover:bg-red-50"}
+      rounded-lg transition-colors duration-200
+    `}
+    onClick={onClick}
+  >
+    {icon}
+    <span>{label}</span>
+  </motion.button>
+);
+
+const MobileUserActions = ({ userData, handleSignoutAlert, handleLogout, location }) => {
+  return (
+    <motion.div
+      className="mt-6 space-y-2"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+    >
+      {userData ? (
+        <>
+          <ActionLink
+            href="/myjobs/dashboard"
+            label="Dashboard"
+            icon={<HiOutlineViewGrid className="text-xl" />}
+          />
+          <ActionButton
+            label="Post a Job"
+            icon={<TbSend  className='text-xl'/>}
+            onClick={handleSignoutAlert}
+          />
+          <ActionButton
+            label="Sign Out"
+            icon={<HiLogout className="text-xl" />}
+            onClick={handleLogout}
+            color="red"
+          />
+        </>
+      ) : (
+        <>
+          <ActionLink
+            href="/signin"
+            label="Sign in"
+            icon={<HiLogin className="text-xl" />}
+          />
+          <ActionLink
+            href="/register"
+            label="Register"
+            icon={<HiUserAdd className="text-xl" />}
+          />
+        </>
+      )}
+      <ActionLink
+        href="/foremployers"
+        label="For Employers"
+        
+      />
+    </motion.div>
+  );
+};
+
+export default MobileUserActions;

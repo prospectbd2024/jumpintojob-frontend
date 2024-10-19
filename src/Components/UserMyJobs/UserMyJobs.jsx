@@ -1,42 +1,101 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { HiOutlineArchive, HiOutlineBookmark, HiOutlineBriefcase, HiOutlineHome, HiOutlinePhoneIncoming } from "react-icons/hi";
+import { usePathname } from "next/navigation";
+import { HiOutlineHome, HiOutlineBookmark, HiOutlineBriefcase, HiOutlinePhoneIncoming, HiOutlineArchive, HiMenu, HiX } from 'react-icons/hi';
 
 const UserMyJobs = ({ children }) => {
-    const [sidebarItemClick, setSidebarItemClick] = useState('/myjobs/dashboard');
-    const [activeSidebarItem, setActiveSideItem] = useState('Dashboard');
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isLargeScreen, setIsLargeScreen] = useState(true);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsLargeScreen(window.innerWidth >= 1024);
+            if (window.innerWidth >= 1024) {
+                setSidebarOpen(true);
+            }
+        };
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
+
+    const menuItems = [
+        { name: 'Dashboard', icon: HiOutlineHome },
+        { name: 'Saved Jobs', icon: HiOutlineBookmark },
+        { name: 'Applied Jobs', icon: HiOutlineBriefcase },
+        { name: 'Interviews', icon: HiOutlinePhoneIncoming },
+        { name: 'Archived Jobs', icon: HiOutlineArchive },
+    ];
 
     return (
-        <div className="min-h-screen flex">
-            <div className="flex-none bg-white shadow-md sticky top-20 w-full md:w-[300px]">
+        <div className="min-h-screen flex flex-col lg:flex-row">
+            {/* Top navigation for small and medium screens */}
+            <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-md z-20">
+                <ul className="flex justify-around p-2">
+                    {menuItems.map((item) => (
+                        <li
+                            key={item.name}
+                            className={`flex flex-col items-center p-2 ${
+                                pathname === `/myjobs/${item.name.toLowerCase().replace(' ', '')}` ? 'text-primary-color' : 'text-[#061421]'
+                            }`}
+                        >
+                            <Link href={`/myjobs/${item.name.toLowerCase().replace(' ', '')}`}>
+                                <item.icon className="text-xl mb-1" />
+                                <span className="text-xs">{item.name.split(' ')[0]}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Sidebar */}
+            <div className={`bg-white shadow-md w-full lg:w-80 fixed inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 transition duration-200 ease-in-out z-30 mt-16 lg:mt-0`}>
                 <div className="p-5">
-                    <h2 className="text-2xl font-semibold text-[#061421] border-b border-gray-300 pb-3">My Jobs</h2>
-                    <ul className="mt-4">
-                        {['Dashboard', 'Saved Jobs', 'Applied Jobs', 'Interviews', 'Archived Jobs'].map((item) => (
+                    <h2 className="text-2xl font-semibold text-[#061421] border-b border-gray-300 pb-3">Dashboard</h2>
+                    <ul className="mt-4 space-y-2">
+                        {menuItems.map((item) => (
                             <li
-                                key={item}
-                                onClick={() => setActiveSideItem(item)}
+                                key={item.name}
                                 className={`flex items-center gap-3 p-3 rounded-md transition duration-200 ease-in-out cursor-pointer ${
-                                    activeSidebarItem === item ? 'bg-[#F08200] text-white' : 'text-[#061421]'
+                                    pathname === `/myjobs/${item.name.toLowerCase().replace(' ', '')}` ? 'bg-primary-color text-white' : 'text-[#061421]'
                                 }`}
+                                onClick={() => {
+                                    if (!isLargeScreen) {
+                                        setSidebarOpen(false);
+                                    }
+                                }}
                             >
-                                {item === 'Dashboard' && <HiOutlineHome className="text-2xl" />}
-                                {item === 'Saved Jobs' && <HiOutlineBookmark className="text-2xl" />}
-                                {item === 'Applied Jobs' && <HiOutlineBriefcase className="text-2xl" />}
-                                {item === 'Interviews' && <HiOutlinePhoneIncoming className="text-2xl" />}
-                                {item === 'Archived Jobs' && <HiOutlineArchive className="text-2xl" />}
-                                <Link href={sidebarItemClick} onMouseOver={() => setSidebarItemClick(`/myjobs/${item.toLowerCase().replace(' ', '')}`)}>
-                                    {item}
+                                <item.icon className="text-2xl" />
+                                <Link href={`/myjobs/${item.name.toLowerCase().replace(' ', '')}`}>
+                                    {item.name}
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
-            <div className="flex-1 p-4 md:p-20">
+
+            {/* Main content */}
+            <div className="flex-1 p-4 lg:p-8 mt-24 lg:mt-0">
                 {children}
             </div>
+
+            {/* Toggle button for sidebar on small and medium screens */}
+            {!isLargeScreen && (
+                <button 
+                    className="fixed bottom-4 right-4 z-40 p-3 bg-primary-color text-white rounded-full shadow-lg"
+                    onClick={toggleSidebar}
+                >
+                    {sidebarOpen ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
+                </button>
+            )}
         </div>
     );
 };
