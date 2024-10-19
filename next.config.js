@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['i.pravatar.cc'], // Allow images from this domain
+        domains: ['i.pravatar.cc', 'logo.clearbit.com', 'upload.wikimedia.org'], // Allow images from this domain
     },
 };
 
