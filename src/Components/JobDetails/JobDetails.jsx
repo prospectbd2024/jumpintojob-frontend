@@ -5,7 +5,6 @@ import { useApplicationContext } from "@/Contexts/ApplicationContext";
 import { useUserContext } from "@/Contexts/UserContext";
 import Link from "next/link";
 import { FaUpRightFromSquare } from "react-icons/fa6";
-import Swal from "sweetalert2";
 import { FaBriefcase, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useJobContext } from "@/Contexts/JobContext";
 import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton";

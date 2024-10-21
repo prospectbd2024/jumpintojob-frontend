@@ -60,7 +60,7 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
                 <p className="text-gray-700 text-sm leading-tight mt-2 truncate">{job.description}</p>
                 <div className="flex items-center justify-between mt-3">
                     <p className="font-semibold bg-blue-50 py-1 px-3 rounded-lg text-blue-800 text-sm">
-                        {job.salary} <span className="font-normal">(Estimated)</span>
+                        {job.salary}$ <span className="font-normal">(Estimated Salary)</span>
                     </p>
                     <p className="text-gray-500 text-xs">{job.created_at}</p>
                 </div>

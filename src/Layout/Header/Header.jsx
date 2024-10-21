@@ -40,6 +40,11 @@ const Header = () => {
     setClient(true);
   }, []);
 
+  // Update activeMenu when the location changes
+  useEffect(() => {
+    setActiveMenu(location);
+  }, [location]);
+
   const toggleOption = () => {
     setSelectedOption(selectedOption === "Global" ? "Local" : "Global");
   };
@@ -51,6 +56,10 @@ const Header = () => {
   const handleActiveMenu = (e) => {
     setActiveMenu(e);
     setMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    setActiveMenu('/');
   };
 
   const handleLogout = async () => { 
@@ -121,7 +130,7 @@ const Header = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center cursor-pointer">
-                <Link href="/" passHref>
+                <Link href="/" passHref onClick={handleLogoClick}>
                   <Logo className="w-24 h-8 sm:w-32 sm:h-10" fill="var(--primary-color)" />
                 </Link>
               </div>
@@ -181,8 +190,5 @@ const Header = () => {
     </>
   );
 };
-
- 
-
 
 export default Header;

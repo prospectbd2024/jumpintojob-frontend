@@ -42,7 +42,7 @@ const SearchSection = ({ handleFilteredJobs }) => {
         isLarge ? 'py-4' : 'py-3'
       }`}
       style={{
-        top: 'var(--header-height, 50px)',
+        top: 'var(--header-height, 65px)',
         zIndex: 1000,
       }}
     >

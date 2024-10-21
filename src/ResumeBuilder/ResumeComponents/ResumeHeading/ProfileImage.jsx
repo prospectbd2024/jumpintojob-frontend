@@ -33,35 +33,41 @@ function ProfileImage({ personalInformation, SetPersonalInformation  }) {
       image.src = url;
     });
 
-  const getCroppedImg = async (imageSrc, pixelCrop) => {
-    const image = await createImage(imageSrc);
-    const canvas = document.createElement('canvas');
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
-    const ctx = canvas.getContext('2d');
-
-    ctx.drawImage(
-      image,
-      pixelCrop.x,
-      pixelCrop.y,
-      pixelCrop.width,
-      pixelCrop.height,
-      0,
-      0,
-      pixelCrop.width,
-      pixelCrop.height
-    );
-
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(URL.createObjectURL(blob));
-      }, 'image/jpeg');
-    });
-  };
+    const getCroppedImg = async (imageSrc, pixelCrop) => {
+      const image = await createImage(imageSrc);
+      const canvas = document.createElement('canvas');
+      canvas.width = pixelCrop.width;
+      canvas.height = pixelCrop.height;
+      const ctx = canvas.getContext('2d');
+    
+      ctx.drawImage(
+        image,
+        pixelCrop.x,
+        pixelCrop.y,
+        pixelCrop.width,
+        pixelCrop.height,
+        0,
+        0,
+        pixelCrop.width,
+        pixelCrop.height
+      );
+    
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result); // This will be the base64 string
+          };
+          reader.readAsDataURL(blob); // Convert the blob to a base64 string
+        }, 'image/jpeg');
+      });
+    };
+    
 
   const handleCropSave = useCallback(async () => {
     if (croppedAreaPixels) {
       const croppedImage = await getCroppedImg(imagePreview, croppedAreaPixels);
+      console.log(croppedImage);
       SetPersonalInformation(prev => ({ ...prev, cv_profile_image: croppedImage }));
       setShowCropper(false);
     }

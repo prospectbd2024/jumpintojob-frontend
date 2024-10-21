@@ -1,61 +1,91 @@
-"use client"; 
-import Link from "next/link"; 
+import React from 'react';
+import Link from "next/link";
+import { motion } from 'framer-motion';
+import { usePathname } from "next/navigation";
 import {
   HiBriefcase,
   HiOutlineUser,
   HiOutlineUserAdd,
 } from "react-icons/hi";
-
-import { usePathname, useRouter } from "next/navigation";
-import { TbBell,TbSend } from "react-icons/tb"; 
+import { TbBell, TbSend } from "react-icons/tb";
 import GlobalLocalToggle from "./GlobalLocalToggle";
 import UserProfileDropdown from "./UserProfileDropdown";
+
+const ActionLink = ({ href, icon, label }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Link
+        href={href}
+        className={`
+          flex items-center gap-2 px-3 py-2 rounded-lg transition-colors duration-200
+          ${isActive ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"}
+        `}
+      >
+        {icon}
+        <span className="font-medium">{label}</span>
+      </Link>
+    </motion.div>
+  );
+};
+
+const ActionButton = ({ onClick, icon, label }) => (
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+    onClick={onClick}
+  >
+    {icon}
+    <span className="font-medium">{label}</span>
+  </motion.button>
+);
+
 const UserActions = ({
-    userData,
-    selectedOption,
-    toggleOption,
-    toggleUserProfile,
-    userProfileClicked,
-    handleLogout,
-    handleSignoutAlert,
-  }) => {
-    
-  const location = usePathname();  
-    return (
-      <div className="flex items-center space-x-4">
-        {userData ? (
-          <>
-            <GlobalLocalToggle selectedOption={selectedOption} toggleOption={toggleOption} />
-            <TbBell className="text-2xl text-gray-600 hover:shadow-lg cursor-pointer" />
-            <UserProfileDropdown
-              userData={userData}
-              toggleUserProfile={toggleUserProfile}
-              userProfileClicked={userProfileClicked}
-              handleLogout={handleLogout}
-            />
-            <button
-              className="flex items-center gap-2 text-gray-800 hover:bg-blue-100 p-2 rounded"
-              onClick={handleSignoutAlert}
-            >
-              <TbSend /> Post a Job
-            </button>
-          </>
-        ) : (
-          <>
-            <Link href="/signin"  className={ `${location =="/signin"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
-              <HiOutlineUser /> Sign in
-            </Link>
-            <Link href="/register" className={ `${location =="/register"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
-              <HiOutlineUserAdd /> Register
-            </Link>
-          </>
-        )}
-        <Link href="/foremployers" className={ `${location =="/foremployers"  ?"text-blue-500" : "text-gray-800"} flex items-center gap-2`}>
-          <HiBriefcase /> For Employers
-        </Link>
-      </div>
-    );
-  };
+  userData,
+  selectedOption,
+  toggleOption,
+  toggleUserProfile,
+  userProfileClicked,
+  handleLogout,
+  handleSignoutAlert,
+}) => {
+  return (
+    <motion.div
+      className="flex items-center space-x-2"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {userData ? (
+        <>
+          <GlobalLocalToggle selectedOption={selectedOption} toggleOption={toggleOption} />
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <TbBell className="text-2xl text-gray-600 hover:text-blue-600 cursor-pointer" />
+          </motion.div>
+          <UserProfileDropdown
+            userData={userData}
+            toggleUserProfile={toggleUserProfile}
+            userProfileClicked={userProfileClicked}
+            handleLogout={handleLogout}
+          />
+          <ActionButton
+            onClick={handleSignoutAlert}
+            icon={<TbSend />}
+            label="Post a Job"
+          />
+        </>
+      ) : (
+        <>
+          <ActionLink href="/signin" icon={<HiOutlineUser />} label="Sign in" />
+          <ActionLink href="/register" icon={<HiOutlineUserAdd />} label="Register" />
+        </>
+      )}
+      <ActionLink href="/foremployers"  label="For Employers" />
+    </motion.div>
+  );
+};
 
-
-  export default UserActions;
+export default UserActions;
