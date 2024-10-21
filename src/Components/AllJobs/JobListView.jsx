@@ -4,11 +4,10 @@ import SingleJob from "./SingleJob";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 import {useJobContext} from "@/Contexts/JobContext";
 
-const JobListView = ({props}) => {
+const JobListView = ({props}) => { 
     const {filteredJobs, clickedJob, handleClickedJob, searchPerformed} = props;
-    const {Loading, NewJobLoadingFlag} = useJobContext();
-    let i = 0;
-
+    const {Loading, NewJobLoadingFlag,shouldWait,setShouldWait} = useJobContext(); 
+    let i = 0; 
     return (
         <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-3xl">
             {/* Skeleton Loaders with fade-in and fade-out transitions */}
@@ -29,7 +28,7 @@ const JobListView = ({props}) => {
                             job={job} 
                             clickedJob={clickedJob} 
                             handleClickedJob={handleClickedJob}
-                            key={job.id}
+                            key={index}
                         />
                     ))
                 ) : (
@@ -44,7 +43,7 @@ const JobListView = ({props}) => {
             {/* New Job Loading Skeletons */}
             <div className={`transition-opacity duration-300 ${NewJobLoadingFlag ? 'opacity-100' : 'opacity-0'}`}>
                 {NewJobLoadingFlag && (
-                    [...Array(6).keys()].map((_, index) => (
+                    [...Array(10).keys()].map((_, index) => (
                         <JobCardSkeleton key={`new-job-loading-${index}`}/>
                     ))
                 )}

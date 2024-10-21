@@ -10,7 +10,8 @@ const AllJobs = ({ children }) => {
         setAllJobs, handleClickedJob,
         jobPage, setJobPage,
         query, setQuery,
-        getNewJobsAndReplace, NewJobLoadingFlag
+        getNewJobsAndReplace, NewJobLoadingFlag,
+        shouldWait,setShouldWait
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
@@ -22,12 +23,12 @@ const AllJobs = ({ children }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (
-                window.innerHeight + document.documentElement.scrollTop
-                >= document.documentElement.offsetHeight - 500
-                && !NewJobLoadingFlag
-            ) {
+            if (shouldGetNewJobs()) {  
+                console.log("loading...");
+                
                 getNewJobsAndReplace(jobPage.currentPage + 1);
+                setShouldWait(prev => true)
+                
             }
         };
 
@@ -40,7 +41,7 @@ const AllJobs = ({ children }) => {
         const searchKey = event.target.jobTitle.value.toLowerCase();
         const location = event.target.jobLocation.value.toLowerCase();
         setQuery(createQueryString({searchKey, location}));
-        
+    
         const filtered = allJobs.filter(job => 
             job.job_title.toLowerCase().includes(searchKey) &&
             job.address.toLowerCase().includes(location)
@@ -50,6 +51,13 @@ const AllJobs = ({ children }) => {
         setSearchPerformed(true);
     }, [allJobs, setQuery]);
 
+    const shouldGetNewJobs = ()=>{
+        return window.innerHeight + document.documentElement.scrollTop
+        >= document.documentElement.offsetHeight - 500
+        && !NewJobLoadingFlag
+        && jobPage.currentPage != jobPage.totalPages
+        && !shouldWait;
+    }
     const createQueryString = (paramsObj) => {
         const params = new URLSearchParams();
         for (const [key, value] of Object.entries(paramsObj)) {

@@ -21,6 +21,9 @@ function JobContext({children}) {
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
     const [Loading, setLoading] = useState(true);
     const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
+    const [shouldWait,setShouldWait] = useState(false)
+
+     
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
@@ -50,14 +53,22 @@ function JobContext({children}) {
     const getNewJobsAndReplace = async (page) => {
 
         setNewJobLoadingFlag(true);
+        let prevScrollToBottom = document.documentElement.scrollHeight;
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`);
             const newData = await response.json();
             setAllJobs(allJobs => [...allJobs, ...newData.data]);
+            setJobPage({type: 'get', ...newData.pagination })
+            setTimeout(()=>{
+                setShouldWait( prev => false)
+            },5000)
+            
         } catch (error) {
             console.error('Failed to fetch data', error);
         } finally {
-            setNewJobLoadingFlag(false);
+            setNewJobLoadingFlag(false) 
+               
+             
         }
     };
 
@@ -151,7 +162,8 @@ function JobContext({children}) {
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
         query,setQuery,
-        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag
+        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag,
+        shouldWait,setShouldWait
         }}>
         {children}
     </jobContext.Provider>
