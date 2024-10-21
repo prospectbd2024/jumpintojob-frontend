@@ -59,7 +59,9 @@ function JobContext({children}) {
             const newData = await response.json();
             setAllJobs(allJobs => [...allJobs, ...newData.data]);
             setJobPage({type: 'get', ...newData.pagination })
-             
+            setTimeout(()=>{
+                setShouldWait( prev => false)
+            },5000)
             
         } catch (error) {
             console.error('Failed to fetch data', error);

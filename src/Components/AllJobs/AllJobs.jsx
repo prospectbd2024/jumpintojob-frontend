@@ -27,9 +27,7 @@ const AllJobs = ({ children }) => {
                 
                 getNewJobsAndReplace(jobPage.currentPage + 1);
                 setShouldWait(prev => true)
-                setTimeout(()=>{
-                    setShouldWait( prev => false)
-                },10000)
+                
             }
         };
 

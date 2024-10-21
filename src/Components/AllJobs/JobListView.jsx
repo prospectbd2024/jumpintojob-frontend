@@ -40,7 +40,7 @@ const JobListView = ({props}) => {
             {/* New Job Loading Skeletons */}
             <div className={`transition-opacity duration-300 ${NewJobLoadingFlag ? 'opacity-100' : 'opacity-0'}`}>
                 {NewJobLoadingFlag && (
-                    [...Array(6).keys()].map((_, index) => (
+                    [...Array(10).keys()].map((_, index) => (
                         <JobCardSkeleton key={`new-job-loading-${index}`}/>
                     ))
                 )}
