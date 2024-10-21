@@ -6,7 +6,7 @@ import {useJobContext} from "@/Contexts/JobContext";
 
 const JobListView = ({props}) => {
     const {filteredJobs, clickedJob, handleClickedJob} = props;
-    const {Loading, NewJobLoadingFlag} = useJobContext();
+    const {Loading, NewJobLoadingFlag,shouldWait,setShouldWait} = useJobContext();
     let i = 0;
 
     return (
@@ -40,7 +40,7 @@ const JobListView = ({props}) => {
             {/* New Job Loading Skeletons */}
             <div className={`transition-opacity duration-300 ${NewJobLoadingFlag ? 'opacity-100' : 'opacity-0'}`}>
                 {NewJobLoadingFlag && (
-                    [...Array(10).keys()].map((_, index) => (
+                    [...Array(6).keys()].map((_, index) => (
                         <JobCardSkeleton key={`new-job-loading-${index}`}/>
                     ))
                 )}

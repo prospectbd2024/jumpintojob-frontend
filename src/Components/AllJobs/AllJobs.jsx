@@ -10,7 +10,8 @@ const AllJobs = ({ children }) => {
         setAllJobs, handleClickedJob,
         jobPage, setJobPage,
         query, setQuery,
-        getNewJobsAndReplace, NewJobLoadingFlag
+        getNewJobsAndReplace, NewJobLoadingFlag,
+        shouldWait,setShouldWait
     } = useJobContext();
 
     const [filteredJobs, setFilteredJobs] = useState([]);
@@ -21,20 +22,14 @@ const AllJobs = ({ children }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if ( window.innerHeight + document.documentElement.scrollTop
-                >= document.documentElement.offsetHeight - 400
-                && NewJobLoadingFlag ) {
-                // Disable scrolling
-                 console.log("should be disabled");
-                 
-              }
-            else{
-                document.body.style.overflow = 'overflow';
-            }
             if (shouldGetNewJobs()) {  
                 console.log("loading...");
                 
                 getNewJobsAndReplace(jobPage.currentPage + 1);
+                setShouldWait(prev => true)
+                setTimeout(()=>{
+                    setShouldWait( prev => false)
+                },10000)
             }
         };
 
@@ -51,7 +46,9 @@ const AllJobs = ({ children }) => {
     const shouldGetNewJobs = ()=>{
         return window.innerHeight + document.documentElement.scrollTop
         >= document.documentElement.offsetHeight - 500
-        && !NewJobLoadingFlag && jobPage.currentPage != jobPage.totalPages;
+        && !NewJobLoadingFlag
+        && jobPage.currentPage != jobPage.totalPages
+        && !shouldWait;
     }
     const createQueryString = (paramsObj) => {
         const params = new URLSearchParams();

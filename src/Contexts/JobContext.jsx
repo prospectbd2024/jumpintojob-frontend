@@ -21,6 +21,7 @@ function JobContext({children}) {
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
     const [Loading, setLoading] = useState(true);
     const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
+    const [shouldWait,setShouldWait] = useState(false)
 
      
     useEffect(() => {
@@ -159,7 +160,8 @@ function JobContext({children}) {
         jobPage, setJobPage,
         shouldShowButton , setShowButton,
         query,setQuery,
-        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag
+        bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag,
+        shouldWait,setShouldWait
         }}>
         {children}
     </jobContext.Provider>
