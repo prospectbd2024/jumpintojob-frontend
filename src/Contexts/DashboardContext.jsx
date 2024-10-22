@@ -16,7 +16,20 @@ function DashboardContext({children}) {
     const [jobsPerPage] = useState(10);
 
     const [appliedJobs, setAppliedJobs] = useState([]);
+    const [appliedJobCurrentPage, setAppliedJobCurrentPage] = useState(1);
+    const appliedJobPerPage = 10; // You can adjust this number as needed
+
+    // Calculate pagination for applied jobs
+    const appliedJobIndexOfLastJob = appliedJobCurrentPage * appliedJobPerPage;
+    const appliedJobIndexOfFirstJob = appliedJobIndexOfLastJob - appliedJobPerPage;
+    const appliedJobCurrentJobs = appliedJobs.slice(appliedJobIndexOfFirstJob, appliedJobIndexOfLastJob);
+    const appliedJobTotalPages = Math.ceil(appliedJobs.length / appliedJobPerPage);
+
+    const appliedJobPaginate = (pageNumber) => setAppliedJobCurrentPage(pageNumber);
+
     const [loadingApplyJob, setLoadingApplyJob] = useState(true); // State for loading
+    const [applicantsData, setApplicantsData] = useState(null); // State for applicants data
+    const [loadingApplicants, setLoadingApplicants] = useState(true); // State for loading applicants
     const [error, setError] = useState(null);
 
     const {bearerToken, userData} = useUserContext();
@@ -71,7 +84,7 @@ function DashboardContext({children}) {
         fetchJobs();
     }, [API_URL, bearerToken]);
 
-    // Fetch applied jobs for the job seeker
+// Fetch applied jobs for the job seeker
     useEffect(() => {
         async function fetchAppliedJobs() {
             setLoadingApplyJob(true);
@@ -93,15 +106,44 @@ function DashboardContext({children}) {
                 }
 
                 const data = await response.json();
-                setAppliedJobs(data.data); // Assuming the response contains a `data` array
+                setAppliedJobs(data.data); // Set the applied jobs data using your naming convention
                 setLoadingApplyJob(false);
             } catch (err) {
-                // setError(err.message); // Set error if fetch fails
+                setError(err.message); // Set error if fetch fails
             }
         }
 
         fetchAppliedJobs();
     }, [API_URL, bearerToken, userData]);
+
+    useEffect(() => {
+        const fetchApplications = async () => {
+            setLoadingApplicants(true);
+            try {
+                // Fetch job applications data directly with auth header
+                const res = await fetch(`${API_URL}/api/v1/employer/jobs-with-applicants`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${bearerToken}`, // Pass the Bearer token here
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!res.ok) {
+                    throw new Error('Failed to fetch applications');
+                }
+
+                const data = await res.json();
+                setApplicantsData(data.data); // Set applicants data
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoadingApplicants(false);
+            }
+        };
+
+        fetchApplications();
+    }, [bearerToken]);
 
     const clearJobs = () => setJobs([]);
 
@@ -130,9 +172,14 @@ function DashboardContext({children}) {
                 clearJobs,
                 currentPage,
                 totalPages,
-                appliedJobs,
+                appliedJobs: appliedJobCurrentJobs,
                 loadingApplyJob,
+                applicantsData,
+                loadingApplicants,
                 error,
+                appliedJobCurrentPage,
+                appliedJobTotalPages,
+                appliedJobPaginate,
             }}>
             {children}
         </dashboardContext.Provider>
