@@ -1,6 +1,7 @@
 "use client"
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import React,{useContext,createContext, useState,useEffect, useCallback} from 'react'
+import { useUserContext } from './UserContext';
 
 
 export const jobContext = createContext();
@@ -22,7 +23,7 @@ function JobContext({children}) {
     const [Loading, setLoading] = useState(true);
     const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
     const [shouldWait,setShouldWait] = useState(false)
-
+   const {userData} = useUserContext();
      
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
@@ -37,7 +38,13 @@ function JobContext({children}) {
                 // Handle errors appropriately (e.g., show an error message to the user)
             });
     }, []);
-
+    useEffect(() => {
+        if(userData){
+            getBookMarkJobs()
+        }
+    
+      
+    }, [])
     const getMoreJobs= (page)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular?page=${page}`)
         .then(res => res.json())
@@ -129,11 +136,55 @@ function JobContext({children}) {
         }
     },[query])
 
+    const getBookMarkJobs = () => {
+        let userId = userData?.data?.user?.user_id;
+    
+        try {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/bookmark/${userId}`)
+                .then(res => res.json())
+                .then(data => {
+                    setBookMarkedJobs(data.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    
+
+    const updateBookMarkJobs = (jobId) => {
+        let userId = userData?.data?.user?.user_id;
+    
+        try {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/bookmark/${userId}/update`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Accept" : 'application/json'
+                },
+                body: JSON.stringify({ job_id: jobId }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setBookMarkedJobs(data.data); // Update state with new bookmarks 
+                    
+                })
+                .catch(error => {
+                    console.error('Error updating bookmark:', error);
+                });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    
+
     const filterJobs =(query)=>{
-        // console.log(query);
+         
 
         try{
-            // console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}&page=${jobPage.currentPage}`);
+             
             fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/search?${query}&page=${jobPage.currentPage}`)
             .then(res => res.json())
             .then(data => {
@@ -151,6 +202,7 @@ function JobContext({children}) {
         }
 
     }
+    
 
   return (
     <jobContext.Provider value={{
@@ -163,7 +215,8 @@ function JobContext({children}) {
         shouldShowButton , setShowButton,
         query,setQuery,
         bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag,
-        shouldWait,setShouldWait
+        shouldWait,setShouldWait,
+        updateBookMarkJobs
         }}>
         {children}
     </jobContext.Provider>
