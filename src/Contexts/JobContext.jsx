@@ -14,6 +14,7 @@ function JobContext({children}) {
     const pathname = usePathname();
     const router = useRouter();
     const [allJobs, setAllJobs] = useState([]);
+    const [featuredJobs, setFeaturedJobs] = useState([]);
     const [selectedJob,setSelectedJob]= useState({});
     const [clickedJob, setClickedJob] = useState();
     const [jobPage, setJobPage] = useState({currentPage: 1, type: 'fetch' , totalPages: 10 , status : 'new'});
@@ -30,6 +31,19 @@ function JobContext({children}) {
             .then(res => res.json())
             .then(data => {
                 setAllJobs(data.data);
+                setJobPage({type: 'get', ...data.pagination })
+                setLoading(false)
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors appropriately (e.g., show an error message to the user)
+            });
+    }, []);
+    useEffect(() => {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular/featured-jobs`)
+            .then(res => res.json())
+            .then(data => {
+                setFeaturedJobs(data.data);
                 setJobPage({type: 'get', ...data.pagination })
                 setLoading(false)
             })
@@ -168,7 +182,8 @@ function JobContext({children}) {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setBookMarkedJobs(data.data); // Update state with new bookmarks 
+                    // setBookMarkedJobs(data.data); // Update state with new bookmarks 
+
                     
                 })
                 .catch(error => {
@@ -216,7 +231,9 @@ function JobContext({children}) {
         query,setQuery,
         bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag,
         shouldWait,setShouldWait,
-        updateBookMarkJobs
+        updateBookMarkJobs,
+        featuredJobs, setFeaturedJobs
+
         }}>
         {children}
     </jobContext.Provider>

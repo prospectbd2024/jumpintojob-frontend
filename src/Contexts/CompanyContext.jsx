@@ -10,6 +10,7 @@ export const useCompanyContext = ()=> useContext(companyContext);
 function CompanyContext({children}) {
 
     const [companies, setCompanies] = useState([]);
+    const [featuredCompanies, setFeaturedCompanies] = useState([]);
  
     
     const fetchCompanes = useCallback((category_id)=>{
@@ -29,8 +30,17 @@ function CompanyContext({children}) {
       fetchCompanes('all-industries');
       }, []);
 
+      
+      
+    useEffect(() => { 
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies/featured`)
+        .then((res) => res.json())
+        .then((data) => {
+          setFeaturedCompanies(data.data??[]); 
+        });
+      }, []);
   return (
-    <companyContext.Provider value={ { companies, setCompanies}}>
+    <companyContext.Provider value={ { companies, setCompanies,featuredCompanies, setFeaturedCompanies}}>
         {children}
     </companyContext.Provider>
   )
