@@ -24,7 +24,7 @@ function JobContext({children}) {
     const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
     const [shouldWait,setShouldWait] = useState(false)
    const {userData} = useUserContext();
-     
+
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/circular`)
             .then(res => res.json())
