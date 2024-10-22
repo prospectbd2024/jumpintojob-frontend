@@ -18,14 +18,14 @@ const FeaturedJobs = () => {
   };
 
   useEffect(() => {
-    if (allJobs && allJobs.length > 0) {
+    if (featuredJobs && featuredJobs.length > 0) {
       setIsLoading(false);
     } else {
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     }
-  }, [allJobs]);
+  }, [featuredJobs]);
 
   return (
     <section className="featured-jobs py-24">
