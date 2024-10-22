@@ -183,6 +183,7 @@ function JobContext({children}) {
                 .then(res => res.json())
                 .then(data => {
                     // setBookMarkedJobs(data.data); // Update state with new bookmarks 
+
                     
                 })
                 .catch(error => {
@@ -232,6 +233,7 @@ function JobContext({children}) {
         shouldWait,setShouldWait,
         updateBookMarkJobs,
         featuredJobs, setFeaturedJobs
+
         }}>
         {children}
     </jobContext.Provider>
