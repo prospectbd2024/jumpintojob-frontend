@@ -7,22 +7,22 @@ import MobileJobDetailsModal from "@/Components/JobDetails/MobileJobDetailsModal
 
 const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
     const {guestProtection} = useUserContext();
-    const {bookMarkedJobs, setBookMarkedJobs} = useJobContext();
+    const {bookMarkedJobs, setBookMarkedJobs,updateBookMarkJobs} = useJobContext();
     const [showModal, setShowModal] = useState(false);
 
     const toggleBookMarks = (e, job) => {
         e.stopPropagation();
         guestProtection(() => {
-            let id = job.id;
-            console.log(bookMarkedJobs);
-
-            if (bookMarkedJobs.includes(id)) {
-                setBookMarkedJobs((prev) => prev.filter((jobId) => jobId !== id));
+            let id = job.id;  
+            if (bookMarkedJobs.find(el => job.id == el.job_id)) {
+                setBookMarkedJobs((prev) => prev.filter(el => job.id != el.job_id));
             } else {
-                setBookMarkedJobs((prev) => [...prev, id]);
+                setBookMarkedJobs((prev) => [...prev, {job_id : job.id}]);
             }
         });
     };
+
+
 
     const toggleModal = () => setShowModal(!showModal);
 
@@ -47,9 +47,10 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
                         onClick={(e) => {
                             e.stopPropagation();
                             toggleBookMarks(e, job);
+                            updateBookMarkJobs(job.id)
                         }}
                         className={`text-xl cursor-pointer w-8 h-8 p-1 rounded-full transition duration-300 ease-in-out ${
-                            bookMarkedJobs.includes(job.id)
+                            bookMarkedJobs.find(el => job.id == el.job_id)
                                 ? 'bg-gray-200 hover:bg-gray-400 text-gray-800 hover:text-white'
                                 : 'bg-green-200 hover:bg-green-400 text-green-800 hover:text-white'
                         }`}
