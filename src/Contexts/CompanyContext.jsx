@@ -33,11 +33,10 @@ function CompanyContext({children}) {
       
       
     useEffect(() => { 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/featured`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/companies/featured`)
         .then((res) => res.json())
         .then((data) => {
-          setFeaturedCompanies(data.data??[]);
-           
+          setFeaturedCompanies(data.data??[]); 
         });
       }, []);
   return (
