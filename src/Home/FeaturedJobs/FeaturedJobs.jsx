@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const FeaturedJobs = () => {
   const { setClickedFeaturedJob } = useUserContext();
-  const { allJobs } = useJobContext();
+  const { allJobs,featuredJobs } = useJobContext();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -38,9 +38,9 @@ const FeaturedJobs = () => {
             ))}
             <ShowMoreJobsSkeleton />
           </div>
-        ) : allJobs.length > 0 ? (
+        ) : featuredJobs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {allJobs.slice(0, 6).map((job) => (
+            {featuredJobs.slice(0, 6).map((job) => (
               <SingleJob
                 key={job.id}
                 job={job}

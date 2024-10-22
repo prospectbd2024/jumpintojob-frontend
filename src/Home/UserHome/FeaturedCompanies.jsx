@@ -5,7 +5,7 @@ import { useCompanyContext } from "@/Contexts/CompanyContext";
 import Link from "next/link";
 
 function FeaturedCompanies({ isLoggedIn, className }) {
-  const { companies } = useCompanyContext();
+  const { companies,featuredCompanies } = useCompanyContext();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function FeaturedCompanies({ isLoggedIn, className }) {
             </>
           ) : (
             <>
-              {companies.slice(0, 7).map((company, index) => (
+              {featuredCompanies.slice(0, 7).map((company, index) => (
                 <CompanyCard key={index} props={{ company, index }} />
               ))}
             </>
