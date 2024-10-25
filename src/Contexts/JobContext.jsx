@@ -22,6 +22,7 @@ function JobContext({children}) {
     const [query,setQuery] = useState("")
     const [bookMarkedJobs, setBookMarkedJobs] = useState([])
     const [Loading, setLoading] = useState(true);
+    const [isFeaturedJobLoading,setFeaturedJobsLoading] = useState(true)
     const [NewJobLoadingFlag, setNewJobLoadingFlag] = useState(false);
     const [shouldWait,setShouldWait] = useState(false)
    const {userData} = useUserContext();
@@ -32,7 +33,7 @@ function JobContext({children}) {
             .then(data => {
                 setAllJobs(data.data);
                 setJobPage({type: 'get', ...data.pagination })
-                setLoading(false)
+                 
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -44,8 +45,10 @@ function JobContext({children}) {
             .then(res => res.json())
             .then(data => {
                 setFeaturedJobs(data.data);
-                setJobPage({type: 'get', ...data.pagination })
-                setLoading(false)
+                setJobPage({type: 'get', ...data.pagination }) 
+                setTimeout(() => {
+                    setFeaturedJobsLoading(false)
+                }, 1000);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -232,7 +235,8 @@ function JobContext({children}) {
         bookMarkedJobs,setBookMarkedJobs, getMoreJobs, getNewJobsAndReplace, Loading, NewJobLoadingFlag,
         shouldWait,setShouldWait,
         updateBookMarkJobs,
-        featuredJobs, setFeaturedJobs
+        featuredJobs, setFeaturedJobs,
+        isFeaturedJobLoading
 
         }}>
         {children}

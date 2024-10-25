@@ -13,7 +13,7 @@ const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob, className, jobCla
     } else {
       setTimeout(() => {
         setIsLoading(false); // Set loading to false after a delay (simulating data fetching)
-      }, 2000); // Adjust delay time as needed
+      }, 5000); // Adjust delay time as needed
     }
   }, []);
 
