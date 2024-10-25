@@ -10,7 +10,7 @@ import { useJobContext } from "@/Contexts/JobContext";
 import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton"; 
 
   
-const JobDetails = ({ props }) => {
+const JobDetails = ({ props ,className}) => {
   const router = useRouter();
   const { job } = props;
   const { isApplied, handleApplyJob } = useApplicationContext();
@@ -26,7 +26,7 @@ const JobDetails = ({ props }) => {
   }
 
   return (
-    <div className="relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0">
+    <div className={"relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0 " +className}>
       {/* Header Content */} 
       <div className="relative pb-1 py-2 pt-2 sm:p-4 md:p-6 lg:pt-8">
         {/* Cover Image */}
