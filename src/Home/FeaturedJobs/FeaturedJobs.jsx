@@ -9,12 +9,12 @@ import { useRouter } from "next/navigation";
 
 const FeaturedJobs = () => {
   const { setClickedFeaturedJob } = useUserContext();
-  const { allJobs,featuredJobs } = useJobContext();
+  const { allJobs,featuredJobs,isFeaturedJobLoading } = useJobContext();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const handleClickedFeaturedJob = (e) => {
-    router.push(`/findjobs/jobdetails/${e}`);
+    router.push(`/jobs/jobdetails/${e}`);
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const FeaturedJobs = () => {
     <section className="featured-jobs py-24">
       <div className="container mx-auto px-4">
         <h2 className="text-center text-3xl font-bold mb-8">Featured Jobs</h2>
-        {isLoading ? (
+        {isFeaturedJobLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[...Array(6)].map((_, i) => (
               <JobCardSkeleton key={i} />
@@ -44,7 +44,7 @@ const FeaturedJobs = () => {
               <SingleJob
                 key={job.id}
                 job={job}
-                clickedJob={handleClickedFeaturedJob}
+                handleClickedJob={handleClickedFeaturedJob}
               />
             ))}
           </div>

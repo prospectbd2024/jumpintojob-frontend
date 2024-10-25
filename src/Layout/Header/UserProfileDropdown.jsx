@@ -44,7 +44,7 @@ const UserProfileDropdown = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-12 right-0 w-80 bg-white shadow-xl rounded-xl overflow-hidden"
+                    className="absolute top-12 right-0 w-80 bg-white shadow-xl rounded-xl overflow-hidden z-[1001]"
                 >
                     <div className="bg-gradient-to-r from-primary-color to-purple-600 p-6 text-white">
                         <h4 className="text-xl font-bold">

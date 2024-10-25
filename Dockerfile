@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM  node:18.20.2-alpine
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ RUN apk add --no-cache bash
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --loglevel verbose
 
 COPY . .
 

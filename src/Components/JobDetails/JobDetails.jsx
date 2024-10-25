@@ -7,20 +7,15 @@ import Link from "next/link";
 import { FaUpRightFromSquare } from "react-icons/fa6";
 import { FaBriefcase, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useJobContext } from "@/Contexts/JobContext";
-import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton";
-import dynamic from "next/dynamic"; 
+import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton"; 
 
-const ApplyJob = dynamic(() => import("../ApplyJob/ApplyJob"), {
-  loading: () => <p>Loading application form...</p>,
-  ssr: false,
-});
-
-const JobDetails = ({ props }) => {
+  
+const JobDetails = ({ props ,className}) => {
   const router = useRouter();
   const { job } = props;
   const { isApplied, handleApplyJob } = useApplicationContext();
   const { guestProtection } = useUserContext();
-  const { Loading } = useJobContext();
+  const { Loading } = useJobContext();  
 
   if (Loading) {
     return (
@@ -31,7 +26,7 @@ const JobDetails = ({ props }) => {
   }
 
   return (
-    <div className="relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0">
+    <div className={"relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0 " +className}>
       {/* Header Content */} 
       <div className="relative pb-1 py-2 pt-2 sm:p-4 md:p-6 lg:pt-8">
         {/* Cover Image */}
@@ -57,7 +52,7 @@ const JobDetails = ({ props }) => {
               </div>
 
               <div className="flex flex-col">
-                <Link href="#" className="text-sm font-semibold text-blue-600 hover:underline">
+                <Link href={`${job.links.dashboard}`} className="text-sm font-semibold text-blue-600 hover:underline">
                   {job.company_name}
                 </Link>
                 <h2 className="text-lg font-bold text-gray-800 mb-1">{job.job_title}</h2>

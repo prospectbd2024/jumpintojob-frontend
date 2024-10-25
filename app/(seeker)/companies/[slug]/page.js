@@ -125,7 +125,7 @@ function Page() {
                         </div>
                         {!isMediumScreen && (
                             <div className='ml-5 mr-8 mt-4'>
-                                <JobDetails props={{ job: job, handleApplyJob: () => handleApplyJob(job.id) }} />
+                                <JobDetails props={{ job: job, handleApplyJob: () => handleApplyJob(job.id) }}  className="sticky top-10"/>
                             </div>
                         )}
                     </div>
