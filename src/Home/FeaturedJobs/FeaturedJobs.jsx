@@ -14,7 +14,7 @@ const FeaturedJobs = () => {
   const router = useRouter();
 
   const handleClickedFeaturedJob = (e) => {
-    router.push(`/findjobs/jobdetails/${e}`);
+    router.push(`/jobs/jobdetails/${e}`);
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const FeaturedJobs = () => {
               <SingleJob
                 key={job.id}
                 job={job}
-                clickedJob={handleClickedFeaturedJob}
+                handleClickedJob={handleClickedFeaturedJob}
               />
             ))}
           </div>
