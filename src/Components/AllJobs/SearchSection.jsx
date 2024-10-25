@@ -43,7 +43,7 @@ const SearchSection = ({ handleFilteredJobs }) => {
       }`}
       style={{
         top: 'var(--header-height, 65px)',
-        zIndex: 1000,
+        zIndex: 10,
       }}
     >
       <style jsx>{`
