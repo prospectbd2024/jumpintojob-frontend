@@ -7,20 +7,15 @@ import Link from "next/link";
 import { FaUpRightFromSquare } from "react-icons/fa6";
 import { FaBriefcase, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useJobContext } from "@/Contexts/JobContext";
-import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton";
-import dynamic from "next/dynamic"; 
+import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton"; 
 
-const ApplyJob = dynamic(() => import("../ApplyJob/ApplyJob"), {
-  loading: () => <p>Loading application form...</p>,
-  ssr: false,
-});
-
+  
 const JobDetails = ({ props }) => {
   const router = useRouter();
   const { job } = props;
   const { isApplied, handleApplyJob } = useApplicationContext();
   const { guestProtection } = useUserContext();
-  const { Loading } = useJobContext();
+  const { Loading } = useJobContext();  
 
   if (Loading) {
     return (
@@ -57,7 +52,7 @@ const JobDetails = ({ props }) => {
               </div>
 
               <div className="flex flex-col">
-                <Link href="#" className="text-sm font-semibold text-blue-600 hover:underline">
+                <Link href={`${job.links.dashboard}`} className="text-sm font-semibold text-blue-600 hover:underline">
                   {job.company_name}
                 </Link>
                 <h2 className="text-lg font-bold text-gray-800 mb-1">{job.job_title}</h2>
