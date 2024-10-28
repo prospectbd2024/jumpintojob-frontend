@@ -31,7 +31,7 @@ function ApplicationContext({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch CV");
+        // throw new Error("Failed to fetch CV");
       }
 
       const data = await response.json();
@@ -127,7 +127,7 @@ function ApplicationContext({ children }) {
   useEffect(() => {
     if (userData) {
       getAppliedJobs();
-      getResume(); // Fetch CV when userData is available
+    
     }
   }, [userData]);
   const isApplied = (job_id) => {
@@ -155,6 +155,7 @@ function ApplicationContext({ children }) {
         handleApplyJob,
         CV,
         setCV,
+        getResume
       }}>
       {children}
     </applicationContext.Provider>
