@@ -1,5 +1,5 @@
 'use client';
-import React, {useState} from 'react';
+import React from 'react';
 import {useJobContext} from '@/Contexts/JobContext';
 import {useUserContext} from '@/Contexts/UserContext';
 import {HiOutlineBookmark} from 'react-icons/hi';
@@ -7,8 +7,7 @@ import MobileJobDetailsModal from "@/Components/JobDetails/MobileJobDetailsModal
 
 const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
     const {guestProtection} = useUserContext();
-    const {bookMarkedJobs, setBookMarkedJobs,updateBookMarkJobs} = useJobContext();
-    const [showModal, setShowModal] = useState(false);
+    const {bookMarkedJobs, setBookMarkedJobs, updateBookMarkJobs} = useJobContext();
 
     const toggleBookMarks = (e, job) => {
         e.stopPropagation();
@@ -17,27 +16,20 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
             if (bookMarkedJobs.find(el => job.id == el.job_id)) {
                 setBookMarkedJobs((prev) => prev.filter(el => job.id != el.job_id));
             } else {
-                setBookMarkedJobs((prev) => [...prev, {job_id : job.id}]);
+                setBookMarkedJobs((prev) => [...prev, {job_id: job.id}]);
             }
         });
     };
 
-
-
-    const toggleModal = () => setShowModal(!showModal);
-
     return (
-        <>
+        <div className="relative">
             <div
-                className={`relative mx-2 sm:mx-3 md:mx-3 md:mr-10 md:ml-10 lg:mx-5 xl:mx-0 rounded-lg p-4 transition-transform duration-300 ease-in-out cursor-pointer ${
+                className={`mx-2 sm:mx-3 md:mx-3 md:mr-10 md:ml-10 lg:mx-5 xl:mx-0 rounded-lg p-4 transition-transform duration-300 ease-in-out cursor-pointer ${
                     clickedJob === job.id
                         ? 'border-b-4 border-r-3 border-gray-300 shadow-lg bg-gradient-to-br from-blue-100 via-blue-80 to-blue-70 transform scale-102'
                         : 'border-b-4 border-r-3 border-transparent shadow-md hover:border-gray-300 hover:shadow-lg'
                 }`}
-                onClick={() => {
-                    handleClickedJob(job.id);
-                    toggleModal(); // Toggle modal on job click
-                }}
+                onClick={() => handleClickedJob(job.id)}
             >
                 <div className="flex items-center justify-between mb-3">
                     <h2 className="text-lg font-semibold text-gray-900 truncate">
@@ -45,9 +37,8 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
                     </h2>
                     <HiOutlineBookmark
                         onClick={(e) => {
-                            e.stopPropagation();
                             toggleBookMarks(e, job);
-                            updateBookMarkJobs(job.id)
+                            updateBookMarkJobs(job.id);
                         }}
                         className={`text-xl cursor-pointer w-8 h-8 p-1 rounded-full transition duration-300 ease-in-out ${
                             bookMarkedJobs.find(el => job.id == el.job_id)
@@ -67,17 +58,15 @@ const SingleJob = ({index, job, clickedJob, handleClickedJob}) => {
                 </div>
             </div>
 
-            {/* Conditionally render the MobileModal */}
-            {showModal && (
-                <div className=' mt-10'>
-
-                <MobileJobDetailsModal
-                    job={job}
-                    toggleModal={toggleModal}
+            {clickedJob === job.id && (
+                <div className="absolute top-full left-0 right-0 z-50">
+                    <MobileJobDetailsModal
+                        job={job}
+                        toggleModal={() => handleClickedJob(null)}
                     />
-                    </div>
+                </div>
             )}
-        </>
+        </div>
     );
 };
 

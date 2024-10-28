@@ -9,8 +9,7 @@ import { FaBriefcase, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useJobContext } from "@/Contexts/JobContext";
 import JobDetailsSkeleton from "@/Skeletons/JobDetailsSkeleton"; 
 
-  
-const JobDetails = ({ props ,className}) => {
+const JobDetails = ({ props, className }) => {
   const router = useRouter();
   const { job } = props;
   const { isApplied, handleApplyJob } = useApplicationContext();
@@ -25,8 +24,11 @@ const JobDetails = ({ props ,className}) => {
     );
   }
 
+  // Get dashboard URL with fallback
+  const dashboardUrl = job?.links?.dashboard || `/company/${job?.company_name}`;
+
   return (
-    <div className={"relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0 " +className}>
+    <div className={"relative bg-white shadow-md border-b border-gray-200 overflow-hidden sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0 " + className}>
       {/* Header Content */} 
       <div className="relative pb-1 py-2 pt-2 sm:p-4 md:p-6 lg:pt-8">
         {/* Cover Image */}
@@ -52,7 +54,7 @@ const JobDetails = ({ props ,className}) => {
               </div>
 
               <div className="flex flex-col">
-                <Link href={`${job.links.dashboard}`} className="text-sm font-semibold text-blue-600 hover:underline">
+                <Link href={dashboardUrl} className="text-sm font-semibold text-blue-600 hover:underline">
                   {job.company_name}
                 </Link>
                 <h2 className="text-lg font-bold text-gray-800 mb-1">{job.job_title}</h2>
@@ -81,9 +83,14 @@ const JobDetails = ({ props ,className}) => {
         <div className="flex items-center relative z-50">
           <button
             type="button"
-            onClick={()=>handleApplyJob(job)}
+            onClick={() => handleApplyJob(job)}
             disabled={isApplied(job.id)}
-            className={`text-white  ${isApplied(job.id)?"bg-gray-600 hover:bg-gray-700 disabled:cursor-not-allowed":"bg-blue-600 hover:bg-blue-700"}focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 inline-flex items-center`}>
+            className={`text-white ${
+              isApplied(job.id)
+                ? "bg-gray-600 hover:bg-gray-700 disabled:cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            } focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 inline-flex items-center`}
+          >
             {isApplied(job.id) ? "Applied" : "Apply Now"}
             <FaUpRightFromSquare className={`w-4 h-4 ml-2 ${!isApplied(job.id) ? "text-white" : "hidden"}`} />
           </button>

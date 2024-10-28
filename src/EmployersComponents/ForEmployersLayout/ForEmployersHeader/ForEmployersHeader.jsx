@@ -57,13 +57,16 @@ const ForEmployersHeader = () => {
     setMobileMenuOpen(false);
   };
 
-  const MenuItem = ({ href, icon: Icon, text }) => (
+  const MenuItem = ({ href, icon: Icon, text, onClick }) => (
     <Link
       href={href}
       className={`${
         activeMenu === href ? "bg-blue-100 text-blue-600" : "text-gray-800 hover:bg-blue-50"
       } flex items-center gap-2 p-2 rounded-lg transition-colors duration-200`}
-      onClick={closeMobileMenu}
+      onClick={() => {
+        closeMobileMenu();
+        onClick && onClick();
+      }}
     >
       <Icon className="text-xl" />
       <span className="whitespace-nowrap">{text}</span>
@@ -77,7 +80,6 @@ const ForEmployersHeader = () => {
           <Link href="/" className="flex items-center space-x-2 group">
             <Logo className="w-24 h-8 sm:w-32 sm:h-10 transition-transform duration-300 group-hover:scale-105" fill="var(--primary-color)" />
             <div className="hidden sm:flex flex-col">
-              {/* <span className="text-blue-600 text-xs font-medium">Find Top Talent</span> */}
               <span className="text-primary-color font-semibold text-lg leading-tight">For Employers</span>
             </div>
           </Link>
@@ -100,16 +102,27 @@ const ForEmployersHeader = () => {
                   />
                   {userProfileClicked && (
                     <div className="absolute top-10 right-0 w-72 bg-white shadow-lg rounded-lg p-5">
-                      {/* ... (keep the existing user profile dropdown content) */}
+                      <div className="space-y-3">
+                        <MenuItem href="/profile" icon={TbUserCircle} text="Profile" />
+                        <MenuItem href="/settings" icon={HiCog} text="Settings" />
+                        <MenuItem href="/help" icon={HiQuestionMarkCircle} text="Help & Support" />
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-red-600 font-medium py-2 px-4 rounded-lg hover:bg-red-50 transition-colors duration-200 flex items-center space-x-2"
+                        >
+                          <TbLogout className="text-xl" />
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
               </div>
             ) : (
-              <>
+              <div className="flex items-center space-x-4">
                 <MenuItem href="/foremployers/register" icon={HiOutlineUserAdd} text="Register" />
                 <MenuItem href="/foremployers/signin" icon={HiOutlineUser} text="Sign In" />
-              </>
+              </div>
             )}
           </nav>
 
@@ -144,7 +157,13 @@ const ForEmployersHeader = () => {
           <MenuItem href="/candidates" icon={TbClipboardList} text="Candidates" />
           <MenuItem href="" icon={TbMessage2} text="Message" />
           <MenuItem href="/" icon={TbUsers} text="For Workers" />
-          {!userData?.data && (
+          {userData?.data ? (
+            <>
+              <MenuItem href="/profile" icon={TbUserCircle} text="Profile" />
+              <MenuItem href="/settings" icon={HiCog} text="Settings" />
+              <MenuItem href="/help" icon={HiQuestionMarkCircle} text="Help & Support" />
+            </>
+          ) : (
             <>
               <MenuItem href="/foremployers/register" icon={HiOutlineUserAdd} text="Register" />
               <MenuItem href="/foremployers/signin" icon={HiOutlineUser} text="Sign In" />
