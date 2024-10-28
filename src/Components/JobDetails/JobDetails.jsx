@@ -52,7 +52,7 @@ const JobDetails = ({ props ,className}) => {
               </div>
 
               <div className="flex flex-col">
-                <Link href={`${job.links.dashboard}`} className="text-sm font-semibold text-blue-600 hover:underline">
+                <Link href={`${job?.links?.dashboard}`} className="text-sm font-semibold text-blue-600 hover:underline">
                   {job.company_name}
                 </Link>
                 <h2 className="text-lg font-bold text-gray-800 mb-1">{job.job_title}</h2>
