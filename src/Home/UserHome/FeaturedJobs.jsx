@@ -2,26 +2,16 @@ import React, { useState, useEffect } from "react";
 import SingleJob from "@/Components/AllJobs/SingleJob";
 import JobCardSkeleton from "@/Skeletons/JobCardSkeleton";
 import ShowMoreButton from "@/Components/Buttons/ShowMoreJobs";
+import { useJobContext } from "@/Contexts/JobContext";
 
 const FeaturedJobsList = ({ allJobs, handleClickedFeaturedJob, className, jobClassName }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate data fetching delay
-    if (allJobs?.length > 0) {
-      setIsLoading(false);
-    } else {
-      setTimeout(() => {
-        setIsLoading(false); // Set loading to false after a delay (simulating data fetching)
-      }, 5000); // Adjust delay time as needed
-    }
-  }, []);
-
+  const {isFeaturedJobLoading} = useJobContext();
+ 
   return (
     <section className={className}>
       <h2 className="text-center text-2xl font-bold mb-8">Featured Jobs</h2>
       <div className={jobClassName}>
-        {isLoading ? (
+        {isFeaturedJobLoading ? (
           // Show skeleton loaders while loading
           <>
             <JobCardSkeleton />

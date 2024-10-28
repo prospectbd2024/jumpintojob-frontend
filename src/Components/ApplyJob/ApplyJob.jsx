@@ -21,8 +21,11 @@ const Skeleton = ({ className }) => (
 
 const ApplyJob = ({ job }) => {
   const { personalInformation } = useUserProfileContext();
+  const { city, state, country } = personalInformation.currentAddress || {};
+  const address = [city, state, country].filter(Boolean).join(", ");
+
   const { userData } = useUserContext();
-  const { apply, message, forwardingLetter, setForwardingLetter, resume, CV, setCV } =
+  const { apply, message, forwardingLetter, setForwardingLetter, resume, CV, setCV ,getResume} =
     useApplicationContext();
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +41,9 @@ const ApplyJob = ({ job }) => {
   const handleCoverLetter = (type) => {
     setForwardingLetter({ type, value: null });
   };
-
+useEffect(()=>{
+  getResume(); // Fetch CV when userData is available
+},[])
   const handleClick = () => {
     if (userData) {
       apply(job, CV, resume);
@@ -249,11 +254,7 @@ if(!isClient || !job){
                 </label>
                 <input
                   id="location"
-                  value={`${personalInformation.currentAddress?.city}${
-                    personalInformation.currentAddress?.state
-                      ? ", " + personalInformation.currentAddress.state
-                      : ""
-                  }, ${personalInformation.currentAddress?.country}`}
+                  value={address??"Not Found!"}
                   disabled
                   className="w-full p-2 border rounded-md bg-gray-100"
                 />
@@ -275,12 +276,14 @@ if(!isClient || !job){
                 Upload or {resume ? "update" : "create"} your resume {resume && "(Optional)"}
               </label>
               <div className="mt-2 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                <input
-                  id="resume"
-                  type="file"
-                  className="w-full md:w-auto p-2 border rounded-md flex-grow"
-                  onChange={(e) => setCV(e.target.files[0])}
-                />
+              <input
+                id="resume"
+                type="file"
+                accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
+                className="w-full md:w-auto p-2 border rounded-md flex-grow"
+                onChange={(e) => setCV(e.target.files[0])}
+              />
+
                 <Link
                   href="/resumebuilder"
                   className="px-4 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 whitespace-nowrap text-center"
@@ -355,6 +358,7 @@ if(!isClient || !job){
               {forwardingLetter.type === "file" && (
                 <input
                   type="file"
+                  accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
                   className="w-full p-2 border rounded-md mt-2"
                   onChange={handleFileChange}
                 />
