@@ -7,7 +7,7 @@ import {useRouter, usePathname } from 'next/navigation'
 import {
     Menu, X, BriefcaseIcon, UsersIcon, CalendarIcon, BarChart2Icon,
     PlusIcon, HelpCircleIcon, BellIcon, MessageCircleIcon,
-    ChevronDownIcon, StarIcon, FilterIcon, Sun, Moon, LogOut, Settings, User
+    ChevronDownIcon, StarIcon, FilterIcon, Sun, Moon, LogOut, Settings, User, HomeIcon
 } from 'lucide-react'
 import {useDashboardContext} from "@/Contexts/DashboardContext";
 import {useUserContext} from "@/Contexts/UserContext";
@@ -111,6 +111,12 @@ export default function DashboardLayout({children}) {
                 <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
+
+                            {/* Desktop Home button */}
+                            <Link href="/" className="hidden lg:flex text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none">
+                                <HomeIcon size={24}/>
+                            </Link>
+
                             <div className="flex items-center">
                                 <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                                         className="lg:hidden text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none">
