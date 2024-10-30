@@ -65,12 +65,6 @@ const UserActions = ({
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <TbBell className="text-2xl text-gray-600 hover:text-blue-600 cursor-pointer" />
           </motion.div>
-          <UserProfileDropdown
-            userData={userData}
-            toggleUserProfile={toggleUserProfile}
-            userProfileClicked={userProfileClicked}
-            handleLogout={handleLogout}
-          />
           <ActionButton
             onClick={handleSignoutAlert}
             icon={<TbSend />}
@@ -84,6 +78,16 @@ const UserActions = ({
         </>
       )}
       <ActionLink href="/foremployers"  label="For Employers" />
+
+      {/*user profile dropdown*/}
+      {userData ? (
+          <UserProfileDropdown
+              userData={userData}
+              toggleUserProfile={toggleUserProfile}
+              userProfileClicked={userProfileClicked}
+              handleLogout={handleLogout}
+          />
+      ) : null}
     </motion.div>
   );
 };
