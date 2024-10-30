@@ -123,6 +123,12 @@ export default function DashboardLayout({children}) {
                                     <Menu size={24}/>
                                 </button>
                             </div>
+
+                            {/* Mobile Home button */}
+                            <Link href="/" className="lg:hidden text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none">
+                                <HomeIcon size={24}/>
+                            </Link>
+
                             <div className="flex items-center space-x-4">
                                 <button
                                     className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none">
