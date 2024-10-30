@@ -54,7 +54,7 @@ const FeaturedJobs = () => {
           </div>
         )}
         <div className="text-center mt-10">
-          <Link href="/findjobs">
+          <Link href="/jobs">
             <button className="
             bg-green-500 
         text-white 
