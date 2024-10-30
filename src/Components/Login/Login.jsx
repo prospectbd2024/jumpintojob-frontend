@@ -67,10 +67,14 @@ const Login = () => {
         timer: 1500,
       });
 
-      if (loginUserData.data.user.is_verified == false) {
+      if (loginUserData.data.user.is_verified === false) {
         navigate.push("/verify-email");
       } else {
-        navigate.push("/dashboard");
+        if (loginUserData.data.user.user_type === 'job_seeker') {
+          navigate.push("/");
+        } else {
+          navigate.push("/dashboard");
+        }
       }
     } else {
       setWarning((prev) => {
