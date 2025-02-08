@@ -1,25 +1,80 @@
+// pages/candidates.js
 'use client'
 
 import React, { useState } from 'react'
-import { Search, Filter, ChevronDown, Star, Mail } from 'lucide-react'
+import { Search, Filter, ChevronDown, Star, Mail, Phone, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
-
-const candidates = [
-    { id: 1, name: 'Alice Johnson', role: 'Frontend Developer', location: 'New York, NY', experience: '5 years', image: 'https://i.pravatar.cc/150?img=1' },
-    { id: 2, name: 'Bob Smith', role: 'Backend Developer', location: 'San Francisco, CA', experience: '3 years', image: 'https://i.pravatar.cc/150?img=2' },
-    { id: 3, name: 'Carol Williams', role: 'UX Designer', location: 'London, UK', experience: '7 years', image: 'https://i.pravatar.cc/150?img=3' },
-    { id: 4, name: 'David Brown', role: 'Full Stack Developer', location: 'Berlin, Germany', experience: '4 years', image: 'https://i.pravatar.cc/150?img=4' },
-]
+import { useCandidatesContext } from '@/Contexts/CandidatesContext';
+import { useInterviewsContext } from '@/Contexts/InterviewsContext';
+import Swal from 'sweetalert2';
 
 export default function CandidatesPage() {
-    const [searchTerm, setSearchTerm] = useState('')
+    const { candidates, deleteCandidate } = useCandidatesContext();
+    const { scheduleInterview } = useInterviewsContext();
+    const [searchTerm, setSearchTerm] = useState('');
 
     const filteredCandidates = candidates.filter(candidate =>
-        candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        candidate.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        candidate.location.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+        candidate.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        candidate.role?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        candidate.location?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const handleCallForInterview = (candidate) => {
+        Swal.fire({
+            title: 'Schedule Interview',
+            html: `
+                <input type="datetime-local" id="interviewDateTime" class="swal2-input" placeholder="Interview Date and Time">
+                <input type="text" id="interviewLocation" class="swal2-input" placeholder="Interview Location">
+            `,
+            confirmButtonText: 'Schedule',
+            focusConfirm: false,
+            preConfirm: () => {
+                const interviewDateTime = document.getElementById('interviewDateTime').value;
+                const interviewLocation = document.getElementById('interviewLocation').value;
+                if (!interviewDateTime || !interviewLocation) {
+                    Swal.showValidationMessage('Please enter date, time, and location');
+                }
+                return { interviewDateTime, interviewLocation };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { interviewDateTime, interviewLocation } = result.value;
+                scheduleInterview({
+                    candidate: candidate.name,
+                    position: candidate.role,
+                    date: new Date(interviewDateTime).toLocaleDateString(),
+                    time: new Date(interviewDateTime).toLocaleTimeString(),
+                    location: interviewLocation,
+                    image: candidate.image,
+                    candidateData: candidate // pass the whole candidate object
+                });
+                Swal.fire('Scheduled!', 'Interview scheduled successfully!', 'success');
+            }
+        });
+    };
+
+    const handleDeleteCandidate = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCandidate(id);
+                Swal.fire(
+                    'Deleted!',
+                    'Candidate has been deleted.',
+                    'success'
+                );
+            }
+        });
+    };
+
 
     return (
         <DashboardLayout>
@@ -61,7 +116,7 @@ export default function CandidatesPage() {
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center space-x-4">
-                                    <Image src={candidate.image} alt={candidate.name} width={60} height={60} className="rounded-full" />
+                                    <Image src={candidate.image || '/placeholder-image.jpg'} alt={candidate.name} width={60} height={60} className="rounded-full" />
                                     <div>
                                         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{candidate.name}</h2>
                                         <p className="text-sm text-gray-600 dark:text-gray-300">{candidate.role}</p>
@@ -74,12 +129,27 @@ export default function CandidatesPage() {
                             <div className="space-y-2">
                                 <p className="text-sm text-gray-600 dark:text-gray-300">📍 {candidate.location}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-300">💼 {candidate.experience} experience</p>
+                                {candidate.resume && (
+                                    <a href={candidate.resume} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">View Resume</a>
+                                )}
+                                <p className="text-sm text-gray-600 dark:text-gray-300">📞 {candidate.phone}</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-300">📧 {candidate.email}</p>
                             </div>
                         </div>
-                        <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4">
-                            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center justify-center space-x-2">
-                                <Mail size={20} />
-                                <span>Contact</span>
+                        <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-between">
+                            <button
+                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center justify-center space-x-2"
+                                onClick={() => handleCallForInterview(candidate)}
+                            >
+                                <Phone size={20} />
+                                <span>Call for Interview</span>
+                            </button>
+                            <button
+                                className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out flex items-center justify-center space-x-2"
+                                onClick={() => handleDeleteCandidate(candidate.id)}
+                            >
+                                <Trash2 size={20} />
+                                <span>Delete</span>
                             </button>
                         </div>
                     </div>
