@@ -1,24 +1,20 @@
+// pages/interviews.js
 'use client'
 
 import React, { useState } from 'react'
 import DashboardLayout from "@/Components/Dashboard/DashboardLayout";
 import { Calendar, Clock, MapPin, User, Search, Filter, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
-
-const interviews = [
-    { id: 1, candidate: 'Alice Johnson', position: 'Frontend Developer', date: '2023-05-20', time: '10:00 AM', location: 'Video Call', image: 'https://i.pravatar.cc/150?img=1' },
-    { id: 2, candidate: 'Bob Smith', position: 'Backend Developer', date: '2023-05-21', time: '2:00 PM', location: 'Office', image: 'https://i.pravatar.cc/150?img=2' },
-    { id: 3, candidate: 'Carol Williams', position: 'UX Designer', date: '2023-05-22', time: '11:30 AM', location: 'Video Call', image: 'https://i.pravatar.cc/150?img=3' },
-    { id: 4, candidate: 'David Brown', position: 'Full Stack Developer', date: '2023-05-23', time: '3:00 PM', location: 'Office', image: 'https://i.pravatar.cc/150?img=4' },
-]
+import { useInterviewsContext } from '@/Contexts/InterviewsContext';
 
 export default function InterviewsPage() {
+    const { interviews } = useInterviewsContext();
     const [searchTerm, setSearchTerm] = useState('')
 
     const filteredInterviews = interviews.filter(interview =>
-        interview.candidate.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        interview.position.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+        interview.candidate?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        interview.position?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <DashboardLayout>
@@ -59,7 +55,7 @@ export default function InterviewsPage() {
                     <div key={interview.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                         <div className="p-6">
                             <div className="flex items-center space-x-4 mb-4">
-                                <Image src={interview.image} alt={interview.candidate} width={60} height={60} className="rounded-full" />
+                                <Image src={interview.candidateData?.image || '/placeholder-image.jpg'} alt={interview.candidate} width={60} height={60} className="rounded-full" />
                                 <div>
                                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{interview.candidate}</h2>
                                     <p className="text-sm text-gray-600 dark:text-gray-300">{interview.position}</p>
